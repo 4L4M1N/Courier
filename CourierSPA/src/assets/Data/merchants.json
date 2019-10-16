@@ -1,0 +1,46 @@
+[
+    {
+        "id": "1",
+        "name": "Rokomari",
+        "email": "rokomari@gmail.com",
+        "imageUrl": "https://www.rokomari.com/static/200/images/rokomari_logo.png"
+    },
+    {
+        "id": "2",
+        "name": "eshop",
+        "email": "eshop@gmail.com",
+        "imageUrl": "https://www.rokomari.com/static/200/images/rokomari_logo.png"
+
+    },
+    {
+        "id": "3",
+        "name": "Shohoz",
+        "email": "Shohoz@gmail.com",
+        "imageUrl": "https://www.shohoz.com/v2/assets/img/shohoz.svg"
+    },
+    {
+        "id": "4",
+        "name": "Daraz",
+        "email": "daraz@gmail.com",
+        "imageUrl": "https://laz-img-cdn.alicdn.com/images/ims-web/TB1HOIkg3ZC2uNjSZFnXXaxZpXa.png"
+    },
+    {
+        "id": "5",
+        "name": "Perfee",
+        "email": "perfee@gmail.com",
+        "imageUrl": "https://www.perfee.com/_nuxt/img/0916f12.png"
+    },
+    {
+        "id": "6",
+        "name": "Arong",
+        "email": "arong@gmail.com",
+        "imageUrl": "https://d2hsbyxoza91sl.cloudfront.net/skin/frontend/enterprise/aarong/images/aarong-logo.png"
+    },
+    {
+        "id": "7",
+        "name": "Ajkerdeal",
+        "email": "deal@gmail.com",
+        "imageUrl": "https://static.ajkerdeal.com/images/newsite/eidlogo.png"
+    }
+
+]

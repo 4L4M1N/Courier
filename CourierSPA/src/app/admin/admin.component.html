@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row pt-4">
+    <div class="col-md-3">
+      <div class="card-body border p-2 mb-5 shadow bg-white rounded">
+          <div class="profile-badge">
+              <div class="media border p-3 shadow-sm p-3 bg-white rounded">
+                    <img src="assets/images/avatar.png" width="50px;">
+                    <div class="media-body">
+                      <p>Admin</p>
+                      <p class="font-italic"></p>
+                    </div>
+              </div>
+          </div>
+
+        <div class="left-navbar">
+            <app-admin-nav></app-admin-nav>
+        </div>
+          
+      </div>
+        
+    </div>
+    
+    <div class="col-md-9">
+      <div class="card-body border shadow p-3 mb-5 bg-white rounded">
+          <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

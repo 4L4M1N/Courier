@@ -1,0 +1,75 @@
+.media img {
+   
+    /* border-radius: 50%; */
+    /* display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px; */
+    
+}
+
+.media .media-body {
+    padding-left: 10px;
+    padding-top: 5px;
+    line-height: 0px;
+}
+.media p {
+    font-size: 15px;
+}
+.left-navbar {
+    padding-top: 25px;
+}
+
+.media {
+    
+  
+    top: 0px;
+    position: relative;
+    max-width: 262px;
+    background-color: #f2f8f9;
+    border-radius: 4px;
+    padding: 32px 24px;
+    margin: 5px;
+    text-decoration: none;
+    z-index: 0;
+    overflow: hidden;
+    border: 1px solid #f2f8f9;
+}
+    .media:hover {
+      transition: all 0.10s ease-out;
+      box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+      top: -4px;
+      border: 1px solid #cccccc;
+      background-color: white;
+    }
+  
+    /* .media:before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      bottom: -16px;
+      right: -16px;
+      background: #00838d;
+      height: 32px;
+      width: 32px;
+      border-radius: 32px;
+      transform: scale(2);
+      transform-origin: 50% 50%;
+      transition: transform 0.15s ease-out;
+    } */
+  
+    .media:hover:before {
+      transform: scale(2.15);
+    }
+    #arrow {
+      display:block;
+     
+      text-align: right;
+    }
+
+
+    /* Special Card CSS Section */
+
+    
+  
+
