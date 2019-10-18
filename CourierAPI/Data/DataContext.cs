@@ -1,3 +1,4 @@
+using CourierAPI.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ namespace CourierAPI.Data
         {
             
         }
+        public DbSet<AppUser> AppUsers {get; set;}
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
