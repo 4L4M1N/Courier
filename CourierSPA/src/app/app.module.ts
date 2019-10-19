@@ -14,6 +14,7 @@ import { MerchantInfoComponent } from './admin/merchant-info/merchant-info.compo
 import { HttpClientModule } from '@angular/common/http';
 import { MerchantAgreementComponent } from './admin/merchant-agreement/merchant-agreement.component';
 import { MerchantEditComponent } from './admin/merchant-edit/merchant-edit.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
    declarations: [
@@ -25,7 +26,8 @@ import { MerchantEditComponent } from './admin/merchant-edit/merchant-edit.compo
       AdminNavComponent,
       MerchantInfoComponent,
       MerchantAgreementComponent,
-      MerchantEditComponent
+      MerchantEditComponent,
+      LoginComponent
    ],
    imports: [
       BrowserModule,
