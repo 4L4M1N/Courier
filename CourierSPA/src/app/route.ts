@@ -5,6 +5,7 @@ import { MerchantInfoComponent } from './admin/merchant-info/merchant-info.compo
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { MerchantAgreementComponent } from './admin/merchant-agreement/merchant-agreement.component';
 import { MerchantEditComponent } from './admin/merchant-edit/merchant-edit.component';
+import { LoginComponent } from './login/login.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -20,5 +21,6 @@ export const appRoutes: Routes = [
             }
         ]
     },
+    { path: 'login', component: LoginComponent },
     { path: '**', redirectTo: 'notes', pathMatch: 'full'},
 ];
