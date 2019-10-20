@@ -15,6 +15,7 @@ import { MerchantAgreementComponent } from './admin/merchant-agreement/merchant-
 import { MerchantEditComponent } from './admin/merchant-edit/merchant-edit.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './services/auth.service';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
    declarations: [
@@ -32,6 +33,8 @@ import { AuthService } from './services/auth.service';
    imports: [
       BrowserModule,
       HttpClientModule,
+      FormsModule,
+      ReactiveFormsModule,
       RouterModule.forRoot(appRoutes)
    ],
    providers: [
