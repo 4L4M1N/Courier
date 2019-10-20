@@ -21,4 +21,13 @@ export class LoginComponent implements OnInit {
       console.log('failed');
     });
   }
+
+  loggedin() {
+    return this.authService.loggedIn();
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    console.log('log out');
+  }
 }
