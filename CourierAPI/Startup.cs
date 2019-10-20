@@ -48,6 +48,8 @@ namespace CourierAPI
             services.AddMvc();
 
             services.AddControllers();
+            services.AddCors();
+
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -76,16 +78,15 @@ namespace CourierAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
             
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
             app.UseAuthorization();
           
-            
+          
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
