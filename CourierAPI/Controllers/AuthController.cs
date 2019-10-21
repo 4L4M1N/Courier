@@ -150,7 +150,7 @@ namespace CourierAPI.Controllers
             
         }
         
-        [Authorize]
+        [Authorize(Roles = "Client")]
         [HttpGet("test")]
         
         public IActionResult Test()
