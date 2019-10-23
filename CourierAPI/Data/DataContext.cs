@@ -11,6 +11,7 @@ namespace CourierAPI.Data
             
         }
         public DbSet<AppUser> AppUsers {get; set;}
+        public DbSet<Merchant> Merchants { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

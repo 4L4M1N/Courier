@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CourierAPI.Data;
 using CourierAPI.Models;
+using CourierAPI.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -49,6 +50,10 @@ namespace CourierAPI
 
             services.AddControllers();
             services.AddCors();
+
+            // services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IMerchantRepository, MerchantRepository>();
+            
 
             services.AddAuthentication(x =>
             {
