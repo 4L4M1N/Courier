@@ -14,7 +14,6 @@ namespace CourierAPI.Repositories
         public void Add(Merchant merchant)
         {
             _context.Merchants.Add(merchant);
-            _context.SaveChanges();
         }
 
         public Merchant GetMerchantDetails(string merchantId)

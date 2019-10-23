@@ -51,7 +51,7 @@ namespace CourierAPI
             services.AddControllers();
             services.AddCors();
 
-            // services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IMerchantRepository, MerchantRepository>();
             
 

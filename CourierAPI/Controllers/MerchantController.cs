@@ -18,11 +18,11 @@ namespace CourierAPI.Controllers
         private readonly DataContext _context;
         private readonly IMerchantRepository _merchantRepo;
 
-        // private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public MerchantController(IMerchantRepository merchantRepository)
+        public MerchantController(IUnitOfWork unitOfWork, IMerchantRepository merchantRepository)
         {
-            // _unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
             _merchantRepo = merchantRepository;
         }
         
@@ -43,8 +43,9 @@ namespace CourierAPI.Controllers
                 Address = addMerchant.Address,
                 TradeLicenseNo = addMerchant.TradeLicenseNo
             };
-            _merchantRepo.Add(merchantToAdd);
-           
+            _unitOfWork.Merchants.Add(merchantToAdd);
+            var result = _unitOfWork.Complete();
+           if(result == 0) return BadRequest();
            
            return Ok();
             
