@@ -9,13 +9,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HomeComponent implements OnInit {
   merchants: any;
-  constructor(private http: HttpClient,private authService: AuthService) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   ngOnInit() {
     this.getMerchants();
   }
   getMerchants() {
-    this.http.get('http://localhost:5000/api/auth/test',{responseType: 'text'}).subscribe(response => {
+    this.http.get('http://localhost:5000/api/auth/test', {responseType: 'text'}).subscribe(response => {
       this.merchants = response;
       console.log(this.merchants);
     }, error => {
