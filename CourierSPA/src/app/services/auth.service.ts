@@ -28,4 +28,6 @@ constructor(private http: HttpClient) { }
         const token = localStorage.getItem('token');
         return !this.jwtHelper.isTokenExpired(token);
     }
+
+
 }
