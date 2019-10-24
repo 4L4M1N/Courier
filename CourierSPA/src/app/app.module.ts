@@ -17,6 +17,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthService } from './services/auth.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AuthInterceptor } from './interceptors/AuthInterceptor';
+import { RegistrationComponent } from './registration/registration.component';
 
 @NgModule({
    declarations: [
@@ -29,7 +30,8 @@ import { AuthInterceptor } from './interceptors/AuthInterceptor';
       MerchantInfoComponent,
       MerchantAgreementComponent,
       MerchantEditComponent,
-      LoginComponent
+      LoginComponent,
+      RegistrationComponent
    ],
    imports: [
       BrowserModule,
@@ -40,7 +42,7 @@ import { AuthInterceptor } from './interceptors/AuthInterceptor';
    ],
    providers: [
       AuthService,
-      { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+      provide
    ],
    bootstrap: [
       AppComponent
