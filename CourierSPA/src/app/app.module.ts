@@ -41,8 +41,7 @@ import { RegistrationComponent } from './registration/registration.component';
       RouterModule.forRoot(appRoutes)
    ],
    providers: [
-      AuthService,
-      provide
+      AuthService
    ],
    bootstrap: [
       AppComponent
