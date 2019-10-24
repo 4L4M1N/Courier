@@ -16,14 +16,12 @@ namespace CourierAPI.Controllers
     {
         
         private readonly DataContext _context;
-        private readonly IMerchantRepository _merchantRepo;
-
         private readonly IUnitOfWork _unitOfWork;
 
-        public MerchantController(IUnitOfWork unitOfWork, IMerchantRepository merchantRepository)
+        public MerchantController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _merchantRepo = merchantRepository;
+            
         }
         
         [HttpGet("test")]
