@@ -1,8 +1,10 @@
+using System.Threading.Tasks;
+
 namespace CourierAPI.Repositories
 {
     public interface IUnitOfWork
     {
          IMerchantRepository Merchants { get;  }
-         int Complete();
+         Task<int> Complete();
     }
 }
