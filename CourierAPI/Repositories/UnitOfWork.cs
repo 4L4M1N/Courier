@@ -15,7 +15,7 @@ namespace CourierAPI.Repositories
             
         }
         public IMerchantRepository Merchants { get;}
-        public async Task<int> Complete()
+        public async Task<int> CompleteAsync()
         {
             var result = await _context.SaveChangesAsync();
             return result;
