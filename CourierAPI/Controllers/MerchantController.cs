@@ -31,8 +31,12 @@ namespace CourierAPI.Controllers
         }
 
         [HttpPost("create")]
-        public IActionResult Create(MerchantToAddDTO addMerchant)
+        public async Task<IActionResult> Create(MerchantToAddDTO addMerchant)
         {
+            var isMerchantNameExist = await _unitOfWork.Merchants.FindByMerchantNameAsync(addMerchant.Name);
+            if(isMerchantNameExist != null)
+                return BadRequest("This name already exists!");
+
             var merchantToAdd = new Merchant
             {
                 Name = addMerchant.Name,
@@ -41,9 +45,9 @@ namespace CourierAPI.Controllers
                 Address = addMerchant.Address,
                 TradeLicenseNo = addMerchant.TradeLicenseNo
             };
-            _unitOfWork.Merchants.Add(merchantToAdd);
-            var result = _unitOfWork.Complete();
-           if(result == 0) return BadRequest();
+            await _unitOfWork.Merchants.AddMerchantAsync(merchantToAdd);
+            var result = await _unitOfWork.Complete();
+            if(result == 0) return BadRequest();
            
            return Ok();
             

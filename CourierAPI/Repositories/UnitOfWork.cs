@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using CourierAPI.Data;
 
 namespace CourierAPI.Repositories
@@ -14,9 +15,9 @@ namespace CourierAPI.Repositories
             
         }
         public IMerchantRepository Merchants { get;}
-        public int Complete()
+        public async Task<int> Complete()
         {
-            var result = _context.SaveChanges();
+            var result = await _context.SaveChangesAsync();
             return result;
         }
     }
