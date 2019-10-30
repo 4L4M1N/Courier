@@ -45,8 +45,9 @@ import { MerchentaddComponent } from './merchentadd/merchentadd.component';
       RouterModule.forRoot(appRoutes)
    ],
    providers: [
+      { provide: HTTP_INTERCEPTORS,useClass: AuthInterceptor, multi: true},
       AuthService,
-      MerchantService
+      MerchantService,
    ],
    bootstrap: [
       AppComponent
