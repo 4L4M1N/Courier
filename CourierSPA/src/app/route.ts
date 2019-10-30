@@ -6,6 +6,7 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { MerchantAgreementComponent } from './admin/merchant-agreement/merchant-agreement.component';
 import { MerchantEditComponent } from './admin/merchant-edit/merchant-edit.component';
 import { LoginComponent } from './login/login.component';
+import { MerchentaddComponent } from './merchentadd/merchentadd.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -22,5 +23,6 @@ export const appRoutes: Routes = [
         ]
     },
     { path: 'login', component: LoginComponent },
+    { path: 'merchantadd', component: MerchentaddComponent },
     { path: '**', redirectTo: 'notes', pathMatch: 'full'},
 ];

@@ -18,6 +18,9 @@ import { AuthService } from './services/auth.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AuthInterceptor } from './interceptors/AuthInterceptor';
 import { RegistrationComponent } from './registration/registration.component';
+import { MerchantService } from './services/Merchant.service';
+import { MerchentaddComponent } from './merchentadd/merchentadd.component';
+
 
 @NgModule({
    declarations: [
@@ -31,7 +34,8 @@ import { RegistrationComponent } from './registration/registration.component';
       MerchantAgreementComponent,
       MerchantEditComponent,
       LoginComponent,
-      RegistrationComponent
+      RegistrationComponent,
+      MerchentaddComponent
    ],
    imports: [
       BrowserModule,
@@ -41,7 +45,8 @@ import { RegistrationComponent } from './registration/registration.component';
       RouterModule.forRoot(appRoutes)
    ],
    providers: [
-      AuthService
+      AuthService,
+      MerchantService
    ],
    bootstrap: [
       AppComponent

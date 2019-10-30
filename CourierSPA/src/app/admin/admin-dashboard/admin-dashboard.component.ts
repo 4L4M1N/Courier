@@ -15,9 +15,8 @@ export class AdminDashboardComponent implements OnInit {
   ngOnInit() {
     this.getAllMerchants();
   }
-  getAllMerchants()
-  {
-    this.merchantService.getMerchants().subscribe(response => { 
+  getAllMerchants() {
+    this.merchantService.getMerchants().subscribe(response => {
       this.merchants = response;
     });
   }
