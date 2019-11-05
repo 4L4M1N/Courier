@@ -6,4 +6,5 @@ export interface Merchants {
     Address: string;
     BankAccountNo: string;
     TradeLicenseNo: string;
+    password: string;
 }

@@ -21,6 +21,7 @@ export class MerchentaddComponent implements OnInit {
       email: new FormControl(''),
       address: new FormControl(''),
       bankAccountNo: new FormControl(''),
+      password: new FormControl(''),
       tradeLicenseNo: new FormControl(''),
       });
   }
