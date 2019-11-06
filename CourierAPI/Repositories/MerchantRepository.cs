@@ -61,7 +61,8 @@ namespace CourierAPI.Repositories
 
         public int LastMerchantId()
         {
-            var id = _context.Merchants.OrderByDescending(a =>a.Id).FirstOrDefault().Id;
+            // var id = _context.Merchants.OrderByDescending(a =>a.Id).FirstOrDefault().Id;
+            var id = _context.Merchants.Count();
             return id;
         }
 
