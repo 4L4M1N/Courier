@@ -1,8 +1,12 @@
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace CourierAPI.Models
 {
     public class Merchant
     {
-        public int Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid Id { get; set; }
         public string Name { get; set; }
         
         public string MerchantIdentity { get; set; }

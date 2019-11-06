@@ -51,6 +51,7 @@ namespace CourierAPI.Controllers
             var merchantId = Extensions.GenerateIdForMerchant(total+1);
             var merchantToAdd = new Merchant
             {
+                // Id = Guid.NewGuid().ToString(),
                 Name = addMerchant.Name,
                 Phone = addMerchant.Phone,
                 Email = addMerchant.Email,
