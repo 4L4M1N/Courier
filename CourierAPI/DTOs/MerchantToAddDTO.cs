@@ -9,5 +9,6 @@ namespace CourierAPI.DTOs
         public string Address { get; set; }
         public string BankAccountNo { get; set; }
         public string TradeLicenseNo { get; set; }
+        public string Password { get; set; }
     }
 }
