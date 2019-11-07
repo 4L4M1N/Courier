@@ -20,6 +20,7 @@ import { AuthInterceptor } from './interceptors/AuthInterceptor';
 import { RegistrationComponent } from './registration/registration.component';
 import { MerchantService } from './services/Merchant.service';
 import { MerchentaddComponent } from './merchentadd/merchentadd.component';
+import { BookingComponent } from './booking/booking.component';
 @NgModule({
    declarations: [
       AppComponent,
@@ -33,7 +34,8 @@ import { MerchentaddComponent } from './merchentadd/merchentadd.component';
       MerchantEditComponent,
       LoginComponent,
       RegistrationComponent,
-      MerchentaddComponent
+      MerchentaddComponent,
+      BookingComponent
    ],
    imports: [
       BrowserModule,
@@ -42,8 +44,7 @@ import { MerchentaddComponent } from './merchentadd/merchentadd.component';
       ReactiveFormsModule,
       RouterModule.forRoot(appRoutes)
    ],
-   providers: [
-   ],
+   providers: [],
    bootstrap: [
       AppComponent
    ]

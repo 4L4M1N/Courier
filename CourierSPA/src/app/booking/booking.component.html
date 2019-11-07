@@ -1,0 +1,93 @@
+
+    <div class="container">
+     
+      <div class="col-sm-12 col-md-12 col-lg-12 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <h5 class="card-title text-center">booking Form</h5>
+
+            <form #loginForm="ngForm" (ngSubmit)="a()">
+                <div class="row">
+
+              <div class="col-sm-4 col-md-4 col-lg-4 mx-auto">
+                  <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title text-center">sender info</h5>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control"  placeholder="merchant name"  autofocus> 
+                          </div>
+                          <div class="form-group">
+                            <input type="text" class="form-control"  placeholder="name"> 
+                          </div>
+                          <div class="form-group">
+                              <input type="text" class="form-control"  placeholder="contact" > 
+                            </div>
+                          <div class="form-group">
+                            <input type="password"  class="form-control"  placeholder="address" >
+                          </div>
+                          <div class="form-group">
+                              <input type="text" class="form-control"  placeholder="reference"> 
+                          </div>
+                    </div>
+                </div>
+              </div>
+              
+              <div class="col-sm-4 col-md-4 col-lg-4 mx-auto">
+                  <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title text-center">Receiver info</h5>
+                        <div class="form-group">
+                          <input type="text" class="form-control"  placeholder="name" > 
+                         </div>
+                         <div class="form-group">
+                            <input type="password"  class="form-control"  placeholder="contract" >
+                          </div>
+                          <div class="form-group">
+                              <input type="password"  class="form-control"  placeholder="address" >
+                            </div>
+      
+                        <div class="form-group">
+                          <input type="password"  class="form-control"  placeholder="address code" >
+                        </div>
+                    </div>
+                </div>
+              </div>
+              
+              <div class="col-sm-4 col-md-4 col-lg-4 mx-auto">
+                  <div class="card ">
+                      <div class="card-body">
+                        <h5 class="card-title text-center">Category & rate</h5>
+                        <div class="form-group">
+                            <input type="text" class="form-control"  placeholder="item Type(big,small,medium)"> 
+                        </div>
+      
+                        <div class="form-group">
+                          <input type="password"  class="form-control"  placeholder="booking charge" >
+                        </div>
+                        <div class="form-group">
+                            <input type="password"  class="form-control"  placeholder="condition ammount" >
+                        </div>
+                        <div class="form-group">
+                           <input type="password"  class="form-control"  placeholder="condition charge" >
+                        </div>
+                        <div class="form-group">
+                            <input type="password"  class="form-control"  placeholder="total charge" >
+                        </div>
+                    </div>
+                </div>
+              </div>
+
+            </div>
+            <br>
+                <button  class="btn  btn-primary btn float-right text-uppercase" type="submit">submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+

@@ -7,6 +7,7 @@ import { MerchantAgreementComponent } from './admin/merchant-agreement/merchant-
 import { MerchantEditComponent } from './admin/merchant-edit/merchant-edit.component';
 import { LoginComponent } from './login/login.component';
 import { MerchentaddComponent } from './merchentadd/merchentadd.component';
+import { BookingComponent } from './booking/booking.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -24,5 +25,6 @@ export const appRoutes: Routes = [
     },
     { path: 'login', component: LoginComponent },
     { path: 'merchantadd', component: MerchentaddComponent },
+    { path: 'booking', component: BookingComponent},
     { path: '**', redirectTo: 'notes', pathMatch: 'full'},
 ];
