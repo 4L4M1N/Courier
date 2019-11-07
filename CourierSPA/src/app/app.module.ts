@@ -44,7 +44,11 @@ import { BookingComponent } from './booking/booking.component';
       ReactiveFormsModule,
       RouterModule.forRoot(appRoutes)
    ],
-   providers: [],
+   providers: [
+      { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+      AuthService,
+      MerchantService,
+   ],
    bootstrap: [
       AppComponent
    ]
