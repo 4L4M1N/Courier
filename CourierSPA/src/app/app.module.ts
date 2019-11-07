@@ -20,8 +20,6 @@ import { AuthInterceptor } from './interceptors/AuthInterceptor';
 import { RegistrationComponent } from './registration/registration.component';
 import { MerchantService } from './services/Merchant.service';
 import { MerchentaddComponent } from './merchentadd/merchentadd.component';
-
-
 @NgModule({
    declarations: [
       AppComponent,
@@ -45,9 +43,6 @@ import { MerchentaddComponent } from './merchentadd/merchentadd.component';
       RouterModule.forRoot(appRoutes)
    ],
    providers: [
-      { provide: HTTP_INTERCEPTORS,useClass: AuthInterceptor, multi: true},
-      AuthService,
-      MerchantService,
    ],
    bootstrap: [
       AppComponent
