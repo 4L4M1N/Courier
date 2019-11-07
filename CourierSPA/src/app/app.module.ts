@@ -19,8 +19,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AuthInterceptor } from './interceptors/AuthInterceptor';
 import { RegistrationComponent } from './registration/registration.component';
 import { MerchantService } from './services/Merchant.service';
-import { MerchentaddComponent } from './merchentadd/merchentadd.component';
-import { BookingComponent } from './booking/booking.component';
+import { MerchentaddComponent } from './admin/merchentadd/merchentadd.component';
+import { BookingComponent } from './admin/booking/booking.component';
 @NgModule({
    declarations: [
       AppComponent,
