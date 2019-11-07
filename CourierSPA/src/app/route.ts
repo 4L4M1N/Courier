@@ -6,8 +6,8 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { MerchantAgreementComponent } from './admin/merchant-agreement/merchant-agreement.component';
 import { MerchantEditComponent } from './admin/merchant-edit/merchant-edit.component';
 import { LoginComponent } from './login/login.component';
-import { MerchentaddComponent } from './merchentadd/merchentadd.component';
-import { BookingComponent } from './booking/booking.component';
+import { MerchentaddComponent } from './admin/merchentadd/merchentadd.component';
+import { BookingComponent } from './admin/booking/booking.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -17,6 +17,8 @@ export const appRoutes: Routes = [
             { path: 'admin', component: AdminComponent, children: [
                 { path: 'merchant-info', component: MerchantInfoComponent},
                 { path: 'admin-dashboard', component: AdminDashboardComponent},
+                { path: 'merchantadd', component: MerchentaddComponent },
+                { path: 'booking', component: BookingComponent},
                 { path: 'merchant-agreement', component: MerchantAgreementComponent},
                 {path: 'merchant-agreement/edit', component: MerchantEditComponent}
             ]
@@ -24,7 +26,5 @@ export const appRoutes: Routes = [
         ]
     },
     { path: 'login', component: LoginComponent },
-    { path: 'merchantadd', component: MerchentaddComponent },
-    { path: 'booking', component: BookingComponent},
     { path: '**', redirectTo: 'notes', pathMatch: 'full'},
 ];

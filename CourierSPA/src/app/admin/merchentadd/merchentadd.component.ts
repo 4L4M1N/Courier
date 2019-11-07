@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Merchants } from '../models/Merchants';
+import { Merchants } from '../../models/Merchants';
 import { FormGroup, FormControl } from '@angular/forms';
-import { MerchantService } from '../services/Merchant.service';
+import { MerchantService } from '../../services/Merchant.service';
 
 @Component({
   selector: 'app-merchentadd',

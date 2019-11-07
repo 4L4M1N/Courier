@@ -13,7 +13,7 @@
 .btn-primary{color:#fff;background-color:#1d6ac8;background-image:-moz-linear-gradient(#45b3f3, #1d6ac8);background-image:-webkit-linear-gradient(#45b3f3, #1d6ac8);border-color:#1d6ac8 #1d6ac8 #1a5eb2}
 .btn-primary:active{border-color:#17529b}
 .container {
-    max-width: 1250px;
+    max-width: 1300px;
 }
 .fab {
     width: 60px;
