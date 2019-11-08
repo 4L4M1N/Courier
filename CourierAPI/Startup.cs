@@ -18,6 +18,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using AutoMapper;
+using CourierAPI.Helpers;
 
 namespace CourierAPI
 {
@@ -50,8 +52,16 @@ namespace CourierAPI
 
             services.AddControllers();
             services.AddCors();
+            
+            // Automapper Configuration
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new AutoMapperProfile());
+            });
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
-            //Scope
+            // configure DI for application services
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IMerchantRepository, MerchantRepository>();
             
