@@ -18,7 +18,7 @@ Create(merchant: Merchants ) {
 }
 
 GetAllMerchants(): Observable<Merchants[]> {
-  return this.http.get<Merchants[]>(this.baseURL + 'GetAllMerchants');
+  return this.http.get<Merchants[]>(this.baseURL + 'all');
 }
 
 GetMerchant(id): Observable<Merchants> {
