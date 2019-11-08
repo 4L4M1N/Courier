@@ -12,6 +12,8 @@ using System.Text;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
+using AutoMapper;
+using System.Collections.Generic;
 
 namespace CourierAPI.Controllers
 {
@@ -24,11 +26,12 @@ namespace CourierAPI.Controllers
         
         private readonly IUnitOfWork _unitOfWork;
         private readonly IConfiguration _config;
-        public MerchantController(IUnitOfWork unitOfWork, IConfiguration config)
+        private readonly IMapper _mapper;
+        public MerchantController(IUnitOfWork unitOfWork, IConfiguration config, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _config = config;
-            
+            _mapper = mapper;
         }
         
         [HttpGet("test")]
@@ -140,7 +143,8 @@ namespace CourierAPI.Controllers
         public async Task<IActionResult> GetAllMerchants()
         {
             var result = await _unitOfWork.Merchants.GetMerchantsAsync();
-            return Ok(result);
+            var returnMerchant = _mapper.Map<IEnumerable<MerchantDTO>>(result);
+            return Ok(returnMerchant);
         }
     }
 }
