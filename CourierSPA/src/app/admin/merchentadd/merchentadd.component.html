@@ -1,7 +1,7 @@
-<div class="container">
+
     <div class="row">
-      <div class="col-sm-9 col-md-5 col-lg-4 mx-auto">
-        <div class="card card-signin my-5 shadow p-3 mb-5 bg-white rounded">
+      <div class="col-md-6">
+      
           <div class="card-body">
             <h5 class="card-title text-center">Create Merchant</h5>
             <form  [formGroup]="merchantaddForm" (ngSubmit) = (Create()) method="POST" >
@@ -52,16 +52,11 @@
               class="form-control"  formControlName="tradeLicenseNo" placeholder="Ex: Abc">
               
         </div>
-    
                 <br>
-                  
-              
                   <button  class="btn  btn-primary btn-block text-uppercase" type="submit">Create</button>
-    
             </form>
           </div>
         </div>
       </div>
-    </div>
-  </div>
+
   
