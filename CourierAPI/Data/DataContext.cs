@@ -13,6 +13,9 @@ namespace CourierAPI.Data
         public DbSet<AppUser> AppUsers {get; set;}
         public DbSet<Merchant> Merchants { get; set; }
 
+        public DbSet<Division> Divisions { get; set; }
+        public DbSet<Zone> Zones { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
