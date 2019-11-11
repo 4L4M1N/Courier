@@ -15,6 +15,8 @@ namespace CourierAPI.Data
 
         public DbSet<Division> Divisions { get; set; }
         public DbSet<Zone> Zones { get; set; }
+        public DbSet<Item> Items { get; set; }
+        public DbSet<ItemAttribute> ItemAttributes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
