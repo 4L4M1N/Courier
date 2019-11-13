@@ -46,7 +46,7 @@ namespace CourierAPI.Controllers
         public async Task<IActionResult> CreateItemAttribute(ItemAttributeDTO itemAttribute)
         {
             if(itemAttribute == null) return BadRequest();
-            var isitemAttributeExists = _unitOfWork.ItemAttributes.CheckItemAttribute(itemAttribute.ItemId);
+            var isitemAttributeExists = _unitOfWork.ItemAttributes.CheckItemAttribute(itemAttribute);
             if(isitemAttributeExists>0)
             {
                  return BadRequest();
