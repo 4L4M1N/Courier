@@ -21,6 +21,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { MerchantService } from './services/Merchant.service';
 import { MerchentaddComponent } from './admin/merchentadd/merchentadd.component';
 import { BookingComponent } from './admin/booking/booking.component';
+import { ItemcreationComponent } from './admin/itemcreation/itemcreation.component';
 @NgModule({
    declarations: [
       AppComponent,
@@ -35,7 +36,8 @@ import { BookingComponent } from './admin/booking/booking.component';
       LoginComponent,
       RegistrationComponent,
       MerchentaddComponent,
-      BookingComponent
+      BookingComponent,
+      ItemcreationComponent
    ],
    imports: [
       BrowserModule,
