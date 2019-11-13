@@ -64,6 +64,8 @@ namespace CourierAPI
             // configure DI for application services
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IMerchantRepository, MerchantRepository>();
+            services.AddScoped<IItemRepository, ItemRepository>();
+            services.AddScoped<IItemAttributeRepository, ItemAttributeRepository>();
             
 
             services.AddAuthentication(x =>
