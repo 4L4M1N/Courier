@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CourierAPI.Data;
+using CourierAPI.DTOs;
 using CourierAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,10 +21,19 @@ namespace CourierAPI.Repositories
             await _context.ItemAttributes.AddAsync(itemAttribute);
         }
 
-        public int CheckItemAttribute(int itemId)
+        public int CheckItemAttribute(ItemAttributeDTO itemAttribute)
         {
             //TODO: Logic is not correct!!!
-            var isExists = _context.ItemAttributes.Include(i=>i.Item).Where(i=>i.Item.ItemId == itemId);
+            var isExists = _context.ItemAttributes.Include(i=>i.Item)
+                .Where(i=>i.Item.ItemId == itemAttribute.ItemId &&
+                        i.ItemSize == itemAttribute.ItemSize &&
+                        i.InCityRate == itemAttribute.InCityRate &&
+                        i.OutCityRate == itemAttribute.OutCityRate &&
+                        i.RegularRate == itemAttribute.RegularRate &&
+                        i.Discount == itemAttribute.Discount &&
+                        i.ConditionCharge == itemAttribute.ConditionCharge &&
+                        i.BookingCharge == itemAttribute.BookingCharge
+                );
             return isExists.Count();
         }
 

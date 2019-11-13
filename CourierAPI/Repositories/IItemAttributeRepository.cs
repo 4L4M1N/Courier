@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CourierAPI.DTOs;
 using CourierAPI.Models;
 
 namespace CourierAPI.Repositories
@@ -8,7 +9,7 @@ namespace CourierAPI.Repositories
     {
         Task AddItem(ItemAttribute itemAttribute);
         Task <IEnumerable<ItemAttribute>> GetItemAttributes();
-        int CheckItemAttribute(int itemId);
+        int CheckItemAttribute(ItemAttributeDTO itemAttribute);
         Task <IEnumerable<ItemAttribute>> GetItemAttributesofAItem(int itemId);
     }
 }
