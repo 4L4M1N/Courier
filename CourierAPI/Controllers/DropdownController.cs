@@ -26,7 +26,7 @@ namespace CourierAPI.Controllers
         
         [HttpPost("item/create")]
         [Authorize(Roles = "CourierOwner")]
-        public async Task<IActionResult> CreateItem(string itemName)
+        public async Task<IActionResult> CreateItem([FromForm]string itemName)
         {
             if(itemName == null)
                 return BadRequest();
