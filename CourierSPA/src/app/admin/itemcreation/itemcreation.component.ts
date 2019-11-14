@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ItemcreationService } from 'src/app/services/itemcreation.service';
-import { ItemCreation } from 'src/app/models/ItemCreation';
+import { ItemAttribute } from 'src/app/models/ItemAttribute';
 
 @Component({
   selector: 'app-itemcreation',
@@ -10,7 +10,7 @@ import { ItemCreation } from 'src/app/models/ItemCreation';
 })
 export class ItemcreationComponent implements OnInit {
 
-  itemcreation: ItemCreation;
+  itemAttributeCreate: ItemAttribute;
   createItemFrom: FormGroup;
   ItemAttributeForm: FormGroup;
   constructor(private itemcreationservice: ItemcreationService) { }
@@ -20,14 +20,15 @@ export class ItemcreationComponent implements OnInit {
 
     });
     this.createItemFrom = new FormGroup({
-      itemname: new FormControl(''),
+      itemName: new FormControl(''),
     });
   }
   CreateItem() {
     if (this.createItemFrom.valid) {
-      this.itemcreation = Object.assign({}, this.createItemFrom.value);
-
-      this.itemcreationservice.CreateItem(this.itemcreation).subscribe(() => {
+      const formData = new FormData();
+      const itemName = this.createItemFrom.controls['itemName'].value;
+      formData.append('itemName', itemName);
+      this.itemcreationservice.CreateItem(formData).subscribe(() => {
         console.log('created');
       }, error => {
         console.log('error');

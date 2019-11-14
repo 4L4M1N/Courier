@@ -1,4 +1,4 @@
-export interface ItemCreation {
+export interface ItemAttribute {
     itemname: string;
     itemsize: string;
     incityrate: DoubleRange;
