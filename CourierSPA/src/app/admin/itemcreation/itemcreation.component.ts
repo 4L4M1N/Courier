@@ -12,7 +12,7 @@ import { Iitem } from 'src/app/models/Iitem';
 export class ItemcreationComponent implements OnInit {
 
   item: Iitem[];
-  itemAttributeCreate: ItemAttribute;
+  itemAttribute: ItemAttribute;
   listItemAttributes: ItemAttribute[];
   createItemFrom: FormGroup;
   ItemAttributeForm: FormGroup;
@@ -50,8 +50,10 @@ export class ItemcreationComponent implements OnInit {
 
   CreateItemAttribute() {
     if (this.ItemAttributeForm.valid) {
-      this.itemAttributeCreate = Object.assign({}, this.ItemAttributeForm.value);
-      this.itemcreationservice.CreateItemAttribute(this.itemAttributeCreate).subscribe(() => {
+      console.log(this.ItemAttributeForm.value);
+      this.itemAttribute = Object.assign({}, this.ItemAttributeForm.value);
+      console.log(this.itemAttribute);
+      this.itemcreationservice.CreateItemAttribute(this.itemAttribute).subscribe(() => {
         console.log('ok');
       }, error => {
         console.log('error');

@@ -1,4 +1,4 @@
 export interface Iitem {
-    id: number;
+    itemId: number;
     name: string;
 }
