@@ -1,11 +1,11 @@
 export interface ItemAttribute {
     // itemname: string;
-    itemsize: string;
-    incityrate: DoubleRange;
-    outcityrate: DoubleRange;
-    regularrate: DoubleRange;
-    conditionrate: DoubleRange;
-    bookingcharge: DoubleRange;
-    discount: DoubleRange;
-    itemid: number;
+    itemId: number;
+    itemSize: string;
+    inCityRate: number;
+    outCityRate: number;
+    regularRate: number;
+    conditionCharge: number;
+    bookingCharge: number;
+    discount: number;
 }

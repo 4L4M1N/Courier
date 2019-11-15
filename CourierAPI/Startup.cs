@@ -23,6 +23,7 @@ using CourierAPI.Helpers;
 using CourierAPI.Infrastructure.Data;
 using CourierAPI.Infrastructure.Repositories;
 
+
 namespace CourierAPI
 {
     public class Startup
@@ -52,7 +53,7 @@ namespace CourierAPI
 
             services.AddMvc();
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddCors();
             
             // Automapper Configuration
