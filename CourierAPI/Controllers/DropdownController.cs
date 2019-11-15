@@ -1,3 +1,4 @@
+using System.Text.Json;
 using System.Threading.Tasks;
 using CourierAPI.Core.DTOs;
 using CourierAPI.Core.IRepositories;
@@ -45,11 +46,14 @@ namespace CourierAPI.Controllers
         [Authorize(Roles = "CourierOwner")]
         public async Task<IActionResult> CreateItemAttribute(ItemAttributeDTO itemAttribute)
         {
-            if(itemAttribute == null) return BadRequest();
+            //Using System.Text.Json
+            //var result = JsonSerializer.Deserialize<ItemAttribute>(itemAttribute);
+            
+            if(itemAttribute == null) return BadRequest("No value please check");
             var isitemAttributeExists = _unitOfWork.ItemAttributes.CheckItemAttribute(itemAttribute);
             if(isitemAttributeExists>0)
             {
-                 return BadRequest();
+                 return BadRequest("validation error!");
             }
             else 
             {
@@ -67,7 +71,7 @@ namespace CourierAPI.Controllers
                 await _unitOfWork.ItemAttributes.AddItem(itemAttributeToADD);
             }
             var result = await _unitOfWork.CompleteAsync();
-            if(result == 0) return BadRequest();
+            if(result == 0) return BadRequest("dont save");
             return Ok();
         }
         [HttpGet("itemattribute")]
