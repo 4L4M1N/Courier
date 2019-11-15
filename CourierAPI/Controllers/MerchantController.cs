@@ -1,8 +1,4 @@
 using System.Threading.Tasks;
-using CourierAPI.Data;
-using CourierAPI.DTOs;
-using CourierAPI.Models;
-using CourierAPI.Repositories;
 using CourierAPI.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +10,9 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
 using AutoMapper;
 using System.Collections.Generic;
+using CourierAPI.Core.DTOs;
+using CourierAPI.Core.IRepositories;
+using CourierAPI.Core.Models;
 
 namespace CourierAPI.Controllers
 {

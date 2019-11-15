@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CourierAPI.Data;
-using CourierAPI.Models;
-using CourierAPI.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -19,7 +16,12 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using AutoMapper;
+using CourierAPI.Core;
+using CourierAPI.Core.IRepositories;
+using CourierAPI.Core.Models;
 using CourierAPI.Helpers;
+using CourierAPI.Infrastructure.Data;
+using CourierAPI.Infrastructure.Repositories;
 
 namespace CourierAPI
 {

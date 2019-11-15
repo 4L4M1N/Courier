@@ -1,6 +1,6 @@
 using AutoMapper;
-using CourierAPI.DTOs;
-using CourierAPI.Models;
+using CourierAPI.Core.DTOs;
+using CourierAPI.Core.Models;
 
 namespace CourierAPI.Helpers
 {
