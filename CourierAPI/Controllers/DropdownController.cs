@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using CourierAPI.DTOs;
-using CourierAPI.Models;
-using CourierAPI.Repositories;
+using CourierAPI.Core.DTOs;
+using CourierAPI.Core.IRepositories;
+using CourierAPI.Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
