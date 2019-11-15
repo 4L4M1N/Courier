@@ -22,31 +22,31 @@
                   <div class="card-body">
                     <h5 class="card-title text-center">Item Attribute</h5>
                                                         
-                      <select class="custom-select form-group">
+                      <select class="custom-select form-group" formControlName="itemid">
                           <option value="" disabled>Choose your Item</option>
-                          <option>New York</option>
+                          <option *ngFor="let i of item" [value]="i.id">{{i.name}}</option>
                         </select>
                         <div class="form-group">
-                            <input type="text" class="form-control"  placeholder="ItemSize"> 
+                            <input type="text" class="form-control" formControlName="ItemSize" placeholder="ItemSize"> 
                         </div>
                         
                         <div class="form-group">
-                          <input type="text"  class="form-control"  placeholder="In CityRate" >
+                          <input type="text"  class="form-control" formControlName="InCityRate"  placeholder="In CityRate" >
                         </div>
                         <div class="form-group">
-                            <input type="text"  class="form-control"  placeholder="Out CityRate" >
+                            <input type="text"  class="form-control" formControlName="OutCityRate"  placeholder="Out CityRate" >
                         </div>
                         <div class="form-group">
-                          <input type="text"  class="form-control"  placeholder="RegularRate" >
+                          <input type="text"  class="form-control" formControlName="RegularRate" placeholder="RegularRate" >
                         </div>
                         <div class="form-group">
-                            <input type="text"  class="form-control"  placeholder="ConditionCharge" >
+                            <input type="text"  class="form-control" formControlName="ConditionCharge" placeholder="ConditionCharge" >
                         </div>
                         <div class="form-group">
-                          <input type="text"  class="form-control"  placeholder="BookingCharge" >
+                          <input type="text"  class="form-control" formControlName="BookingCharge" placeholder="BookingCharge" >
                         </div>
                         <div class="form-group">
-                        <input type="text"  class="form-control"  placeholder="Discount" >
+                        <input type="text"  class="form-control" formControlName="Discount" placeholder="Discount" >
                         </div>
 
                         <button  class="btn  btn-primary btn float-right text-uppercase" type="submit">submit</button>
@@ -58,6 +58,9 @@
           <div class="col-sm-4 col-md-4 col-lg-4 mx-auto border-right">
             <div class="card-body">
                 <h5 class="card-title text-center">Item Attribute Lists</h5>
+                <div *ngFor="let i of listItemAttributes" >
+                  <!--<p>{{i.itemname}}</p> -->
+                </div>
             </div>
           </div> <!-- Show item attributes from database End -->
       </div>
