@@ -1,5 +1,5 @@
 export interface ItemAttribute {
-    itemname: string;
+    // itemname: string;
     itemsize: string;
     incityrate: DoubleRange;
     outcityrate: DoubleRange;
@@ -7,4 +7,5 @@ export interface ItemAttribute {
     conditionrate: DoubleRange;
     bookingcharge: DoubleRange;
     discount: DoubleRange;
+    itemid: number;
 }
