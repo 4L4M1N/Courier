@@ -22,9 +22,9 @@
                   <div class="card-body">
                     <h5 class="card-title text-center">Item Attribute</h5>
                                                         
-                      <select class="custom-select form-group" formControlName="itemid">
+                      <select class="custom-select form-group" formControlName="itemid" (change)="onSelect($event)">
                           <option value="" disabled>Choose your Item</option>
-                          <option *ngFor="let i of item" [ngValue]="i.itemId">{{i.name}}</option>
+                          <option *ngFor="let i of item" [value]="i.itemId">{{i.name}}</option>
                         </select>
                         <div class="form-group">
                             <input type="text" class="form-control" formControlName="ItemSize" placeholder="ItemSize"> 
@@ -58,12 +58,22 @@
           <div class="col-sm-4 col-md-4 col-lg-4 mx-auto border-right">
             <div class="card-body">
                 <h5 class="card-title text-center">Item Attribute Lists</h5>
-                <div *ngFor="let i of listItemAttributes" >
+                
+
+                <div class="card-body shadow-sm p-3 mb-2 bg-white rounded border border-info" *ngFor="let i of itemAttributesOfAnItem | paginate: { itemsPerPage: 4, currentPage: p }" id="itemAttributeList">
+                    <h5 class="card-title text-center">Item Attribute Lists</h5>
+                    {{i.bookingCharge}}, {{i.outCityRate}}
+                </div>
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                <div >
+                    
                   <!--<p>{{i.itemname}}</p> -->
                 </div>
             </div>
+          
           </div> <!-- Show item attributes from database End -->
-      </div>
+          
+        </div>
 </div>
 
 

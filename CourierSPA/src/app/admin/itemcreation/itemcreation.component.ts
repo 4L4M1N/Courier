@@ -14,8 +14,10 @@ export class ItemcreationComponent implements OnInit {
   item: Iitem[];
   itemAttribute: ItemAttribute;
   listItemAttributes: ItemAttribute[];
+  itemAttributesOfAnItem: ItemAttribute[];
   createItemFrom: FormGroup;
   ItemAttributeForm: FormGroup;
+  p: number = 1;
   constructor(private itemcreationservice: ItemcreationService) { }
 
   ngOnInit() {
@@ -62,12 +64,23 @@ export class ItemcreationComponent implements OnInit {
   getitems() {
     this.itemcreationservice.GetItems().subscribe(r => this.item = r);
   }
-
+  onSelect(event)
+  {
+    let value = event.target.value;
+    let itemId = value;
+    console.log(itemId);
+    if(itemId == 0) 
+    { this.itemAttributesOfAnItem == null; 
+    } else {
+      this.itemcreationservice.GetItemAttributesOfAnItem(itemId).subscribe(data => {this.itemAttributesOfAnItem = data});
+    }
+    
+  }
   loadAllItemAttribtes() {
     this.itemcreationservice.GetAllItemAttribute().subscribe((listItemAttributes: ItemAttribute[]) => {
       this.listItemAttributes = listItemAttributes;
     }, error => {
       console.log('error');
     });
-  }
+    }
 }
