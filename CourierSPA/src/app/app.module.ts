@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import {NgxPaginationModule} from 'ngx-pagination';
+
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HomeComponent } from './home/home.component';
@@ -44,6 +46,7 @@ import { ItemcreationComponent } from './admin/itemcreation/itemcreation.compone
       HttpClientModule,
       FormsModule,
       ReactiveFormsModule,
+      NgxPaginationModule,
       RouterModule.forRoot(appRoutes)
    ],
    providers: [

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CourierAPI.Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20191115140949_Initial")]
+    [Migration("20191120162614_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -93,9 +93,8 @@ namespace CourierAPI.Infrastructure.Migrations
 
             modelBuilder.Entity("CourierAPI.Core.Models.Merchant", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");

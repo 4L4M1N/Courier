@@ -7,7 +7,7 @@ namespace CourierAPI.Core.IRepositories
     public interface IMerchantRepository
     {
          Task AddMerchantAsync(Merchant merchant);
-         Task<Merchant> GetMerchantDetailsAsync(string merchantName);
+         Task<Merchant> GetMerchantDetailsAsync(string merchantId);
          Task<Merchant> FindByMerchantNameAsync(string merchantName);
          Task<Merchant> FindByMerchantEmailAsync(string merchantEmail);
          Task<Merchant> FindByMerchantPhoneAsync(string merchantPhone);

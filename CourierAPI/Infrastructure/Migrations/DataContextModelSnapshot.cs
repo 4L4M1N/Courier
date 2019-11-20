@@ -91,9 +91,8 @@ namespace CourierAPI.Infrastructure.Migrations
 
             modelBuilder.Entity("CourierAPI.Core.Models.Merchant", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");

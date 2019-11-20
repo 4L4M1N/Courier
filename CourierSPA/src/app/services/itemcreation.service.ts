@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { ItemAttribute } from '../models/ItemAttribute';
 import { throwError, Observable } from 'rxjs';
 import { Iitem } from '../models/Iitem';
@@ -27,6 +27,14 @@ GetAllItemAttribute(): Observable<ItemAttribute[]> {
 }
 GetItems(): Observable<Iitem[]> {
   return this.http.get<Iitem[]>(this.baseURL + 'item');
+}
+GetItemAttributesOfAnItem(itemId): Observable<ItemAttribute[]>
+{
+  console.log(itemId);
+  // let params = new HttpParams();
+  // params = params.append('itemId', itemId.toString());
+  return this.http.get<ItemAttribute[]>(this.baseURL + 'itemattribute/' + itemId);
+
 }
 
 private handleError(err: HttpErrorResponse) {

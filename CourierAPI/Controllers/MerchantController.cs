@@ -54,6 +54,7 @@ namespace CourierAPI.Controllers
             var merchantToAdd = new Merchant
             {
                 // Id = Guid.NewGuid().ToString(),
+                Id = Guid.NewGuid().ToString(),
                 Name = addMerchant.Name,
                 Phone = addMerchant.Phone,
                 Email = addMerchant.Email,
@@ -134,7 +135,8 @@ namespace CourierAPI.Controllers
         {
             var isMerchantExist = await _unitOfWork.Merchants.GetMerchantDetailsAsync(id);
             if(isMerchantExist == null) return BadRequest("Merchant not Found");
-            return Ok(isMerchantExist);
+            var returnMerchant = _mapper.Map<MerchantDTO>(isMerchantExist);
+            return Ok(returnMerchant);
         }
 
         [Authorize(Roles = "CourierOwner, SuperAdmin")]

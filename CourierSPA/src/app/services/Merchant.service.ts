@@ -9,7 +9,7 @@ import { Merchants } from '../models/Merchants';
 })
 
 export class MerchantService {
-  baseURL = 'http://localhost:5000/api/Merchant/';
+  baseURL = 'http://localhost:5000/api/merchant/';
 
 constructor(private http: HttpClient) { }
 
@@ -22,6 +22,6 @@ GetAllMerchants(): Observable<Merchants[]> {
 }
 
 GetMerchant(id): Observable<Merchants> {
-  return this.http.get<Merchants>(this.baseURL + 'GetMerchant/' + id);
+  return this.http.get<Merchants>(this.baseURL + id);
 }
 }

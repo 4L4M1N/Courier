@@ -16,10 +16,10 @@ export const appRoutes: Routes = [
         path: '',
         children: [
             { path: 'admin', component: AdminComponent, children: [
-                { path: 'merchant-info', component: MerchantInfoComponent},
+                { path: 'merchant-info/:merchantId', component: MerchantInfoComponent},
                 { path: 'admin-dashboard', component: AdminDashboardComponent},
                 { path: 'merchantadd', component: MerchentaddComponent },
-                { path: 'booking', component: BookingComponent},
+                { path: 'booking/:merchantId', component: BookingComponent},
                 { path: 'itemcreate', component: ItemcreationComponent},
                 { path: 'merchant-agreement', component: MerchantAgreementComponent},
                 {path: 'merchant-agreement/edit', component: MerchantEditComponent}
