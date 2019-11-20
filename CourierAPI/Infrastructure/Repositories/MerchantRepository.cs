@@ -53,9 +53,9 @@ namespace CourierAPI.Infrastructure.Repositories
         }
 
         //Get merchant details by Name
-        public async Task<Merchant> GetMerchantDetailsAsync(string merchantName)
+        public async Task<Merchant> GetMerchantDetailsAsync(string merchantId)
         {
-            var result = await (_context.Merchants.Where(m => m.Name == merchantName).FirstOrDefaultAsync());
+            var result = await (_context.Merchants.Where(m => m.Id == merchantId).FirstOrDefaultAsync());
             return result;
         }
 

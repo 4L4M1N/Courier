@@ -1,6 +1,6 @@
 
 <div class="card-body">
-  <h5 class="card-title text-center">booking Form</h5>
+  <h5 class="card-title text-center">Item and Item Attribute</h5>
       <div class="row">
 
           <!-- Create item starts -->
@@ -61,7 +61,8 @@
                 
 
                 <div class="card-body shadow-sm p-3 mb-2 bg-white rounded border border-info" *ngFor="let i of itemAttributesOfAnItem | paginate: { itemsPerPage: 4, currentPage: p }" id="itemAttributeList">
-                    <h5 class="card-title text-center">Item Attribute Lists</h5>
+                    <h5 class="card-title text-center">Item Name:</h5>
+                    Size: {{i.itemSize}}
                     {{i.bookingCharge}}, {{i.outCityRate}}
                 </div>
                 <pagination-controls (pageChange)="p = $event"></pagination-controls>

@@ -5,8 +5,8 @@ namespace CourierAPI.Core.Models
 {
     public class Merchant
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        
+        public string Id { get; set; }
         public string Name { get; set; }
         
         public string MerchantIdentity { get; set; }
