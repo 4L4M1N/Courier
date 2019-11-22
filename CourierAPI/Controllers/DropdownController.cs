@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CourierAPI.Controllers
 {
-    
+
     [Route("api/[controller]")]
     [ApiController]
     public class DropdownController : ControllerBase
@@ -24,12 +24,12 @@ namespace CourierAPI.Controllers
             var result = await _unitOfWork.Items.GetItems();
             return Ok(result);
         }
-        
+
         [HttpPost("item/create")]
         [Authorize(Roles = "CourierOwner")]
         public async Task<IActionResult> CreateItem([FromForm]string itemName)
         {
-            if(itemName == null)
+            if (itemName == null)
                 return BadRequest();
             var itemToSave = new Item
             {
@@ -37,7 +37,7 @@ namespace CourierAPI.Controllers
             };
             await _unitOfWork.Items.AddItem(itemToSave);
             var result = await _unitOfWork.CompleteAsync();
-            if(result == 0) return BadRequest();
+            if (result == 0) return BadRequest();
             return Ok();
         }
 
@@ -48,14 +48,14 @@ namespace CourierAPI.Controllers
         {
             //Using System.Text.Json
             //var result = JsonSerializer.Deserialize<ItemAttribute>(itemAttribute);
-            
-            if(itemAttribute == null) return BadRequest("No value please check");
+
+            if (itemAttribute == null) return BadRequest("No value please check");
             var isitemAttributeExists = _unitOfWork.ItemAttributes.CheckItemAttribute(itemAttribute);
-            if(isitemAttributeExists>0)
+            if (isitemAttributeExists > 0)
             {
-                 return BadRequest("validation error!");
+                return BadRequest("validation error!");
             }
-            else 
+            else
             {
                 var itemAttributeToADD = new ItemAttribute
                 {
@@ -71,7 +71,7 @@ namespace CourierAPI.Controllers
                 await _unitOfWork.ItemAttributes.AddItem(itemAttributeToADD);
             }
             var result = await _unitOfWork.CompleteAsync();
-            if(result == 0) return BadRequest("dont save");
+            if (result == 0) return BadRequest("dont save");
             return Ok();
         }
         [HttpGet("itemattribute")]
@@ -86,7 +86,7 @@ namespace CourierAPI.Controllers
         {
             int id = int.Parse(itemId);
             var result = await _unitOfWork.ItemAttributes.GetItemAttributesofAItem(id);
-            if(result == null) return BadRequest();
+            if (result == null) return BadRequest();
             return Ok(result);
         }
 

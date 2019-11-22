@@ -16,13 +16,13 @@ using CourierAPI.Core.Models;
 
 namespace CourierAPI.Controllers
 {
-    
+
     [Route("api/[controller]")]
     [ApiController]
-    
+
     public class MerchantController : ControllerBase
     {
-        
+
         private readonly IUnitOfWork _unitOfWork;
         private readonly IConfiguration _config;
         private readonly IMapper _mapper;
@@ -32,7 +32,7 @@ namespace CourierAPI.Controllers
             _config = config;
             _mapper = mapper;
         }
-        
+
         [HttpGet("test")]
         public IActionResult Test()
         {
@@ -44,13 +44,13 @@ namespace CourierAPI.Controllers
         public async Task<IActionResult> Create(MerchantToAddDTO addMerchant)
         {
             var isMerchantExist = await _unitOfWork.Merchants.FindByMerchantNameAsync(addMerchant.Name);
-            if(isMerchantExist != null)
+            if (isMerchantExist != null)
                 return BadRequest("This name already exists!");
 
             byte[] passwordHash, passwordSalt;
             Extensions.CreatePasswordHash(addMerchant.Password, out passwordHash, out passwordSalt);
             int total = _unitOfWork.Merchants.LastMerchantId();
-            var merchantId = Extensions.GenerateIdForMerchant(total+1);
+            var merchantId = Extensions.GenerateIdForMerchant(total + 1);
             var merchantToAdd = new Merchant
             {
                 // Id = Guid.NewGuid().ToString(),
@@ -66,19 +66,19 @@ namespace CourierAPI.Controllers
             };
             await _unitOfWork.Merchants.AddMerchantAsync(merchantToAdd);
             var result = await _unitOfWork.CompleteAsync();
-            if(result == 0) return BadRequest();
-           
+            if (result == 0) return BadRequest();
+
             return Ok();
-            
+
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDTO merchant)
         {
             var isMerchantExist = await _unitOfWork.Merchants.FindByMerchantNameAsync(merchant.UserName);
-            if(isMerchantExist == null)
+            if (isMerchantExist == null)
                 return BadRequest("Not Found");
-            
+
             var result = Extensions.VerifyPasswordHash(merchant.Password, isMerchantExist.PasswordHash, isMerchantExist.PasswordSalt);
             if (result)
             {
@@ -90,9 +90,9 @@ namespace CourierAPI.Controllers
 
                 var key = new SymmetricSecurityKey(Encoding.UTF8
                     .GetBytes(_config.GetSection("AppSettings:Token").Value)); //Set Secret value
-                
+
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-                
+
                 //insert information to token
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
@@ -102,11 +102,12 @@ namespace CourierAPI.Controllers
                 };
 
                 var tokenHandler = new JwtSecurityTokenHandler();
-                
-                var token = tokenHandler.CreateToken(tokenDescriptor);
-                
 
-                return Ok(new {
+                var token = tokenHandler.CreateToken(tokenDescriptor);
+
+
+                return Ok(new
+                {
                     token = tokenHandler.WriteToken(token)
                 });
             }
@@ -117,7 +118,7 @@ namespace CourierAPI.Controllers
         public async Task<IActionResult> Update(MerchantToAddDTO updateMerchant)
         {
             var isMerchantExist = await _unitOfWork.Merchants.FindByMerchantNameAsync(updateMerchant.Name);
-            if(isMerchantExist == null) return BadRequest("User Not Found");
+            if (isMerchantExist == null) return BadRequest("User Not Found");
 
             isMerchantExist.Email = updateMerchant.Email;
             isMerchantExist.BankAccountNo = updateMerchant.BankAccountNo;
@@ -125,7 +126,7 @@ namespace CourierAPI.Controllers
             isMerchantExist.Phone = updateMerchant.Phone;
             isMerchantExist.TradeLicenseNo = updateMerchant.TradeLicenseNo;
             var result = await _unitOfWork.CompleteAsync();
-            if(result == 0) return BadRequest();
+            if (result == 0) return BadRequest();
             return Ok("Merchant Updated");
         }
 
@@ -134,7 +135,7 @@ namespace CourierAPI.Controllers
         public async Task<IActionResult> GetMerchant(string id)
         {
             var isMerchantExist = await _unitOfWork.Merchants.GetMerchantDetailsAsync(id);
-            if(isMerchantExist == null) return BadRequest("Merchant not Found");
+            if (isMerchantExist == null) return BadRequest("Merchant not Found");
             var returnMerchant = _mapper.Map<MerchantDTO>(isMerchantExist);
             return Ok(returnMerchant);
         }

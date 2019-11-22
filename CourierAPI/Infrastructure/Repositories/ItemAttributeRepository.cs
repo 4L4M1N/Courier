@@ -25,8 +25,8 @@ namespace CourierAPI.Infrastructure.Repositories
         public int CheckItemAttribute(ItemAttributeDTO itemAttribute)
         {
             //TODO: Logic is not correct!!!
-            var isExists = _context.ItemAttributes.Include(i=>i.Item)
-                .Where(i=>i.Item.ItemId == itemAttribute.ItemId &&
+            var isExists = _context.ItemAttributes.Include(i => i.Item)
+                .Where(i => i.Item.ItemId == itemAttribute.ItemId &&
                         i.ItemSize == itemAttribute.ItemSize &&
                         i.InCityRate == itemAttribute.InCityRate &&
                         i.OutCityRate == itemAttribute.OutCityRate &&
