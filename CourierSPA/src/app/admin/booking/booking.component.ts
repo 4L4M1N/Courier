@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
 import { Merchants } from 'src/app/models/Merchants';
 import { MerchantService } from 'src/app/services/Merchant.service';
+import { Iitem } from 'src/app/models/Iitem';
+import { ItemAttribute } from 'src/app/models/ItemAttribute';
+import { ItemcreationService } from 'src/app/services/itemcreation.service';
 
 @Component({
   selector: 'app-booking',
@@ -12,7 +15,13 @@ export class BookingComponent implements OnInit {
 
   merchantInfo: any;
   merchantId: any;
-  constructor(private route: ActivatedRoute, private merchentservice: MerchantService ) { }
+  items: Iitem[];
+  listItemAttributes: ItemAttribute[];
+  constructor(private route: ActivatedRoute, private merchentservice: MerchantService,
+              private itemcreationservice: ItemcreationService ) { 
+                this.itemcreationservice.GetItems().subscribe(data => { this.items = data});
+                
+              }
 
   ngOnInit() {
     this.route.paramMap
@@ -20,11 +29,27 @@ export class BookingComponent implements OnInit {
       this.merchantId = params.get('merchantId');
       console.log(this.merchantId);
     });
+    this.GetMerchantInfo();
+  }
+  GetMerchantInfo() {
     this.merchentservice.GetMerchant(this.merchantId)
-      .subscribe(data => {
-        this.merchantInfo = data;
-        console.log(this.merchantInfo);
+    .subscribe(data => {
+      this.merchantInfo = data;
+      console.log(this.merchantInfo);
+    });
+  }
+  onSelect(event)
+  {
+    let value = event.target.value;
+    let itemId = value;
+    console.log(itemId);
+    if(itemId == 0) {
+      this.listItemAttributes == null;
+    } else {
+      this.itemcreationservice.GetItemAttributesOfAnItem(itemId).subscribe(data => {
+        this.listItemAttributes = data;
       });
+    }
   }
   a() {
     console.log('ok');

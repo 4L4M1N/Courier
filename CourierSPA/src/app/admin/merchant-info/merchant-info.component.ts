@@ -18,11 +18,14 @@ export class MerchantInfoComponent implements OnInit {
       this.merchantId = params.get('merchantId');
       console.log(this.merchantId);
     });
+    this.GetMerchantInfo();
+  }
+  GetMerchantInfo() {
     this.merchentservice.GetMerchant(this.merchantId)
       .subscribe(data => {
         this.merchantInfo = data;
         console.log(this.merchantInfo);
-      })
+      });
   }
   
 
