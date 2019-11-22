@@ -11,12 +11,12 @@ namespace CourierAPI.Infrastructure.Repositories
     public class MerchantRepository : IMerchantRepository
     {
         private readonly DataContext _context;
-       
+
         public MerchantRepository(DataContext context)
         {
             _context = context;
         }
-        
+
         //Add Merchant
         public async Task AddMerchantAsync(Merchant merchant)
         {
@@ -33,7 +33,7 @@ namespace CourierAPI.Infrastructure.Repositories
         //Find by Merchant Identity
         public async Task<Merchant> FindByMerchantIdentityAsync(string merchantIdentity)
         {
-            var result = await  (_context.Merchants.Where(m => m.MerchantIdentity == merchantIdentity).FirstOrDefaultAsync());
+            var result = await (_context.Merchants.Where(m => m.MerchantIdentity == merchantIdentity).FirstOrDefaultAsync());
             return result;
         }
 
@@ -41,7 +41,7 @@ namespace CourierAPI.Infrastructure.Repositories
         public async Task<Merchant> FindByMerchantNameAsync(string merchantName)
         {
             var result = await (_context.Merchants.Where(m => m.Name == merchantName).FirstOrDefaultAsync());
-   
+
             return result;
         }
 

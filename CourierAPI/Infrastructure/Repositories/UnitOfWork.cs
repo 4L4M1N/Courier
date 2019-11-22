@@ -7,11 +7,11 @@ namespace CourierAPI.Infrastructure.Repositories
     public class UnitOfWork : IUnitOfWork
     {
         private readonly DataContext _context;
-        public IMerchantRepository Merchants { get; private set;}
+        public IMerchantRepository Merchants { get; private set; }
 
-        public IItemRepository Items { get; private set;}
+        public IItemRepository Items { get; private set; }
 
-        public IItemAttributeRepository ItemAttributes { get; private set;}
+        public IItemAttributeRepository ItemAttributes { get; private set; }
 
         public UnitOfWork(DataContext context)
         {
@@ -20,7 +20,7 @@ namespace CourierAPI.Infrastructure.Repositories
             Items = new ItemRepository(_context);
             ItemAttributes = new ItemAttributeRepository(_context);
         }
-        
+
         public async Task<int> CompleteAsync()
         {
             var result = await _context.SaveChangesAsync();
