@@ -80,6 +80,14 @@ namespace CourierAPI.Controllers
             var result = await _unitOfWork.ItemAttributes.GetItemAttributes();
             return Ok(result);
         }
+        [HttpGet("itemattributedetails/{itemAttributeId}")]
+        public async Task<IActionResult> ItemAttributeDetails(int itemAttributeId)
+        {
+            // int id = int.Parse(itemAttributeId);
+            var result = await _unitOfWork.ItemAttributes.GetItemAttributeDetails(itemAttributeId);
+            if (result == null) return BadRequest();
+            return Ok(result);
+        }
         //Get itemattribute of a Item..for dropdown
         [HttpGet("itemattribute/{itemId?}")]
         public async Task<IActionResult> ItemAttributeOfAItem(string itemId)

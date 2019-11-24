@@ -11,5 +11,6 @@ namespace CourierAPI.Core.IRepositories
         Task <IEnumerable<ItemAttribute>> GetItemAttributes();
         int CheckItemAttribute(ItemAttributeDTO itemAttribute);
         Task <IEnumerable<ItemAttribute>> GetItemAttributesofAItem(int itemId);
+        Task <ItemAttribute> GetItemAttributeDetails(int itemAttributeId);
     }
 }

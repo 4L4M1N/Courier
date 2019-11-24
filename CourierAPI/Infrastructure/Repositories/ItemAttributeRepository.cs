@@ -38,6 +38,14 @@ namespace CourierAPI.Infrastructure.Repositories
             return isExists.Count();
         }
 
+        public async Task<ItemAttribute> GetItemAttributeDetails(int itemAttributeId)
+        {
+            var itemAttribute = await _context.ItemAttributes
+                                        .Where(ia =>ia.ItemAttributeId == itemAttributeId)
+                                        .FirstOrDefaultAsync();
+            return itemAttribute;
+        }
+
         public async Task<IEnumerable<ItemAttribute>> GetItemAttributes()
         {
             var items = await _context.ItemAttributes.ToListAsync();
