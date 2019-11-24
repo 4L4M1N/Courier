@@ -34,7 +34,10 @@ GetItemAttributesOfAnItem(itemId): Observable<ItemAttribute[]>
   // let params = new HttpParams();
   // params = params.append('itemId', itemId.toString());
   return this.http.get<ItemAttribute[]>(this.baseURL + 'itemattribute/' + itemId);
-
+}
+GetItemAttributeDetails(itemAttributeId): Observable<ItemAttribute>
+{
+  return this.http.get<ItemAttribute>(this.baseURL + 'itemattributedetails/' + itemAttributeId);
 }
 
 private handleError(err: HttpErrorResponse) {

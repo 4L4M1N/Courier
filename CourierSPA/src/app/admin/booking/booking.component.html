@@ -58,22 +58,30 @@
                             <option *ngFor="let i of items" [value]="i.itemId">{{i.name}}</option>
                         </select>
 
-                        <select class="custom-select form-group">
+                        <select class="custom-select form-group" (change)="onSelectItemAttribute($event)">
                             <option value="" disabled>Choose your attribute</option>
                             <option *ngFor="let i of listItemAttributes" [value]="i.itemId">{{i.itemSize}}+ {{i.inCityRate}}</option>
                         </select>
       
                         <div class="form-group">
-                          <input type="password"  class="form-control"  placeholder="booking charge" >
+                            <label>Size</label>
+                            <input type="text" class="form-control"  placeholder="{{itemAttributeDetails?.itemSize}}" readonly> 
                         </div>
                         <div class="form-group">
-                            <input type="password"  class="form-control"  placeholder="condition ammount" >
+                            <label>In City Rate</label>
+                            <input type="text" class="form-control"  placeholder="{{itemAttributeDetails?.inCityRate}}" readonly> 
                         </div>
                         <div class="form-group">
-                           <input type="password"  class="form-control"  placeholder="condition charge" >
+                            <label>Out City Rate</label>
+                            <input type="text" class="form-control"  placeholder="{{itemAttributeDetails?.outCityRate}}" readonly> 
                         </div>
                         <div class="form-group">
-                            <input type="password"  class="form-control"  placeholder="total charge" >
+                            <label>Booking Charge</label>
+                            <input type="text" class="form-control"  placeholder="{{itemAttributeDetails?.bookingCharge}}" readonly> 
+                        </div>
+                        <div class="form-group">
+                            <label>Condition Charge</label>
+                            <input type="text" class="form-control"  placeholder="{{itemAttributeDetails?.conditionCharge}}" readonly> 
                         </div>
                     </div>
                 </div>

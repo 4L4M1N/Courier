@@ -16,6 +16,7 @@ export class BookingComponent implements OnInit {
   merchantInfo: any;
   merchantId: any;
   items: Iitem[];
+  itemAttributeDetails: ItemAttribute;
   listItemAttributes: ItemAttribute[];
   constructor(private route: ActivatedRoute, private merchentservice: MerchantService,
               private itemcreationservice: ItemcreationService ) { 
@@ -49,6 +50,19 @@ export class BookingComponent implements OnInit {
       this.itemcreationservice.GetItemAttributesOfAnItem(itemId).subscribe(data => {
         this.listItemAttributes = data;
       });
+    }
+  }
+  onSelectItemAttribute(event)
+  {
+    let value = event.target.value;
+    let itemAttributeId = value;
+    console.log(itemAttributeId)
+    if(itemAttributeId == 0) {
+      this.itemAttributeDetails == null;
+    } else {
+      this.itemcreationservice.GetItemAttributeDetails(itemAttributeId).subscribe(data => {
+        this.itemAttributeDetails = data;
+      })
     }
   }
   a() {
