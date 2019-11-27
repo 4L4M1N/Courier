@@ -5,6 +5,7 @@ import { MerchantService } from 'src/app/services/Merchant.service';
 import { Iitem } from 'src/app/models/Iitem';
 import { ItemAttribute } from 'src/app/models/ItemAttribute';
 import { ItemcreationService } from 'src/app/services/itemcreation.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-booking',
@@ -15,9 +16,20 @@ export class BookingComponent implements OnInit {
 
   merchantInfo: any;
   merchantId: any;
+  // get all items and populate dropdown
   items: Iitem[];
+  // get itemAttributeDetails of an selected item attribute
   itemAttributeDetails: ItemAttribute;
+  // get item attributes according to itemId
   listItemAttributes: ItemAttribute[];
+  // store itemAttributes to table
+  tempItemAttribute:ItemAttribute;
+  // push all added itemAttributes
+  itemAttributeTable:ItemAttribute[] = [];
+  // store item attribute id
+  itemAttributeIDs:any[] = [];
+  addItemAttribute:FormGroup;
+  submitItemAttribute =  false;
   constructor(private route: ActivatedRoute, private merchentservice: MerchantService,
               private itemcreationservice: ItemcreationService ) { 
                 this.itemcreationservice.GetItems().subscribe(data => { this.items = data});
@@ -31,6 +43,11 @@ export class BookingComponent implements OnInit {
       console.log(this.merchantId);
     });
     this.GetMerchantInfo();
+    this.addItemAttribute = new FormGroup({
+      // itemid: new FormControl(''),
+      itemid: new FormControl('', Validators.required),
+      attributeId: new FormControl('', Validators.required)
+    });
   }
   GetMerchantInfo() {
     this.merchentservice.GetMerchant(this.merchantId)
@@ -64,6 +81,25 @@ export class BookingComponent implements OnInit {
         this.itemAttributeDetails = data;
       })
     }
+  }
+  get addItemAttributeForm() { return this.addItemAttribute.controls;}
+  //Add to table
+  addItemAttributeToList()
+  {
+    this.submitItemAttribute = true;
+    if (this.addItemAttribute.invalid) {
+      console.log("error");
+      return;
+  }
+    var itemid = this.addItemAttribute.controls['itemid'].value;
+    var itemAttributeId = this.addItemAttribute.controls['attributeId'].value;
+    this.itemAttributeIDs.push(itemAttributeId);
+    this.itemcreationservice.GetItemAttributeDetails(itemAttributeId).subscribe(data => {
+      this.tempItemAttribute = data;
+      this.itemAttributeTable.push(this.tempItemAttribute);
+    })
+    console.log(this.itemAttributeIDs);
+    console.log(this.itemAttributeTable);
   }
   a() {
     console.log('ok');

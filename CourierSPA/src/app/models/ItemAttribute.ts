@@ -1,6 +1,6 @@
 export interface ItemAttribute {
     // itemname: string;
-    itemId: number;
+    itemAttributeId: number;
     itemSize: string;
     inCityRate: number;
     outCityRate: number;
