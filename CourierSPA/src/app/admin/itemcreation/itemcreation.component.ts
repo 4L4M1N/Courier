@@ -14,7 +14,7 @@ export class ItemcreationComponent implements OnInit {
   item: Iitem[];
   itemAttribute: ItemAttribute;
   listItemAttributes: ItemAttribute[];
-  itemAttributesOfAnItem: ItemAttribute[];
+  itemAttributesOfAnItem;
   createItemFrom: FormGroup;
   ItemAttributeForm: FormGroup;
   p: number = 1;
@@ -72,7 +72,8 @@ export class ItemcreationComponent implements OnInit {
     if(itemId == 0) 
     { this.itemAttributesOfAnItem == null; 
     } else {
-      this.itemcreationservice.GetItemAttributesOfAnItem(itemId).subscribe(data => {this.itemAttributesOfAnItem = data});
+      // this.itemcreationservice.GetItemAttributesOfAnItem(itemId).subscribe(data => {this.itemAttributesOfAnItem = data});
+      this.itemAttributesOfAnItem = this.itemcreationservice.GetItemAttributesOfAnItem(itemId);
     }
     
   }
