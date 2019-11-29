@@ -13,9 +13,9 @@
 }
 .btn-primary{color:#fff;background-color:#1d6ac8;background-image:-moz-linear-gradient(#45b3f3, #1d6ac8);background-image:-webkit-linear-gradient(#45b3f3, #1d6ac8);border-color:#1d6ac8 #1d6ac8 #1a5eb2}
 .btn-primary:active{border-color:#17529b}
-.container {
-    max-width: 1300px;
-}
+/* .container {
+    max-width: auto;
+} */
 .fab {
     width: 60px;
     height: 60px;
@@ -40,3 +40,6 @@
       -webkit-transform: rotate(90deg);
       transform: rotate(90deg);
   }
+
+html, body { min-height:20%;}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
