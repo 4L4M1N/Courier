@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { MatToolbarModule, MatButtonModule, MatSidenavModule,
+   MatIconModule, MatListModule, MatCardModule, MatGridList, MatGridListModule } from '@angular/material';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
@@ -8,9 +9,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './route';
-import { AdminComponent } from './admin/admin.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
-import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
+import { AdminNavComponent } from './_layout/admin-nav/admin-nav.component';
 import { MerchantInfoComponent } from './admin/merchant-info/merchant-info.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MerchantAgreementComponent } from './admin/merchant-agreement/merchant-agreement.component';
@@ -24,12 +24,13 @@ import { MerchantService } from './services/Merchant.service';
 import { MerchentaddComponent } from './admin/merchentadd/merchentadd.component';
 import { BookingComponent } from './admin/booking/booking.component';
 import { ItemcreationComponent } from './admin/itemcreation/itemcreation.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AdminLayoutComponent } from './_layout/admin-layout/admin-layout.component';
 @NgModule({
    declarations: [
       AppComponent,
       NavBarComponent,
       HomeComponent,
-      AdminComponent,
       AdminDashboardComponent,
       AdminNavComponent,
       MerchantInfoComponent,
@@ -39,7 +40,8 @@ import { ItemcreationComponent } from './admin/itemcreation/itemcreation.compone
       RegistrationComponent,
       MerchentaddComponent,
       BookingComponent,
-      ItemcreationComponent
+      ItemcreationComponent,
+      AdminLayoutComponent
    ],
    imports: [
       BrowserModule,
@@ -47,7 +49,15 @@ import { ItemcreationComponent } from './admin/itemcreation/itemcreation.compone
       FormsModule,
       ReactiveFormsModule,
       NgxPaginationModule,
-      RouterModule.forRoot(appRoutes)
+      RouterModule.forRoot(appRoutes),
+      BrowserAnimationsModule,
+      MatToolbarModule,
+      MatButtonModule,
+      MatSidenavModule,
+      MatIconModule,
+      MatListModule,
+      MatCardModule,
+      MatGridListModule
    ],
    providers: [
       { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

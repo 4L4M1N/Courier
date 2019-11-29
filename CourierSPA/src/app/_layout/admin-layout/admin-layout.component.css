@@ -1,3 +1,12 @@
+.leftNav {
+    width:250px;
+}
+.body {
+    height: 800px;
+}
+#mainBody {
+    padding-top: 50px;
+}
 .media img {
    
     border-radius: 50%;
@@ -16,9 +25,9 @@
 .media p {
     font-size: 15px;
 }
-.left-navbar {
+/* .left-navbar {
     padding-top: 25px;
-}
+} */
 .media {
    border-radius: 10px;
 }
