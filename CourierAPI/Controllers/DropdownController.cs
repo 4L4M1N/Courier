@@ -97,6 +97,5 @@ namespace CourierAPI.Controllers
             if (result == null) return BadRequest();
             return Ok(result);
         }
-
     }
 }

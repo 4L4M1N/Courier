@@ -18,6 +18,8 @@ namespace CourierAPI.Infrastructure.Data
         public DbSet<Zone> Zones { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<ItemAttribute> ItemAttributes { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
+        public DbSet<Receiver> Receivers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
