@@ -3,8 +3,8 @@ using CourierAPI.Core.Models;
 
 namespace CourierAPI.Core.IRepositories
 {
-    public interface IBookingRepository
+    public interface IReceiverRepository
     {
-         Task Add(Booking booking);
+         Task Add(Receiver receiver); 
     }
 }
