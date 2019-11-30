@@ -16,6 +16,7 @@ namespace CourierAPI.Helpers
             }
         }
 
+        //Generate Merchant Id
         public static string GenerateIdForMerchant(int id)
         {
             DateTime year = DateTime.Now;

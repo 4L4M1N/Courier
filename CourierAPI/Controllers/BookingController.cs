@@ -1,6 +1,8 @@
+using System;
 using System.Threading.Tasks;
 using CourierAPI.Core.DTOs;
 using CourierAPI.Core.IRepositories;
+using CourierAPI.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CourierAPI.Controllers
@@ -27,7 +29,18 @@ namespace CourierAPI.Controllers
         [HttpPost("add")]
         public async Task<IActionResult> Add(BookingDTO booking)
         {
-            return Ok(booking);
+            //Create Receiver
+            var receiver = new Receiver
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = booking.Name,
+                Address = booking.Address,
+                Phone = booking.Phone,
+                Email = booking.Email,
+                ZoneId = booking.ZoneId
+            };
+            await _unitOfWork.Receiver.Add(receiver);
+            return Ok();
         }
     }
 }
