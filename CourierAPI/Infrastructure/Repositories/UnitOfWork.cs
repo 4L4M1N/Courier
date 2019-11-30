@@ -12,6 +12,7 @@ namespace CourierAPI.Infrastructure.Repositories
         public IItemRepository Items { get; private set; }
 
         public IItemAttributeRepository ItemAttributes { get; private set; }
+        public IReceiverRepository Receiver {get; private set;}
 
         public UnitOfWork(DataContext context)
         {
@@ -19,6 +20,7 @@ namespace CourierAPI.Infrastructure.Repositories
             Merchants = new MerchantRepository(_context);
             Items = new ItemRepository(_context);
             ItemAttributes = new ItemAttributeRepository(_context);
+            Receiver = new ReceiverRepository(_context);
         }
 
         public async Task<int> CompleteAsync()
