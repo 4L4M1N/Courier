@@ -29,7 +29,7 @@ namespace CourierAPI.Controllers
         [HttpPost("add")]
         public async Task<IActionResult> Add(BookingDTO booking)
         {
-            //Create Receiver
+            //Save Receiver
             var receiver = new Receiver
             {
                 Id = Guid.NewGuid().ToString(),
@@ -39,7 +39,32 @@ namespace CourierAPI.Controllers
                 Email = booking.Email,
                 ZoneId = booking.ZoneId
             };
-            await _unitOfWork.Receiver.Add(receiver);
+            await _unitOfWork.Receivers.Add(receiver);
+            //get receiverId
+            var receiverId = receiver.Id;
+            
+            //Place Booking
+            var placeBooking = new Booking
+            {
+                Id = Guid.NewGuid().ToString(),
+                ReceiverId = receiverId,
+                MerchantId = booking.MerchantId,
+                BookingDate = DateTime.Now
+            };
+            var bookingId = placeBooking.Id;
+            await _unitOfWork.Bookings.Add(placeBooking);
+
+            //Save BookingItems
+            booking.ItemAttributesId.ForEach(async (itemattribute) => {
+                var saveBookingItem = new BookingItem
+                {
+                    ItemAttributeId = itemattribute,
+                    BookingId = bookingId
+                };
+                await _unitOfWork.BookingItems.Add(saveBookingItem);
+            });
+            var result = await _unitOfWork.CompleteAsync();
+            if (result == 0) return BadRequest("error occured");
             return Ok();
         }
     }

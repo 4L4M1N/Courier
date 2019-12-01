@@ -7,7 +7,9 @@ namespace CourierAPI.Core.IRepositories
          IMerchantRepository Merchants { get;}
          IItemRepository Items {get;}
          IItemAttributeRepository ItemAttributes {get;}
-         IReceiverRepository Receiver {get;}
+         IReceiverRepository Receivers {get;}
+         IBookingRepository Bookings {get;}
+         IBookingItemRepository BookingItems {get;}
          Task<int> CompleteAsync();
     }
 }
