@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CourierAPI.Core.Models
@@ -14,5 +15,8 @@ namespace CourierAPI.Core.Models
         [ForeignKey("MerchantId")]
         public Merchant Merchant { get; set; }
         public int TotalAmmount { get; set; }
+        public DateTime BookingDate { get; set; }
+        public DateTime DeliveredDate { get; set; }
+        public string Status { get; set; }
     }
 }
