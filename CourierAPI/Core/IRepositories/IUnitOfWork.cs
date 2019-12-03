@@ -10,6 +10,7 @@ namespace CourierAPI.Core.IRepositories
          IReceiverRepository Receivers {get;}
          IBookingRepository Bookings {get;}
          IBookingItemRepository BookingItems {get;}
+         IDeliveryAddressRepository DeliveryAddress {get;}
          Task<int> CompleteAsync();
     }
 }

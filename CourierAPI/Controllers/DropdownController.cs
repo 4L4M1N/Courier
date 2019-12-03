@@ -97,5 +97,24 @@ namespace CourierAPI.Controllers
             if (result == null) return BadRequest();
             return Ok(result);
         }
+
+
+        //Delivery Address
+        [HttpGet("divisions")]
+        public async Task<IActionResult> GetDivisions()
+        {
+            var divisions = await _unitOfWork.DeliveryAddress.GetDivisions();
+            return Ok(divisions);
+        }
+
+        //Zones of a Division
+        [HttpGet("divisions/{divisionId?}")]
+        public async Task<IActionResult> ZonesOfADivison(string divisionId)
+        {
+            int id = int.Parse(divisionId);
+            var result = await _unitOfWork.DeliveryAddress.GetZonesOfADivision(id);
+            if (result == null) return BadRequest();
+            return Ok(result);
+        }
     }
 }

@@ -1,9 +1,12 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using CourierAPI.Core.DTOs;
 using CourierAPI.Core.IRepositories;
 using CourierAPI.Core.Models;
+using CourierAPI.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CourierAPI.Controllers
 {
@@ -13,11 +16,14 @@ namespace CourierAPI.Controllers
     public class BookingController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly DataContext _context;
         
         
-        public BookingController(IUnitOfWork unitOfWork)
+        public BookingController(IUnitOfWork unitOfWork, DataContext context)
         {
+            _context = context;
             _unitOfWork = unitOfWork;
+            
         }
         [HttpGet("test")]
         public async Task<IActionResult> GetBooking()
@@ -66,6 +72,13 @@ namespace CourierAPI.Controllers
             var result = await _unitOfWork.CompleteAsync();
             if (result == 0) return BadRequest("error occured");
             return Ok();
+        }
+        //Show Booking Details
+        [HttpGet("allBookings")]
+        public async Task<ActionResult> ShowBookingDetails()
+        {
+            var result = await _context.ShowBookings.FromSqlRaw("exec Booking").ToListAsync();
+            return Ok(result);
         }
     }
 }
