@@ -53,7 +53,10 @@ namespace CourierAPI
 
             services.AddMvc();
 
-            services.AddControllers().AddNewtonsoftJson();
+            services.AddControllers().AddNewtonsoftJson(
+                 options => options.SerializerSettings.ReferenceLoopHandling =            
+                Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
             services.AddCors();
             
             // Automapper Configuration
@@ -72,6 +75,7 @@ namespace CourierAPI
             services.AddScoped<IReceiverRepository, ReceiverRepository>();
             services.AddScoped<IBookingRepository, BookingRepository>();
             services.AddScoped<IBookingItemRepository, BookingItemRepository>();
+            services.AddScoped<IDeliveryAddressRepository, DeliveryAddressRepository>();
             
 
             services.AddAuthentication(x =>
