@@ -46,6 +46,13 @@
                     <div class="form-group">
                       <input type="password"  class="form-control"  placeholder="address code" >
                     </div>
+                    <div class="form-group">
+                      <select class="custom-select form-control" formControlName="divisionId" (change)="onSelect($event)" >
+                          <option value="" disabled>Choose your Division</option>
+                          <option *ngFor="let i of division" [value]="i.divisionId">{{i.name}}</option>
+                      </select>
+                      
+                    </div>
                 </div>
             
           </div> <!-- Receiver info  End -->

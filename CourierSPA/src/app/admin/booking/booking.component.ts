@@ -6,6 +6,8 @@ import { Iitem } from 'src/app/models/Iitem';
 import { ItemAttribute } from 'src/app/models/ItemAttribute';
 import { ItemcreationService } from 'src/app/services/itemcreation.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Division } from 'src/app/models/division';
+import { DivisionZoneService } from 'src/app/services/divisionZone.service';
 
 @Component({
   selector: 'app-booking',
@@ -13,6 +15,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./booking.component.css']
 })
 export class BookingComponent implements OnInit {
+
+  division: Division[];
 
   merchantInfo: any;
   merchantId: any;
@@ -23,20 +27,21 @@ export class BookingComponent implements OnInit {
   // get item attributes according to itemId
   listItemAttributes: ItemAttribute[];
   // store itemAttributes to table
-  tempItemAttribute:ItemAttribute;
+  tempItemAttribute: ItemAttribute;
   // push all added itemAttributes
-  itemAttributeTable:ItemAttribute[] = [];
+  itemAttributeTable: ItemAttribute[] = [];
   // store item attribute id
-  itemAttributeIDs:any[] = [];
-  addItemAttribute:FormGroup;
+  itemAttributeIDs: any[] = [];
+  addItemAttribute: FormGroup;
   submitItemAttribute =  false;
   constructor(private route: ActivatedRoute, private merchentservice: MerchantService,
-              private itemcreationservice: ItemcreationService ) { 
+              private itemcreationservice: ItemcreationService,
+              private divisionzonservice: DivisionZoneService ) { 
                 this.itemcreationservice.GetItems().subscribe(data => { this.items = data});
-                
               }
 
   ngOnInit() {
+    this.getDivisions();
     this.route.paramMap
     .subscribe(params => {
       this.merchantId = params.get('merchantId');
@@ -56,12 +61,11 @@ export class BookingComponent implements OnInit {
       console.log(this.merchantInfo);
     });
   }
-  onSelect(event)
-  {
+  onSelect(event) {
     let value = event.target.value;
     let itemId = value;
     console.log(itemId);
-    if(itemId == 0) {
+    if (itemId == 0) {
       this.listItemAttributes == null;
     } else {
       this.itemcreationservice.GetItemAttributesOfAnItem(itemId).subscribe(data => {
@@ -69,8 +73,7 @@ export class BookingComponent implements OnInit {
       });
     }
   }
-  onSelectItemAttribute(event)
-  {
+  onSelectItemAttribute(event) {
     let value = event.target.value;
     let itemAttributeId = value;
     console.log(itemAttributeId)
@@ -84,8 +87,7 @@ export class BookingComponent implements OnInit {
   }
   get addItemAttributeForm() { return this.addItemAttribute.controls;}
   //Add to table
-  addItemAttributeToList()
-  {
+  addItemAttributeToList() {
     this.submitItemAttribute = true;
     if (this.addItemAttribute.invalid) {
       console.log("error");
@@ -104,5 +106,10 @@ export class BookingComponent implements OnInit {
   a() {
     console.log('ok');
   }
+  getDivisions() {
+    this.divisionzonservice.GetDivisions().subscribe(r => this.division = r);
+  }
+
+
 
 }
