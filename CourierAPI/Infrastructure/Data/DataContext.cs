@@ -1,4 +1,5 @@
 using CourierAPI.Core.Models;
+using CourierAPI.Core.Query;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,10 @@ namespace CourierAPI.Infrastructure.Data
         public DbSet<BookingItem> BookingItems { get; set; }
         public DbSet<DeliveryMan> DeliveryMen { get; set; }
         public DbSet<AssignedDelivMan> AssignedDelivMen { get; set; }
+
+
+        //Query
+        public DbQuery<BookingDetailsR> ShowBookings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
