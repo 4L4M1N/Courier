@@ -16,6 +16,8 @@ namespace CourierAPI.Infrastructure.Repositories
         public IBookingRepository Bookings {get ; private set;}
         public IBookingItemRepository BookingItems {get; private set;}
 
+        public IDeliveryAddressRepository DeliveryAddress {get; private set;}
+
         public UnitOfWork(DataContext context)
         {
             _context = context;
@@ -25,6 +27,7 @@ namespace CourierAPI.Infrastructure.Repositories
             Receivers = new ReceiverRepository(_context);
             Bookings = new BookingRepository(_context);
             BookingItems = new BookingItemRepository(_context);
+            DeliveryAddress = new DeliveryAddressRepository(_context);
         }
 
         public async Task<int> CompleteAsync()
