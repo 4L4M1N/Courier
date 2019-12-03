@@ -47,12 +47,20 @@
                       <input type="password"  class="form-control"  placeholder="address code" >
                     </div>
                     <div class="form-group">
-                      <select class="custom-select form-control" formControlName="divisionId" (change)="onSelect($event)" >
+                      <select class="custom-select form-control" formControlName="divisionId" (change)="onSelectDivision($event)" >
                           <option value="" disabled>Choose your Division</option>
                           <option *ngFor="let i of division" [value]="i.divisionId">{{i.name}}</option>
                       </select>
                       
                     </div>
+
+                    <div class="form-group">
+                      <select class="custom-select form-group" formControlName="zoneId" (change)="onSelectZone($event)">
+                          <option value="" disabled>Choose your Zone</option>
+                          <option *ngFor="let i of ZonesOfaDivision" [value]="i.zoneId">{{i.name}}</option>
+                      </select>
+                    </div>
+
                 </div>
             
           </div> <!-- Receiver info  End -->

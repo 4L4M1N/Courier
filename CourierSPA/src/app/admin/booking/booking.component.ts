@@ -8,6 +8,7 @@ import { ItemcreationService } from 'src/app/services/itemcreation.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Division } from 'src/app/models/division';
 import { DivisionZoneService } from 'src/app/services/divisionZone.service';
+import { Zone } from 'src/app/models/zone';
 
 @Component({
   selector: 'app-booking',
@@ -16,7 +17,8 @@ import { DivisionZoneService } from 'src/app/services/divisionZone.service';
 })
 export class BookingComponent implements OnInit {
 
-  division: Division[];
+  division: Division[]; // get all divisions and populate dropdown
+  listZones: Zone[];
 
   merchantInfo: any;
   merchantId: any;
@@ -36,12 +38,12 @@ export class BookingComponent implements OnInit {
   submitItemAttribute =  false;
   constructor(private route: ActivatedRoute, private merchentservice: MerchantService,
               private itemcreationservice: ItemcreationService,
-              private divisionzonservice: DivisionZoneService ) { 
+              private divisionzonservice: DivisionZoneService ) {
                 this.itemcreationservice.GetItems().subscribe(data => { this.items = data});
+                this.divisionzonservice.GetDivisions().subscribe(r => this.division = r);
               }
 
   ngOnInit() {
-    this.getDivisions();
     this.route.paramMap
     .subscribe(params => {
       this.merchantId = params.get('merchantId');
@@ -61,11 +63,25 @@ export class BookingComponent implements OnInit {
       console.log(this.merchantInfo);
     });
   }
+
+  onSelectDivision(event) {
+    let value = event.target.value;
+    let divId = value;
+    if (divId === 0) {
+      this.listZones == null;
+    } else {
+      this.divisionzonservice.GetZonesOfADivison(divId).subscribe(data => {
+        this.listZones = data;
+      });
+    }
+  }
+
+
   onSelect(event) {
     let value = event.target.value;
     let itemId = value;
     console.log(itemId);
-    if (itemId == 0) {
+    if (itemId === 0) {
       this.listItemAttributes == null;
     } else {
       this.itemcreationservice.GetItemAttributesOfAnItem(itemId).subscribe(data => {
@@ -77,7 +93,7 @@ export class BookingComponent implements OnInit {
     let value = event.target.value;
     let itemAttributeId = value;
     console.log(itemAttributeId)
-    if(itemAttributeId == 0) {
+    if(itemAttributeId === 0) {
       this.itemAttributeDetails == null;
     } else {
       this.itemcreationservice.GetItemAttributeDetails(itemAttributeId).subscribe(data => {
@@ -106,10 +122,5 @@ export class BookingComponent implements OnInit {
   a() {
     console.log('ok');
   }
-  getDivisions() {
-    this.divisionzonservice.GetDivisions().subscribe(r => this.division = r);
-  }
-
-
 
 }

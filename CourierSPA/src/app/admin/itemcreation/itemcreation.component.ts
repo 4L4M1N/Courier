@@ -64,18 +64,16 @@ export class ItemcreationComponent implements OnInit {
   getitems() {
     this.itemcreationservice.GetItems().subscribe(r => this.item = r);
   }
-  onSelect(event)
-  {
+  onSelect(event) {
     let value = event.target.value;
     let itemId = value;
     console.log(itemId);
-    if(itemId == 0) 
-    { this.itemAttributesOfAnItem == null; 
+    if (itemId === 0) {
+      this.itemAttributesOfAnItem == null;
     } else {
       // this.itemcreationservice.GetItemAttributesOfAnItem(itemId).subscribe(data => {this.itemAttributesOfAnItem = data});
       this.itemAttributesOfAnItem = this.itemcreationservice.GetItemAttributesOfAnItem(itemId);
     }
-    
   }
   loadAllItemAttribtes() {
     this.itemcreationservice.GetAllItemAttribute().subscribe((listItemAttributes: ItemAttribute[]) => {
