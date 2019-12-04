@@ -38,9 +38,9 @@ export class BookingComponent implements OnInit {
   submitItemAttribute =  false;
   constructor(private route: ActivatedRoute, private merchentservice: MerchantService,
               private itemcreationservice: ItemcreationService,
-              private divisionzonservice: DivisionZoneService ) {
+              private deliveryAddressservice: deliveryAddressservice ) {
                 this.itemcreationservice.GetItems().subscribe(data => { this.items = data});
-                this.divisionzonservice.GetDivisions().subscribe(r => this.division = r);
+                this.deliveryAddressservice.GetDivisions().subscribe(r => this.division = r);
               }
 
   ngOnInit() {
@@ -71,7 +71,7 @@ export class BookingComponent implements OnInit {
     if (divId === 0) {
       this.listZones == null;
     } else {
-      this.divisionzonservice.GetZonesOfADivison(divId).subscribe(data => {
+      this.deliveryAddressservice.GetZonesOfADivison(divId).subscribe(data => {
         this.listZones = data;
       });
     }
