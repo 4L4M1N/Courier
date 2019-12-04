@@ -24,19 +24,19 @@ namespace CourierAPI.Controllers
         }
 
          [HttpPost("create")]
-        public async Task<IActionResult> Create(DeliveryManToAddDTO addDaliveryMan)
+        public async Task<IActionResult> Create(DeliveryManToAddDTO addDeliveryMan)
         {
             //check already exists or not
 
             byte[] passwordHash, passwordSalt;
-            Extensions.CreatePasswordHash(addDaliveryMan.Password, out passwordHash, out passwordSalt);
+            Extensions.CreatePasswordHash(addDeliveryMan.Password, out passwordHash, out passwordSalt);
             int total = _unitOfWork.DeliveryMan.LastDeliverManId();
             var DeliveryManId = Extensions.GenerateIdForDeliveryMan(total + 1);
             var DeliveryManToAdd = new DeliveryMan
             {
                 DelivManIdentity  = DeliveryManId,
-                Name = addDaliveryMan.Name,
-                Phone = addDaliveryMan.Phone,
+                Name = addDeliveryMan.Name,
+                Phone = addDeliveryMan.Phone,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt
             };
