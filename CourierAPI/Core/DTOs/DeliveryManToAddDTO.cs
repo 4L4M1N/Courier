@@ -1,6 +1,6 @@
 namespace CourierAPI.Core.DTOs
 {
-    public interface DeliveryManToAddDTO
+    public class DeliveryManToAddDTO
     {
      
         public string Name { get; set; }
