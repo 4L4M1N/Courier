@@ -76,6 +76,7 @@ namespace CourierAPI
             services.AddScoped<IBookingRepository, BookingRepository>();
             services.AddScoped<IBookingItemRepository, BookingItemRepository>();
             services.AddScoped<IDeliveryAddressRepository, DeliveryAddressRepository>();
+            services.AddScoped<IDeliveryManRepository, DeliveryManRepository>();
             
 
             services.AddAuthentication(x =>

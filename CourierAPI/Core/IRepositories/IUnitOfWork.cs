@@ -11,6 +11,8 @@ namespace CourierAPI.Core.IRepositories
          IBookingRepository Bookings {get;}
          IBookingItemRepository BookingItems {get;}
          IDeliveryAddressRepository DeliveryAddress {get;}
+
+         IDeliveryManRepository DeliveryMan{get;}
          Task<int> CompleteAsync();
     }
 }

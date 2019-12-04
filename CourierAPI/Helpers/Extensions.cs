@@ -25,6 +25,15 @@ namespace CourierAPI.Helpers
             return generatedId;
         }
 
+        //Generate DeliveryMan Id
+        public static string GenerateIdForDeliveryMan(int id)
+        {
+            DateTime day = DateTime.Now;
+            DateTime month = DateTime.Now;
+            string generateId = "D"+day.ToString("dd")+"-"+id.ToString()+"-"+month.ToString("MM");
+            return generateId;
+        }
+
         public static bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
         {
             if (password == null) throw new ArgumentNullException("password");
