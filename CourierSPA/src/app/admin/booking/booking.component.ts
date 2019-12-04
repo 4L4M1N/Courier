@@ -67,6 +67,7 @@ export class BookingComponent implements OnInit {
   onSelectDivision(event) {
     let value = event.target.value;
     let divId = value;
+    //console.log(divId);
     if (divId === 0) {
       this.listZones == null;
     } else {
@@ -101,7 +102,7 @@ export class BookingComponent implements OnInit {
       })
     }
   }
-  get addItemAttributeForm() { return this.addItemAttribute.controls;}
+  get addItemAttributeForm() { return this.addItemAttribute.controls; }
   //Add to table
   addItemAttributeToList() {
     this.submitItemAttribute = true;
@@ -115,7 +116,7 @@ export class BookingComponent implements OnInit {
     this.itemcreationservice.GetItemAttributeDetails(itemAttributeId).subscribe(data => {
       this.tempItemAttribute = data;
       this.itemAttributeTable.push(this.tempItemAttribute);
-    })
+    });
     console.log(this.itemAttributeIDs);
     console.log(this.itemAttributeTable);
   }
