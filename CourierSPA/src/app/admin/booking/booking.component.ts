@@ -7,8 +7,8 @@ import { ItemAttribute } from 'src/app/models/ItemAttribute';
 import { ItemcreationService } from 'src/app/services/itemcreation.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Division } from 'src/app/models/division';
-import { DivisionZoneService } from 'src/app/services/divisionZone.service';
 import { Zone } from 'src/app/models/zone';
+import { DeliveryAddressService } from 'src/app/services/deliveryAddress.service';
 
 @Component({
   selector: 'app-booking',
@@ -38,7 +38,7 @@ export class BookingComponent implements OnInit {
   submitItemAttribute =  false;
   constructor(private route: ActivatedRoute, private merchentservice: MerchantService,
               private itemcreationservice: ItemcreationService,
-              private deliveryAddressservice: deliveryAddressservice ) {
+              private deliveryAddressservice: DeliveryAddressService) {
                 this.itemcreationservice.GetItems().subscribe(data => { this.items = data});
                 this.deliveryAddressservice.GetDivisions().subscribe(r => this.division = r);
               }
