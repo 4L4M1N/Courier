@@ -35,12 +35,14 @@ export class BookingComponent implements OnInit {
   // store item attribute id
   itemAttributeIDs: any[] = [];
   addItemAttribute: FormGroup;
+  booking: FormGroup;
   submitItemAttribute =  false;
+  submitBooking = false;
   constructor(private route: ActivatedRoute, private merchentservice: MerchantService,
               private itemcreationservice: ItemcreationService,
               private deliveryAddressservice: DeliveryAddressService) {
                 this.itemcreationservice.GetItems().subscribe(data => { this.items = data});
-                this.deliveryAddressservice.GetDivisions().subscribe(r => this.division = r);
+                this.deliveryAddressservice.GetDivisions().subscribe(r => {this.division = r});
               }
 
   ngOnInit() {
@@ -50,11 +52,26 @@ export class BookingComponent implements OnInit {
       console.log(this.merchantId);
     });
     this.GetMerchantInfo();
+
+    // Booking form 
+    this.booking = new FormGroup({
+      merchantIdentity: new FormControl(),
+      merchantName: new FormControl(),
+      merchantPhone: new FormControl(),
+      merchantEmail: new FormControl(),
+      receiverName: new FormControl(),
+      receiverPhone: new FormControl(),
+      receiverAddress: new FormControl(),
+      divisionid: new FormControl('', Validators.required),
+      zoneid: new FormControl('', Validators.required)
+    });
+    
     this.addItemAttribute = new FormGroup({
       // itemid: new FormControl(''),
       itemid: new FormControl('', Validators.required),
       attributeId: new FormControl('', Validators.required)
     });
+    
   }
   GetMerchantInfo() {
     this.merchentservice.GetMerchant(this.merchantId)
@@ -103,6 +120,7 @@ export class BookingComponent implements OnInit {
     }
   }
   get addItemAttributeForm() { return this.addItemAttribute.controls; }
+  get bookingForm() { return this.booking.controls; }
   //Add to table
   addItemAttributeToList() {
     this.submitItemAttribute = true;
@@ -122,6 +140,16 @@ export class BookingComponent implements OnInit {
   }
   a() {
     console.log('ok');
+  }
+  addBooking() {
+    this.submitBooking = true;
+    
+    //this.submitBooking = true;
+    if (this.booking.invalid) {
+      console.log("error");
+      return;
+  }
+  
   }
 
 }
