@@ -1,5 +1,5 @@
 
 export interface Division {
-    divisionId: number ;
+    divisionId: number;
     name: string;
 }

@@ -27,6 +27,8 @@ import { ItemcreationComponent } from './admin/itemcreation/itemcreation.compone
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminLayoutComponent } from './_layout/admin-layout/admin-layout.component';
 import { DeliveryManAddComponent } from './admin/deliveryManAdd/deliveryManAdd.component';
+
+
 @NgModule({
    declarations: [
       AppComponent,
