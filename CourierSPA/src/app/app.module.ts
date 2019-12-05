@@ -26,6 +26,7 @@ import { BookingComponent } from './admin/booking/booking.component';
 import { ItemcreationComponent } from './admin/itemcreation/itemcreation.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminLayoutComponent } from './_layout/admin-layout/admin-layout.component';
+import { DeliveryManAddComponent } from './admin/deliveryManAdd/deliveryManAdd.component';
 @NgModule({
    declarations: [
       AppComponent,
@@ -41,7 +42,8 @@ import { AdminLayoutComponent } from './_layout/admin-layout/admin-layout.compon
       MerchentaddComponent,
       BookingComponent,
       ItemcreationComponent,
-      AdminLayoutComponent
+      AdminLayoutComponent,
+      DeliveryManAddComponent
    ],
    imports: [
       BrowserModule,
