@@ -9,9 +9,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Division } from 'src/app/models/division';
 import { Zone } from 'src/app/models/zone';
 import { DeliveryAddressService } from 'src/app/services/deliveryAddress.service';
-import { MessagesService } from 'src/app/services/Messages.service';
 import { MatDialogRef } from '@angular/material';
-import { ConfirmService } from 'src/app/services/Confirm.service';
+
 
 @Component({
   selector: 'app-booking',
@@ -43,10 +42,7 @@ export class BookingComponent implements OnInit {
   submitBooking = false;
   constructor(private route: ActivatedRoute, private merchentservice: MerchantService,
               private itemcreationservice: ItemcreationService,
-              private deliveryAddressservice: DeliveryAddressService,
-              public dialogRef: MatDialogRef<BookingComponent>,
-              private messagesService: MessagesService,
-              private confirmService: ConfirmService) {
+              private deliveryAddressservice: DeliveryAddressService) {
                 this.itemcreationservice.GetItems().subscribe(data => { this.items = data});
                 this.deliveryAddressservice.GetDivisions().subscribe(r => {this.division = r});
               }
@@ -131,8 +127,6 @@ export class BookingComponent implements OnInit {
   
   //Add to table
   addItemAttributeToList() {
-    let a = this.confirmService.confirmDialog();
-    console.log(a);
     this.submitItemAttribute = true;
     if (this.addItemAttribute.invalid) {
       console.log("error");
@@ -153,20 +147,7 @@ export class BookingComponent implements OnInit {
     this.submitBooking = true;
     if (this.booking.invalid) {
       console.log("error");
-      this.handleError(this.booking.errors);
       return;
   }
   }
-
-
-  // Messages
-  private success() {
-    this.messagesService.openDialog('Success', 'Database updated as you wished!');
-  }
-
-  private handleError(error) {
-    this.messagesService.openDialog('Error', 'Please fill up all field');
-  }
-
-
 }
