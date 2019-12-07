@@ -35,3 +35,42 @@
     box-shadow: 0 4px 8px 0 rgba(130, 226, 143, 0.2), 0 6px 20px 0 rgba(28, 214, 44, 0.19);
 } */
 
+
+
+
+.example-container {
+    height: 500px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+  }
+  .example-sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  .example-sidenav {
+     user-select: none;
+  }
+  .full-width {
+    width: 100%;
+  }
+  .menu-button {
+    transition: 300ms ease-in-out;
+    transform: rotate(0deg);
+  }
+  .menu-button.rotated {
+    transform: rotate(180deg);
+  }
+  .submenu {
+  overflow-y: hidden;
+    transition: 300ms ease-in-out;
+    padding-left: 30px;
+    height: 0;
+  }
+  .submenu a{
+    padding-left: 10px;
+  }
+  .submenu.expanded {
+    transform: scaleY(1);
+    height: auto;
+  }
