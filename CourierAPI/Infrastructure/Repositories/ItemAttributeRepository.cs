@@ -31,7 +31,6 @@ namespace CourierAPI.Infrastructure.Repositories
                         i.InCityRate == itemAttribute.InCityRate &&
                         i.OutCityRate == itemAttribute.OutCityRate &&
                         i.RegularRate == itemAttribute.RegularRate &&
-                        i.Discount == itemAttribute.Discount &&
                         i.ConditionCharge == itemAttribute.ConditionCharge &&
                         i.BookingCharge == itemAttribute.BookingCharge
                 );

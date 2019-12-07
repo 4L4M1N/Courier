@@ -3,7 +3,7 @@ import { AlertComponent } from './shared/Dialog/alert/alert.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule,
-         MatIconModule, MatListModule, MatCardModule, MatGridList, MatGridListModule, MatDialogModule, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+         MatIconModule, MatListModule, MatCardModule, MatGridList, MatGridListModule, MatDialogModule, MAT_DIALOG_DATA, MatDialogRef, MatCheckboxModule } from '@angular/material';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
@@ -69,7 +69,8 @@ import { ItemcreationService } from './services/itemcreation.service';
       MatListModule,
       MatCardModule,
       MatGridListModule,
-      MatDialogModule
+      MatDialogModule,
+      MatCheckboxModule
    ],
    providers: [
       { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

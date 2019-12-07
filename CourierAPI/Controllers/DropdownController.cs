@@ -65,7 +65,6 @@ namespace CourierAPI.Controllers
                     RegularRate = itemAttribute.RegularRate,
                     ConditionCharge = itemAttribute.ConditionCharge,
                     BookingCharge = itemAttribute.BookingCharge,
-                    Discount = itemAttribute.Discount,
                     ItemId = itemAttribute.ItemId
                 };
                 await _unitOfWork.ItemAttributes.AddItem(itemAttributeToADD);

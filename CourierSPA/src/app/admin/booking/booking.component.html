@@ -5,7 +5,7 @@
   <div class="row">
 
 
-    <!-- Merchant info start -->
+<!-- Merchant info start -->
     <div class="col-sm-4 col-md-4 col-lg-4 mx-auto border-right" [formGroup]="booking">
       <div class="card-body">
         <h5 class="card-title text-center">Merchant Info</h5>
@@ -31,9 +31,10 @@
         </div>
 
       </div>
-    </div> <!-- Merchant info End -->
+    </div> 
+<!-- Merchant info End -->
 
-    <!-- Receiver info start -->
+<!-- Receiver info start -->
     <div class="col-sm-4 col-md-4 col-lg-4 mx-auto border-right" [formGroup]="booking">
 
       <div class="card-body">
@@ -80,41 +81,39 @@
             <div *ngIf="bookingForm.zoneid.errors.required">Zone is required</div>
           </div>
         </div>
-
-        <button class="btn  btn-primary btn float-right text-uppercase" (click)="addBooking()"
-          type="submit">submit</button>
       </div>
 
-    </div> <!-- Receiver info  End -->
+    </div>
+ <!-- Receiver info  End -->
 
-    <!-- ItemAttribute Add start -->
-    <div class="col-sm-4 col-md-4 col-lg-4 mx-auto" [formGroup]="addItemAttribute">
+<!-- ItemAttribute Add start -->
+    <div class="col-sm-4 col-md-4 col-lg-4 mx-auto" [formGroup]="booking">
       <!-- <form (ngSubmit)="addItemAttributeToList()"> -->
       <div class="card-body">
         <h5 class="card-title text-center">Item & rate</h5>
 
         <div class="form-group">
           <select class="custom-select form-control" formControlName="itemid" (change)="onSelect($event)"
-            [ngClass]="{ 'is-invalid': submitItemAttribute && addItemAttributeForm.itemid.errors }">
+            [ngClass]="{ 'is-invalid': submitBooking && bookingForm.itemid.errors }">
             <option value="" disabled>Choose your Item</option>
             <option *ngFor="let i of items" [value]="i.itemId">{{i.name}}</option>
           </select>
 
-          <div *ngIf="submitItemAttribute && addItemAttributeForm.itemid.errors" class="invalid-feedback">
-            <div *ngIf="addItemAttributeForm.itemid.errors.required">Item is required</div>
+          <div *ngIf="submitBooking && bookingForm.itemid.errors" class="invalid-feedback">
+            <div *ngIf="bookingForm.itemid.errors.required">Item is required</div>
           </div>
         </div>
 
         <div class="form-group">
           <select class="custom-select form-group" formControlName="attributeId"
             (change)="onSelectItemAttribute($event)"
-            [ngClass]="{ 'is-invalid': submitItemAttribute && addItemAttributeForm.attributeId.errors }">
+            [ngClass]="{ 'is-invalid': submitBooking && bookingForm.attributeId.errors }">
             <option value="" disabled>Choose your attribute</option>
             <option *ngFor="let i of listItemAttributes" [value]="i.itemAttributeId">{{i.itemSize}}+ {{i.inCityRate}}
             </option>
           </select>
-          <div *ngIf="submitItemAttribute && addItemAttributeForm.attributeId.errors" class="invalid-feedback">
-            <div *ngIf="addItemAttributeForm.attributeId.errors.required">Item Attribute is required</div>
+          <div *ngIf="submitBooking && bookingForm.attributeId.errors" class="invalid-feedback">
+            <div *ngIf="bookingForm.attributeId.errors.required">Item Attribute is required</div>
           </div>
         </div>
 
@@ -126,7 +125,7 @@
           <label>In City Rate</label>
           <input type="text" class="form-control" placeholder="{{itemAttributeDetails?.inCityRate}}" readonly>
         </div>
-        <div class="form-group">
+        <div *ngIf="!isInCity" class="form-group">
           <label>Out City Rate</label>
           <input type="text" class="form-control" placeholder="{{itemAttributeDetails?.outCityRate}}" readonly>
         </div>
@@ -134,15 +133,32 @@
           <label>Booking Charge</label>
           <input type="text" class="form-control" placeholder="{{itemAttributeDetails?.bookingCharge}}" readonly>
         </div>
-        <div class="form-group">
+        <div *ngIf="isConditionChargeApply" class="form-group">
           <label>Condition Charge</label>
           <input type="text" class="form-control" placeholder="{{itemAttributeDetails?.conditionCharge}}" readonly>
         </div>
+        <mat-checkbox [(ngModel)]="isConditionChargeApply" class="example-margin" [ngModelOptions]="{standalone: true}">
+          <label>Apply Condition Charge </label>
+        </mat-checkbox>
+        <div class="form-group">
+          <label>Discount</label>
+          <input type="text" class="form-control" (input)="onSearchChange($event.target.value)">
+        </div>
+        <div class="form-group">
+          <label>Total</label>
+          <input type="text" class="form-control" [(ngModel)]="total" [ngModelOptions]="{standalone: true}" readonly>
+        </div>
       </div>
-      <button class="btn  btn-primary btn float-right text-uppercase" (click)="addItemAttributeToList()"
-        type="submit">Add to List</button>
+      <button mat-raised-button color="primary" (click)="addBooking()" type="submit">
+        Add Booking
+      </button>
+      <!-- <button class="btn  btn-primary btn float-right text-uppercase" (click)="addItemAttributeToList()"
+        type="submit">Add to List
+      </button> -->
+
       <!-- </form> -->
-    </div> <!-- ItemAttribute add end -->
+    </div> 
+<!-- ItemAttribute add end -->
 
   </div>
 
