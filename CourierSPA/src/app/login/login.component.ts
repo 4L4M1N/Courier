@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { from } from 'rxjs';
+import { ModalService } from '../services/Dialog/modal.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submitted = false;
   model: any = {};
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private modalService: ModalService) { }
 
   ngOnInit() {
     this.loginForm = new FormGroup({
@@ -50,5 +51,26 @@ export class LoginComponent implements OnInit {
   logout() {
     localStorage.removeItem('token');
     console.log('log out');
+  }
+  openInfoModal() {
+    this.modalService.openInfoModal('Hello Info');
+  }
+
+  openWarningModal() {
+    this.modalService.openWarningModal('Hello Warning');
+  }
+
+  openErrorModal() {
+    this.modalService.openErrorModal('Hello Error');
+  }
+
+  openConfirmModal() {
+    this.modalService.openConfirmModal('Are you love me?', (answer: boolean) => {
+      if (answer) {
+        console.log('Yes, I love you.');
+        return;
+      }
+      console.log('No, I\'m sorry.');
+    });
   }
 }
