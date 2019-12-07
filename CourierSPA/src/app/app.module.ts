@@ -1,3 +1,5 @@
+import { ConfirmComponent } from './shared/Dialog/confirm/confirm.component';
+import { AlertComponent } from './shared/Dialog/alert/alert.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule,
@@ -48,7 +50,9 @@ import { ItemcreationService } from './services/itemcreation.service';
       BookingComponent,
       ItemcreationComponent,
       AdminLayoutComponent,
-      DeliveryManAddComponent
+      DeliveryManAddComponent,
+      AlertComponent,
+      ConfirmComponent
    ],
    imports: [
       BrowserModule,
@@ -79,7 +83,7 @@ import { ItemcreationService } from './services/itemcreation.service';
       AppComponent
    ],
    entryComponents: [
-
+      AlertComponent, ConfirmComponent
     ],
 })
 export class AppModule { }
