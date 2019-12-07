@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule,
-   MatIconModule, MatListModule, MatCardModule, MatGridList, MatGridListModule } from '@angular/material';
+         MatIconModule, MatListModule, MatCardModule, MatGridList, MatGridListModule, MatDialogModule, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
@@ -27,6 +27,11 @@ import { ItemcreationComponent } from './admin/itemcreation/itemcreation.compone
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminLayoutComponent } from './_layout/admin-layout/admin-layout.component';
 import { DeliveryManAddComponent } from './admin/deliveryManAdd/deliveryManAdd.component';
+import { MessagesComponent } from './shared/Messages/Messages.component';
+import { MessagesService } from './services/Messages.service';
+import { DeliveryAddressService } from './services/deliveryAddress.service';
+import { ItemcreationService } from './services/itemcreation.service';
+import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
 
 
 @NgModule({
@@ -45,7 +50,9 @@ import { DeliveryManAddComponent } from './admin/deliveryManAdd/deliveryManAdd.c
       BookingComponent,
       ItemcreationComponent,
       AdminLayoutComponent,
-      DeliveryManAddComponent
+      DeliveryManAddComponent,
+      MessagesComponent,
+      ConfirmDialogComponent
    ],
    imports: [
       BrowserModule,
@@ -61,15 +68,26 @@ import { DeliveryManAddComponent } from './admin/deliveryManAdd/deliveryManAdd.c
       MatIconModule,
       MatListModule,
       MatCardModule,
-      MatGridListModule
+      MatGridListModule,
+      MatDialogModule
    ],
    providers: [
       { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
       AuthService,
       MerchantService,
+      MessagesService,
+      DeliveryManAddComponent,
+      DeliveryAddressService,
+      ItemcreationService,
+      {provide: MAT_DIALOG_DATA, useValue: {}},
+      {provide: MatDialogRef, useValue: {}},
    ],
    bootstrap: [
       AppComponent
-   ]
+   ],
+   entryComponents: [
+      MessagesComponent,
+      ConfirmDialogComponent
+    ],
 })
 export class AppModule { }
