@@ -10,7 +10,10 @@ import { Division } from 'src/app/models/division';
 import { Zone } from 'src/app/models/zone';
 import { DeliveryAddressService } from 'src/app/services/deliveryAddress.service';
 import { MatDialogRef } from '@angular/material';
-
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { InvoiceR } from 'src/app/models/reports/invoiceR';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-booking',
@@ -19,9 +22,17 @@ import { MatDialogRef } from '@angular/material';
 })
 export class BookingComponent implements OnInit {
 
+  // get value from merchant
+  merchantIdentity: any;
+  merchantPhone: string;
+  merchantEmail = '';
+  merchantName = '';
+  invoice = new InvoiceR(); // invoice object
   division: Division[]; // get all divisions and populate dropdown
   listZones: Zone[];
+  discountAmmount = 0;
   total = 0;
+  tempTotal = 0;
   discount = 0;
   merchantInfo: any;
   merchantId: any;
@@ -47,6 +58,7 @@ export class BookingComponent implements OnInit {
               private deliveryAddressservice: DeliveryAddressService) {
                 this.itemcreationservice.GetItems().subscribe(data => { this.items = data});
                 this.deliveryAddressservice.GetDivisions().subscribe(r => {this.division = r});
+                
               }
 
   ngOnInit() {
@@ -59,17 +71,15 @@ export class BookingComponent implements OnInit {
 
     // Booking form
     this.booking = new FormGroup({
-      merchantIdentity: new FormControl(),
-      merchantName: new FormControl(),
-      merchantPhone: new FormControl(),
-      merchantEmail: new FormControl(),
+     
       receiverName: new FormControl('', Validators.required),
       receiverPhone: new FormControl('', Validators.required),
       receiverAddress: new FormControl('', Validators.required),
       divisionid: new FormControl('', Validators.required),
       zoneid: new FormControl('', Validators.required),
       itemid: new FormControl('', Validators.required),
-      attributeId: new FormControl('', Validators.required)
+      attributeId: new FormControl('', Validators.required),
+
     });
     // Item Form
     this.addItemAttribute = new FormGroup({
@@ -85,6 +95,7 @@ export class BookingComponent implements OnInit {
     .subscribe(data => {
       this.merchantInfo = data;
       console.log(this.merchantInfo);
+      
     });
   }
   // division dropdown populate
@@ -130,12 +141,15 @@ export class BookingComponent implements OnInit {
       this.itemcreationservice.GetItemAttributeDetails(itemAttributeId).subscribe(data => {
         this.itemAttributeDetails = data;
         this.total = this.total + this.itemAttributeDetails['inCityRate'] + this.itemAttributeDetails['bookingCharge'];
+        // this.tempTotal = this.total + this.itemAttributeDetails['inCityRate'] + this.itemAttributeDetails['bookingCharge'];
         console.log(this.total);
       })
     }
   }
   onSearchChange(searchValue: string): void { 
     console.log(searchValue);
+    // this.total = this.tempTotal;
+    console.log(this.total);
     this.total = this.total - (+searchValue);
     console.log(this.total);
   }
@@ -168,6 +182,91 @@ export class BookingComponent implements OnInit {
       console.log("error");
       return;
   }
-
   }
+  
+  generatePdf() {
+    console.log(this.merchantName);
+    this.invoice.merchantName = this.merchantInfo.name;
+    this.invoice.merchantPhone = this.merchantInfo.phone;
+    this.invoice.merchantEmail = this.merchantInfo.email;
+    this.invoice.receiverName = this.booking.controls['receiverName'].value;
+    this.invoice.receiverPhone = this.booking.controls['receiverPhone'].value;
+    this.invoice.reciverAddress = this.booking.controls['receiverAddress'].value;
+    this.invoice.discount = this.discountAmmount;
+    this.invoice.total = this.total;
+    console.log(this.invoice);
+
+    const documentDefinition = this.getDocumentDefinition();
+    pdfMake.createPdf(documentDefinition).open();
+   }
+
+   // set data for pdf
+   getDocumentDefinition() {
+    sessionStorage.setItem('resume', JSON.stringify(this.invoice));
+    return {
+      pageSize: 'A4',
+      content: [
+        {
+          text: 'Courier',
+          bold: true,
+          fontSize: 20,
+          alignment: 'center',
+          margin: [0, 0, 0, 20]
+        },
+        {
+          columns: [
+            [{
+              text: this.invoice.merchantName,
+              style: 'name'
+            },
+            {
+              text: this.invoice.merchantPhone
+            },
+            {
+              text: 'Email : ' + this.invoice.merchantEmail + '\n\n',
+            }
+            ]
+          ]
+        },
+        {
+          columns: [
+            [
+              {
+                text: 'Receiver Info'
+              },
+              {
+              text: this.invoice.receiverName,
+              style: 'name'
+            },
+            {
+              text: this.invoice.receiverPhone
+            },
+            {
+              text: 'Address : ' + this.invoice.reciverAddress + '\n\n',
+            }
+            ]
+          ]
+        },
+        {
+          layout: 'lightHorizontalLines', // optional
+          table: {
+            // headers are automatically repeated if the table spans over multiple pages
+            // you can declare how many rows should be treated as headers
+            headerRows: 1,
+            widths: [ '*', 'auto', 100, '*' ],
+            body: [
+              [ 'Description', 'Date', 'Discount', 'Total' ],
+              [ 'Test', '10/10/19', this.invoice.discount, this.invoice.total ]
+            ]
+          }
+        }
+      ],
+        styles: {
+          name: {
+            fontSize: 10,
+            bold: true
+          }
+        }
+    };
+   }
 }

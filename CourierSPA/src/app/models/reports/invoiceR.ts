@@ -8,8 +8,10 @@ export class InvoiceR {
     receiverName: string;
     reciverAddress: string;
     receiverPhone: string;
-    itemAttributes: ItemAttributes[] = [];
-
+    division: string;
+    zone: string;
+    total: number;
+    discount: number;
 }
 export class ItemAttributes {
     itemAttributeId: number;
