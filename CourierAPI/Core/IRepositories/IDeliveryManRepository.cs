@@ -7,6 +7,8 @@ namespace CourierAPI.Core.IRepositories
     {
         Task AddDeliveryManAsync(DeliveryMan deliveryMan);
         Task<DeliveryMan> GetDeliveryManDetailsAsync(string id);
+
+        Task<DeliveryMan> FindByDeliveryManNameAsync(string DMname);
         int LastDeliverManId();
     }
 }
