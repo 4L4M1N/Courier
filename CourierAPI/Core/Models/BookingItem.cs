@@ -7,6 +7,7 @@ namespace CourierAPI.Core.Models
         public int Id { get; set; }
         public int ItemAttributeId { get; set; }
         public bool IsInCity { get; set; }
+        public bool IsOutCity { get; set; }
         public bool IsConditionChargeApply { get; set; }
 
         public string BookingId { get; set; }

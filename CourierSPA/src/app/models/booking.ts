@@ -1,9 +1,15 @@
 export interface Booking {
     merchantId: string;
-    itemAttributes: [];
+    itemAttributeId: number;
     divisionId: number;
-    areadId: number;
+    zoneId: number;
     receiverName: string;
     receiverPhone: string;
     receiverAddress: string;
+    totalAmount: number;
+    discount: number;
+    conditionCharge: number;
+    isConditionCharge: boolean;
+    isOutCity: boolean;
+    isInCity: boolean;
 }
