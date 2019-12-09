@@ -13,6 +13,8 @@ import { MatDialogRef } from '@angular/material';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { InvoiceR } from 'src/app/models/reports/invoiceR';
+import { Booking } from 'src/app/models/booking';
+import { BookingService } from 'src/app/services/Booking/booking.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -34,6 +36,7 @@ export class BookingComponent implements OnInit {
   total = 0;
   tempTotal = 0;
   discount = 0;
+  conditionCharge = 0;
   merchantInfo: any;
   merchantId: any;
   isConditionChargeApply = false;    // Condition Charge
@@ -44,6 +47,22 @@ export class BookingComponent implements OnInit {
   itemAttributeDetails: ItemAttribute;
   // get item attributes according to itemId
   listItemAttributes: ItemAttribute[];
+  // Booking data
+  placeBooking: Booking = {
+    merchantId: '',
+    receiverName: '',
+    receiverPhone: '',
+    receiverAddress: '',
+    divisionId: 0,
+    zoneId: 0,
+    totalAmount: 0,
+    discount:0,
+    isConditionCharge: false,
+    isInCity: false,
+    conditionCharge: 0,
+    isOutCity: false,
+    itemAttributeId: 0
+  };
 
   // tempItemAttribute: ItemAttribute; // store itemAttributes to table
   // itemAttributeTable: ItemAttribute[] = []; // push all added itemAttributes
@@ -55,7 +74,8 @@ export class BookingComponent implements OnInit {
   submitBooking = false;
   constructor(private route: ActivatedRoute, private merchentservice: MerchantService,
               private itemcreationservice: ItemcreationService,
-              private deliveryAddressservice: DeliveryAddressService) {
+              private deliveryAddressservice: DeliveryAddressService,
+              private bookingService: BookingService) {
                 this.itemcreationservice.GetItems().subscribe(data => { this.items = data});
                 this.deliveryAddressservice.GetDivisions().subscribe(r => {this.division = r});
                 
@@ -181,7 +201,41 @@ export class BookingComponent implements OnInit {
     if (this.booking.invalid) {
       console.log("error");
       return;
-  }
+    }
+    
+    this.placeBooking.merchantId = this.merchantInfo.id;
+    this.placeBooking.receiverName = this.booking.controls['receiverName'].value;
+    this.placeBooking.receiverPhone = this.booking.controls['receiverPhone'].value;
+    this.placeBooking.receiverAddress = this.booking.controls['receiverAddress'].value;
+    this.placeBooking.divisionId = this.booking.controls['divisionid'].value;
+    this.placeBooking.zoneId = this.booking.controls['zoneid'].value;
+    this.placeBooking.itemAttributeId = this.booking.controls['attributeId'].value;
+    this.placeBooking.discount = this.discountAmmount;
+    this.placeBooking.totalAmount = this.total;
+    // Condition Charge
+    if (this.isConditionChargeApply) {
+      this.placeBooking.isConditionCharge = true;
+      this.placeBooking.conditionCharge = this.conditionCharge;
+    } else {
+      this.placeBooking.isConditionCharge = false;
+      this.placeBooking.conditionCharge = 0;
+    }
+    // inCity OutCity
+
+    if (this.isInCity) {
+      this.placeBooking.isInCity = true;
+      this.placeBooking.isOutCity = false;
+    } else {
+      this.placeBooking.isInCity = false;
+      this.placeBooking.isOutCity = true;
+    }
+    console.log(this.placeBooking);
+    this.bookingService.Create(this.placeBooking).subscribe(() => {
+      console.log('created');
+    }, error => {
+      console.log('error');
+    });
+
   }
   
   generatePdf() {

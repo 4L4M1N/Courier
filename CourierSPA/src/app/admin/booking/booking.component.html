@@ -135,7 +135,7 @@
         </div>
         <div *ngIf="isConditionChargeApply" class="form-group">
           <label>Condition Charge</label>
-          <input type="text" class="form-control" placeholder="{{itemAttributeDetails?.conditionCharge}}" readonly>
+          <input type="text" class="form-control" [(ngModel)]="conditionCharge" [ngModelOptions]="{standalone: true}" placeholder="{{itemAttributeDetails?.conditionCharge}}" readonly>
         </div>
         <mat-checkbox [(ngModel)]="isConditionChargeApply" class="example-margin" [ngModelOptions]="{standalone: true}">
           <label>Apply Condition Charge </label>

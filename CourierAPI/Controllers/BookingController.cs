@@ -39,10 +39,10 @@ namespace CourierAPI.Controllers
             var receiver = new Receiver
             {
                 Id = Guid.NewGuid().ToString(),
-                Name = booking.Name,
-                Address = booking.Address,
-                Phone = booking.Phone,
-                Email = booking.Email,
+                Name = booking.ReceiverName,
+                Address = booking.ReceiverAddress,
+                Phone = booking.ReceiverPhone,
+                Email = booking.ReceiverEmail,
                 ZoneId = booking.ZoneId
             };
             await _unitOfWork.Receivers.Add(receiver);
@@ -55,20 +55,24 @@ namespace CourierAPI.Controllers
                 Id = Guid.NewGuid().ToString(),
                 ReceiverId = receiverId,
                 MerchantId = booking.MerchantId,
-                BookingDate = DateTime.Now
+                BookingDate = DateTime.Now,
+                TotalAmmount = booking.TotalAmount,
+                Discount = booking.Discount,
+
             };
             var bookingId = placeBooking.Id;
             await _unitOfWork.Bookings.Add(placeBooking);
 
             //Save BookingItems
-            booking.ItemAttributesId.ForEach(async (itemattribute) => {
-                var saveBookingItem = new BookingItem
-                {
-                    ItemAttributeId = itemattribute,
-                    BookingId = bookingId
-                };
-                await _unitOfWork.BookingItems.Add(saveBookingItem);
-            });
+            var bookingItem = new BookingItem 
+            {
+                BookingId = bookingId,
+                ItemAttributeId = booking.ItemAttributeId,
+                IsInCity = booking.IsInCity,
+                IsOutCity = booking.IsOutCity,
+                IsConditionChargeApply = booking.IsConditionCharge
+            };
+            await _unitOfWork.BookingItems.Add(bookingItem);
             var result = await _unitOfWork.CompleteAsync();
             if (result == 0) return BadRequest("error occured");
             return Ok();
