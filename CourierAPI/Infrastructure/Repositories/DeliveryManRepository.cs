@@ -19,6 +19,12 @@ namespace CourierAPI.Infrastructure.Repositories
             await _context.DeliveryMen.AddAsync(deliveryMan);
         }
 
+        public async Task<DeliveryMan> FindByDeliveryManNameAsync(string DMname)
+        {
+            var result = await _context.DeliveryMen.Where(a => a.Name == DMname).FirstOrDefaultAsync();
+            return result;
+        }
+
         public async Task<DeliveryMan> GetDeliveryManDetailsAsync(string id)
         {
             var result = await (_context.DeliveryMen.Where(d => d.DelivManIdentity == id).FirstOrDefaultAsync());
