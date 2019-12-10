@@ -10,6 +10,7 @@ import { BookingComponent } from './admin/booking/booking.component';
 import { ItemcreationComponent } from './admin/itemcreation/itemcreation.component';
 import { AdminLayoutComponent } from './_layout/admin-layout/admin-layout.component';
 import { DeliveryManAddComponent } from './admin/deliveryManAdd/deliveryManAdd.component';
+import { ManageBookingComponent } from './admin/manage-booking/manage-booking.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -23,6 +24,7 @@ export const appRoutes: Routes = [
                 { path: 'deliverymanadd', component: DeliveryManAddComponent},
                 { path: 'booking/:merchantId', component: BookingComponent},
                 { path: 'itemcreate', component: ItemcreationComponent},
+                { path: 'managebooking', component: ManageBookingComponent},
                 { path: 'merchant-agreement', component: MerchantAgreementComponent},
                 {path: 'merchant-agreement/edit', component: MerchantEditComponent}
             ]
