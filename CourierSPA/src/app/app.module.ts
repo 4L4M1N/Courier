@@ -3,7 +3,7 @@ import { AlertComponent } from './shared/Dialog/alert/alert.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule,
-         MatIconModule, MatListModule, MatCardModule, MatGridList, MatGridListModule, MatDialogModule, MAT_DIALOG_DATA, MatDialogRef, MatCheckboxModule } from '@angular/material';
+         MatIconModule, MatListModule, MatCardModule, MatGridList, MatGridListModule, MatDialogModule, MAT_DIALOG_DATA, MatDialogRef, MatCheckboxModule, MatTableModule } from '@angular/material';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
@@ -31,6 +31,7 @@ import { AdminLayoutComponent } from './_layout/admin-layout/admin-layout.compon
 import { DeliveryManAddComponent } from './admin/deliveryManAdd/deliveryManAdd.component';
 import { DeliveryAddressService } from './services/deliveryAddress.service';
 import { ItemcreationService } from './services/itemcreation.service';
+import { ManageBookingComponent } from './admin/manage-booking/manage-booking.component';
 
 
 
@@ -51,6 +52,7 @@ import { ItemcreationService } from './services/itemcreation.service';
       ItemcreationComponent,
       AdminLayoutComponent,
       DeliveryManAddComponent,
+      ManageBookingComponent,
       AlertComponent,
       ConfirmComponent
    ],
@@ -70,7 +72,8 @@ import { ItemcreationService } from './services/itemcreation.service';
       MatCardModule,
       MatGridListModule,
       MatDialogModule,
-      MatCheckboxModule
+      MatCheckboxModule,
+      MatTableModule
    ],
    providers: [
       { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

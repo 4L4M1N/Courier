@@ -13,6 +13,7 @@ namespace CourierAPI.Core.IRepositories
          IDeliveryAddressRepository DeliveryAddress {get;}
 
          IDeliveryManRepository DeliveryMan{get;}
+         IAssignedDelivManRepository AssignedDelivMan {get;}
          Task<int> CompleteAsync();
     }
 }
