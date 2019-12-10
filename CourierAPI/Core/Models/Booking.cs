@@ -15,8 +15,6 @@ namespace CourierAPI.Core.Models
         [ForeignKey("MerchantId")]
         public Merchant Merchant { get; set; }
 
-        public string DelivManIdentity { get; set; }
-
         public double TotalAmmount { get; set; }
         public double Discount { get; set; }
         public DateTime BookingDate { get; set; }

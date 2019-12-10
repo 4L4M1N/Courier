@@ -9,6 +9,7 @@ namespace CourierAPI.Core.IRepositories
         Task<DeliveryMan> GetDeliveryManDetailsAsync(string id);
 
         Task<DeliveryMan> FindByDeliveryManNameAsync(string DMname);
+        Task<DeliveryMan> FindByDeliveryManByIdAsync(string delivManId);
         int LastDeliverManId();
     }
 }

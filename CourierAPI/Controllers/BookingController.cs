@@ -77,8 +77,27 @@ namespace CourierAPI.Controllers
             if (result == 0) return BadRequest("error occured");
             return Ok();
         }
+        [HttpPost("assign")]
+        public async Task<ActionResult> AssignDelivMan(string bookingId, string delivManId)
+        {
+            var isBookingExists = await _unitOfWork.Bookings.FindBookingById(bookingId);
+            var isDelivManExists = await _unitOfWork.DeliveryMan.FindByDeliveryManByIdAsync(delivManId);
+            if(isBookingExists == null || isDelivManExists == null)
+            {
+                return BadRequest("Don't exists!");
+            }
+            var assignedDelivMan = new AssignedDelivMan
+            {
+                BookingId = bookingId,
+                DelivManId = delivManId
+            };
+            await _unitOfWork.AssignedDelivMan.Add(assignedDelivMan);
+            var result = await _unitOfWork.CompleteAsync();
+            if(result == 0) return BadRequest("Assigned Failled!");
+            return Ok();
+        }
         //Show Booking Details
-        [HttpGet("allBookings")]
+        [HttpGet("all")]
         public async Task<ActionResult> ShowBookingDetails()
         {
             var result = await _context.ShowBookings.FromSqlRaw("exec Booking").ToListAsync();

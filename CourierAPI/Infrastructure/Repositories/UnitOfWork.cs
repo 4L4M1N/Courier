@@ -20,6 +20,8 @@ namespace CourierAPI.Infrastructure.Repositories
 
         public IDeliveryManRepository DeliveryMan {get; private set;}
 
+        public IAssignedDelivManRepository AssignedDelivMan { get; private set;}
+
         public UnitOfWork(DataContext context)
         {
             _context = context;
@@ -31,6 +33,7 @@ namespace CourierAPI.Infrastructure.Repositories
             BookingItems = new BookingItemRepository(_context);
             DeliveryAddress = new DeliveryAddressRepository(_context);
             DeliveryMan = new DeliveryManRepository(_context);
+            AssignedDelivMan = new AssignedDelivManRepository(_context);
         }
 
         public async Task<int> CompleteAsync()
