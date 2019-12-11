@@ -101,6 +101,12 @@ namespace CourierAPI.Controllers
             return Unauthorized();
             
         } 
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAllDeliveryMan()
+        {
+            var deliveryMan = await _unitOfWork.DeliveryMan.GetAllDeliveryMan();
+            return Ok(deliveryMan);
+        }
         
     }
 }

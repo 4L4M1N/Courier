@@ -3,7 +3,7 @@ import { AlertComponent } from './shared/Dialog/alert/alert.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule,
-         MatIconModule, MatListModule, MatCardModule, MatGridList, MatGridListModule, MatDialogModule, MAT_DIALOG_DATA, MatDialogRef, MatCheckboxModule, MatTableModule } from '@angular/material';
+         MatIconModule, MatListModule, MatCardModule, MatGridList, MatGridListModule, MatDialogModule, MAT_DIALOG_DATA, MatDialogRef, MatCheckboxModule, MatTableModule, MatFormFieldModule } from '@angular/material';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
@@ -32,6 +32,7 @@ import { DeliveryManAddComponent } from './admin/deliveryManAdd/deliveryManAdd.c
 import { DeliveryAddressService } from './services/deliveryAddress.service';
 import { ItemcreationService } from './services/itemcreation.service';
 import { ManageBookingComponent } from './admin/manage-booking/manage-booking.component';
+import { AssignDelivManComponent } from './admin/assignDelivMan/assignDelivMan.component';
 
 
 
@@ -54,7 +55,8 @@ import { ManageBookingComponent } from './admin/manage-booking/manage-booking.co
       DeliveryManAddComponent,
       ManageBookingComponent,
       AlertComponent,
-      ConfirmComponent
+      ConfirmComponent,
+      AssignDelivManComponent
    ],
    imports: [
       BrowserModule,
@@ -73,7 +75,8 @@ import { ManageBookingComponent } from './admin/manage-booking/manage-booking.co
       MatGridListModule,
       MatDialogModule,
       MatCheckboxModule,
-      MatTableModule
+      MatTableModule,
+      MatFormFieldModule
    ],
    providers: [
       { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
@@ -87,7 +90,7 @@ import { ManageBookingComponent } from './admin/manage-booking/manage-booking.co
       AppComponent
    ],
    entryComponents: [
-      AlertComponent, ConfirmComponent
+      AlertComponent, ConfirmComponent, AssignDelivManComponent
     ],
 })
 export class AppModule { }

@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Hi {{data.name}}</h1>
+<div mat-dialog-content>
+  <p>What's your favorite color?</p>
+  
+    <input matInput [(ngModel)]="data.color">
+  
+</div>
+
+<mat-nav-list>
+    <mat-list-item *ngFor="let item of data.delivManList"  (click)="down(item)" routerLinkActive="active"> {{item.name}} 
+        <mat-divider></mat-divider>
+    </mat-list-item>
+</mat-nav-list>
+<p *ngIf="delivManName">{{delivManName}} is Selected </p> 
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data.color" cdkFocusInitial>Ok</button>
+</div>

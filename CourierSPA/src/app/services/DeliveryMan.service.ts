@@ -13,5 +13,8 @@ constructor(private http: HttpClient) { }
 Create(deliveryMan: IDeliveryMan) {
   return this.http.post(this.baseURL + 'create', deliveryMan);
 }
+GetAllDelivaryMan() {
+  return this.http.get(this.baseURL + 'all');
+}
 
 }
