@@ -6,11 +6,14 @@
   
 </div>
 
-<mat-nav-list>
-    <mat-list-item *ngFor="let item of data.delivManList"  (click)="down(item)" routerLinkActive="active"> {{item.name}} 
+<mat-selection-list #linkList>
+    <mat-list-option  *ngFor="let item of data.delivManList;index as i" 
+     (click)="down(item)" routerLinkActive="active"
+     (selectionChange)="selectionChanged($event,i)" [class.active]="selectedItem === i">
+     <a mat-list-item> <span class="contact-names">{{ item.name }}</span> </a>
         <mat-divider></mat-divider>
-    </mat-list-item>
-</mat-nav-list>
+    </mat-list-option>
+</mat-selection-list >
 <p *ngIf="delivManName">{{delivManName}} is Selected </p> 
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>
