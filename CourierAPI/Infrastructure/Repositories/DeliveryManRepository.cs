@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CourierAPI.Core.IRepositories;
@@ -29,6 +30,12 @@ namespace CourierAPI.Infrastructure.Repositories
         {
             var result = await _context.DeliveryMen.Where(a => a.Name == DMname).FirstOrDefaultAsync();
             return result;
+        }
+
+        public async Task<IEnumerable<DeliveryMan>> GetAllDeliveryMan()
+        {
+            var items = await _context.DeliveryMen.ToListAsync();
+            return items;
         }
 
         public async Task<DeliveryMan> GetDeliveryManDetailsAsync(string id)

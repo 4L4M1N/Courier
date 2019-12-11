@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CourierAPI.Core.Models;
 
@@ -10,6 +11,7 @@ namespace CourierAPI.Core.IRepositories
 
         Task<DeliveryMan> FindByDeliveryManNameAsync(string DMname);
         Task<DeliveryMan> FindByDeliveryManByIdAsync(string delivManId);
+        Task<IEnumerable<DeliveryMan>> GetAllDeliveryMan();
         int LastDeliverManId();
     }
 }
