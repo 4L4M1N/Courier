@@ -15,7 +15,7 @@
     <ng-container *ngIf="element.delivManName != null">
         {{element.delivManName}} 
     </ng-container>
-    <button *ngIf="element.delivManName == null" (click)="openDialog()" mat-button color="primary" type="submit">
+    <button *ngIf="element.delivManName == null" (click)="openDialog(element.id)" mat-button color="primary" type="submit">
         Assign
       </button>
   </td>

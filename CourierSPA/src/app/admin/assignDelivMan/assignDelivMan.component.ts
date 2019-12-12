@@ -11,6 +11,7 @@ import { AssignDelivMan } from 'src/app/models/View/assignDelivMan';
 export class AssignDelivManComponent implements OnInit {
   selectedDelivManId = '';
   selectedItem:number = null;
+  delivManId = '';
   delivManName: string;
   constructor(
     public dialogRef: MatDialogRef<AssignDelivManComponent>,
@@ -27,9 +28,9 @@ export class AssignDelivManComponent implements OnInit {
     this.selectedItem = i
 }
   down(selectedDelivManId ) {
-    
+    this.delivManId = selectedDelivManId. delivManIdentity;
+    this.data.selectedDelivManId = this.delivManId;
     this.delivManName = selectedDelivManId.name;
-     alert(selectedDelivManId. delivManIdentity);
   }
 
 }

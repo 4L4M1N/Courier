@@ -15,9 +15,10 @@ export class ManageBookingComponent implements OnInit {
   public displayedColumns = ['id', 'receiverName', 'delivManName', 'zone'];
   dialogValue:string; 
   sendValue:string;
-  name:string;
+  selectedDelivManId:string;
   color:string;
   delivManList:any;
+  bookingId:string;
   constructor(private bookingService: BookingService, private dialog: MatDialog, private deliveryManService: DeliveryManService) { }
 
   ngOnInit() {
@@ -38,16 +39,33 @@ export class ManageBookingComponent implements OnInit {
       console.log(this.delivManList);
     });
   }
-  openDialog(): void {
-    
+  openDialog(a): void {
+    console.log(a);
+    this.bookingId = a;
     const dialogRef = this.dialog.open(AssignDelivManComponent, {
       width: '250px',
-      data: { name: this.name, color: this.color, delivManList: this.delivManList }
+      data: { name: this.selectedDelivManId, delivManList: this.delivManList }
     });
 
     dialogRef.afterClosed().subscribe(res => {
-      this.color = res;
-      console.log(this.color);
+      this.selectedDelivManId = res;
+      if(this.selectedDelivManId == null) console.log("no value");
+      console.log(this.selectedDelivManId);
+
+      // assign
+      if(this.bookingId != null && this.selectedDelivManId != null) {
+        let assign = {
+          bookingId : this.bookingId,
+          delivManId: this.selectedDelivManId
+        };
+        console.log("true");
+        this.bookingService.AssignDelivManToBooking(assign).subscribe(() => {
+          console.log('ok');
+        }, error => {
+          console.log('error');
+        });
+      }
     });
+
   }
 }
