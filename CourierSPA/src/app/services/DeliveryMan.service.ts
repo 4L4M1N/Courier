@@ -17,4 +17,5 @@ GetAllDelivaryMan() {
   return this.http.get(this.baseURL + 'all');
 }
 
+
 }

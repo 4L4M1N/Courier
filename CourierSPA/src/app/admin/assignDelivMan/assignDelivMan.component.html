@@ -1,8 +1,8 @@
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
+<h1 mat-dialog-title>Hi</h1>
 <div mat-dialog-content>
   <p>What's your favorite color?</p>
   
-    <input matInput [(ngModel)]="data.color">
+   
   
 </div>
 
@@ -14,8 +14,8 @@
         <mat-divider></mat-divider>
     </mat-list-option>
 </mat-selection-list >
-<p *ngIf="delivManName">{{delivManName}} is Selected </p> 
+<p *ngIf="delivManName" [(ngModel)]="data.selectedDelivManId" value="delivManName" name="name" ngDefaultControl>{{delivManName}} is Selected </p> 
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.color" cdkFocusInitial>Ok</button>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data.selectedDelivManId">Assign</button>
 </div>

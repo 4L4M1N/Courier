@@ -1,5 +1,4 @@
 export interface AssignDelivMan {
-    name: string;
-    color: string;
-    delivManList:any;
+    selectedDelivManId: string;
+    delivManList: any;
 }

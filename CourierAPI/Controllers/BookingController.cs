@@ -78,18 +78,18 @@ namespace CourierAPI.Controllers
             return Ok();
         }
         [HttpPost("assign")]
-        public async Task<ActionResult> AssignDelivMan(string bookingId, string delivManId)
+        public async Task<ActionResult> AssignDelivMan(AssignDelivManToBooking assign)
         {
-            var isBookingExists = await _unitOfWork.Bookings.FindBookingById(bookingId);
-            var isDelivManExists = await _unitOfWork.DeliveryMan.FindByDeliveryManByIdAsync(delivManId);
+            var isBookingExists = await _unitOfWork.Bookings.FindBookingById(assign.BookingId);
+            var isDelivManExists = await _unitOfWork.DeliveryMan.FindByDeliveryManByIdAsync(assign.DelivManId);
             if(isBookingExists == null || isDelivManExists == null)
             {
                 return BadRequest("Don't exists!");
             }
             var assignedDelivMan = new AssignedDelivMan
             {
-                BookingId = bookingId,
-                DelivManId = delivManId
+                BookingId = assign.BookingId,
+                DelivManId = assign.DelivManId
             };
             await _unitOfWork.AssignedDelivMan.Add(assignedDelivMan);
             var result = await _unitOfWork.CompleteAsync();
