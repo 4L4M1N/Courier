@@ -31,11 +31,20 @@
                               <input type="checkbox" class="custom-control-input" id="customCheck1">
                               <label class="custom-control-label" for="customCheck1">Remember password</label>
                         </div>
-                        <button  class="btn  btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+                        <button mat-raised-button color="primary" class="btn btn-primary">Sign In</button>
           
                   </form>
                 </div>
               </div>
+            </div>
+          </div>
+          <div>
+             <!-- modal -->
+            <div class="button-row">
+              <button mat-raised-button (click)="openInfoModal()">Show Info Modal</button>
+              <button mat-raised-button (click)="openWarningModal()">Show Warning Modal</button>
+              <button mat-raised-button (click)="openErrorModal()">Show Error Modal</button>
+              <button mat-raised-button (click)="openConfirmModal()">Show Confirm Modal</button>
             </div>
           </div>
         </div>

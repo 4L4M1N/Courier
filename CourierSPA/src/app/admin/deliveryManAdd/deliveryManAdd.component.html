@@ -1,0 +1,37 @@
+
+    <div class="row">
+      <div class="col-md-4">
+      
+          <div class="card-body">
+            <h5 class="card-title text-center">Create Delivery Man</h5>
+            <form  [formGroup]="deliveymanaddForm" (ngSubmit) = (Create()) method="POST" >
+              
+                  <div class="form-label-group">
+                        <label for="inputUsername">Name</label>
+                        <input type="text" 
+                        class="form-control"  formControlName="name" placeholder="Ex: Abc">
+                        
+                  </div>
+  
+                  <div class="form-label-group">
+                      <label for="inputUsername">Phone</label>
+                      <input type="text" 
+                      class="form-control" formControlName="phone" placeholder="Ex: Abc">
+                      
+                  </div>
+                  
+
+                  <div class="form-label-group">
+                    <label for="inputUsername">Password</label>
+                    <input type="text" 
+                    class="form-control"  formControlName="password" placeholder="Ex: Abc">
+                    
+                </div>
+                <br>
+                  <button  class="btn  btn-primary btn-block text-uppercase" type="submit">Create</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+  

@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CourierAPI.Data;
-using CourierAPI.Models;
-using CourierAPI.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -18,6 +15,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using AutoMapper;
+using CourierAPI.Core;
+using CourierAPI.Core.IRepositories;
+using CourierAPI.Core.Models;
+using CourierAPI.Helpers;
+using CourierAPI.Infrastructure.Data;
+using CourierAPI.Infrastructure.Repositories;
+
 
 namespace CourierAPI
 {
@@ -48,13 +53,31 @@ namespace CourierAPI
 
             services.AddMvc();
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(
+                 options => options.SerializerSettings.ReferenceLoopHandling =            
+                Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
             services.AddCors();
+            
+            // Automapper Configuration
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new AutoMapperProfile());
+            });
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
-            //Scope
+            // configure DI for application services
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IMerchantRepository, MerchantRepository>();
-            
+            services.AddScoped<IItemRepository, ItemRepository>();
+            services.AddScoped<IItemAttributeRepository, ItemAttributeRepository>();
+            services.AddScoped<IReceiverRepository, ReceiverRepository>();
+            services.AddScoped<IBookingRepository, BookingRepository>();
+            services.AddScoped<IBookingItemRepository, BookingItemRepository>();
+            services.AddScoped<IDeliveryAddressRepository, DeliveryAddressRepository>();
+            services.AddScoped<IDeliveryManRepository, DeliveryManRepository>();
+            services.AddScoped<IAssignedDelivManRepository, AssignedDelivManRepository>();
 
             services.AddAuthentication(x =>
             {
@@ -91,7 +114,7 @@ namespace CourierAPI
             
             app.UseAuthentication();
             app.UseAuthorization();
-          
+            
           
             app.UseEndpoints(endpoints =>
             {

@@ -14,7 +14,7 @@ baseUrl = 'assets/Data/merchants.json';
 constructor(private http: HttpClient) { }
 
 getMerchants(): Observable<IMerchants[]> {
-  return this.http.get<IMerchants[]>(this.baseUrl).pipe(catchError(this.handleError))
+  return this.http.get<IMerchants[]>(this.baseUrl).pipe(catchError(this.handleError));
 }
 
 

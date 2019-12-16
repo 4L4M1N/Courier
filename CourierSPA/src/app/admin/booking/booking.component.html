@@ -1,0 +1,169 @@
+<div class="card-body">
+  <h5 class="card-title text-center">booking Form</h5>
+  <!-- <form #loginForm="ngForm" (ngSubmit)="a()"> -->
+  <!-- <form #loginForm="ngForm" (ngSubmit)="a()">  -->
+  <div class="row">
+
+
+<!-- Merchant info start -->
+    <div class="col-sm-4 col-md-4 col-lg-4 mx-auto border-right" >
+      <div class="card-body">
+        <h5 class="card-title text-center">Merchant Info</h5>
+        <div class="form-group">
+          <label>Id</label>
+          <input type="text" class="form-control" 
+            value="{{merchantInfo?.merchantIdentity}}" readonly>
+        </div>
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" class="form-control"  value="{{merchantInfo?.name}}"
+            readonly>
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="text" class="form-control" value="{{merchantInfo?.phone}}"
+            readonly>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="text" class="form-control"  value="{{merchantInfo?.email}}"
+            readonly>
+        </div>
+
+      </div>
+    </div> 
+<!-- Merchant info End -->
+
+<!-- Receiver info start -->
+    <div class="col-sm-4 col-md-4 col-lg-4 mx-auto border-right" [formGroup]="booking">
+
+      <div class="card-body">
+        <h5 class="card-title text-center">Receiver info</h5>
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName="receiverName" placeholder="name"
+            [ngClass]="{ 'is-invalid': submitBooking && bookingForm.receiverName.errors }">
+          <div *ngIf="submitBooking && bookingForm.receiverName.errors" class="invalid-feedback">
+            <div *ngIf="bookingForm.receiverName.errors.required">Receiver name is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName="receiverPhone" placeholder="Phon no"
+            [ngClass]="{ 'is-invalid': submitBooking && bookingForm.receiverPhone.errors }">
+          <div *ngIf="submitBooking && bookingForm.receiverPhone.errors" class="invalid-feedback">
+            <div *ngIf="bookingForm.receiverPhone.errors.required">Phone is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName="receiverAddress" placeholder="address"
+            [ngClass]="{ 'is-invalid': submitBooking && bookingForm.receiverAddress.errors }">
+          <div *ngIf="submitBooking && bookingForm.receiverAddress.errors" class="invalid-feedback">
+            <div *ngIf="bookingForm.receiverAddress.errors.required">Address is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <select class="custom-select form-control" formControlName="divisionid" (change)="onSelectDivision($event)"
+            [ngClass]="{ 'is-invalid': submitBooking && bookingForm.divisionid.errors }">
+            <option value="" disabled>Choose your Division</option>
+            <option *ngFor="let i of division" [value]="i.divisionId">{{i.name}}</option>
+          </select>
+          <div *ngIf="submitBooking && bookingForm.divisionid.errors" class="invalid-feedback">
+            <div *ngIf="bookingForm.divisionid.errors.required">Division is required</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <select class="custom-select form-group" formControlName="zoneid"
+            [ngClass]="{ 'is-invalid': submitBooking && bookingForm.zoneid.errors }">
+            <option value="" disabled>Choose your Zone</option>
+            <option *ngFor="let i of listZones" [value]="i.zoneId">{{i.name}}</option>
+          </select>
+          <div *ngIf="submitBooking && bookingForm.zoneid.errors" class="invalid-feedback">
+            <div *ngIf="bookingForm.zoneid.errors.required">Zone is required</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+ <!-- Receiver info  End -->
+
+<!-- ItemAttribute Add start -->
+    <div class="col-sm-4 col-md-4 col-lg-4 mx-auto" [formGroup]="booking">
+      <!-- <form (ngSubmit)="addItemAttributeToList()"> -->
+      <div class="card-body">
+        <h5 class="card-title text-center">Item & rate</h5>
+
+        <div class="form-group">
+          <select class="custom-select form-control" formControlName="itemid" (change)="onSelect($event)"
+            [ngClass]="{ 'is-invalid': submitBooking && bookingForm.itemid.errors }">
+            <option value="" disabled>Choose your Item</option>
+            <option *ngFor="let i of items" [value]="i.itemId">{{i.name}}</option>
+          </select>
+
+          <div *ngIf="submitBooking && bookingForm.itemid.errors" class="invalid-feedback">
+            <div *ngIf="bookingForm.itemid.errors.required">Item is required</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <select class="custom-select form-group" formControlName="attributeId"
+            (change)="onSelectItemAttribute($event)"
+            [ngClass]="{ 'is-invalid': submitBooking && bookingForm.attributeId.errors }">
+            <option value="" disabled>Choose your attribute</option>
+            <option *ngFor="let i of listItemAttributes" [value]="i.itemAttributeId">{{i.itemSize}}+ {{i.inCityRate}}
+            </option>
+          </select>
+          <div *ngIf="submitBooking && bookingForm.attributeId.errors" class="invalid-feedback">
+            <div *ngIf="bookingForm.attributeId.errors.required">Item Attribute is required</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Size</label>
+          <input type="text" class="form-control" placeholder="{{itemAttributeDetails?.itemSize}}" readonly>
+        </div>
+        <div class="form-group">
+          <label>In City Rate</label>
+          <input type="text" class="form-control" placeholder="{{itemAttributeDetails?.inCityRate}}" readonly>
+        </div>
+        <div *ngIf="!isInCity" class="form-group">
+          <label>Out City Rate</label>
+          <input type="text" class="form-control" placeholder="{{itemAttributeDetails?.outCityRate}}" readonly>
+        </div>
+        <div class="form-group">
+          <label>Booking Charge</label>
+          <input type="text" class="form-control" placeholder="{{itemAttributeDetails?.bookingCharge}}" readonly>
+        </div>
+        <div *ngIf="isConditionChargeApply" class="form-group">
+          <label>Condition Charge</label>
+          <input type="text" class="form-control" [(ngModel)]="conditionCharge" [ngModelOptions]="{standalone: true}" placeholder="{{itemAttributeDetails?.conditionCharge}}" readonly>
+        </div>
+        <mat-checkbox [(ngModel)]="isConditionChargeApply" class="example-margin" [ngModelOptions]="{standalone: true}">
+          <label>Apply Condition Charge </label>
+        </mat-checkbox>
+        <div class="form-group">
+          <label>Discount</label>
+          <input type="text" class="form-control" [(ngModel)]="discountAmmount" [ngModelOptions]="{standalone: true}" (input)="onSearchChange($event.target.value)">
+        </div>
+        <div class="form-group">
+          <label>Total</label>
+          <input type="text" class="form-control" [(ngModel)]="total" [ngModelOptions]="{standalone: true}" readonly>
+        </div>
+      </div>
+      <button mat-raised-button color="primary" (click)="addBooking()" type="submit">
+        Add Booking
+      </button>
+      <!-- <button class="btn  btn-primary btn float-right text-uppercase" (click)="addItemAttributeToList()"
+        type="submit">Add to List
+      </button> -->
+
+      <!-- </form> -->
+    </div> 
+<!-- ItemAttribute add end -->
+
+  </div>
+  <button mat-raised-button color="primary" (click)="generatePdf()">Print</button>
+  <br>
+
+  <!-- </form> -->
+  <br><br>
+</div>
