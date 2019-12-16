@@ -15,6 +15,7 @@ import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { InvoiceR } from 'src/app/models/reports/invoiceR';
 import { Booking } from 'src/app/models/booking';
 import { BookingService } from 'src/app/services/Booking/booking.service';
+import { ModalService } from 'src/app/services/Dialog/modal.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -75,10 +76,10 @@ export class BookingComponent implements OnInit {
   constructor(private route: ActivatedRoute, private merchentservice: MerchantService,
               private itemcreationservice: ItemcreationService,
               private deliveryAddressservice: DeliveryAddressService,
+              private modalService: ModalService,
               private bookingService: BookingService) {
                 this.itemcreationservice.GetItems().subscribe(data => { this.items = data});
                 this.deliveryAddressservice.GetDivisions().subscribe(r => {this.division = r});
-                
               }
 
   ngOnInit() {
@@ -91,7 +92,6 @@ export class BookingComponent implements OnInit {
 
     // Booking form
     this.booking = new FormGroup({
-     
       receiverName: new FormControl('', Validators.required),
       receiverPhone: new FormControl('', Validators.required),
       receiverAddress: new FormControl('', Validators.required),
@@ -232,6 +232,7 @@ export class BookingComponent implements OnInit {
     console.log(this.placeBooking);
     this.bookingService.Create(this.placeBooking).subscribe(() => {
       console.log('created');
+      this.openInfoModal();
     }, error => {
       console.log('error');
     });
@@ -323,4 +324,8 @@ export class BookingComponent implements OnInit {
         }
     };
    }
+
+   openInfoModal() {
+    this.modalService.openInfoModal('Booking added');
+  }
 }
