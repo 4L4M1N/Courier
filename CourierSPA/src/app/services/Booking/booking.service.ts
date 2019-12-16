@@ -8,7 +8,7 @@ import { BookingView } from 'src/app/models/View/bookingView';
   providedIn: 'root'
 })
 export class BookingService {
-  baseURL = 'http://localhost:5000/api/booking/';
+  baseURL = 'https://courierapidevelopment.azurewebsites.net/api/booking/';
 
 constructor(private http: HttpClient) { }
 

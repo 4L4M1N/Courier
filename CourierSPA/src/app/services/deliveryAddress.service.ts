@@ -8,7 +8,7 @@ import { Zone } from '../models/zone';
   providedIn: 'root'
 })
 export class DeliveryAddressService {
-  baseURL = 'http://localhost:5000/api/dropdown/';
+  baseURL = 'https://courierapidevelopment.azurewebsites.net/api/dropdown/';
 
   constructor(private http: HttpClient) { }
 

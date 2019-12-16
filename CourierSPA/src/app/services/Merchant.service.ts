@@ -9,7 +9,7 @@ import { Merchants } from '../models/Merchants';
 })
 
 export class MerchantService {
-  baseURL = 'http://localhost:5000/api/merchant/';
+  baseURL = 'https://courierapidevelopment.azurewebsites.net/api/merchant/';
 
 constructor(private http: HttpClient) { }
 

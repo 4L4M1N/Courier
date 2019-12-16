@@ -6,7 +6,7 @@ import { IDeliveryMan } from '../models/IDeliveryMan';
   providedIn: 'root'
 })
 export class DeliveryManService {
-  baseURL = 'http://localhost:5000/api/deliveryman/';
+  baseURL = 'https://courierapidevelopment.azurewebsites.net/api/deliveryman/';
 
 constructor(private http: HttpClient) { }
 

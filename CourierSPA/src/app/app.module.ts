@@ -2,6 +2,7 @@ import { ConfirmComponent } from './shared/Dialog/confirm/confirm.component';
 import { AlertComponent } from './shared/Dialog/alert/alert.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule,
          MatIconModule, MatListModule, MatCardModule, MatGridList, MatGridListModule, MatDialogModule, MAT_DIALOG_DATA, MatDialogRef, MatCheckboxModule, MatTableModule, MatFormFieldModule } from '@angular/material';
 import {NgxPaginationModule} from 'ngx-pagination';
@@ -80,6 +81,7 @@ import { AssignDelivManComponent } from './admin/assignDelivMan/assignDelivMan.c
    ],
    providers: [
       { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+      {provide: LocationStrategy, useClass: HashLocationStrategy},
       AuthService,
       MerchantService,
       DeliveryManAddComponent,
