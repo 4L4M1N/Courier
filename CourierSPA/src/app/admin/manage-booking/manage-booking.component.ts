@@ -4,6 +4,7 @@ import { BookingView } from 'src/app/models/View/bookingView';
 import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material';
 import { AssignDelivManComponent } from '../assignDelivMan/assignDelivMan.component';
 import { DeliveryManService } from 'src/app/services/DeliveryMan.service';
+import { ModalService } from 'src/app/services/Dialog/modal.service';
 
 @Component({
   selector: 'app-manage-booking',
@@ -19,7 +20,9 @@ export class ManageBookingComponent implements OnInit {
   color:string;
   delivManList:any;
   bookingId:string;
-  constructor(private bookingService: BookingService, private dialog: MatDialog, private deliveryManService: DeliveryManService) { }
+  constructor(private bookingService: BookingService, private dialog: MatDialog,
+              private deliveryManService: DeliveryManService,
+              private modalService: ModalService) { }
 
   ngOnInit() {
     this.GetAllBooking();
@@ -43,7 +46,7 @@ export class ManageBookingComponent implements OnInit {
     console.log(a);
     this.bookingId = a;
     const dialogRef = this.dialog.open(AssignDelivManComponent, {
-      width: '250px',
+      width: '350px',
       data: { name: this.selectedDelivManId, delivManList: this.delivManList }
     });
 
@@ -61,11 +64,14 @@ export class ManageBookingComponent implements OnInit {
         console.log("true");
         this.bookingService.AssignDelivManToBooking(assign).subscribe(() => {
           console.log('ok');
+          this.openInfoModal();
         }, error => {
           console.log('error');
         });
       }
     });
-
+  }
+  openInfoModal() {
+    this.modalService.openInfoModal('Successfully Assigned');
   }
 }
