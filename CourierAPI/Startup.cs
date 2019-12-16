@@ -69,15 +69,15 @@ namespace CourierAPI
 
             // configure DI for application services
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IMerchantRepository, MerchantRepository>();
-            services.AddScoped<IItemRepository, ItemRepository>();
-            services.AddScoped<IItemAttributeRepository, ItemAttributeRepository>();
-            services.AddScoped<IReceiverRepository, ReceiverRepository>();
-            services.AddScoped<IBookingRepository, BookingRepository>();
-            services.AddScoped<IBookingItemRepository, BookingItemRepository>();
-            services.AddScoped<IDeliveryAddressRepository, DeliveryAddressRepository>();
-            services.AddScoped<IDeliveryManRepository, DeliveryManRepository>();
-            services.AddScoped<IAssignedDelivManRepository, AssignedDelivManRepository>();
+            // services.AddScoped<IMerchantRepository, MerchantRepository>();
+            // services.AddScoped<IItemRepository, ItemRepository>();
+            // services.AddScoped<IItemAttributeRepository, ItemAttributeRepository>();
+            // services.AddScoped<IReceiverRepository, ReceiverRepository>();
+            // services.AddScoped<IBookingRepository, BookingRepository>();
+            // services.AddScoped<IBookingItemRepository, BookingItemRepository>();
+            // services.AddScoped<IDeliveryAddressRepository, DeliveryAddressRepository>();
+            // services.AddScoped<IDeliveryManRepository, DeliveryManRepository>();
+            // services.AddScoped<IAssignedDelivManRepository, AssignedDelivManRepository>();
 
             services.AddAuthentication(x =>
             {
