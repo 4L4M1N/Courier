@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { ItemcreationService } from 'src/app/services/itemcreation.service';
 import { ItemAttribute } from 'src/app/models/ItemAttribute';
 import { Iitem } from 'src/app/models/Iitem';
+import { ModalService } from 'src/app/services/Dialog/modal.service';
 
 @Component({
   selector: 'app-itemcreation',
@@ -18,7 +19,7 @@ export class ItemcreationComponent implements OnInit {
   createItemFrom: FormGroup;
   ItemAttributeForm: FormGroup;
   p: number = 1;
-  constructor(private itemcreationservice: ItemcreationService) { }
+  constructor(private itemcreationservice: ItemcreationService, private modalService: ModalService) { }
 
   ngOnInit() {
     this.getitems();
@@ -44,7 +45,7 @@ export class ItemcreationComponent implements OnInit {
       const itemName = this.createItemFrom.controls['itemName'].value;
       formData.append('itemName', itemName);
       this.itemcreationservice.CreateItem(formData).subscribe(() => {
-        console.log('created');
+        this.openInfoModalItem();
       }, error => {
         console.log('error');
       });
@@ -56,7 +57,7 @@ export class ItemcreationComponent implements OnInit {
       this.itemAttribute = Object.assign({}, this.ItemAttributeForm.value);
       console.log(this.itemAttribute);
       this.itemcreationservice.CreateItemAttribute(this.itemAttribute).subscribe(() => {
-        console.log('ok');
+        this.openInfoModalItemAttribute();
       }, error => {
         console.log('error');
       });
@@ -81,5 +82,11 @@ export class ItemcreationComponent implements OnInit {
     }, error => {
       console.log('error');
     });
+    }
+    openInfoModalItem() {
+      this.modalService.openInfoModal('Item added');
+    }
+    openInfoModalItemAttribute() {
+      this.modalService.openInfoModal('Item attribute added');
     }
 }
