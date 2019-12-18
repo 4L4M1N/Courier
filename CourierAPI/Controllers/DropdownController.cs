@@ -126,11 +126,11 @@ namespace CourierAPI.Controllers
             {
                 return BadRequest("Duplicate Division");
             }
-            var itemToSave = new Division
+            var divisionToSave = new Division
             {
                 Name = divisionName
             };
-            await _unitOfWork.DeliveryAddress.AddDivisionAsync(itemToSave);
+            await _unitOfWork.DeliveryAddress.AddDivisionAsync(divisionToSave);
             var result = await _unitOfWork.CompleteAsync();
             if (result == 0) return BadRequest();
             return Ok();
