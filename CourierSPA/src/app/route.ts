@@ -1,3 +1,4 @@
+import { DivisionzonecreationComponent } from './admin/divisionzonecreation/divisionzonecreation.component';
 import {Routes} from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { MerchantInfoComponent } from './admin/merchant-info/merchant-info.component';
@@ -23,6 +24,7 @@ export const appRoutes: Routes = [
                 { path: 'merchantadd', component: MerchentaddComponent },
                 { path: 'deliverymanadd', component: DeliveryManAddComponent},
                 { path: 'booking/:merchantId', component: BookingComponent},
+                { path: 'divzonecreate', component: DivisionzonecreationComponent },
                 { path: 'itemcreate', component: ItemcreationComponent},
                 { path: 'managebooking', component: ManageBookingComponent},
                 { path: 'merchant-agreement', component: MerchantAgreementComponent},

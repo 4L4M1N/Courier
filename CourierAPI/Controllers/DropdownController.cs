@@ -121,7 +121,7 @@ namespace CourierAPI.Controllers
         public async Task<IActionResult> CreateDivision([FromForm]string divisionName)
         {
             if (divisionName == null)
-                return BadRequest();
+                return BadRequest("null");
             if(_unitOfWork.DeliveryAddress.FindDivisionByNameAsync(divisionName) == null)
             {
                 return BadRequest("Duplicate Division");
