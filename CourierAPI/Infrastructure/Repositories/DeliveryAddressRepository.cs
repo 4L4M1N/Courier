@@ -13,9 +13,32 @@ namespace CourierAPI.Infrastructure.Repositories
         private readonly DataContext _context;
         public DeliveryAddressRepository(DataContext context)
         {
-            this._context = context;
+            _context = context;
 
         }
+
+        public async Task AddDivisionAsync(Division division)
+        {
+            await _context.Divisions.AddAsync(division);
+        }
+
+        public async Task AddZoneAsync(Zone zone)
+        {
+            await _context.Zones.AddAsync(zone);
+        }
+
+        public Task<Division> FindDivisionByNameAsync(string divisionName)
+        {
+            var result = _context.Divisions.Where(d => d.Name == divisionName).FirstOrDefaultAsync();
+            return result;
+        }
+
+        public Task<Zone> FindZoneByNameAsync(string zoneName, int divisionId)
+        {
+            var result = _context.Zones.Where(z => z.Name == zoneName && z.DivisionId == divisionId).FirstOrDefaultAsync();
+            return result;
+        }
+
         public async Task<IEnumerable<Division>> GetDivisions()
         {
             var divisions = await _context.Divisions.ToListAsync();
