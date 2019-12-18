@@ -18,5 +18,14 @@ export class DeliveryAddressService {
   GetZonesOfADivison(divisionId): Observable<Zone[]> {
     return this.http.get<Zone[]>(this.baseURL + 'divisions/' + divisionId);
   }
+  CreateDivision(DivisionName) {
+    return this.http.post(this.baseURL + 'division/create', DivisionName);
+  }
+
+  CreateZone(sendZone: Zone) {
+    console.log(sendZone);
+    return this.http.post(this.baseURL + 'zone/create', sendZone);
+  }
+
 
 }
