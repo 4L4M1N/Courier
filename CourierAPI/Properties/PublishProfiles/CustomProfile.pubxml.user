@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAe2b3w57WI06+1vGe2o7BHAAAAAACAAAAAAAQZgAAAAEAACAAAAAqCt00PaGnHE8umjwCHEDOwIkMAjelSYecPnEzyurAAwAAAAAOgAAAAAIAACAAAABOg/2p/6AgH+sM3+gI7sMEQp5g3SWbDzeF+Z9Dr5X/cCAAAAC9p3fUIK7WJyVJAqgFm5dHBfbYIol9u+NATvO4n5qcjkAAAADVrG2MUIqjsedSeJKQ5VB8zagMoIgKte4ex2U+mNq5aN1icqCFgF/F1J6TVkg61VTe2ApYGWV6TKbSa9lY4r3Y</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="CourierDB">
+      <Value>Data Source=SQL5043.site4now.net%3bInitial Catalog=DB_A50EE3_courier%3bUser Id=DB_A50EE3_courier_admin%3bPassword=Prog4%40AmiN%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="CourierAPI.Infrastructure.Data.DataContext">
+      <Value>Data Source=SQL5043.site4now.net%3bInitial Catalog=DB_A50EE3_courier%3bUser Id=DB_A50EE3_courier_admin%3bPassword=Prog4%40AmiN%3b</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>
