@@ -10,5 +10,10 @@ namespace CourierAPI.Core.IRepositories
          Task <IEnumerable<Zone>> GetZones();
          Task <IEnumerable<Zone>> GetZonesOfADivision(int divisionId);
          Task <Zone> GetZone(int zoneId);
+         Task AddDivisionAsync(Division division);
+         Task AddZoneAsync(Zone zone);
+         Task <Division> FindDivisionByNameAsync(string divisionName);
+         Task <Zone> FindZoneByNameAsync(string zoneName, int divisionId);
+
     }
 }

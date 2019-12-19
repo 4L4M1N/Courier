@@ -1,3 +1,4 @@
+import { DivisionzonecreationComponent } from './admin/divisionzonecreation/divisionzonecreation.component';
 import { ConfirmComponent } from './shared/Dialog/confirm/confirm.component';
 import { AlertComponent } from './shared/Dialog/alert/alert.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -57,7 +58,8 @@ import { AssignDelivManComponent } from './admin/assignDelivMan/assignDelivMan.c
       ManageBookingComponent,
       AlertComponent,
       ConfirmComponent,
-      AssignDelivManComponent
+      AssignDelivManComponent,
+      DivisionzonecreationComponent
    ],
    imports: [
       BrowserModule,

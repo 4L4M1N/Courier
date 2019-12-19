@@ -115,5 +115,52 @@ namespace CourierAPI.Controllers
             if (result == null) return BadRequest();
             return Ok(result);
         }
+        // Create Division
+        [HttpPost("division/create")]
+        [Authorize(Roles = "CourierOwner")]
+        public async Task<IActionResult> CreateDivision([FromForm]string divisionName)
+        {
+            if (divisionName == null)
+                return BadRequest("null");
+            if(_unitOfWork.DeliveryAddress.FindDivisionByNameAsync(divisionName) == null)
+            {
+                return BadRequest("Duplicate Division");
+            }
+            var divisionToAdd = new Division
+            {
+                Name = divisionName
+            };
+            await _unitOfWork.DeliveryAddress.AddDivisionAsync(divisionToAdd);
+            var result = await _unitOfWork.CompleteAsync();
+            if (result == 0) return BadRequest();
+            return Ok();
+        }
+        // Create Zone
+        [HttpPost("zone/create")]
+        [Authorize(Roles = "CourierOwner")]
+        public async Task<IActionResult> CreateZone(ZoneDTO zone)
+        {
+            //Using System.Text.Json
+            //var result = JsonSerializer.Deserialize<ItemAttribute>(itemAttribute);
+
+            if (zone == null) return BadRequest("No value please check");
+            var isZoneExists = _unitOfWork.DeliveryAddress.FindZoneByNameAsync(zone.ZoneName, zone.DivisionId);
+            if (isZoneExists == null)
+            {
+                return BadRequest("duplicate zone!");
+            }
+            else
+            {
+                var zoneToADD = new Zone
+                {
+                    DivisionId = zone.DivisionId,
+                    Name = zone.ZoneName
+                };
+                await _unitOfWork.DeliveryAddress.AddZoneAsync(zoneToADD);
+            }
+            var result = await _unitOfWork.CompleteAsync();
+            if (result == 0) return BadRequest("dont save");
+            return Ok();
+        }
     }
 }

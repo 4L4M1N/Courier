@@ -1,0 +1,44 @@
+
+<div class="card-body">
+  <h5 class="card-title text-center">Division and Zone</h5>
+      <div class="row">
+
+          <!-- Create Division starts -->
+          <div class="col-sm-4 col-md-4 col-lg-4 mx-auto "> 
+              <form [formGroup]="createDivFrom" (ngSubmit) = "createDivision()">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Create division</h5>
+                    <div class="form-group">
+                        <input type="text" class="form-control" formControlName="divisionName"  placeholder="Division Name"  autofocus> 
+                    </div> 
+                    <button  class="btn  btn-primary btn float-right text-uppercase" type="submit">submit</button>
+                  </div>
+              </form> 
+          </div> <!-- Create Division End -->
+          <div class=" border-right">
+
+          </div>
+           <!-- Create Zone starts -->
+           <div class="col-sm-4 col-md-4 col-lg-4 mx-auto">
+            <form [formGroup]="createZoneFrom" (ngSubmit)="CreateZone()">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Create Zone</h5>
+                                                      
+                    <select class="custom-select form-group" formControlName="divisionid" (change)="onSelect($event)">
+                        <option value="" disabled>Choose your Division</option>
+                        <option *ngFor="let i of division" [value]="i.divisionId">{{i.name}}</option>
+                    </select>
+                      <div class="form-group">
+                          <input type="text" class="form-control" formControlName="zoneName" placeholder="zone name"> 
+                      </div>
+
+                      <button  class="btn  btn-primary btn float-right text-uppercase" type="submit">submit</button>
+                </div>
+              </form>
+        </div> <!-- Create Zone end -->
+
+        
+          
+        </div>
+</div>
+
