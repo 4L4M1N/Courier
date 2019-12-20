@@ -59,7 +59,7 @@
 			</mat-list-item>
 			<div class="submenu" [ngClass]="{'expanded' : showSubmenu2}" *ngIf="isShowing || isExpanded">
 				<a mat-list-item [routerLink]="'/admin/managebooking'"><i class="fas fa-tasks pr-2"></i>  Manage Booking</a>
-				<a mat-list-item href="..."><i class="fas fa-map-marked-alt pr-2"></i>Create Zone</a>
+				<a mat-list-item [routerLink]="'/admin/divzonecreate'"><i class="fas fa-map-marked-alt pr-2"></i>Create Zone</a>
 			
 			</div>
     </mat-nav-list>
