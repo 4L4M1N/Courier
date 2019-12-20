@@ -19,6 +19,7 @@ export class DeliveryAddressService {
     return this.http.get<Zone[]>(this.baseURL + 'divisions/' + divisionId);
   }
   CreateDivision(DivisionName) {
+    console.log(DivisionName);
     return this.http.post(this.baseURL + 'division/create', DivisionName);
   }
 

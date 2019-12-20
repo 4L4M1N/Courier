@@ -122,7 +122,7 @@ namespace CourierAPI.Controllers
         {
             if (divisionName == null)
                 return BadRequest("null");
-            if(_unitOfWork.DeliveryAddress.FindDivisionByNameAsync(divisionName) == null)
+            if(_unitOfWork.DeliveryAddress.FindDivisionByNameAsync(divisionName) != null)
             {
                 return BadRequest("Duplicate Division");
             }
@@ -145,7 +145,7 @@ namespace CourierAPI.Controllers
 
             if (zone == null) return BadRequest("No value please check");
             var isZoneExists = _unitOfWork.DeliveryAddress.FindZoneByNameAsync(zone.ZoneName, zone.DivisionId);
-            if (isZoneExists == null)
+            if (isZoneExists != null)
             {
                 return BadRequest("duplicate zone!");
             }
