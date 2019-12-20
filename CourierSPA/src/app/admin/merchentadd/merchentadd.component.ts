@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Merchants } from '../../models/Merchants';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MerchantService } from '../../services/Merchant.service';
+import { ModalService } from 'src/app/services/Dialog/modal.service';
 
 @Component({
   selector: 'app-merchentadd',
@@ -12,7 +13,7 @@ export class MerchentaddComponent implements OnInit {
 
   merchant: Merchants;
   merchantaddForm: FormGroup;
-  constructor(private merchentservice: MerchantService) { }
+  constructor(private merchentservice: MerchantService, private modalService: ModalService) { }
 
   ngOnInit() {
     this.merchantaddForm = new FormGroup({
@@ -30,10 +31,13 @@ export class MerchentaddComponent implements OnInit {
       this.merchant = Object.assign({}, this.merchantaddForm.value);
 
       this.merchentservice.Create(this.merchant).subscribe(() => {
-        console.log('created');
+        this.openInfoModalMerchantAdd();
       }, error => {
         console.log('error');
       });
   }}
+  openInfoModalMerchantAdd() {
+    this.modalService.openInfoModal('Merchant added');
+  }
 
 }

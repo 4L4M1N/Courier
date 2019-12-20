@@ -25,7 +25,6 @@
     "@fortawesome/fontawesome-free": "^5.11.2",
     "bootstrap": "^4.3.1",
     "hammerjs": "^2.0.8",
-    "ngx-bootstrap": "^5.2.0",
     "ngx-pagination": "^4.1.0",
     "pdfmake": "^0.1.62",
     "rxjs": "~6.4.0",
