@@ -6,7 +6,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 @Injectable()
 export class AuthService {
 
-     baseUrl = 'https://courierapidevelopment.azurewebsites.net/api/auth/';
+     baseUrl = 'http://amin601-001-site1.gtempurl.com/api/auth/';
      jwtHelper = new JwtHelperService();
      decodeToken: any;
 

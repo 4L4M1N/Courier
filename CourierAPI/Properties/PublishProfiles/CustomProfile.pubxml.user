@@ -6,7 +6,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAe2b3w57WI06+1vGe2o7BHAAAAAACAAAAAAAQZgAAAAEAACAAAAAqCt00PaGnHE8umjwCHEDOwIkMAjelSYecPnEzyurAAwAAAAAOgAAAAAIAACAAAABOg/2p/6AgH+sM3+gI7sMEQp5g3SWbDzeF+Z9Dr5X/cCAAAAC9p3fUIK7WJyVJAqgFm5dHBfbYIol9u+NATvO4n5qcjkAAAADVrG2MUIqjsedSeJKQ5VB8zagMoIgKte4ex2U+mNq5aN1icqCFgF/F1J6TVkg61VTe2ApYGWV6TKbSa9lY4r3Y</EncryptedPassword>
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAe2b3w57WI06+1vGe2o7BHAAAAAACAAAAAAAQZgAAAAEAACAAAACvtyJsVRS1WOIbd5+Qnvaguc7SlpM0B0rULIZMRVe2jwAAAAAOgAAAAAIAACAAAAA/ZA92NXJFjeKuiqO0Wzop4Z48E+CqFvuFtJzWFpv1JSAAAACZvJHMsdRSAEO65UBbVVtYKx39Gan0uD+xsuyLRo6DDEAAAABuI+pwWchVhQZuHtlXrAIeMWZwlyeImBRmtDOccyWqTrPX5dQJHEhfNTLVjS+vjBpIm2QHzn8LD97bVPb0b7Ub</EncryptedPassword>
   </PropertyGroup>
   <ItemGroup>
     <DestinationConnectionStrings Include="CourierDB">

@@ -8,7 +8,7 @@ import { Iitem } from '../models/Iitem';
   providedIn: 'root'
 })
 export class ItemcreationService {
-  baseURL = 'https://courierapidevelopment.azurewebsites.net/api/dropdown/';
+  baseURL = 'http://amin601-001-site1.gtempurl.com/api/dropdown/';
 
 constructor(private http: HttpClient) { }
 
