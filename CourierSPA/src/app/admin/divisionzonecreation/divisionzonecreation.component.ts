@@ -3,6 +3,7 @@ import { DeliveryAddressService } from 'src/app/services/deliveryAddress.service
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Zone } from 'src/app/models/zone';
+import { ModalService } from 'src/app/services/Dialog/modal.service';
 
 @Component({
   selector: 'app-divisionzonecreation',
@@ -22,7 +23,7 @@ export class DivisionzonecreationComponent implements OnInit {
 
   createZoneFrom: FormGroup;
 
-  constructor(private deliveryAddressService: DeliveryAddressService) { }
+  constructor(private deliveryAddressService: DeliveryAddressService, private modalService: ModalService) { }
 
   ngOnInit() {
 
@@ -44,8 +45,10 @@ export class DivisionzonecreationComponent implements OnInit {
       formData.append('divisionName', divisionName);
       this.deliveryAddressService.CreateDivision(formData).subscribe(() => {
         console.log('created');
+        this.openInfoModal();
       }, error => {
         console.log('error');
+        this.openErrorModal();
       });
   }}
 
@@ -75,10 +78,22 @@ export class DivisionzonecreationComponent implements OnInit {
       console.log(this.zone);
       this.deliveryAddressService.CreateZone(this.zone).subscribe(() => {
         console.log('ok');
+        this.openZoneInfoModal();
       }, error => {
         console.log('error');
+        this.openErrorModal();
       });
     }
   }
+  openInfoModal() {
+    this.modalService.openInfoModal('Division added');
+  }
+  openZoneInfoModal() {
+    this.modalService.openInfoModal('Division added');
+  }
+  openErrorModal() {
+    this.modalService.openErrorModal('Error');
+  }
+
 
 }
