@@ -20,36 +20,36 @@
           <div class="col-sm-4 col-md-4 col-lg-4 mx-auto border-right">
               <form [formGroup]="ItemAttributeForm" (ngSubmit)="CreateItemAttribute()">
                   <div class="card-body">
-                    <h5 class="card-title text-center">Item Attribute</h5>
+                    <h5 class="card-title text-center">Item Type</h5>
                                                         
                       <select class="custom-select form-group" formControlName="itemid" (change)="onSelect($event)">
                           <option value="" disabled>Choose your Item</option>
                           <option *ngFor="let i of item" [value]="i.itemId">{{i.name}}</option>
                         </select>
                         <div class="form-group">
-                            <input type="text" class="form-control" formControlName="ItemSize" placeholder="ItemSize"> 
+                            <input type="text" class="form-control" formControlName="ItemSize" placeholder="Item Type Name"> 
                         </div>
                         
                         <div class="form-group">
-                          <input type="text"  class="form-control" formControlName="InCityRate"  placeholder="In CityRate" >
+                          <input type="text"  class="form-control" formControlName="InCityRate"  placeholder="In City Rate" >
                         </div>
                         <div class="form-group">
-                            <input type="text"  class="form-control" formControlName="OutCityRate"  placeholder="Out CityRate" >
+                            <input type="text"  class="form-control" formControlName="OutCityRate"  placeholder="Out City Rate" >
                         </div>
                         <div class="form-group">
-                          <input type="text"  class="form-control" formControlName="RegularRate" placeholder="RegularRate" >
+                          <input type="text"  class="form-control" formControlName="RegularRate" placeholder="Regular Rate" >
                         </div>
                         <div class="form-group">
-                            <input type="text"  class="form-control" formControlName="ConditionCharge" placeholder="ConditionCharge" >
+                            <input type="text"  class="form-control" formControlName="ConditionCharge" placeholder="Condition Charge in Percantage (%)" >
                         </div>
                         <div class="form-group">
-                          <input type="text"  class="form-control" formControlName="BookingCharge" placeholder="BookingCharge" >
+                          <input type="text"  class="form-control" formControlName="BookingCharge" placeholder="Booking Charge" >
                         </div>
                         <div class="form-group">
                         <input type="text"  class="form-control" formControlName="Discount" placeholder="Discount" >
                         </div>
 
-                        <button  class="btn  btn-primary btn float-right text-uppercase" type="submit">submit</button>
+                        <button  class="btn  btn-primary btn float-right text-uppercase" type="submit">Submit</button>
                   </div>
               </form>
           </div> <!-- Create item attribute end -->
@@ -57,7 +57,7 @@
           <!-- Show item attributes from database start -->
           <div class="col-sm-4 col-md-4 col-lg-4 mx-auto border-right">
             <div class="card-body">
-                <h5 class="card-title text-center">Item Attribute Lists</h5>
+                <h5 class="card-title text-center">Item Type Lists</h5>
                 
 
                 <div class="card-body shadow-sm p-3 mb-2 bg-white rounded border border-info" *ngFor="let i of itemAttributesOfAnItem | async | paginate: { itemsPerPage: 4, currentPage: p }" id="itemAttributeList">
