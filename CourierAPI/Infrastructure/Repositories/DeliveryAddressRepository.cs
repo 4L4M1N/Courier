@@ -27,15 +27,15 @@ namespace CourierAPI.Infrastructure.Repositories
             await _context.Zones.AddAsync(zone);
         }
 
-        public Task<Division> FindDivisionByNameAsync(string divisionName)
+        public async Task<Division> FindDivisionByNameAsync(string divisionName)
         {
-            var result = _context.Divisions.Where(d => d.Name == divisionName).FirstOrDefaultAsync();
+            var result = await (_context.Divisions.Where(d => d.Name == divisionName).FirstOrDefaultAsync());
             return result;
         }
 
-        public Task<Zone> FindZoneByNameAsync(string zoneName, int divisionId)
+        public async Task<Zone> FindZoneByNameAsync(string zoneName, int divisionId)
         {
-            var result = _context.Zones.Where(z => z.Name == zoneName && z.DivisionId == divisionId).FirstOrDefaultAsync();
+            var result = await (_context.Zones.Where(z => z.Name == zoneName && z.DivisionId == divisionId).FirstOrDefaultAsync());
             return result;
         }
 

@@ -122,7 +122,8 @@ namespace CourierAPI.Controllers
         {
             if (divisionName == null)
                 return BadRequest("null");
-            if(_unitOfWork.DeliveryAddress.FindDivisionByNameAsync(divisionName) != null)
+            var isDivisionExists = await _unitOfWork.DeliveryAddress.FindDivisionByNameAsync(divisionName);
+            if(isDivisionExists != null)
             {
                 return BadRequest("Duplicate Division");
             }
@@ -144,7 +145,7 @@ namespace CourierAPI.Controllers
             //var result = JsonSerializer.Deserialize<ItemAttribute>(itemAttribute);
 
             if (zone == null) return BadRequest("No value please check");
-            var isZoneExists = _unitOfWork.DeliveryAddress.FindZoneByNameAsync(zone.ZoneName, zone.DivisionId);
+            var isZoneExists = await _unitOfWork.DeliveryAddress.FindZoneByNameAsync(zone.ZoneName, zone.DivisionId);
             if (isZoneExists != null)
             {
                 return BadRequest("duplicate zone!");
