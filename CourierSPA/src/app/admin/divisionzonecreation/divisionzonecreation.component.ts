@@ -15,7 +15,7 @@ export class DivisionzonecreationComponent implements OnInit {
   division: IDivision[];
 
   zone: Zone;
-  zonesOfAivision;
+  zonesOfAivision: Zone[];
 
   loadDivision;
 
@@ -65,8 +65,10 @@ export class DivisionzonecreationComponent implements OnInit {
     if (divisionId === 0) {
       this.zonesOfAivision  == null;
     } else {
-      this.zonesOfAivision = this.deliveryAddressService.GetZonesOfADivison(value);
-      //this.deliveryAddressService.GetZonesOfADivison(<Zone>).subscribe(data => this.zonesOfAivision = data)
+     // this.zonesOfAivision = this.deliveryAddressService.GetZonesOfADivison(divisionId);
+      this.deliveryAddressService.GetZonesOfADivison(divisionId).subscribe(data => {
+        this.zonesOfAivision = data;
+      });
       console.log(this.zonesOfAivision);
     }
   }
