@@ -9,7 +9,7 @@ import { Merchants } from '../models/Merchants';
 })
 
 export class MerchantService {
-  baseURL = 'http://amin601-001-site1.gtempurl.com/api/merchant/';
+  baseURL = 'http://localhost:5000/api/merchant/';
 
 constructor(private http: HttpClient) { }
 
