@@ -8,7 +8,7 @@ import { Zone } from '../models/zone';
   providedIn: 'root'
 })
 export class DeliveryAddressService {
-  baseURL = 'http://amin601-001-site1.gtempurl.com/api/dropdown/';
+  baseURL = 'http://localhost:5000/api/dropdown/';
 
   constructor(private http: HttpClient) { }
 
