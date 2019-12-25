@@ -17,7 +17,7 @@
               <i class="fas fa-phone-alt" style="color: green;"></i> {{merchantInfo?.phone}}<br>
               <i class="far fa-envelope" style="color: #0080FF;"></i> {{merchantInfo?.email}}
               <div class="text-right">
-                <a class="text-align-right" [routerLink]="['/admin/merchant-agreement']"> Info</a>
+                <a class="text-align-right" [routerLink]="['/admin/merchant-agreement', merchantId]" routerLinkActive="router-link-active"> Info</a>
               </div>
 
           </div>
@@ -88,3 +88,31 @@
 
 
   </div>
+<div class="row">
+  <!-- Item create for merchant -->
+  <div class="col-md-4">
+    <div class="card shadow p-1 mb-2 bg-white rounded">
+      <div class="card-img-top text-center border-bottom">
+         <div style="height: 100px;">
+           <h4>Create Type</h4>
+         </div>
+          
+      </div>
+
+      <div class="card-body">
+          
+          <div class="fab"><i class="fas fa-list fa-sm"></i></div>
+          
+          <div class="card-title" style="border-left: 5px solid #0080FF;font-weight:bold;">
+            <h3 class="pl-1">Item and Type</h3>
+          </div>
+          Total Item: 25<br>
+          Pending: 2
+          <div class="text-right">
+            <a class="text-align-right" [routerLink]="['/admin/merchant-info/', merchantId]"> Create</a>
+          </div>
+
+      </div>
+    </div>
+  </div>  <!-- Item create for merchant End -->
+</div>
