@@ -27,7 +27,7 @@ export const appRoutes: Routes = [
                 { path: 'divzonecreate', component: DivisionzonecreationComponent },
                 { path: 'itemcreate', component: ItemcreationComponent},
                 { path: 'managebooking', component: ManageBookingComponent},
-                { path: 'merchant-agreement', component: MerchantAgreementComponent},
+                { path: 'merchant-agreement/:merchantId', component: MerchantAgreementComponent},
                 {path: 'merchant-agreement/edit', component: MerchantEditComponent}
             ]
             }

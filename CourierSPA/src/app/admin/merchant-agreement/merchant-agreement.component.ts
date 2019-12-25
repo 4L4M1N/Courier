@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-merchant-agreement',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MerchantAgreementComponent implements OnInit {
 
-  constructor() { }
+  merchantId: any;
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.paramMap
+    .subscribe(params => {
+      this.merchantId = params.get('merchantId');
+      console.log(this.merchantId);
+    });
   }
 
 }
