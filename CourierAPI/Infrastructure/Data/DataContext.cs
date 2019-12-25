@@ -24,6 +24,9 @@ namespace CourierAPI.Infrastructure.Data
         public DbSet<DeliveryMan> DeliveryMen { get; set; }
         public DbSet<AssignedDelivMan> AssignedDelivMen { get; set; }
 
+        public DbSet<CommonInfo> CommonInfos { get; set; }
+        public DbSet<Branch> Branches { get; set; }
+
 
         //Query
         public DbQuery<BookingDetailsR> ShowBookings { get; set; }
