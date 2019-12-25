@@ -22,6 +22,8 @@ namespace CourierAPI.Infrastructure.Repositories
 
         public IAssignedDelivManRepository AssignedDelivMan { get; private set;}
 
+        public ICommonInfoRepository CommonInfo {get; private set; }
+
         public UnitOfWork(DataContext context)
         {
             _context = context;
@@ -34,6 +36,7 @@ namespace CourierAPI.Infrastructure.Repositories
             DeliveryAddress = new DeliveryAddressRepository(_context);
             DeliveryMan = new DeliveryManRepository(_context);
             AssignedDelivMan = new AssignedDelivManRepository(_context);
+            CommonInfo = new CommonInfoRepository(_context);
         }
 
         public async Task<int> CompleteAsync()
