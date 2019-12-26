@@ -35,10 +35,17 @@ GetItemAttributesOfAnItem(itemId): Observable<ItemAttribute[]>
   // params = params.append('itemId', itemId.toString());
   return this.http.get<ItemAttribute[]>(this.baseURL + 'itemattribute/' + itemId);
 }
+GetItemAttributesOfAnItemMerchant(itemId, merchantIdentity): Observable<ItemAttribute[]>
+{
+  let query = encodeURIComponent('itemId') + '=' + encodeURIComponent(itemId)
+  + '&' + encodeURIComponent('merchantIdentity') + '=' + encodeURIComponent(merchantIdentity);
+  return this.http.get<ItemAttribute[]>(this.baseURL + 'itemattribute' + '?' + query);
+}
 GetItemAttributeDetails(itemAttributeId): Observable<ItemAttribute>
 {
   return this.http.get<ItemAttribute>(this.baseURL + 'itemattributedetails/' + itemAttributeId);
 }
+
 
 private handleError(err: HttpErrorResponse) {
   // in a real world app, we may send the server to some remote logging infrastructure
