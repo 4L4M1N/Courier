@@ -35,6 +35,8 @@ import { DeliveryAddressService } from './services/deliveryAddress.service';
 import { ItemcreationService } from './services/itemcreation.service';
 import { ManageBookingComponent } from './admin/manage-booking/manage-booking.component';
 import { AssignDelivManComponent } from './admin/assignDelivMan/assignDelivMan.component';
+import { MerchantItemComponent } from './admin/merchant-item/merchant-item.component';
+
 
 
 
@@ -48,6 +50,7 @@ import { AssignDelivManComponent } from './admin/assignDelivMan/assignDelivMan.c
       MerchantInfoComponent,
       MerchantAgreementComponent,
       MerchantEditComponent,
+      MerchantItemComponent,
       LoginComponent,
       RegistrationComponent,
       MerchentaddComponent,

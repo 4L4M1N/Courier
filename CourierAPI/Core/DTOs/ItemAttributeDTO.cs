@@ -10,5 +10,6 @@ namespace CourierAPI.Core.DTOs
         public double BookingCharge { get; set; }
         public double Discount { get; set; }
         public int ItemId { get; set; }
+        public string MerchantId { get; set; }
     }
 }

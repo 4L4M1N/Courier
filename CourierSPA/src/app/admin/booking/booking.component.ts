@@ -146,7 +146,7 @@ export class BookingComponent implements OnInit {
     if (itemId === 0) {
       this.listItemAttributes == null;
     } else {
-      this.itemcreationservice.GetItemAttributesOfAnItem(itemId).subscribe(data => {
+      this.itemcreationservice.GetItemAttributesOfAnItemMerchant(itemId,this.merchantId).subscribe(data => {
         this.listItemAttributes = data;
       });
     }

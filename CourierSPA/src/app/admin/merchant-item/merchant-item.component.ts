@@ -1,29 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ItemcreationService } from 'src/app/services/itemcreation.service';
+import { ModalService } from 'src/app/services/Dialog/modal.service';
+import { ActivatedRoute } from '@angular/router';
 import { ItemAttribute } from 'src/app/models/ItemAttribute';
 import { Iitem } from 'src/app/models/Iitem';
-import { ModalService } from 'src/app/services/Dialog/modal.service';
 
 @Component({
-  selector: 'app-itemcreation',
-  templateUrl: './itemcreation.component.html',
-  styleUrls: ['./itemcreation.component.css']
+  selector: 'app-merchant-item',
+  templateUrl: './merchant-item.component.html',
+  styleUrls: ['./merchant-item.component.css']
 })
-export class ItemcreationComponent implements OnInit {
+export class MerchantItemComponent implements OnInit {
 
   item: Iitem[];
+  merchantId: any;
   itemAttribute: ItemAttribute;
   listItemAttributes: ItemAttribute[];
   itemAttributesOfAnItem;
   createItemFrom: FormGroup;
   ItemAttributeForm: FormGroup;
   p: number = 1;
-  constructor(private itemcreationservice: ItemcreationService, private modalService: ModalService) { }
+  editOutCity: any;
+  constructor(private itemcreationservice: ItemcreationService, private route: ActivatedRoute,
+              private modalService: ModalService) { }
 
   ngOnInit() {
+    this.route.paramMap
+    .subscribe(params => {
+      this.merchantId = params.get('merchantId');
+      console.log(this.merchantId);
+    });
     this.getitems();
-
+    // Item Attribute or Type
     this.ItemAttributeForm = new FormGroup({
       itemid: new FormControl(''),
       ItemSize: new FormControl(''),
@@ -34,25 +43,8 @@ export class ItemcreationComponent implements OnInit {
       BookingCharge: new FormControl(''),
       Discount: new FormControl(''),
     });
-
-    this.createItemFrom = new FormGroup({
-      itemName: new FormControl(''),
-    });
   }
-  CreateItem() {
-    if (this.createItemFrom.valid) {
-      const formData = new FormData();
-      const itemName = this.createItemFrom.controls['itemName'].value;
-      formData.append('itemName', itemName);
-      this.itemcreationservice.CreateItem(formData).subscribe(() => {
-        console.log('created');
-        this.openInfoModal();
-      }, error => {
-        console.log('error');
-        this.openErrorModal();
-      });
-  }}
-
+  // Create Item attribute or type
   CreateItemAttribute() {
     if (this.ItemAttributeForm.valid) {
       console.log(this.ItemAttributeForm.value);
@@ -66,9 +58,6 @@ export class ItemcreationComponent implements OnInit {
         this.openErrorModal();
       });
   }}
-  getitems() {
-    this.itemcreationservice.GetItems().subscribe(r => this.item = r);
-  }
   onSelect(event) {
     let value = event.target.value;
     let itemId = value;
@@ -87,10 +76,20 @@ export class ItemcreationComponent implements OnInit {
       console.log('error');
     });
   }
-    openInfoModal() {
-      this.modalService.openInfoModal('Added');
-    }
-    openErrorModal() {
-      this.modalService.openErrorModal('Error');
-    }
+  onTypeClick(itemAttribute) {
+    this.editOutCity = itemAttribute.outCityRate;
+    this.ItemAttributeForm.controls['OutCityRate'].setValue(this.editOutCity);
+    console.log(this.editOutCity);
+  }
+  getitems() {
+    this.itemcreationservice.GetItems().subscribe(r => this.item = r);
+  }
+  openInfoModal() {
+    this.modalService.openInfoModal('Added');
+  }
+  openErrorModal() {
+    this.modalService.openErrorModal('Error');
+  }
+
 }
+

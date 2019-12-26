@@ -4,14 +4,16 @@ using CourierAPI.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CourierAPI.Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20191226130651_UpdatedItemAttribute")]
+    partial class UpdatedItemAttribute
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -235,7 +237,7 @@ namespace CourierAPI.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MerchantIdentity")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<double>("OutCityRate")
                         .HasColumnType("float");
@@ -246,6 +248,8 @@ namespace CourierAPI.Infrastructure.Migrations
                     b.HasKey("ItemAttributeId");
 
                     b.HasIndex("ItemId");
+
+                    b.HasIndex("MerchantIdentity");
 
                     b.ToTable("ItemAttributes");
                 });
@@ -611,6 +615,10 @@ namespace CourierAPI.Infrastructure.Migrations
                         .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("CourierAPI.Core.Models.Merchant", "Merchant")
+                        .WithMany()
+                        .HasForeignKey("MerchantIdentity");
                 });
 
             modelBuilder.Entity("CourierAPI.Core.Models.Receiver", b =>
