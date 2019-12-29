@@ -1,0 +1,68 @@
+
+        <div class="container">
+            <div class="row">
+              <div class="col-sm-9 col-md-5 col-lg-4 mx-auto">
+                <div class="card card-signin my-5 shadow p-3 mb-5 bg-white rounded">
+                  <div class="card-body">
+                    <h5 class="card-title text-center">Request a Booking</h5>
+                    <form  [formGroup]="bookingRequestForm" (ngSubmit) = (submitBooking()) method="POST" >
+                      
+                      <div class="form-label-group">
+                        <label for="name">Name</label>
+                        <input type="text" 
+                        class="form-control" id="name" formControlName="name" placeholder="Ex: Abc"
+                        [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                          <div *ngIf="f.name.errors.required">Name is required</div>
+                        </div>
+                      </div>    
+                      <div class="form-label-group">
+                                <label for="inputUsername">User Phone</label>
+                                <input type="text" 
+                                class="form-control" id="phone" formControlName="phone" placeholder="Ex: Abc"
+                                [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
+                                <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                                  <div *ngIf="f.phone.errors.required">Phone is required</div>
+                                </div>
+                          </div>
+            
+                          <div class="form-label-group">
+                                <label for="bookingItems">Items</label>
+                                <input type="text" 
+                                class="form-control" id="bookingItems" formControlName="bookingItems" placeholder="Ex: Abc"
+                                [ngClass]="{ 'is-invalid': submitted && f.bookingItems.errors }">
+                                <div *ngIf="submitted && f.bookingItems.errors" class="invalid-feedback">
+                                  <div *ngIf="f.bookingItems.errors.required">Item is required</div>
+                                </div>
+                          </div> 
+                          <div class="form-label-group">
+                            <label for="inputPassword">Email</label>
+                            <input type="text" 
+                            class="form-control" id="email" formControlName="email" placeholder="Ex: Abc"
+                            [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                              <div *ngIf="f.email.errors.required">Email is required</div>
+                            </div>
+                      </div>
+                          <br>
+                          
+                          <!-- Implement Remember me -->
+                         
+                          <button mat-raised-button color="primary" class="btn btn-primary">Request</button>
+            
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+               <!-- modal -->
+              <!-- <div class="button-row">
+                <button mat-raised-button (click)="openInfoModal()">Show Info Modal</button>
+                <button mat-raised-button (click)="openWarningModal()">Show Warning Modal</button>
+                <button mat-raised-button (click)="openErrorModal()">Show Error Modal</button>
+                <button mat-raised-button (click)="openConfirmModal()">Show Confirm Modal</button>
+              </div> -->
+            </div>
+          </div>
+  

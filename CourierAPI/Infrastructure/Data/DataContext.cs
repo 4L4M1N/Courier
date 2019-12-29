@@ -26,6 +26,7 @@ namespace CourierAPI.Infrastructure.Data
 
         public DbSet<CommonInfo> CommonInfos { get; set; }
         public DbSet<Branch> Branches { get; set; }
+        public DbSet<RequestBooking> RequestBookings { get; set; }
 
 
         //Query

@@ -24,6 +24,8 @@ namespace CourierAPI.Infrastructure.Repositories
 
         public ICommonInfoRepository CommonInfo {get; private set; }
 
+        public IRequestBookingRepository RequestBooking {get; private set;}
+
         public UnitOfWork(DataContext context)
         {
             _context = context;
@@ -37,6 +39,7 @@ namespace CourierAPI.Infrastructure.Repositories
             DeliveryMan = new DeliveryManRepository(_context);
             AssignedDelivMan = new AssignedDelivManRepository(_context);
             CommonInfo = new CommonInfoRepository(_context);
+            RequestBooking = new RequestBookingRepository(_context);
         }
 
         public async Task<int> CompleteAsync()
