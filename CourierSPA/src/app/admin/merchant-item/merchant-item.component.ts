@@ -49,6 +49,7 @@ export class MerchantItemComponent implements OnInit {
     if (this.ItemAttributeForm.valid) {
       console.log(this.ItemAttributeForm.value);
       this.itemAttribute = Object.assign({}, this.ItemAttributeForm.value);
+      this.itemAttribute.merchantId = this.merchantId;
       console.log(this.itemAttribute);
       this.itemcreationservice.CreateItemAttribute(this.itemAttribute).subscribe(() => {
         console.log('ok');
@@ -66,7 +67,7 @@ export class MerchantItemComponent implements OnInit {
       this.itemAttributesOfAnItem == null;
     } else {
       // this.itemcreationservice.GetItemAttributesOfAnItem(itemId).subscribe(data => {this.itemAttributesOfAnItem = data});
-      this.itemAttributesOfAnItem = this.itemcreationservice.GetItemAttributesOfAnItem(itemId);
+      this.itemAttributesOfAnItem = this.itemcreationservice.GetItemAttributesOfAnItemMerchant(itemId, this.merchantId);
     }
   }
   loadAllItemAttribtes() {
@@ -77,8 +78,15 @@ export class MerchantItemComponent implements OnInit {
     });
   }
   onTypeClick(itemAttribute) {
+    console.log(itemAttribute);
     this.editOutCity = itemAttribute.outCityRate;
-    this.ItemAttributeForm.controls['OutCityRate'].setValue(this.editOutCity);
+    this.ItemAttributeForm.controls['ItemSize'].setValue(itemAttribute.itemSize);
+    this.ItemAttributeForm.controls['OutCityRate'].setValue(itemAttribute.outCityRate);
+    this.ItemAttributeForm.controls['InCityRate'].setValue(itemAttribute.inCityRate);
+    this.ItemAttributeForm.controls['RegularRate'].setValue(itemAttribute.regularRate);
+    this.ItemAttributeForm.controls['ConditionCharge'].setValue(itemAttribute.conditionCharge);
+    this.ItemAttributeForm.controls['BookingCharge'].setValue(itemAttribute.bookingCharge);
+    this.ItemAttributeForm.controls['Discount'].setValue(itemAttribute.discount);
     console.log(this.editOutCity);
   }
   getitems() {
