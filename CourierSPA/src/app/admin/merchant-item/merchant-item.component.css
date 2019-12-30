@@ -1,3 +1,6 @@
 .card-body {
     padding: 0px;
 }
+#itemAttributeList {
+    cursor: pointer; 
+}
