@@ -91,6 +91,11 @@ export class MerchantItemComponent implements OnInit {
     this.ItemAttributeForm.controls['Discount'].setValue(itemAttribute.discount);
     console.log(this.editOutCity);
   }
+  UpdateItemAttribute() 
+  {
+    var a = this.ItemAttributeForm.controls['OutCityRate'].value;
+    alert(a);
+  }
   getitems() {
     this.itemcreationservice.GetItems().subscribe(r => this.item = r);
   }

@@ -18,7 +18,7 @@
           
           <!-- Create item attribute starts -->
           <div class="col-sm-4 col-md-4 col-lg-4 mx-auto border-right">
-              <form [formGroup]="ItemAttributeForm" (ngSubmit)="CreateItemAttribute()">
+              <form [formGroup]="ItemAttributeForm">
                   <div class="card-body">
                     <h5 class="card-title text-center">Item Type</h5>
                                                         
@@ -49,8 +49,8 @@
                         <input type="text"  class="form-control" formControlName="Discount" placeholder="Discount" >
                         </div>
 
-                        <button *ngIf="!isUpdate" class="btn  btn-primary btn float-right text-uppercase" type="submit">Submit</button>
-                        <button *ngIf="isUpdate" class="btn  btn-success btn float-right text-uppercase" type="submit">Update</button>
+                        <button *ngIf="!isUpdate" class="btn  btn-primary btn float-right text-uppercase" type="submit" (click)="CreateItemAttribute()">Submit</button>
+                        <button *ngIf="isUpdate" class="btn  btn-success btn float-right text-uppercase" type="submit" (click)="UpdateItemAttribute()" >Update</button>
                   </div>
               </form>
           </div> <!-- Create item attribute end -->
