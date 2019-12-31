@@ -41,8 +41,7 @@ export class MerchantItemComponent implements OnInit {
       OutCityRate: new FormControl(''),
       RegularRate: new FormControl(''),
       ConditionCharge: new FormControl(''),
-      BookingCharge: new FormControl(''),
-      Discount: new FormControl(''),
+      BookingCharge: new FormControl('')
     });
   }
   // Create Item attribute or type
@@ -88,7 +87,6 @@ export class MerchantItemComponent implements OnInit {
     this.ItemAttributeForm.controls['RegularRate'].setValue(itemAttribute.regularRate);
     this.ItemAttributeForm.controls['ConditionCharge'].setValue(itemAttribute.conditionCharge);
     this.ItemAttributeForm.controls['BookingCharge'].setValue(itemAttribute.bookingCharge);
-    this.ItemAttributeForm.controls['Discount'].setValue(itemAttribute.discount);
     console.log(this.editOutCity);
   }
   UpdateItemAttribute() 

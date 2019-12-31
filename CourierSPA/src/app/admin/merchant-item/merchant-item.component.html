@@ -45,10 +45,6 @@
                         <div class="form-group">
                           <input type="text"  class="form-control" formControlName="BookingCharge" placeholder="Booking Charge" >
                         </div>
-                        <div class="form-group">
-                        <input type="text"  class="form-control" formControlName="Discount" placeholder="Discount" >
-                        </div>
-
                         <button *ngIf="!isUpdate" class="btn  btn-primary btn float-right text-uppercase" type="submit" (click)="CreateItemAttribute()">Submit</button>
                         <button *ngIf="isUpdate" class="btn  btn-success btn float-right text-uppercase" type="submit" (click)="UpdateItemAttribute()" >Update</button>
                   </div>
