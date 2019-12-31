@@ -80,6 +80,40 @@ namespace CourierAPI.Controllers
             if (result == 0) return BadRequest("dont save");
             return Ok();
         }
+
+        [HttpPut("itemattribute/update/{id}")]
+        public async Task<IActionResult> UpdateItemAttribute(int id, ItemAttributeDTO itemAttribute) 
+        {
+            
+            var getItemAttribute = _unitOfWork.ItemAttributes.GetItemAttributeByID(id);
+            if(getItemAttribute == null) 
+                return BadRequest("this item Attribute does not exist");
+               
+            else{
+                getItemAttribute.ItemSize = itemAttribute.ItemSize;
+                getItemAttribute.InCityRate = itemAttribute.InCityRate;
+                getItemAttribute.OutCityRate = itemAttribute.OutCityRate;
+                getItemAttribute.RegularRate = itemAttribute.RegularRate;
+                getItemAttribute.ConditionCharge = itemAttribute.ConditionCharge;
+                getItemAttribute.BookingCharge = itemAttribute.BookingCharge;
+               // getItemAttribute.ItemId = itemAttribute.ItemId;
+
+                if(itemAttribute.MerchantId != null) {
+                    var merchant = await _unitOfWork.Merchants.GetMerchantDetailsAsync(itemAttribute.MerchantId);
+                    if(merchant == null) return BadRequest("Invalid merchant");
+                    getItemAttribute.MerchantIdentity = merchant.MerchantIdentity;
+                }
+                await _unitOfWork.ItemAttributes.UpdateItem(getItemAttribute);
+            }
+
+            var result = await _unitOfWork.CompleteAsync();
+            if (result == 0) return BadRequest("dont save");
+            return Ok("update done");
+            
+        }
+
+
+
         [HttpGet("itemattribute")]
         public async Task<IActionResult> GetItemAttributes([FromQuery]ItemAttributesFilter filter)
         {

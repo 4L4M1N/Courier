@@ -66,5 +66,17 @@ namespace CourierAPI.Infrastructure.Repositories
             var itemAttributes = await _context.ItemAttributes.Where(a => a.ItemId == itemId).ToListAsync();
             return itemAttributes;
         }
+
+        public async Task UpdateItem(ItemAttribute itemAttribute)
+        {
+            _context.ItemAttributes.Update(itemAttribute);
+        }
+
+        public  ItemAttribute GetItemAttributeByID(int id)
+        {
+            var result =  _context.ItemAttributes.Where(x => x.ItemAttributeId == id).FirstOrDefault();
+            return result;
+        }
+
     }
 }
