@@ -9,6 +9,7 @@ export interface Booking {
     totalAmount: number;
     discount: number;
     conditionCharge: number;
+    itemPrice: number;
     isConditionCharge: boolean;
     isOutCity: boolean;
     isInCity: boolean;
