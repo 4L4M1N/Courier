@@ -22,6 +22,7 @@ export class MerchantItemComponent implements OnInit {
   ItemAttributeForm: FormGroup;
   p: number = 1;
   editOutCity: any;
+  isUpdate = false;
   constructor(private itemcreationservice: ItemcreationService, private route: ActivatedRoute,
               private modalService: ModalService) { }
 
@@ -78,6 +79,7 @@ export class MerchantItemComponent implements OnInit {
     });
   }
   onTypeClick(itemAttribute) {
+    this.isUpdate =  true;
     console.log(itemAttribute);
     this.editOutCity = itemAttribute.outCityRate;
     this.ItemAttributeForm.controls['ItemSize'].setValue(itemAttribute.itemSize);
