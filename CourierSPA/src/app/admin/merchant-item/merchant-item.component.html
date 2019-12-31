@@ -49,7 +49,8 @@
                         <input type="text"  class="form-control" formControlName="Discount" placeholder="Discount" >
                         </div>
 
-                        <button  class="btn  btn-primary btn float-right text-uppercase" type="submit">Submit</button>
+                        <button *ngIf="!isUpdate" class="btn  btn-primary btn float-right text-uppercase" type="submit">Submit</button>
+                        <button *ngIf="isUpdate" class="btn  btn-success btn float-right text-uppercase" type="submit">Update</button>
                   </div>
               </form>
           </div> <!-- Create item attribute end -->
