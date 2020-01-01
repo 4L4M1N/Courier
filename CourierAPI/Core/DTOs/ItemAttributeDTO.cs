@@ -11,5 +11,6 @@ namespace CourierAPI.Core.DTOs
         public double Discount { get; set; }
         public int ItemId { get; set; }
         public string MerchantId { get; set; }
+        public int ItemAttributeId {get; set;}
     }
 }

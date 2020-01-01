@@ -4,3 +4,6 @@
 #itemAttributeList {
     cursor: pointer; 
 }
+.button-space {
+    margin-right: 5px;
+}

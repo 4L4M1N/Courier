@@ -81,11 +81,11 @@ namespace CourierAPI.Controllers
             return Ok();
         }
 
-        [HttpPut("itemattribute/update/{id}")]
-        public async Task<IActionResult> UpdateItemAttribute(int id, ItemAttributeDTO itemAttribute) 
+        [HttpPut("itemattribute/update")]
+        public async Task<IActionResult> UpdateItemAttribute(ItemAttributeDTO itemAttribute) 
         {
             
-            var getItemAttribute = _unitOfWork.ItemAttributes.GetItemAttributeByID(id);
+            var getItemAttribute = _unitOfWork.ItemAttributes.GetItemAttributeByID(itemAttribute.ItemAttributeId);
             if(getItemAttribute == null) 
                 return BadRequest("this item Attribute does not exist");
                
@@ -108,8 +108,7 @@ namespace CourierAPI.Controllers
 
             var result = await _unitOfWork.CompleteAsync();
             if (result == 0) return BadRequest("dont save");
-            return Ok("update done");
-            
+            return NoContent();
         }
 
 

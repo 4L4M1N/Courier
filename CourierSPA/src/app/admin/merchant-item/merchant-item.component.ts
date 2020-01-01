@@ -24,7 +24,7 @@ export class MerchantItemComponent implements OnInit {
   p: number = 1;
   editOutCity: any;
   ItemAttributeid: any;
-  isUpdate = false;
+  isModify = false;
   constructor(private itemcreationservice: ItemcreationService, private route: ActivatedRoute,
               private modalService: ModalService) { }
 
@@ -80,9 +80,10 @@ export class MerchantItemComponent implements OnInit {
     });
   }
   onTypeClick(itemAttribute) {
-    this.isUpdate =  true;
+    this.isModify =  true;
     console.log(itemAttribute);
     this.ItemAttributeid = itemAttribute.itemAttributeId;
+    console.log(this.ItemAttributeid);
     this.editOutCity = itemAttribute.outCityRate;
     this.ItemAttributeForm.controls['ItemSize'].setValue(itemAttribute.itemSize);
     this.ItemAttributeForm.controls['OutCityRate'].setValue(itemAttribute.outCityRate);
@@ -96,9 +97,10 @@ export class MerchantItemComponent implements OnInit {
     if (this.ItemAttributeForm.valid) {
       console.log(this.ItemAttributeForm.value);
       this.itemAttribute = Object.assign({}, this.ItemAttributeForm.value);
+      this.itemAttribute.itemAttributeId = this.ItemAttributeid;
       this.itemAttribute.merchantId = this.merchantId;
       console.log(this.itemAttribute);
-      this.itemcreationservice.UpdateItemAttribute( this.ItemAttributeid , this.itemAttribute).subscribe(() => {
+      this.itemcreationservice.UpdateItemAttribute(this.itemAttribute).subscribe(() => {
         console.log('ok');
         this.openInfoModal();
       }, error => {

@@ -3,9 +3,11 @@
       <div class="col-md-4">
         <div class="card shadow p-1 mb-2 bg-white rounded">
           <div class="card-img-top text-center border-bottom">
-              <img src="https://www.shohoz.com/v2/assets/img/shohoz.svg"  class="card-img-top" alt="...">
-              
-          </div>
+            <div style="height: 80px;">
+              <h4>Merchant Info</h4>
+            </div>
+             
+         </div>
 
           <div class="card-body">
               
@@ -46,8 +48,7 @@
           <div class="card-title" style="border-left: 5px solid #0080FF;font-weight:bold;">
             <h3 class="pl-1">Form</h3>
           </div>
-          <i class="fas fa-phone-alt" style="color: green;"></i> 017XXXXXXXX<br>
-          <i class="far fa-envelope" style="color: #0080FF;"></i> sohoz@gmail.com
+          
           <div class="text-right">
             <a class="text-align-right" [routerLink]="['/admin/booking/', merchantId]" routerLinkActive="router-link-active"> Form</a>
           </div>
@@ -74,8 +75,7 @@
           <div class="card-title" style="border-left: 5px solid #0080FF;font-weight:bold;">
             <h3 class="pl-1">Reports</h3>
           </div>
-          Total Booking: 25<br>
-          Pending: 32
+          
           <div class="text-right">
             <a class="text-align-right" [routerLink]="['/admin/merchant-info/', merchantId]"> Report</a>
           </div>
@@ -106,8 +106,7 @@
           <div class="card-title" style="border-left: 5px solid #0080FF;font-weight:bold;">
             <h3 class="pl-1">Item and Type</h3>
           </div>
-          Total Item: 25<br>
-          Pending: 2
+         
           <div class="text-right">
             <a class="text-align-right" [routerLink]="['/admin/merchant-item/', merchantId]"> Create</a>
           </div>
