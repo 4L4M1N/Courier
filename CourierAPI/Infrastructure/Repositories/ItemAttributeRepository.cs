@@ -78,5 +78,12 @@ namespace CourierAPI.Infrastructure.Repositories
             return result;
         }
 
+        public async Task DeleteItem(int id)
+        {
+            var findItemAttribute = await _context.ItemAttributes.FindAsync(id);
+            _context.ItemAttributes.Remove(findItemAttribute);
+        }
+
+
     }
 }

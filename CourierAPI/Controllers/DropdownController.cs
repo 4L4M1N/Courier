@@ -112,6 +112,25 @@ namespace CourierAPI.Controllers
         }
 
 
+        [HttpDelete("itemattribute/delete/{id}/{merchantId}")]
+        public async Task<IActionResult> DeleteItemAttribute(int id, string merchantId) {
+            var isMerchantExist = await _unitOfWork.Merchants.GetMerchantDetailsAsync(merchantId);
+            
+            if (isMerchantExist == null) return BadRequest("Merchant not Found");
+ 
+            var GetItemAttributeByID = _unitOfWork.ItemAttributes.GetItemAttributeByID(id);
+            if(GetItemAttributeByID == null) 
+                return BadRequest("this item Attribute does not exist");
+            
+            await _unitOfWork.ItemAttributes.DeleteItem(GetItemAttributeByID.ItemAttributeId);
+ 
+            var result = await _unitOfWork.CompleteAsync();
+            if (result == 0) return BadRequest("dont save");
+            return NoContent();
+        }
+
+
+
 
         [HttpGet("itemattribute")]
         public async Task<IActionResult> GetItemAttributes([FromQuery]ItemAttributesFilter filter)
