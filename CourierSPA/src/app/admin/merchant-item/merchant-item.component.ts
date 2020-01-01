@@ -102,7 +102,7 @@ export class MerchantItemComponent implements OnInit {
       console.log(this.itemAttribute);
       this.itemcreationservice.UpdateItemAttribute(this.itemAttribute).subscribe(() => {
         console.log('ok');
-        this.openInfoModal();
+        this.openUpdateModal();
       }, error => {
         console.log('error');
         this.openErrorModal();
@@ -114,6 +114,9 @@ export class MerchantItemComponent implements OnInit {
   }
   openInfoModal() {
     this.modalService.openInfoModal('Added');
+  }
+  openUpdateModal() {
+    this.modalService.openInfoModal('Updated');
   }
   openErrorModal() {
     this.modalService.openErrorModal('Error');
