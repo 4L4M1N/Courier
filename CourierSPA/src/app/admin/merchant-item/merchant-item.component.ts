@@ -1,9 +1,9 @@
+import { ItemAttribute } from './../../models/ItemAttribute';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ItemcreationService } from 'src/app/services/itemcreation.service';
 import { ModalService } from 'src/app/services/Dialog/modal.service';
 import { ActivatedRoute } from '@angular/router';
-import { ItemAttribute } from 'src/app/models/ItemAttribute';
 import { Iitem } from 'src/app/models/Iitem';
 
 @Component({
@@ -12,7 +12,8 @@ import { Iitem } from 'src/app/models/Iitem';
   styleUrls: ['./merchant-item.component.css']
 })
 export class MerchantItemComponent implements OnInit {
-
+  
+ 
   item: Iitem[];
   merchantId: any;
   itemAttribute: ItemAttribute;
@@ -22,6 +23,7 @@ export class MerchantItemComponent implements OnInit {
   ItemAttributeForm: FormGroup;
   p: number = 1;
   editOutCity: any;
+  ItemAttributeid: any;
   isUpdate = false;
   constructor(private itemcreationservice: ItemcreationService, private route: ActivatedRoute,
               private modalService: ModalService) { }
@@ -80,6 +82,7 @@ export class MerchantItemComponent implements OnInit {
   onTypeClick(itemAttribute) {
     this.isUpdate =  true;
     console.log(itemAttribute);
+    this.ItemAttributeid = itemAttribute.itemAttributeId;
     this.editOutCity = itemAttribute.outCityRate;
     this.ItemAttributeForm.controls['ItemSize'].setValue(itemAttribute.itemSize);
     this.ItemAttributeForm.controls['OutCityRate'].setValue(itemAttribute.outCityRate);
@@ -89,10 +92,20 @@ export class MerchantItemComponent implements OnInit {
     this.ItemAttributeForm.controls['BookingCharge'].setValue(itemAttribute.bookingCharge);
     console.log(this.editOutCity);
   }
-  UpdateItemAttribute() 
-  {
-    var a = this.ItemAttributeForm.controls['OutCityRate'].value;
-    alert(a);
+  UpdateItemAttribute() {
+    if (this.ItemAttributeForm.valid) {
+      console.log(this.ItemAttributeForm.value);
+      this.itemAttribute = Object.assign({}, this.ItemAttributeForm.value);
+      this.itemAttribute.merchantId = this.merchantId;
+      console.log(this.itemAttribute);
+      this.itemcreationservice.UpdateItemAttribute( this.ItemAttributeid , this.itemAttribute).subscribe(() => {
+        console.log('ok');
+        this.openInfoModal();
+      }, error => {
+        console.log('error');
+        this.openErrorModal();
+      });
+    }
   }
   getitems() {
     this.itemcreationservice.GetItems().subscribe(r => this.item = r);
