@@ -45,9 +45,13 @@
                         <div class="form-group">
                           <input type="text"  class="form-control" formControlName="BookingCharge" placeholder="Booking Charge" >
                         </div>
-                        <button *ngIf="!isUpdate" class="btn  btn-primary btn float-right text-uppercase" type="submit" (click)="CreateItemAttribute()">Submit</button>
-                        <button *ngIf="isUpdate" class="btn  btn-success btn float-right text-uppercase" type="submit" (click)="UpdateItemAttribute()" >Update</button>
-                  </div>
+                        <div class="btn-toolbar">
+                          <button *ngIf="!isModify" class="btn  btn-primary btn float-right text-uppercase" type="submit" (click)="CreateItemAttribute()">Submit</button>
+                          
+                          <button *ngIf="isModify" class="btn  btn-success btn float-right text-uppercase button-space" type="submit" (click)="UpdateItemAttribute()" >Update</button>
+                          <button *ngIf="isModify"  class="btn  btn-danger btn float-right text-uppercase button-space" type="submit" (click)="UpdateItemAttribute()" >Delete</button>
+                        </div>
+                      </div>
               </form>
           </div> <!-- Create item attribute end -->
 
@@ -60,11 +64,9 @@
                 <div class="card-body shadow-sm p-3 mb-2 bg-white rounded border border-info" 
                 *ngFor="let i of itemAttributesOfAnItem | async | paginate: { itemsPerPage: 4, currentPage: p }" 
                 (click)="onTypeClick(i)" id="itemAttributeList">
-                    <h5 class="card-title text-center">Item Name:</h5>
-                    Size: {{i.itemSize}}
-                    {{i.bookingCharge}}, {{i.outCityRate}}
-                    <br>
-                    
+                    <h5 class="card-title text-center">Type: {{i.itemSize}}</h5>
+                   Booking Charge: {{i.bookingCharge}}, In City Rate: {{i.inCityRate}} 
+                    Condition Charge: {{i.conditionCharge}}
                 </div>
                 <pagination-controls (pageChange)="p = $event"></pagination-controls>
                 <div >

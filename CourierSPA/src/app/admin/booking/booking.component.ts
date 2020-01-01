@@ -140,7 +140,6 @@ export class BookingComponent implements OnInit {
     }
   }
 
-
   onSelect(event) {
     let value = event.target.value;
     let itemId = value;
@@ -149,6 +148,7 @@ export class BookingComponent implements OnInit {
       this.listItemAttributes == null;
     } else {
       this.itemcreationservice.GetItemAttributesOfAnItemMerchant(itemId,this.merchantId).subscribe(data => {
+        
         this.listItemAttributes = data;
       });
     }
@@ -219,9 +219,7 @@ export class BookingComponent implements OnInit {
     if (this.isConditionChargeApply) {
       this.placeBooking.isConditionCharge = true;
       this.placeBooking.conditionCharge = this.conditionCharge;
-      this.placeBooking.totalAmount = this.total + ((this.total * this.conditionCharge) / 100);
       console.log(this.conditionCharge);
-
     } else {
       this.placeBooking.isConditionCharge = false;
       this.placeBooking.conditionCharge = 0;
@@ -268,7 +266,7 @@ export class BookingComponent implements OnInit {
       pageSize: 'A4',
       content: [
         {
-          text: 'Courier',
+          text: 'Rapid Courier',
           bold: true,
           fontSize: 20,
           alignment: 'center',
