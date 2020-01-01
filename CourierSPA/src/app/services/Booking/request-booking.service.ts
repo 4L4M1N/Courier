@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RequestBookingService {
-  baseURL = 'http://localhost:5000/api/requestbooking/';
+  baseURL = 'http://amin601-001-site1.gtempurl.com/api/requestbooking/';
 constructor(private http: HttpClient) { }
 Create(requestBooking: RequestBooking) {
   return this.http.post(this.baseURL + 'add', requestBooking);

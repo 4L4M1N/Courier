@@ -57,7 +57,7 @@ namespace CourierAPI
                  options => options.SerializerSettings.ReferenceLoopHandling =            
                 Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
-            //services.BuildServiceProvider().GetService<DataContext>().Database.Migrate();
+            services.BuildServiceProvider().GetService<DataContext>().Database.Migrate();
             services.AddCors();
             
             // Automapper Configuration
@@ -108,8 +108,8 @@ namespace CourierAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            //app.UseCors(x => x.WithOrigins("http://binary-geek.com").AllowAnyMethod().AllowAnyHeader());
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseCors(x => x.WithOrigins("http://binary-geek.com").AllowAnyMethod().AllowAnyHeader());
+            //app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseHttpsRedirection();
 
             app.UseRouting();
