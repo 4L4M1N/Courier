@@ -26,6 +26,9 @@ UpdateItemAttribute(sendUpdatedItemAttribute: ItemAttribute) {
   return this.http.put(this.baseURL + 'itemattribute/update' , sendUpdatedItemAttribute);
 }
 
+deleteItemAttribute(itemAttributeId, merchantId) {
+  return this.http.delete(this.baseURL + 'itemattribute/delete/' + itemAttributeId + '/' + merchantId);
+}
 
 GetAllItemAttribute(): Observable<ItemAttribute[]> {
   return this.http.get<ItemAttribute[]>(this.baseURL + 'itemattribute');
