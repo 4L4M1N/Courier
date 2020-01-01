@@ -1,0 +1,9 @@
+.card-body {
+    padding: 0px;
+}
+#itemAttributeList {
+    cursor: pointer; 
+}
+.button-space {
+    margin-right: 5px;
+}

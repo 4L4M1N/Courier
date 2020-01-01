@@ -17,6 +17,7 @@ namespace CourierAPI.Core.Models
 
         public double TotalAmmount { get; set; }
         public double Discount { get; set; }
+        public double ItemPrice { get; set;}
         public DateTime BookingDate { get; set; }
         public DateTime DeliveredDate { get; set; }
         public string Status { get; set; }

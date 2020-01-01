@@ -12,6 +12,9 @@ import { ItemcreationComponent } from './admin/itemcreation/itemcreation.compone
 import { AdminLayoutComponent } from './_layout/admin-layout/admin-layout.component';
 import { DeliveryManAddComponent } from './admin/deliveryManAdd/deliveryManAdd.component';
 import { ManageBookingComponent } from './admin/manage-booking/manage-booking.component';
+import { MerchantItemComponent } from './admin/merchant-item/merchant-item.component';
+import { RequestBookingComponent } from './request-booking/request-booking.component';
+import { ManageRequestedBookingComponent } from './admin/manage-requested-booking/manage-requested-booking.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -27,13 +30,16 @@ export const appRoutes: Routes = [
                 { path: 'divzonecreate', component: DivisionzonecreationComponent },
                 { path: 'itemcreate', component: ItemcreationComponent},
                 { path: 'managebooking', component: ManageBookingComponent},
-                { path: 'merchant-agreement', component: MerchantAgreementComponent},
+                { path: 'manage-requested-booking', component: ManageRequestedBookingComponent},
+                { path: 'merchant-agreement/:merchantId', component: MerchantAgreementComponent},
+                { path: 'merchant-item/:merchantId', component: MerchantItemComponent},
                 {path: 'merchant-agreement/edit', component: MerchantEditComponent}
             ]
             }
         ],
     },
     { path: 'login', component: LoginComponent },
+    { path: 'requestbooking', component: RequestBookingComponent },
     { path: '**', redirectTo: 'notes', pathMatch: 'full'},
     { path: 'admin', redirectTo: 'admin-dashboard', pathMatch: 'full'},
 ];

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CourierAPI.Core.DTOs;
+using CourierAPI.Core.Filters;
 using CourierAPI.Core.IRepositories;
 using CourierAPI.Core.Models;
 using CourierAPI.Infrastructure.Data;
@@ -45,10 +46,18 @@ namespace CourierAPI.Infrastructure.Repositories
             return itemAttribute;
         }
 
-        public async Task<IEnumerable<ItemAttribute>> GetItemAttributes()
+        public async Task<IEnumerable<ItemAttribute>> GetItemAttributes(ItemAttributesFilter filter)
         {
-            var items = await _context.ItemAttributes.ToListAsync();
-            return items;
+            var itemAttributes =  _context.ItemAttributes.AsQueryable();
+            if(filter.ItemId.HasValue)
+            {
+                itemAttributes = itemAttributes.Where(at => at.ItemId == filter.ItemId);
+            }
+            if(filter.MerchantIdentity != null)
+            {
+                itemAttributes = itemAttributes.Where(at => at.MerchantIdentity == filter.MerchantIdentity);
+            }
+            return await itemAttributes.ToListAsync();
         }
 
         //Get an items all attribute
@@ -57,5 +66,17 @@ namespace CourierAPI.Infrastructure.Repositories
             var itemAttributes = await _context.ItemAttributes.Where(a => a.ItemId == itemId).ToListAsync();
             return itemAttributes;
         }
+
+        public async Task UpdateItem(ItemAttribute itemAttribute)
+        {
+            _context.ItemAttributes.Update(itemAttribute);
+        }
+
+        public  ItemAttribute GetItemAttributeByID(int id)
+        {
+            var result =  _context.ItemAttributes.Where(x => x.ItemAttributeId == id).FirstOrDefault();
+            return result;
+        }
+
     }
 }

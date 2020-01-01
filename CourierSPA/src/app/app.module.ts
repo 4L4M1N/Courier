@@ -35,6 +35,10 @@ import { DeliveryAddressService } from './services/deliveryAddress.service';
 import { ItemcreationService } from './services/itemcreation.service';
 import { ManageBookingComponent } from './admin/manage-booking/manage-booking.component';
 import { AssignDelivManComponent } from './admin/assignDelivMan/assignDelivMan.component';
+import { MerchantItemComponent } from './admin/merchant-item/merchant-item.component';
+import { RequestBookingComponent } from './request-booking/request-booking.component';
+import { ManageRequestedBookingComponent } from './admin/manage-requested-booking/manage-requested-booking.component';
+
 
 
 
@@ -48,6 +52,7 @@ import { AssignDelivManComponent } from './admin/assignDelivMan/assignDelivMan.c
       MerchantInfoComponent,
       MerchantAgreementComponent,
       MerchantEditComponent,
+      MerchantItemComponent,
       LoginComponent,
       RegistrationComponent,
       MerchentaddComponent,
@@ -59,7 +64,9 @@ import { AssignDelivManComponent } from './admin/assignDelivMan/assignDelivMan.c
       AlertComponent,
       ConfirmComponent,
       AssignDelivManComponent,
-      DivisionzonecreationComponent
+      DivisionzonecreationComponent,
+      RequestBookingComponent,
+      ManageRequestedBookingComponent
    ],
    imports: [
       BrowserModule,

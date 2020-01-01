@@ -58,6 +58,7 @@ namespace CourierAPI.Controllers
                 BookingDate = DateTime.Now,
                 TotalAmmount = booking.TotalAmount,
                 Discount = booking.Discount,
+                ItemPrice = booking.ItemPrice
 
             };
             var bookingId = placeBooking.Id;

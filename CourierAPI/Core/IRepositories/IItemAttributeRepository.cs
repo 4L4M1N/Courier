@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CourierAPI.Core.DTOs;
+using CourierAPI.Core.Filters;
 using CourierAPI.Core.Models;
 
 namespace CourierAPI.Core.IRepositories
@@ -8,9 +9,11 @@ namespace CourierAPI.Core.IRepositories
     public interface IItemAttributeRepository
     {
         Task AddItem(ItemAttribute itemAttribute);
-        Task <IEnumerable<ItemAttribute>> GetItemAttributes();
+        Task UpdateItem(ItemAttribute itemAttribute);
+        Task <IEnumerable<ItemAttribute>> GetItemAttributes(ItemAttributesFilter filter);
         int CheckItemAttribute(ItemAttributeDTO itemAttribute);
         Task <IEnumerable<ItemAttribute>> GetItemAttributesofAItem(int itemId);
         Task <ItemAttribute> GetItemAttributeDetails(int itemAttributeId);
+        ItemAttribute GetItemAttributeByID(int id);
     }
 }

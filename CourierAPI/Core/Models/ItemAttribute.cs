@@ -15,6 +15,8 @@ namespace CourierAPI.Core.Models
         public int ItemId { get; set; }
         [ForeignKey("ItemId")]
         public Item Item { get; set; }
-        
+
+        public string MerchantIdentity { get; set; }
+       
     }
 }

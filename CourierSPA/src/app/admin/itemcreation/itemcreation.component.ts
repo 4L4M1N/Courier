@@ -19,7 +19,7 @@ export class ItemcreationComponent implements OnInit {
   createItemFrom: FormGroup;
   ItemAttributeForm: FormGroup;
   p: number = 1;
-  constructor(private itemcreationservice: ItemcreationService,private modalService: ModalService) { }
+  constructor(private itemcreationservice: ItemcreationService, private modalService: ModalService) { }
 
   ngOnInit() {
     this.getitems();
@@ -86,7 +86,7 @@ export class ItemcreationComponent implements OnInit {
     }, error => {
       console.log('error');
     });
-    }
+  }
     openInfoModal() {
       this.modalService.openInfoModal('Added');
     }

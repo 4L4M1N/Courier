@@ -1,6 +1,7 @@
 using System.Text.Json;
 using System.Threading.Tasks;
 using CourierAPI.Core.DTOs;
+using CourierAPI.Core.Filters;
 using CourierAPI.Core.IRepositories;
 using CourierAPI.Core.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -67,16 +68,59 @@ namespace CourierAPI.Controllers
                     BookingCharge = itemAttribute.BookingCharge,
                     ItemId = itemAttribute.ItemId
                 };
+                if(itemAttribute.MerchantId != null) {
+                    var merchant = await _unitOfWork.Merchants.GetMerchantDetailsAsync(itemAttribute.MerchantId);
+                    if(merchant == null) return BadRequest("Invalid merchant");
+                    itemAttributeToADD.MerchantIdentity = merchant.MerchantIdentity;
+                }
+                
                 await _unitOfWork.ItemAttributes.AddItem(itemAttributeToADD);
             }
             var result = await _unitOfWork.CompleteAsync();
             if (result == 0) return BadRequest("dont save");
             return Ok();
         }
-        [HttpGet("itemattribute")]
-        public async Task<IActionResult> GetItemAttributes()
+
+        [HttpPut("itemattribute/update")]
+        public async Task<IActionResult> UpdateItemAttribute(ItemAttributeDTO itemAttribute) 
         {
-            var result = await _unitOfWork.ItemAttributes.GetItemAttributes();
+            
+            var getItemAttribute = _unitOfWork.ItemAttributes.GetItemAttributeByID(itemAttribute.ItemAttributeId);
+            if(getItemAttribute == null) 
+                return BadRequest("this item Attribute does not exist");
+               
+            else{
+                getItemAttribute.ItemSize = itemAttribute.ItemSize;
+                getItemAttribute.InCityRate = itemAttribute.InCityRate;
+                getItemAttribute.OutCityRate = itemAttribute.OutCityRate;
+                getItemAttribute.RegularRate = itemAttribute.RegularRate;
+                getItemAttribute.ConditionCharge = itemAttribute.ConditionCharge;
+                getItemAttribute.BookingCharge = itemAttribute.BookingCharge;
+               // getItemAttribute.ItemId = itemAttribute.ItemId;
+
+                if(itemAttribute.MerchantId != null) {
+                    var merchant = await _unitOfWork.Merchants.GetMerchantDetailsAsync(itemAttribute.MerchantId);
+                    if(merchant == null) return BadRequest("Invalid merchant");
+                    getItemAttribute.MerchantIdentity = merchant.MerchantIdentity;
+                }
+                await _unitOfWork.ItemAttributes.UpdateItem(getItemAttribute);
+            }
+
+            var result = await _unitOfWork.CompleteAsync();
+            if (result == 0) return BadRequest("dont save");
+            return NoContent();
+        }
+
+
+
+        [HttpGet("itemattribute")]
+        public async Task<IActionResult> GetItemAttributes([FromQuery]ItemAttributesFilter filter)
+        {
+            if(filter.MerchantIdentity != null && filter.ItemId != null) {
+            var merchant = await _unitOfWork.Merchants.GetMerchantDetailsAsync(filter.MerchantIdentity);
+            filter.MerchantIdentity = merchant.MerchantIdentity;
+            }
+            var result = await _unitOfWork.ItemAttributes.GetItemAttributes(filter);
             return Ok(result);
         }
         [HttpGet("itemattributedetails/{itemAttributeId}")]

@@ -53,6 +53,9 @@ namespace CourierAPI.Infrastructure.Migrations
                     b.Property<double>("Discount")
                         .HasColumnType("float");
 
+                    b.Property<double>("ItemPrice")
+                        .HasColumnType("float");
+
                     b.Property<string>("MerchantId")
                         .HasColumnType("nvarchar(450)");
 
@@ -104,6 +107,53 @@ namespace CourierAPI.Infrastructure.Migrations
                     b.HasIndex("BookingId");
 
                     b.ToTable("BookingItems");
+                });
+
+            modelBuilder.Entity("CourierAPI.Core.Models.Branch", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CourierId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourierId");
+
+                    b.ToTable("Branches");
+                });
+
+            modelBuilder.Entity("CourierAPI.Core.Models.CommonInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TotalBranch")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CommonInfos");
                 });
 
             modelBuilder.Entity("CourierAPI.Core.Models.DeliveryMan", b =>
@@ -187,6 +237,9 @@ namespace CourierAPI.Infrastructure.Migrations
                     b.Property<string>("ItemSize")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("MerchantIdentity")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("OutCityRate")
                         .HasColumnType("float");
 
@@ -264,6 +317,36 @@ namespace CourierAPI.Infrastructure.Migrations
                     b.ToTable("Receivers");
                 });
 
+            modelBuilder.Entity("CourierAPI.Core.Models.RequestBooking", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("BookingItems")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsAccepted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RequestBookings");
+                });
+
             modelBuilder.Entity("CourierAPI.Core.Models.Zone", b =>
                 {
                     b.Property<int>("ZoneId")
@@ -289,6 +372,9 @@ namespace CourierAPI.Infrastructure.Migrations
                 {
                     b.Property<DateTime>("BookingDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("DelivManId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DelivManName")
                         .HasColumnType("nvarchar(max)");
@@ -540,6 +626,15 @@ namespace CourierAPI.Infrastructure.Migrations
                     b.HasOne("CourierAPI.Core.Models.Booking", "Booking")
                         .WithMany()
                         .HasForeignKey("BookingId");
+                });
+
+            modelBuilder.Entity("CourierAPI.Core.Models.Branch", b =>
+                {
+                    b.HasOne("CourierAPI.Core.Models.CommonInfo", "CommonInfo")
+                        .WithMany()
+                        .HasForeignKey("CourierId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("CourierAPI.Core.Models.ItemAttribute", b =>

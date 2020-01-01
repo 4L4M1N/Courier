@@ -37,6 +37,7 @@ export class BookingComponent implements OnInit {
   total = 0;
   tempTotal = 0;
   discount = 0;
+  itemPrice = 0;
   conditionCharge = 0;
   merchantInfo: any;
   merchantId: any;
@@ -62,7 +63,8 @@ export class BookingComponent implements OnInit {
     isInCity: false,
     conditionCharge: 0,
     isOutCity: false,
-    itemAttributeId: 0
+    itemAttributeId: 0,
+    itemPrice: 0
   };
 
   // tempItemAttribute: ItemAttribute; // store itemAttributes to table
@@ -138,7 +140,6 @@ export class BookingComponent implements OnInit {
     }
   }
 
-
   onSelect(event) {
     let value = event.target.value;
     let itemId = value;
@@ -146,7 +147,8 @@ export class BookingComponent implements OnInit {
     if (itemId === 0) {
       this.listItemAttributes == null;
     } else {
-      this.itemcreationservice.GetItemAttributesOfAnItem(itemId).subscribe(data => {
+      this.itemcreationservice.GetItemAttributesOfAnItemMerchant(itemId,this.merchantId).subscribe(data => {
+        
         this.listItemAttributes = data;
       });
     }
@@ -212,10 +214,12 @@ export class BookingComponent implements OnInit {
     this.placeBooking.itemAttributeId = this.booking.controls['attributeId'].value;
     this.placeBooking.discount = this.discountAmmount;
     this.placeBooking.totalAmount = this.total;
+    this.placeBooking.itemPrice = this.itemPrice;
     // Condition Charge
     if (this.isConditionChargeApply) {
       this.placeBooking.isConditionCharge = true;
       this.placeBooking.conditionCharge = this.conditionCharge;
+      console.log(this.conditionCharge);
     } else {
       this.placeBooking.isConditionCharge = false;
       this.placeBooking.conditionCharge = 0;
@@ -262,7 +266,7 @@ export class BookingComponent implements OnInit {
       pageSize: 'A4',
       content: [
         {
-          text: 'Courier',
+          text: 'Rapid Courier',
           bold: true,
           fontSize: 20,
           alignment: 'center',
