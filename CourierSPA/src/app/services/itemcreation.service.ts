@@ -21,6 +21,11 @@ CreateItemAttribute(sendItemAttribute: ItemAttribute) {
   return this.http.post(this.baseURL + 'itemattribute/create', sendItemAttribute);
 }
 
+UpdateItemAttribute(id: number, sendItemAttribute: ItemAttribute) {
+  console.log(sendItemAttribute);
+  return this.http.put(this.baseURL + 'itemattribute/update/' + id , sendItemAttribute);
+}
+
 
 GetAllItemAttribute(): Observable<ItemAttribute[]> {
   return this.http.get<ItemAttribute[]>(this.baseURL + 'itemattribute');
