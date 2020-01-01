@@ -8,7 +8,7 @@ import { BookingView } from 'src/app/models/View/bookingView';
   providedIn: 'root'
 })
 export class BookingService {
-  baseURL = 'http://amin601-001-site1.gtempurl.com/api/booking/';
+  baseURL = 'http://localhost:5000/api/booking/';
 
 constructor(private http: HttpClient) { }
 
