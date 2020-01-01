@@ -10,6 +10,7 @@ namespace CourierAPI.Core.IRepositories
     {
         Task AddItem(ItemAttribute itemAttribute);
         Task UpdateItem(ItemAttribute itemAttribute);
+        Task DeleteItem(int id);
         Task <IEnumerable<ItemAttribute>> GetItemAttributes(ItemAttributesFilter filter);
         int CheckItemAttribute(ItemAttributeDTO itemAttribute);
         Task <IEnumerable<ItemAttribute>> GetItemAttributesofAItem(int itemId);
