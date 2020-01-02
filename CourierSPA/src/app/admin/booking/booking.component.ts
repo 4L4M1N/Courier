@@ -127,11 +127,11 @@ export class BookingComponent implements OnInit {
   onSelectDivision(event) {
     this.booking.controls['itemid'].setValue('');
     this.booking.controls['attributeId'].setValue('');
-    this.itemAttributeDetails.bookingCharge = 0;
-    this.itemAttributeDetails.conditionCharge = 0;
-    this.itemAttributeDetails.inCityRate = 0;
-    this.itemAttributeDetails.outCityRate = 0;
-    this.itemAttributeDetails.itemSize = '';
+    // this.itemAttributeDetails.bookingCharge = 0;
+    // this.itemAttributeDetails.conditionCharge = 0;
+    // this.itemAttributeDetails.inCityRate = 0;
+    // this.itemAttributeDetails.outCityRate = 0;
+    // this.itemAttributeDetails.itemSize = '';
     this.itemPrice = 0;
     
     let divisionName = event.target['options']
