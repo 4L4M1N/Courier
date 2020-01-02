@@ -39,6 +39,7 @@ export class BookingComponent implements OnInit {
   discount = 0;
   itemPrice = 0;
   conditionCharge = 0;
+  conditionChargeTemp = 0;
   merchantInfo: any;
   merchantId: any;
   isConditionChargeApply = false;    // Condition Charge
@@ -101,7 +102,10 @@ export class BookingComponent implements OnInit {
       zoneid: new FormControl('', Validators.required),
       itemid: new FormControl('', Validators.required),
       attributeId: new FormControl('', Validators.required),
-
+      size: new FormControl(''),
+      cityrate: new FormControl(''),
+      outcityrate: new FormControl(''),
+      bcharge: new FormControl('')
     });
     // Item Form
     this.addItemAttribute = new FormGroup({
@@ -117,15 +121,29 @@ export class BookingComponent implements OnInit {
     .subscribe(data => {
       this.merchantInfo = data;
       console.log(this.merchantInfo);
-      
     });
   }
   // division dropdown populate
   onSelectDivision(event) {
+    this.booking.controls['itemid'].setValue('');
+    this.booking.controls['attributeId'].setValue('');
+    this.itemAttributeDetails.bookingCharge = 0;
+    this.itemAttributeDetails.conditionCharge = 0;
+    this.itemAttributeDetails.inCityRate = 0;
+    this.itemAttributeDetails.outCityRate = 0;
+    this.itemAttributeDetails.itemSize = '';
+    this.itemPrice = 0;
+    
     let divisionName = event.target['options']
                       [event.target['options'].selectedIndex].text;
+                      console.log(divisionName);
     if(divisionName === 'Dhaka') {
       this.isInCity = true;
+      console.log(this.isInCity);
+    } else {
+      
+      this.isInCity = false;
+      console.log(this.isInCity);
     }
     console.log(divisionName);
     let value = event.target.value;
@@ -162,7 +180,18 @@ export class BookingComponent implements OnInit {
     } else {
       this.itemcreationservice.GetItemAttributeDetails(itemAttributeId).subscribe(data => {
         this.itemAttributeDetails = data;
-        this.total = this.total + this.itemAttributeDetails['inCityRate'] + this.itemAttributeDetails['bookingCharge'];
+        this.conditionChargeTemp = this.itemAttributeDetails['conditionCharge'];
+        console.log(this.conditionCharge);
+         this.total = 0;
+         this.isConditionChargeApply = false;
+         this.itemPrice = 0;
+        if (this.isInCity) {
+          this.total = this.total + this.itemAttributeDetails['inCityRate'] + this.itemAttributeDetails['bookingCharge'];
+         } else {
+          this.total = this.total + this.itemAttributeDetails['outCityRate'] + this.itemAttributeDetails['bookingCharge'];
+         }
+        
+        this.tempTotal = this.total;
         // this.tempTotal = this.total + this.itemAttributeDetails['inCityRate'] + this.itemAttributeDetails['bookingCharge'];
         console.log(this.total);
       })
@@ -174,6 +203,27 @@ export class BookingComponent implements OnInit {
     console.log(this.total);
     this.total = this.total - (+searchValue);
     console.log(this.total);
+  }
+  onItemPriceChange(itemPrice): void {
+    this.conditionCharge = 0;
+    this.itemPrice = itemPrice;
+    this.conditionCharge =  (this.itemPrice * this.conditionChargeTemp) / 100;
+    if(this.isConditionChargeApply == true) {
+      this.total = 0;
+      this.total = this.tempTotal + this.conditionCharge;
+    }
+    
+  }
+  conditionChargeChange(isChanged:any) {
+
+    if(isChanged.checked && this.conditionCharge !== 0 && this.itemPrice !== 0) 
+    {
+      this.total = 0;
+      this.total = this.tempTotal + this.conditionCharge;
+    } else {
+      this.total = this.tempTotal;
+    }
+    console.log(isChanged.checked);
   }
 
   get addItemAttributeForm() { return this.addItemAttribute.controls; }

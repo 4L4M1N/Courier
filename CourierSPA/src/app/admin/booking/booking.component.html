@@ -119,9 +119,9 @@
 
         <div class="form-group">
           <label>Size</label>
-          <input type="text" class="form-control" placeholder="{{itemAttributeDetails?.itemSize}}" readonly>
+          <input type="text" class="form-control"  placeholder="{{itemAttributeDetails?.itemSize}}" readonly>
         </div>
-        <div class="form-group">
+        <div *ngIf="isInCity"  class="form-group">
           <label>In City Rate </label>
           <input type="text" class="form-control" placeholder="{{itemAttributeDetails?.inCityRate}}" readonly>
         </div>
@@ -135,16 +135,21 @@
         </div>
         <div class="form-group">
           <label>Item Price</label>
-          <input type="text" class="form-control" [(ngModel)]="itemPrice" [ngModelOptions]="{standalone: true}">
+          <input type="text" class="form-control" [(ngModel)]="itemPrice" 
+          [ngModelOptions]="{standalone: true}"
+          (input)="onItemPriceChange($event.target.value)">
         </div>
-        <div *ngIf="isConditionChargeApply" class="form-group">
-          <label>Condition Charge Percentage % </label>
-          <input type="text" class="form-control" [(ngModel)]="conditionCharge"
-           [ngModelOptions]="{standalone: true}" placeholder="{{itemAttributeDetails?.conditionCharge}}"
-           
+        <div class="form-group">
+          <label>Condition Charge Percentage {{itemAttributeDetails?.conditionCharge}}% </label>
+          <input type="text" class="form-control" 
+          [(ngModel)]="conditionCharge"
+           value="{{conditionCharge}}"
+           [ngModelOptions]="{standalone: true}"
             readonly>
         </div>
-        <mat-checkbox [(ngModel)]="isConditionChargeApply" class="example-margin" [ngModelOptions]="{standalone: true}">
+        <mat-checkbox [(ngModel)]="isConditionChargeApply" class="example-margin"
+         [ngModelOptions]="{standalone: true}"
+         (change)="conditionChargeChange($event)">
           <label>Apply Condition Charge </label>
         </mat-checkbox>
         <!-- <div class="form-group">
