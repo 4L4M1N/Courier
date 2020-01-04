@@ -42,6 +42,8 @@ export class BookingComponent implements OnInit {
   itemPrice:number;
   conditionCharge: number;
   conditionChargeTemp: number;
+  courierBill: number;
+  merchantBill: number;
   merchantInfo: any;
   merchantId: any;
   isAddWithMainBill = false; // Add with main Bill
@@ -206,15 +208,23 @@ export class BookingComponent implements OnInit {
     this.conditionCharge = 0;
     this.total = 0;
     this.payableAmount = 0;
+    this.courierBill = 0;
+    this.merchantBill = 0;
     this.itemPrice = parseFloat(itemPrice);
     if (this.isInCity) {
       this.bookingAndDelivCharge = (this.itemAttributeDetails['inCityRate'] + this.itemAttributeDetails['bookingCharge']);
       this.total = this.total + (this.itemAttributeDetails['inCityRate'] + this.itemAttributeDetails['bookingCharge']);
       this.payableAmount = this.total;
+      this.courierBill = this.bookingAndDelivCharge;
+      this.merchantBill = this.itemPrice;
+      console.log(this.merchantBill);
     } else {
       this.bookingAndDelivCharge = this.itemAttributeDetails['outCityRate'] + this.itemAttributeDetails['bookingCharge'];
       this.total = this.total + this.itemAttributeDetails['outCityRate'] + this.itemAttributeDetails['bookingCharge'];
       this.payableAmount = this.total;
+      this.courierBill = this.bookingAndDelivCharge;
+      this.merchantBill = this.itemPrice;
+      console.log(this.merchantBill);
     }
     
     console.log(this.total);
@@ -228,51 +238,59 @@ export class BookingComponent implements OnInit {
         this.bookingAndDelivCharge = (this.itemAttributeDetails['inCityRate'] + this.itemAttributeDetails['bookingCharge']);
         this.total = this.total + this.itemAttributeDetails['inCityRate'] + this.itemAttributeDetails['bookingCharge'];
        this.payableAmount = this.total;
+       this.courierBill = this.bookingAndDelivCharge;
+      
       } else {
         this.bookingAndDelivCharge = this.itemAttributeDetails['outCityRate'] + this.itemAttributeDetails['bookingCharge'];
         this.total = this.total + this.itemAttributeDetails['outCityRate'] + this.itemAttributeDetails['bookingCharge'];
         this.payableAmount = this.total;
+        this.courierBill = this.bookingAndDelivCharge;
       }
       this.tempTotal = this.total;
       console.log(this.total);
       this.bookingAndDelivCharge = this.bookingAndDelivCharge + this.conditionCharge;
       this.total = this.tempTotal + this.conditionCharge;
       this.payableAmount = this.total;
+      this.courierBill = this.bookingAndDelivCharge;
     }
   }
   conditionChargeChange(isChanged:any) {
     if(isChanged.checked && this.conditionCharge !== 0 && this.itemPrice !== 0) 
     {
-      if(this.isAddWithMainBill == true) {this.isAddWithMainBill = false;}
+      // if(this.isAddWithMainBill == true) {this.isAddWithMainBill = false;}
       this.total = 0;
       this.payableAmount = 0;
+      this.courierBill = 0;
       this.total = this.tempTotal + this.conditionCharge;
+      this.courierBill = this.bookingAndDelivCharge + this.conditionCharge;
       this.payableAmount = this.total;
     } else {
-      this.isAddWithMainBill = false;
+     
       this.total = this.tempTotal;
       this.payableAmount = this.total;
+      this.courierBill = this.bookingAndDelivCharge;
+
       console.log(this.total);
     }
     console.log(isChanged.checked);
   }
-  addWithMainBill(isAdd: any)
-  {
-    if (isAdd.checked && this.conditionCharge !== 0 && this.itemPrice !== 0)
-    {
-      this.payableAmount = 0;
-      console.log(this.total);
-      if(this.isConditionChargeApply)
-      {
-        this.payableAmount = this.total - this.bookingAndDelivCharge - this.conditionCharge;
-      } else {
-        this.payableAmount = this.total - this.bookingAndDelivCharge;
-      }
+  // addWithMainBill(isAdd: any)
+  // {
+  //   if (isAdd.checked && this.conditionCharge !== 0 && this.itemPrice !== 0)
+  //   {
+  //     this.payableAmount = 0;
+  //     console.log(this.total);
+  //     if(this.isConditionChargeApply)
+  //     {
+  //       this.payableAmount = this.total - this.bookingAndDelivCharge - this.conditionCharge;
+  //     } else {
+  //       this.payableAmount = this.total - this.bookingAndDelivCharge;
+  //     }
       
-    } else {
-      this.payableAmount = this.total;
-    }
-  }
+  //   } else {
+  //     this.payableAmount = this.total;
+  //   }
+  // }
 
   get addItemAttributeForm() { return this.addItemAttribute.controls; }
   get bookingForm() { return this.booking.controls; }

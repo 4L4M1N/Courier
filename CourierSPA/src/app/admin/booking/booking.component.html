@@ -156,18 +156,26 @@
          (change)="conditionChargeChange($event)">
           <label>Apply Condition Charge </label>
         </mat-checkbox>
-        <mat-checkbox [(ngModel)]="isAddWithMainBill" class="example-margin"
+        <!-- <mat-checkbox [(ngModel)]="isAddWithMainBill" class="example-margin"
         [ngModelOptions]="{standalone: true}"
         (change)="addWithMainBill($event)">
          <label>Exclude From Bill </label>
-       </mat-checkbox>
+       </mat-checkbox> -->
         <!-- <div class="form-group">
           <label>Discount</label>
           <input type="text" class="form-control" [(ngModel)]="discountAmmount" [ngModelOptions]="{standalone: true}" (input)="onSearchChange($event.target.value)">
         </div> -->
         <div class="form-group">
-          <label>Payable Amount</label>
+          <label>Total Payable for Receiver</label>
           <input type="number" class="form-control" [(ngModel)]="payableAmount" [ngModelOptions]="{standalone: true}" readonly>
+        </div>
+        <div class="form-group">
+          <label>Bill for Merchant</label>
+          <input type="number" class="form-control" [(ngModel)]="merchantBill" [ngModelOptions]="{standalone: true}" readonly>
+        </div>
+        <div class="form-group">
+          <label>Bill for Courier</label>
+          <input type="number" class="form-control" [(ngModel)]="courierBill" [ngModelOptions]="{standalone: true}" readonly>
         </div>
         <div class="form-group">
           <label>Total</label>
