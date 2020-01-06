@@ -15,13 +15,21 @@ namespace CourierAPI.Helpers
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
             }
         }
-
+        public static string GenerateSerialForBooking(string courierId, string merchantId, int totalBooking)
+        {
+            DateTime year = DateTime.Now;
+            DateTime month = DateTime.Now;
+            DateTime day = DateTime.Now;
+            var bookingDate = day.ToString("dd") + month.ToString("MM") + year.ToString("yy");
+            var generatedSerialNo = courierId + "-" + bookingDate +"-" + merchantId+ "-" + totalBooking.ToString();
+            return generatedSerialNo;
+        }
         //Generate Merchant Id
         public static string GenerateIdForMerchant(int id)
         {
             DateTime year = DateTime.Now;
             DateTime month = DateTime.Now;
-            string generatedId = year.ToString("yy")+ "-" + id.ToString() + "-" + month.ToString("MM");
+            string generatedId = year.ToString("yy")+ id.ToString() + month.ToString("MM");
             return generatedId;
         }
 

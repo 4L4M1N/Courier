@@ -13,4 +13,8 @@ export interface Booking {
     isConditionCharge: boolean;
     isOutCity: boolean;
     isInCity: boolean;
+    merchantIdentity: string;
+    merchantBill: number;
+    courierBill: number;
+    receiverBill: number;
 }
