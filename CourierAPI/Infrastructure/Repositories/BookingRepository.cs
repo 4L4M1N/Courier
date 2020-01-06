@@ -25,5 +25,13 @@ namespace CourierAPI.Infrastructure.Repositories
             var result = await _context.Bookings.Where(b =>b.Id == bookingId).FirstOrDefaultAsync();
             return result;
         }
+
+        public async Task Delete(string bookingId)
+        {
+            var result = await _context.Bookings.FindAsync(bookingId);
+            _context.Bookings.Remove(result);
+        }
+
+        
     }
 }

@@ -7,5 +7,6 @@ namespace CourierAPI.Core.IRepositories
     {
          Task Add(Booking booking);
          Task<Booking> FindBookingById(string bookingId);
+         Task Delete(string bookingId);
     }
 }
