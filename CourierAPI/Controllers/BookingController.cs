@@ -95,6 +95,23 @@ namespace CourierAPI.Controllers
             if (result == 0) return BadRequest("error occured");
             return Ok();
         }
+
+        [HttpDelete("delete/{id}")]
+        public async Task<IActionResult> DeleteBooking(string id)
+        {
+            var isBookingExists = await _unitOfWork.Bookings.FindBookingById(id);
+
+            if(isBookingExists == null)
+                return BadRequest("no booking is exist");
+
+            await _unitOfWork.Bookings.Delete(isBookingExists.Id);
+
+             var result = await _unitOfWork.CompleteAsync();
+            if (result == 0) return BadRequest("dont save");
+            return NoContent();
+        }
+
+
         [HttpPost("assign")]
         public async Task<ActionResult> AssignDelivMan(AssignDelivManToBooking assign)
         {
