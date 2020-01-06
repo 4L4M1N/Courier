@@ -46,6 +46,7 @@ export class BookingComponent implements OnInit {
   merchantBill: number;
   merchantInfo: any;
   merchantId: any;
+  showBookingSerial: any;
   isAddWithMainBill = false; // Add with main Bill
   isConditionChargeApply = false;    // Condition Charge
   isInCity = false; // InCity/OutCity
@@ -70,7 +71,11 @@ export class BookingComponent implements OnInit {
     conditionCharge: 0,
     isOutCity: false,
     itemAttributeId: 0,
-    itemPrice: 0
+    itemPrice: 0,
+    merchantBill: 0,
+    receiverBill: 0,
+    courierBill: 0,
+    merchantIdentity: ''
   };
 
   // tempItemAttribute: ItemAttribute; // store itemAttributes to table
@@ -97,6 +102,7 @@ export class BookingComponent implements OnInit {
       console.log(this.merchantId);
     });
     this.GetMerchantInfo();
+    // this.GetBookingSerial();
 
     // Booking form
     this.booking = new FormGroup({
@@ -117,12 +123,24 @@ export class BookingComponent implements OnInit {
     });
 
   }
+
   // Get merchant info
   GetMerchantInfo() {
     this.merchentservice.GetMerchant(this.merchantId)
     .subscribe(data => {
       this.merchantInfo = data;
-      console.log(this.merchantInfo);
+      
+      console.log(this.merchantIdentity);
+      this.merchantIdentity = this.merchantInfo.merchantIdentity;
+      console.log(this.merchantInfo.merchantIdentity);
+      this.GetBookingSerial();
+    });
+  }
+  GetBookingSerial() {
+    console.log(this.merchantIdentity);
+    this.bookingService.GetBookingSerial(this.merchantIdentity).subscribe(data => {
+      this.showBookingSerial = data;
+      console.log(this.showBookingSerial.showBookingSerial);
     });
   }
   // division dropdown populate
@@ -331,6 +349,11 @@ export class BookingComponent implements OnInit {
     this.placeBooking.discount = this.discountAmmount;
     this.placeBooking.totalAmount = this.total;
     this.placeBooking.itemPrice = this.itemPrice;
+    this.placeBooking.merchantIdentity = this.merchantIdentity;
+    this.placeBooking.courierBill = this.courierBill;
+    this.placeBooking.merchantBill = this.merchantBill;
+    this.placeBooking.receiverBill = this.payableAmount;
+    this.placeBooking.conditionCharge = this.conditionCharge;
     // Condition Charge
     if (this.isConditionChargeApply) {
       this.placeBooking.isConditionCharge = true;

@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using CourierAPI.Core.DTOs;
+using CourierAPI.Helpers;
 using CourierAPI.Core.IRepositories;
 using CourierAPI.Core.Models;
 using CourierAPI.Infrastructure.Data;
@@ -32,6 +33,16 @@ namespace CourierAPI.Controllers
             return Ok();
         }
 
+        [HttpGet("getbookingserial/{merchantId}")]
+        public async Task<IActionResult> GetBookingSerial(string merchantId)
+        {
+             var totalBooking = await _context.Bookings.CountAsync();
+             var courierIdTemp = "0001"; //remove after 
+             var showBookingSerial = Extensions.GenerateSerialForBooking(courierIdTemp,merchantId,totalBooking+1);
+            
+            return Ok(new {showBookingSerial = showBookingSerial});
+        }
+
         [HttpPost("add")]
         public async Task<IActionResult> Add(BookingDTO booking)
         {
@@ -48,7 +59,9 @@ namespace CourierAPI.Controllers
             await _unitOfWork.Receivers.Add(receiver);
             //get receiverId
             var receiverId = receiver.Id;
-            
+            var totalBooking = _context.Bookings.Count();
+            var courierIdTemp = "0001"; //remove after 
+            var bookingSerialNo = Extensions.GenerateSerialForBooking(courierIdTemp,booking.MerchantIdentity,totalBooking+1);
             //Place Booking
             var placeBooking = new Booking
             {
@@ -58,8 +71,12 @@ namespace CourierAPI.Controllers
                 BookingDate = DateTime.Now,
                 TotalAmmount = booking.TotalAmount,
                 Discount = booking.Discount,
-                ItemPrice = booking.ItemPrice
-
+                ItemPrice = booking.ItemPrice,
+                SerialNo = bookingSerialNo,
+                MerchantBill = booking.MerchantBill,
+                CourierBill = booking.CourierBill,
+                ReceiverBill = booking.ReceiverBill,
+                ConditionCharge = booking.ConditionCharge
             };
             var bookingId = placeBooking.Id;
             await _unitOfWork.Bookings.Add(placeBooking);

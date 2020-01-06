@@ -15,7 +15,11 @@ namespace CourierAPI.Core.DTOs
         public int ZoneId { get; set; }
         public int DivisionId { get; set; }
         public double ConditionCharge { get; set; }
+        public double MerchantBill { get; set; }
+        public double CourierBill { get; set; }
+        public double ReceiverBill { get; set; }
         public double ItemPrice { get; set;}
+        public string MerchantIdentity { get; set; }
         public bool IsConditionCharge { get; set; }
         public bool IsInCity { get; set; }
         public bool IsOutCity { get; set; }
