@@ -12,6 +12,11 @@ export class InvoiceR {
     zone: string;
     total: number;
     discount: number;
+    itemPrice: number;
+    courierBill: number;
+    merchantBill: number;
+    receiverBill: number;
+    conditionCharge: number;
 }
 export class ItemAttributes {
     itemAttributeId: number;

@@ -1,5 +1,6 @@
 using CourierAPI.Core.Models;
 using CourierAPI.Core.Query;
+using CourierAPI.Core.ReportFormat;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -30,7 +31,7 @@ namespace CourierAPI.Infrastructure.Data
 
 
         //Query
-        public DbQuery<BookingDetailsR> ShowBookings { get; set; }
+        public DbQuery<BookingR> ShowBookings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

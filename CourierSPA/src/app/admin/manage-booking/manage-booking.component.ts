@@ -13,7 +13,7 @@ import { ModalService } from 'src/app/services/Dialog/modal.service';
 })
 export class ManageBookingComponent implements OnInit {
   bookingList: any;
-  public displayedColumns = ['id', 'receiverName', 'delivManName', 'zone'];
+  public displayedColumns = ['id', 'bookingSerialNo', 'merchantName',  'receiverName', 'delivManName', 'zone'];
   dialogValue:string; 
   sendValue:string;
   selectedDelivManId:string;
