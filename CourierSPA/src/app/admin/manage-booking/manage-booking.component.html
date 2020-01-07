@@ -3,7 +3,14 @@
     <th mat-header-cell *matHeaderCellDef> Booking Id </th>
     <td mat-cell *matCellDef="let element"> {{element.id}} </td>
   </ng-container>
- 
+  <ng-container matColumnDef="bookingSerialNo">
+    <th mat-header-cell *matHeaderCellDef> Booking Serial No </th>
+    <td mat-cell *matCellDef="let element"> {{element.bookingSerialNo}} </td>
+  </ng-container>
+  <ng-container matColumnDef="merchantName">
+    <th mat-header-cell *matHeaderCellDef> Merchant Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.merchantName}} </td>
+  </ng-container>
   <ng-container matColumnDef="receiverName">
     <th mat-header-cell *matHeaderCellDef> Receiver Name </th>
     <td mat-cell *matCellDef="let element"> {{element.receiverName}} </td>
