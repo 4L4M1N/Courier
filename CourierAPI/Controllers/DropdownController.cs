@@ -1,5 +1,8 @@
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Linq;
+using AutoMapper;
 using CourierAPI.Core.DTOs;
 using CourierAPI.Core.Filters;
 using CourierAPI.Core.IRepositories;
@@ -15,9 +18,11 @@ namespace CourierAPI.Controllers
     public class DropdownController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
-        public DropdownController(IUnitOfWork unitOfWork)
+        private readonly IMapper _mapper;
+        public DropdownController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
         [HttpGet("item")]
         public async Task<IActionResult> GetItems()
@@ -135,11 +140,31 @@ namespace CourierAPI.Controllers
         [HttpGet("itemattribute")]
         public async Task<IActionResult> GetItemAttributes([FromQuery]ItemAttributesFilter filter)
         {
-            if(filter.MerchantIdentity != null && filter.ItemId != null) {
+            if(filter.MerchantIdentity != null && filter.ItemId != null && filter.WithItem != true) {
             var merchant = await _unitOfWork.Merchants.GetMerchantDetailsAsync(filter.MerchantIdentity);
             filter.MerchantIdentity = merchant.MerchantIdentity;
             }
+            //For agreement 
+            if(filter.MerchantIdentity != null && filter.WithItem == true)
+            {
+                var merchant = await _unitOfWork.Merchants.GetMerchantDetailsAsync(filter.MerchantIdentity);
+                filter.MerchantIdentity = merchant.MerchantIdentity;
+                var itemAttributeList = await _unitOfWork.ItemAttributes.GetItemAttributes(filter.MerchantIdentity);
+                var itemList = await _unitOfWork.Items.GetItems(0);
+                var itemAttributeWithItemName = from itemAttribute in itemAttributeList join item in itemList
+                                                on itemAttribute.ItemId equals item.ItemId
+                                                select new {
+                                                    itemAttribute.InCityRate,
+                                                    itemAttribute.OutCityRate,
+                                                    itemAttribute.ItemSize,
+                                                    itemAttribute.ConditionCharge,
+                                                    itemAttribute.BookingCharge,
+                                                    item.Name
+                                                };
+                return Ok(itemAttributeWithItemName);
+            }
             var result = await _unitOfWork.ItemAttributes.GetItemAttributes(filter);
+            
             return Ok(result);
         }
         [HttpGet("itemattributedetails/{itemAttributeId}")]

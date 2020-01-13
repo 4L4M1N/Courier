@@ -9,4 +9,5 @@ export interface ItemAttribute {
     bookingCharge: number;
     discount: number;
     merchantId: string;
+    itemName: string;
 }

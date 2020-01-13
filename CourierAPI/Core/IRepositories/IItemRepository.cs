@@ -7,6 +7,7 @@ namespace CourierAPI.Core.IRepositories
     public interface IItemRepository
     {
          Task <IEnumerable<Item>> GetItems();
+         Task <List<Item>> GetItems(int itemId);
          Task AddItem(Item item);
     }
 }

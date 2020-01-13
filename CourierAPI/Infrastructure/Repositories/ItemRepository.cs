@@ -25,5 +25,11 @@ namespace CourierAPI.Infrastructure.Repositories
             var items = await _context.Items.ToListAsync();
             return items;
         }
+
+        public async Task<List<Item>> GetItems(int itemId)
+        {
+            var items = await _context.Items.ToListAsync();
+            return items;
+        }
     }
 }

@@ -57,7 +57,7 @@
           </div>
           </div>
 
-          <div class="row">
+          <!-- <div class="row">
           <div class="col-md-12">
             <div class="card-body border-bottom">
                 <h5 class="card-title"><i class="fas fa-percentage" aria-hidden="true"></i> Charge per product</h5>
@@ -65,19 +65,33 @@
                 <h6>Out Side Dhaka 100Tk</h6>
             </div>
           </div>
-          </div>
+          </div> -->
 
 
           <div class="row">
               <div class="col-md-12">
                 <div class="card-body border-bottom">
-                    <h5 class="card-title"><i class="fa fa-cubes" aria-hidden="true"></i>Item type</h5>
-                    <h6><strong>Books, Documents, Gifts</strong></h6>
+                    <h5 class="card-title"><i class="fa fa-cubes" aria-hidden="true"></i>Items</h5>
+                    <mat-chip-list aria-label="Zone selection">
+                      <mat-chip color="primary" selected *ngFor="let item of itemAttributeList">{{item.name}}</mat-chip>
+                    </mat-chip-list>
                     
                 </div>
               </div>
           </div>
 
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Item Information</h5>
+          <li *ngFor="let item of itemAttributeList">
+            {{item.name}}, {{item.itemSize}}, COD: {{item.conditionCharge}}, InCity: {{item.inCityRate}}
+            OutCity: {{item.outCityRate}}, Booking Charge: {{item.bookingCharge}}
+          </li>
+        </div>
+      </div>
+      
     </div>
 
 
