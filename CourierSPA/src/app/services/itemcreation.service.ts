@@ -49,6 +49,12 @@ GetItemAttributesOfAnItemMerchant(itemId, merchantIdentity): Observable<ItemAttr
   + '&' + encodeURIComponent('merchantIdentity') + '=' + encodeURIComponent(merchantIdentity);
   return this.http.get<ItemAttribute[]>(this.baseURL + 'itemattribute' + '?' + query);
 }
+GetItemAttributeWithItem(merchantIdentity): Observable<ItemAttribute[]>
+{
+  let query = encodeURIComponent('withItem') + '=' + encodeURIComponent('true')
+  + '&' + encodeURIComponent('merchantIdentity') + '=' + encodeURIComponent(merchantIdentity);
+  return this.http.get<ItemAttribute[]>(this.baseURL + 'itemattribute' + '?' + query);
+}
 GetItemAttributeDetails(itemAttributeId): Observable<ItemAttribute>
 {
   return this.http.get<ItemAttribute>(this.baseURL + 'itemattributedetails/' + itemAttributeId);

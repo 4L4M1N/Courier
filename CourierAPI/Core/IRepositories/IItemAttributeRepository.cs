@@ -12,6 +12,7 @@ namespace CourierAPI.Core.IRepositories
         Task UpdateItem(ItemAttribute itemAttribute);
         Task DeleteItem(int id);
         Task <IEnumerable<ItemAttribute>> GetItemAttributes(ItemAttributesFilter filter);
+        Task<List<ItemAttribute>> GetItemAttributes(string merchantIdentity);
         int CheckItemAttribute(ItemAttributeDTO itemAttribute);
         Task <IEnumerable<ItemAttribute>> GetItemAttributesofAItem(int itemId);
         Task <ItemAttribute> GetItemAttributeDetails(int itemAttributeId);

@@ -5,5 +5,6 @@ namespace CourierAPI.Core.Filters
         #nullable enable
         public int? ItemId { get; set; }
         public string? MerchantIdentity { get; set; }
+        public bool WithItem { get; set; }
     }
 }
