@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MerchantsService } from 'src/app/services/merchants.service';
 import { IMerchants } from 'src/app/models/IMerchants';
 import { HttpClient } from '@angular/common/http';
 import { Merchants } from 'src/app/models/Merchants';

@@ -4,40 +4,36 @@
         
       <div class="card">
         <div class="card-body">
-            <div class="fab"><p style="font-size: 25px;">Edit</p></div>
+            <div class="fab"><p style="font-size: 25px;" (click) = "ClickEditMerchantInfo()">Edit</p></div>
           <h5 class="card-title">Merchant Information</h5> <i class="fas fa-pencil" aria-hidden="true"></i>
 
               <div class="form-group">
                 <label>Merchant Code</label>
-              <input type="text" class="form-control" readonly placeholder="{{merchantId}}">
+              <input type="text" class="form-control" [readOnly]="isReadOnly" value="{{merchantInfo?.merchantIdentity}}">
               </div>
 
               <div class="form-group">
                 <label>Merchant Name</label>
-                <input type="text" class="form-control" readonly placeholder="Exp: Rokomary">
+                <input type="text" class="form-control" [readOnly]="isReadOnly" value="{{merchantInfo?.name}}">
               </div>
 
               <div class="form-group">
                 <label>Contact Number</label>
-                <input type="text" class="form-control" readonly placeholder="0155545789">
+                <input type="text" class="form-control" [readOnly]="isReadOnly" value="{{merchantInfo?.phone}}">
               </div>
 
               <div class="form-group">
                 <label>Email Address </label>
-                <input type="text" class="form-control" readonly placeholder="Exp: rokomari@gmail.com">
+                <input type="text" class="form-control" [readOnly]="isReadOnly" value="{{merchantInfo?.email}}">
               </div>
 
               <div class="form-group">
                 <label>Trade License</label>
-                <input type="text" class="form-control" readonly placeholder="1256789">
+                <input type="text" class="form-control" [readOnly]="isReadOnly" value="{{merchantInfo?.tradeLicenseNo}}">
               </div>
-
-              <div class="form-group">
-                <label>NID</label>
-                <input type="text" class="form-control" readonly placeholder="1256789">
-              </div>
-
+              <button *ngIf="!isReadOnly" class="btn  btn-success btn float-right text-uppercase button-space" type="submit" >Update</button>
         </div>
+        
       </div>
     </div>
     <div class="col-md-4">
