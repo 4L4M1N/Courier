@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HashLocationStrategy, LocationStrategy, DatePipe } from '@angular/common';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule,
-         MatIconModule, MatListModule, MatCardModule, MatGridList, MatGridListModule, MatDialogModule, MAT_DIALOG_DATA, MatDialogRef, MatCheckboxModule, MatTableModule, MatFormFieldModule, MatChipsModule, MatInputModule, MatPaginator, MatSortModule, MatPaginatorModule } from '@angular/material';
+         MatIconModule, MatListModule, MatCardModule, MatGridList, MatGridListModule, MatDialogModule, MAT_DIALOG_DATA, MatDialogRef, MatCheckboxModule, MatTableModule, MatFormFieldModule, MatChipsModule, MatInputModule, MatPaginator, MatSortModule, MatPaginatorModule, MatSelectModule } from '@angular/material';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
@@ -90,7 +90,8 @@ import { ManageRequestedBookingComponent } from './admin/manage-requested-bookin
       MatChipsModule,
       MatInputModule,
       MatPaginatorModule,
-      MatSortModule
+      MatSortModule,
+      MatSelectModule
    ],
    providers: [
       { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
