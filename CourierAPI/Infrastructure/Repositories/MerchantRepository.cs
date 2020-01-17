@@ -37,6 +37,13 @@ namespace CourierAPI.Infrastructure.Repositories
             return result;
         }
 
+        public async Task<Merchant> FindByMerchantIdAsync(string id)
+        {
+            var result = await (_context.Merchants.Where(m => m.Id == id).FirstOrDefaultAsync());
+
+            return result;
+        }
+
         //Find merchant by Name
         public async Task<Merchant> FindByMerchantNameAsync(string merchantName)
         {
