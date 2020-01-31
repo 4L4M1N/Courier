@@ -22,7 +22,7 @@ using CourierAPI.Core.Models;
 using CourierAPI.Helpers;
 using CourierAPI.Infrastructure.Data;
 using CourierAPI.Infrastructure.Repositories;
-
+using CourierAPI.Core.Services;
 
 namespace CourierAPI
 {
@@ -79,6 +79,7 @@ namespace CourierAPI
             // services.AddScoped<IDeliveryAddressRepository, DeliveryAddressRepository>();
             // services.AddScoped<IDeliveryManRepository, DeliveryManRepository>();
             // services.AddScoped<IAssignedDelivManRepository, AssignedDelivManRepository>();
+            services.AddTransient<IBookingService, BookingService>();
 
             services.AddAuthentication(x =>
             {
