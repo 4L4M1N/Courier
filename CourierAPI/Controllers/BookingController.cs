@@ -8,6 +8,7 @@ using CourierAPI.Core.Models;
 using CourierAPI.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using CourierAPI.Core.Services;
 
 namespace CourierAPI.Controllers
 {
@@ -18,12 +19,13 @@ namespace CourierAPI.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly DataContext _context;
+        private readonly IBookingService _bookingService;
         
-        
-        public BookingController(IUnitOfWork unitOfWork, DataContext context)
+        public BookingController(IUnitOfWork unitOfWork, DataContext context, IBookingService bookingService)
         {
             _context = context;
             _unitOfWork = unitOfWork;
+            _bookingService = bookingService;
             
         }
         [HttpGet("test")]
@@ -135,7 +137,7 @@ namespace CourierAPI.Controllers
         [HttpGet("all")]
         public async Task<ActionResult> ShowBookingDetails()
         {
-            var result = await _context.ShowBookings.FromSqlRaw("exec Booking").ToListAsync();
+            var result = await _bookingService.GetAllBookingDetails();
             return Ok(result);
         }
     }
