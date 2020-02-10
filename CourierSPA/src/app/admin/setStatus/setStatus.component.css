@@ -1,0 +1,6 @@
+::ng-deep.mat-pseudo-checkbox{
+    display: none !important;
+  }
+.mat-list-item.active .contact-names{
+    color: red;
+  }

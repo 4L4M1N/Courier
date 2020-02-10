@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Set Status</h1>
+<div class="row">
+  <div class="col-md-6 mx-auto border-right">
+    <mat-dialog-content>
+      <mat-selection-list #linkList>
+        <mat-list-option  *ngFor="let item of data.statusList;index as i" 
+         (click)="down(item)" routerLinkActive="active"
+         (selectionChange)="selectionChanged($event,i)" [class.active]="selectedItem === i">
+         <a mat-list-item> <span class="contact-names">{{ item.name }}</span> </a>
+            <mat-divider></mat-divider>
+        </mat-list-option>
+      </mat-selection-list>
+    
+    <p *ngIf="statusName" [(ngModel)]="data.selectedStatusId" ngDefaultControl>{{statusName}} is Selected </p> 
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+      <button class="btn btn-danger" mat-button (click)="onNoClick()">Cancel</button>
+      <button class="btn btn-success" mat-button [mat-dialog-close]="data.selectedStatusId">Assign</button>
+    </div>
+  </div>
+  <div class="col-md-6">
+    kala bandor ami
+  </div>
+</div>
+
+
+

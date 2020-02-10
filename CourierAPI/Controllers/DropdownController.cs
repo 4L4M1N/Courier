@@ -251,5 +251,11 @@ namespace CourierAPI.Controllers
             if (result == 0) return BadRequest("dont save");
             return Ok();
         }
+        [HttpGet("allstatus")]
+        public async Task<IActionResult> GetAllStatus()
+        {
+            var status = await _unitOfWork.Status.GetAllStatus();
+            return Ok(status);
+        }
     }
 }
