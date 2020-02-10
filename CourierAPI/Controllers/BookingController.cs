@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 using CourierAPI.Core.DTOs;
 using CourierAPI.Helpers;
 using CourierAPI.Core.IRepositories;
+using CourierAPI.Core.IServices;
 using CourierAPI.Core.Models;
 using CourierAPI.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using CourierAPI.Core.Services;
 
 namespace CourierAPI.Controllers
 {

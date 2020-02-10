@@ -18,11 +18,12 @@ using Microsoft.IdentityModel.Tokens;
 using AutoMapper;
 using CourierAPI.Core;
 using CourierAPI.Core.IRepositories;
+using CourierAPI.Core.IServices;
 using CourierAPI.Core.Models;
 using CourierAPI.Helpers;
 using CourierAPI.Infrastructure.Data;
 using CourierAPI.Infrastructure.Repositories;
-using CourierAPI.Core.Services;
+using CourierAPI.Infrastructure.Services;
 
 namespace CourierAPI
 {
