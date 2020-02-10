@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CourierAPI.Core.IRepositories;
-using CourierAPI.Core.Query;
+using CourierAPI.Core.IServices;
 using CourierAPI.Core.ReportFormat;
 using CourierAPI.Infrastructure.Data;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace CourierAPI.Core.Services
+namespace CourierAPI.Infrastructure.Services
 {
     public class BookingService : IBookingService
     {
