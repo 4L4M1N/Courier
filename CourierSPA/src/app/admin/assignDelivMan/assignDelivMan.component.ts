@@ -28,7 +28,7 @@ export class AssignDelivManComponent implements OnInit {
     this.selectedItem = i
 }
   down(selectedDelivManId ) {
-    this.delivManId = selectedDelivManId. delivManIdentity;
+    this.delivManId = selectedDelivManId.delivManIdentity;
     this.data.selectedDelivManId = this.delivManId;
     this.delivManName = selectedDelivManId.name;
   }

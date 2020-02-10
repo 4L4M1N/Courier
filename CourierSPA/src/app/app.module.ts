@@ -38,6 +38,8 @@ import { AssignDelivManComponent } from './admin/assignDelivMan/assignDelivMan.c
 import { MerchantItemComponent } from './admin/merchant-item/merchant-item.component';
 import { RequestBookingComponent } from './request-booking/request-booking.component';
 import { ManageRequestedBookingComponent } from './admin/manage-requested-booking/manage-requested-booking.component';
+import { StatusService } from './services/status.service';
+import { SetStatusComponent } from './admin/setStatus/setStatus.component';
 
 
 
@@ -64,6 +66,7 @@ import { ManageRequestedBookingComponent } from './admin/manage-requested-bookin
       AlertComponent,
       ConfirmComponent,
       AssignDelivManComponent,
+      SetStatusComponent,
       DivisionzonecreationComponent,
       RequestBookingComponent,
       ManageRequestedBookingComponent
@@ -101,13 +104,14 @@ import { ManageRequestedBookingComponent } from './admin/manage-requested-bookin
       DeliveryManAddComponent,
       DeliveryAddressService,
       ItemcreationService,
+      StatusService,
       DatePipe
    ],
    bootstrap: [
       AppComponent
    ],
    entryComponents: [
-      AlertComponent, ConfirmComponent, AssignDelivManComponent
+      AlertComponent, ConfirmComponent, AssignDelivManComponent, SetStatusComponent
     ],
 })
 export class AppModule { }
