@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CourierAPI.Core.IRepositories;
@@ -20,6 +21,12 @@ namespace CourierAPI.Infrastructure.Services
         public async Task<List<BookingR>> GetAllBookingDetails()
         {
             var result = await _context.ShowBookings.FromSqlRaw("exec Booking").ToListAsync();
+            return result;
+        }
+
+        public async Task<List<BookingDetailsReport>> GetBookingDetailsForReport(DateTime From, DateTime To)
+        {
+            var result = await _context.ShowBookingDetailsReport.FromSqlRaw("exec BookingPreview {0}, {1}",From, To).ToListAsync();
             return result;
         }
     }

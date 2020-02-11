@@ -32,6 +32,7 @@ namespace CourierAPI.Infrastructure.Data
 
         //Query
         public DbQuery<BookingR> ShowBookings { get; set; }
+        public DbQuery<BookingDetailsReport> ShowBookingDetailsReport { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
