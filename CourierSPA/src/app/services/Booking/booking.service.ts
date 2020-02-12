@@ -28,4 +28,8 @@ Create(booking: Booking) {
     console.log(model);
     return this.http.post(this.baseURL + 'assign' , model);
   }
+  SetStatusOfBooking(model: any) {
+    console.log(model);
+    return this.http.post(this.baseURL + 'setbookingstatus' , model);
+  }
 }

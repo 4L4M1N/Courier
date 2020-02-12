@@ -20,12 +20,15 @@ namespace CourierAPI.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly DataContext _context;
         private readonly IBookingService _bookingService;
+        private readonly IStatusService _statusService;
         
-        public BookingController(IUnitOfWork unitOfWork, DataContext context, IBookingService bookingService)
+        public BookingController(IUnitOfWork unitOfWork, DataContext context, 
+                                IBookingService bookingService, IStatusService statusService)
         {
             _context = context;
             _unitOfWork = unitOfWork;
             _bookingService = bookingService;
+            _statusService = statusService;
             
         }
         [HttpGet("test")]
@@ -79,7 +82,9 @@ namespace CourierAPI.Controllers
                 CourierBill = booking.CourierBill,
                 ReceiverBill = booking.ReceiverBill,
                 ConditionCharge = booking.ConditionCharge
+                
             };
+            placeBooking.Status = "Pending";
             var bookingId = placeBooking.Id;
             await _unitOfWork.Bookings.Add(placeBooking);
 
@@ -139,6 +144,19 @@ namespace CourierAPI.Controllers
         {
             var result = await _bookingService.GetAllBookingDetails();
             return Ok(result);
+        }
+        [HttpPost("setbookingstatus")]
+        public async Task<ActionResult> SetStatusOfBooking(BookingStatusSetDTO assign)
+        {   
+            var result = await _statusService.SetStatusOfBooking(assign.BookingId, assign.SelectedStatusId);
+            if(result == false)
+            {
+                return BadRequest("Assigned Failled!");
+            }
+            // await _unitOfWork.AssignedDelivMan.Add(assignedDelivMan);
+            // var result = await _unitOfWork.CompleteAsync();
+            // if(result == 0) return BadRequest("Assigned Failled!");
+            return Ok();
         }
     }
 }
