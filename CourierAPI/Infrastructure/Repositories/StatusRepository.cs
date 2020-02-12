@@ -20,5 +20,11 @@ namespace CourierAPI.Infrastructure.Repositories
             var status = await _context.Statuses.ToListAsync();
             return status;
         }
+
+        public async Task<Status> GetStatusById(int statusId)
+        {
+            var status = await _context.Statuses.FirstOrDefaultAsync(x=>x.Id==statusId);
+            return status;
+        }
     }
 }

@@ -118,21 +118,23 @@ export class ManageBookingComponent implements OnInit {
       this.selectedStatusId = res;
       if(this.selectedStatusId == null) console.log("no value");
       console.log(this.selectedStatusId);
+      console.log(this.bookingId);
 
       // assign
-      // if(this.bookingId != null && this.selectedDelivManId != null) {
-      //   let assign = {
-      //     bookingId : this.bookingId,
-      //     delivManId: this.selectedDelivManId
-      //   };
-      //   console.log("true");
-      //   this.bookingService.AssignDelivManToBooking(assign).subscribe(() => {
-      //     console.log('ok');
-      //     this.openInfoModal();
-      //   }, error => {
-      //     console.log('error');
-      //   });
-      // }
+      if(this.bookingId != null && this.selectedStatusId != null) {
+        let setStatusOfBooking = {
+          bookingId : this.bookingId,
+          selectedStatusId: this.selectedStatusId
+        };
+        console.log("true");
+        this.bookingService.SetStatusOfBooking(setStatusOfBooking).subscribe(() => {
+          console.log('ok');
+          this.openInfoModal();
+          this.GetAllBooking();
+        }, error => {
+          console.log('error');
+        });
+      }
     });
   }
   openInfoModal() {

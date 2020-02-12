@@ -62,14 +62,12 @@
   <ng-container matColumnDef="status">
     <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
     <mat-cell *matCellDef="let element"> 
-    <ng-container *ngIf="element.delivManName != null">
+    <ng-container>
       <button (click)="openStatusDialog(element.id)" mat-button color="primary" type="submit">
-        {{element.delivManName}}
+        {{element.status}}
         </button>
     </ng-container>
-    <button class="pl-3" *ngIf="element.delivManName == null" (click)="openStatusDialog(element.id)" mat-button color="primary" type="submit">
-        Assign
-      </button>
+    
     </mat-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

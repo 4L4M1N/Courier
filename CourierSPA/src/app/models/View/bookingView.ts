@@ -7,4 +7,5 @@ export interface BookingView {
     zone: string;
     bookingSerialNo: string;
     merchantName: string;
+    status: string;
 }

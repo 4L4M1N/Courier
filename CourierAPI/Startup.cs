@@ -81,7 +81,7 @@ namespace CourierAPI
             // services.AddScoped<IDeliveryManRepository, DeliveryManRepository>();
             // services.AddScoped<IAssignedDelivManRepository, AssignedDelivManRepository>();
             services.AddTransient<IBookingService, BookingService>();
-
+            services.AddTransient<IStatusService, StatusService>();
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
