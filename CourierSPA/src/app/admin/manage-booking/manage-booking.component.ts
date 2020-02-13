@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BookingService } from 'src/app/services/Booking/booking.service';
-import { BookingView } from 'src/app/models/View/bookingView';
+import { BookingView } from 'src/app/models/viewModels/bookingView';
 import { MatDialog, MatDialogRef, MatDialogConfig, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { AssignDelivManComponent } from '../assignDelivMan/assignDelivMan.component';
 import { DeliveryManService } from 'src/app/services/DeliveryMan.service';
@@ -76,7 +76,7 @@ export class ManageBookingComponent implements OnInit {
     console.log(ab);
     console.log(event);
   }
-  openDialog(a): void {
+  openAssignDialog(a): void {
     console.log(a);
     this.bookingId = a;
     const dialogRef = this.dialog.open(AssignDelivManComponent, {
@@ -100,6 +100,7 @@ export class ManageBookingComponent implements OnInit {
         this.bookingService.AssignDelivManToBooking(assign).subscribe(() => {
           console.log('ok');
           this.openInfoModal();
+          this.GetAllBooking();
         }, error => {
           console.log('error');
         });

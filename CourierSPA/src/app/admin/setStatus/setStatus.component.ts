@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { SetStatus } from 'src/app/models/View/SetStatus';
+import { SetStatus } from 'src/app/models/viewModels/SetStatus';
 
 @Component({
   selector: 'app-setStatus',
