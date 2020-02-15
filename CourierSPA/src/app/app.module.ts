@@ -1,3 +1,4 @@
+import { BookingreportComponent } from './admin/bookingreport/bookingreport.component';
 import { DivisionzonecreationComponent } from './admin/divisionzonecreation/divisionzonecreation.component';
 import { ConfirmComponent } from './shared/Dialog/confirm/confirm.component';
 import { AlertComponent } from './shared/Dialog/alert/alert.component';
@@ -69,7 +70,8 @@ import { SetStatusComponent } from './admin/setStatus/setStatus.component';
       SetStatusComponent,
       DivisionzonecreationComponent,
       RequestBookingComponent,
-      ManageRequestedBookingComponent
+      ManageRequestedBookingComponent,
+      BookingreportComponent
    ],
    imports: [
       BrowserModule,
