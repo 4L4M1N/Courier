@@ -6,5 +6,6 @@ namespace CourierAPI.Core.IRepositories
     public interface IReceiverRepository
     {
          Task Add(Receiver receiver); 
+         Task<Receiver> GetReciverById(string ReceiverId);
     }
 }

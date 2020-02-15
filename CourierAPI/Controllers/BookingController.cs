@@ -21,14 +21,19 @@ namespace CourierAPI.Controllers
         private readonly DataContext _context;
         private readonly IBookingService _bookingService;
         private readonly IStatusService _statusService;
+        public readonly IMerchantService _merchantService;
+        public readonly IReceiverService _receiverService;
         
         public BookingController(IUnitOfWork unitOfWork, DataContext context, 
-                                IBookingService bookingService, IStatusService statusService)
+                                IBookingService bookingService, IStatusService statusService,
+                                IMerchantService merchantService, IReceiverService receiverService)
         {
             _context = context;
             _unitOfWork = unitOfWork;
             _bookingService = bookingService;
             _statusService = statusService;
+            _merchantService = merchantService;
+            _receiverService = receiverService;
             
         }
         [HttpGet("test")]
@@ -157,6 +162,18 @@ namespace CourierAPI.Controllers
             // var result = await _unitOfWork.CompleteAsync();
             // if(result == 0) return BadRequest("Assigned Failled!");
             return Ok();
+        }
+         [HttpGet("search")]
+        public async Task<ActionResult> SearchBooking(string SerialNo)
+        {
+            var booking = await _bookingService.SearchBookingBySerialNo(SerialNo);
+            if(booking == null)
+            {
+                return NotFound();
+            }
+            var merchant = await _merchantService.GetMerchant(booking.MerchantId);
+            var receiver = await _receiverService.GetReceiver(booking.ReceiverId);
+            return Ok(new {booking});
         }
     }
 }

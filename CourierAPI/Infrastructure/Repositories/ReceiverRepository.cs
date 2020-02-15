@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using CourierAPI.Core.IRepositories;
 using CourierAPI.Core.Models;
@@ -18,6 +19,12 @@ namespace CourierAPI.Infrastructure.Repositories
         public async Task Add(Receiver receiver)
         {
             await _context.Receivers.AddAsync(receiver);
+        }
+
+        public async Task<Receiver> GetReciverById(string ReceiverId)
+        {
+            var result = await _context.Receivers.FindAsync(ReceiverId);
+            return result;
         }
     }
 }
