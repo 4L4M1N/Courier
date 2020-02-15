@@ -1,3 +1,4 @@
+import { BookingreportComponent } from './admin/bookingreport/bookingreport.component';
 import { DivisionzonecreationComponent } from './admin/divisionzonecreation/divisionzonecreation.component';
 import {Routes} from '@angular/router';
 import { HomeComponent } from './home/home.component';
@@ -33,7 +34,8 @@ export const appRoutes: Routes = [
                 { path: 'manage-requested-booking', component: ManageRequestedBookingComponent},
                 { path: 'merchant-agreement/:merchantId', component: MerchantAgreementComponent},
                 { path: 'merchant-item/:merchantId', component: MerchantItemComponent},
-                {path: 'merchant-agreement/edit', component: MerchantEditComponent}
+                {path: 'merchant-agreement/edit', component: MerchantEditComponent},
+                {path: 'bookingreport', component: BookingreportComponent}
             ]
             }
         ],
