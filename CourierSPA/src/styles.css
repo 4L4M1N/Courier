@@ -49,5 +49,8 @@ mat-list-option:hover, .mat-list-option:focus, .mat-nav-list .mat-list-item:hove
       transform: rotate(90deg);
   }
 
-html, body { min-height:20%;}
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { min-height:100%;}
+body { margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+  min-height: auto;
+  }

@@ -1,8 +1,14 @@
 .leftNav {
+    min-height: auto;
     width:250px;
 }
 .body {
-    height: 800px;
+  width: 100%;
+  height: 1000px;
+  box-sizing: border-box;
+}
+mat-card {
+  min-height: 600px;
 }
 #mainBody {
     padding-top: 50px;
