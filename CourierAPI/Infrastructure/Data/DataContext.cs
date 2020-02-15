@@ -38,6 +38,7 @@ namespace CourierAPI.Infrastructure.Data
         {
             base.OnModelCreating(builder);
 
+
             // Override default AspNet Identity table names
             builder.Entity<IdentityUser>(entity => { entity.ToTable(name: "Users"); });
             builder.Entity<IdentityRole>(entity => { entity.ToTable(name: "Roles"); });
