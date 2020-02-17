@@ -16,9 +16,9 @@ namespace CourierAPI.Core.Models
         public string Address { get; set; }
         public string BankAccountNo { get; set; }
         public string TradeLicenseNo { get; set; }
-        [JsonIgnore]
+        // [JsonIgnore]
         public byte[] PasswordHash { get; set; }
-        [JsonIgnore]
+        // [JsonIgnore]
         public byte[] PasswordSalt { get; set; }
     }
 }

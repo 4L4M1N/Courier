@@ -34,7 +34,7 @@ namespace CourierAPI.Infrastructure.Repositories
 
         public async Task<Booking> FindBookingBySerialNo(string bookingSerialNo)
         {
-             var result = await _context.Bookings.Where(b =>b.SerialNo== bookingSerialNo).FirstOrDefaultAsync();
+             var result = await _context.Bookings.Where(b =>b.SerialNo== bookingSerialNo).Include(x=>x.Merchant).Include(x=>x.Receiver).AsNoTracking().FirstOrDefaultAsync();
             return result;
         }
     }
