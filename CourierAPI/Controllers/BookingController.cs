@@ -171,8 +171,11 @@ namespace CourierAPI.Controllers
             {
                 return NotFound();
             }
-            var merchant = await _merchantService.GetMerchant(booking.MerchantId);
-            var receiver = await _receiverService.GetReceiver(booking.ReceiverId);
+            // var convertToJson = new Seri
+           
+            // booking.Merchant.PasswordHash = null;
+            // var merchant = await _merchantService.GetMerchant(booking.MerchantId);
+            // var receiver = await _receiverService.GetReceiver(booking.ReceiverId);
             return Ok(new {booking});
         }
     }
