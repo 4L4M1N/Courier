@@ -18,12 +18,19 @@
             <mat-datepicker #ToPicker></mat-datepicker>
           </mat-form-field>
           <br>
-          <button mat-button (click)="check()" mat-raised-button color="primary">Check Date</button>
+          <!-- <button mat-button (click)="check()" mat-raised-button color="primary">Check Date</button> -->
         </div>
       </div>
     </div>
     <div class="col-sm-6">
-      One of three columns
+      <div class="card">
+        <div class="card-header">
+          Reports
+        </div>
+        <div class="card-body">
+          <button mat-button (click)="generatePdf()" mat-raised-button color="primary">{{reportNumber+1}}. Booking Details</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
