@@ -41,6 +41,7 @@ import { RequestBookingComponent } from './request-booking/request-booking.compo
 import { ManageRequestedBookingComponent } from './admin/manage-requested-booking/manage-requested-booking.component';
 import { StatusService } from './services/status.service';
 import { SetStatusComponent } from './admin/setStatus/setStatus.component';
+import { BookingReportService } from './services/Report/booking/bookingReport.service';
 
 
 
@@ -109,6 +110,7 @@ import { SetStatusComponent } from './admin/setStatus/setStatus.component';
       DeliveryAddressService,
       ItemcreationService,
       StatusService,
+      BookingReportService,
       DatePipe,
       { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
    ],
