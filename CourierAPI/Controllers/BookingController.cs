@@ -178,5 +178,14 @@ namespace CourierAPI.Controllers
             // var receiver = await _receiverService.GetReceiver(booking.ReceiverId);
             return Ok(new {booking});
         }
+        //show from to date report
+        [HttpGet("datewisereport")]
+        //DateTime from, DateTime to
+        public async Task<ActionResult> ShowReportDateWise([FromQuery]DateTime FromDate, DateTime ToDate)
+        {
+            
+            var result = await _bookingService.GetBookingDetailsForReport(FromDate,ToDate);
+            return Ok(result);
+        }
     }
 }

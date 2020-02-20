@@ -27,7 +27,7 @@ namespace CourierAPI.Infrastructure.Services
 
         public async Task<List<BookingDetailsReport>> GetBookingDetailsForReport(DateTime From, DateTime To)
         {
-            var result = await _context.ShowBookingDetailsReport.FromSqlRaw("exec BookingPreview {0}, {1}",From, To).ToListAsync();
+            var result = await _context.ShowBookingDetailsReport.FromSqlRaw("exec BookingDetails {0}, {1}",From, To).ToListAsync();
             return result;
         }
 
