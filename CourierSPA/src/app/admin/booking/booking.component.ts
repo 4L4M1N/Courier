@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Merchants } from 'src/app/models/Merchants';
 import { MerchantService } from 'src/app/services/Merchant.service';
 import { Iitem } from 'src/app/models/Iitem';
@@ -41,13 +41,17 @@ export class BookingComponent implements OnInit {
   tempTotal: number;
   bookingAndDelivCharge: number;
   discount = 0;
-  itemPrice:number;
+  itemPrice: number;
+  kala:any;
   conditionCharge: number;
   conditionChargeTemp: number;
   courierBill: number;
   merchantBill: number;
   merchantInfo: any;
   merchantId: any;
+  searchBookingId: any;
+  searchResult: any;
+  isSearch = false;
   showBookingSerial: any;
   isAddWithMainBill = false; // Add with main Bill
   isConditionChargeApply = false;    // Condition Charge
@@ -67,7 +71,7 @@ export class BookingComponent implements OnInit {
     divisionId: 0,
     zoneId: 0,
     totalAmount: 0,
-    discount:0,
+    discount: 0,
     isConditionCharge: false,
     isInCity: false,
     conditionCharge: 0,
@@ -86,24 +90,24 @@ export class BookingComponent implements OnInit {
 
   addItemAttribute: FormGroup;
   booking: FormGroup;
-  submitItemAttribute =  false;
+  submitItemAttribute = false;
   submitBooking = false;
   constructor(private route: ActivatedRoute, private merchentservice: MerchantService,
-              private itemcreationservice: ItemcreationService,
-              private deliveryAddressservice: DeliveryAddressService,
-              private modalService: ModalService,
-              private datePipe: DatePipe,
-              private bookingService: BookingService) {
-                this.itemcreationservice.GetItems().subscribe(data => { this.items = data});
-                this.deliveryAddressservice.GetDivisions().subscribe(r => {this.division = r});
-              }
+    private itemcreationservice: ItemcreationService,
+    private deliveryAddressservice: DeliveryAddressService,
+    private modalService: ModalService,
+    private datePipe: DatePipe,
+    private bookingService: BookingService) {
+    this.itemcreationservice.GetItems().subscribe(data => { this.items = data });
+    this.deliveryAddressservice.GetDivisions().subscribe(r => { this.division = r });
+  }
 
   ngOnInit() {
     this.route.paramMap
-    .subscribe(params => {
-      this.merchantId = params.get('merchantId');
-      console.log(this.merchantId);
-    });
+      .subscribe(params => {
+        this.merchantId = params.get('merchantId');
+        console.log(this.merchantId);
+      });
     this.GetMerchantInfo();
     // this.GetBookingSerial();
 
@@ -130,14 +134,14 @@ export class BookingComponent implements OnInit {
   // Get merchant info
   GetMerchantInfo() {
     this.merchentservice.GetMerchant(this.merchantId)
-    .subscribe(data => {
-      this.merchantInfo = data;
-      
-      console.log(this.merchantIdentity);
-      this.merchantIdentity = this.merchantInfo.merchantIdentity;
-      console.log(this.merchantInfo.merchantIdentity);
-      this.GetBookingSerial();
-    });
+      .subscribe(data => {
+        this.merchantInfo = data;
+
+        console.log(this.merchantIdentity);
+        this.merchantIdentity = this.merchantInfo.merchantIdentity;
+        console.log(this.merchantInfo.merchantIdentity);
+        this.GetBookingSerial();
+      });
   }
   GetBookingSerial() {
     console.log(this.merchantIdentity);
@@ -150,21 +154,15 @@ export class BookingComponent implements OnInit {
   onSelectDivision(event) {
     this.booking.controls['itemid'].setValue('');
     this.booking.controls['attributeId'].setValue('');
-    // this.itemAttributeDetails.bookingCharge = 0;
-    // this.itemAttributeDetails.conditionCharge = 0;
-    // this.itemAttributeDetails.inCityRate = 0;
-    // this.itemAttributeDetails.outCityRate = 0;
-    // this.itemAttributeDetails.itemSize = '';
     this.itemPrice = 0;
-    
     let divisionName = event.target['options']
-                      [event.target['options'].selectedIndex].text;
-                      console.log(divisionName);
-    if(divisionName === 'Dhaka') {
+    [event.target['options'].selectedIndex].text;
+    console.log(divisionName);
+    if (divisionName === 'Dhaka') {
       this.isInCity = true;
       console.log(this.isInCity);
     } else {
-      
+
       this.isInCity = false;
       console.log(this.isInCity);
     }
@@ -185,163 +183,49 @@ export class BookingComponent implements OnInit {
     let value = event.target.value;
     let itemId = value;
     console.log(itemId);
-    if (itemId === 0) {
-      this.listItemAttributes == null;
-    } else {
-      this.itemcreationservice.GetItemAttributesOfAnItemMerchant(itemId,this.merchantId).subscribe(data => {
-        
-        this.listItemAttributes = data;
-      });
-    }
+    this.GetItemAttributes(itemId);
   }
-  onSelectItemAttribute(event) {
-    let value = event.target.value;
-    let itemAttributeId = value;
-    console.log(itemAttributeId)
-    if(itemAttributeId === 0) {
-      this.itemAttributeDetails == null;
-    } else {
-      this.itemcreationservice.GetItemAttributeDetails(itemAttributeId).subscribe(data => {
-        this.itemAttributeDetails = data;
-        this.conditionChargeTemp = this.itemAttributeDetails['conditionCharge'];
-        console.log(this.conditionCharge);
-         // this.total = 0;
-         this.isConditionChargeApply = false;
-         this.itemPrice = 0;
-        // if (this.isInCity) {
-        //   this.total = this.total + this.itemAttributeDetails['inCityRate'] + this.itemAttributeDetails['bookingCharge'];
-        //  } else {
-        //   this.total = this.total + this.itemAttributeDetails['outCityRate'] + this.itemAttributeDetails['bookingCharge'];
-        //  }
-        // this.tempTotal = this.total;
-        // console.log(this.total);
-      })
-    }
-  }
-  onSearchChange(searchValue: string): void { 
-    console.log(searchValue);
-    // this.total = this.tempTotal;
-    console.log(this.total);
-    this.total = this.total - (+searchValue);
-    console.log(this.total);
-  }
-  onItemPriceChange(itemPrice: any): void {
-    this.conditionCharge = 0;
-    this.total = 0;
-    this.payableAmount = 0;
-    this.courierBill = 0;
-    this.merchantBill = 0;
-    this.itemPrice = parseFloat(itemPrice);
-    if (this.isInCity) {
-      this.bookingAndDelivCharge = (this.itemAttributeDetails['inCityRate'] + this.itemAttributeDetails['bookingCharge']);
-      this.total = this.total + (this.itemAttributeDetails['inCityRate'] + this.itemAttributeDetails['bookingCharge']);
-      this.payableAmount = this.total;
-      this.courierBill = this.bookingAndDelivCharge;
-      this.merchantBill = this.itemPrice;
-      console.log(this.merchantBill);
-    } else {
-      this.bookingAndDelivCharge = this.itemAttributeDetails['outCityRate'] + this.itemAttributeDetails['bookingCharge'];
-      this.total = this.total + this.itemAttributeDetails['outCityRate'] + this.itemAttributeDetails['bookingCharge'];
-      this.payableAmount = this.total;
-      this.courierBill = this.bookingAndDelivCharge;
-      this.merchantBill = this.itemPrice;
-      console.log(this.merchantBill);
-    }
-    
-    console.log(this.total);
-    this.total = this.total + this.itemPrice;
-    this.payableAmount = this.total;
-    this.tempTotal = this.total;
-    this.conditionCharge =  (this.itemPrice * this.conditionChargeTemp) / 100;
-    if(this.isConditionChargeApply == true) {
-      this.total = 0;
-      if (this.isInCity) {
-        this.bookingAndDelivCharge = (this.itemAttributeDetails['inCityRate'] + this.itemAttributeDetails['bookingCharge']);
-        this.total = this.total + this.itemAttributeDetails['inCityRate'] + this.itemAttributeDetails['bookingCharge'];
-       this.payableAmount = this.total;
-       this.courierBill = this.bookingAndDelivCharge;
-      
-      } else {
-        this.bookingAndDelivCharge = this.itemAttributeDetails['outCityRate'] + this.itemAttributeDetails['bookingCharge'];
-        this.total = this.total + this.itemAttributeDetails['outCityRate'] + this.itemAttributeDetails['bookingCharge'];
-        this.payableAmount = this.total;
-        this.courierBill = this.bookingAndDelivCharge;
-      }
-      this.tempTotal = this.total;
-      console.log(this.total);
-      this.bookingAndDelivCharge = this.bookingAndDelivCharge + this.conditionCharge;
-      this.total = this.tempTotal + this.conditionCharge;
-      this.payableAmount = this.total;
-      this.courierBill = this.bookingAndDelivCharge;
-    }
-  }
-  conditionChargeChange(isChanged:any) {
-    if(isChanged.checked && this.conditionCharge !== 0 && this.itemPrice !== 0) 
-    {
-      // if(this.isAddWithMainBill == true) {this.isAddWithMainBill = false;}
-      this.total = 0;
-      this.payableAmount = 0;
-      this.courierBill = 0;
-      this.total = this.tempTotal + this.conditionCharge;
-      this.courierBill = this.bookingAndDelivCharge + this.conditionCharge;
-      this.payableAmount = this.total;
-    } else {
-     
-      this.total = this.tempTotal;
-      this.payableAmount = this.total;
-      this.courierBill = this.bookingAndDelivCharge;
 
-      console.log(this.total);
-    }
-    console.log(isChanged.checked);
-  }
-  // addWithMainBill(isAdd: any)
-  // {
-  //   if (isAdd.checked && this.conditionCharge !== 0 && this.itemPrice !== 0)
-  //   {
-  //     this.payableAmount = 0;
-  //     console.log(this.total);
-  //     if(this.isConditionChargeApply)
-  //     {
-  //       this.payableAmount = this.total - this.bookingAndDelivCharge - this.conditionCharge;
-  //     } else {
-  //       this.payableAmount = this.total - this.bookingAndDelivCharge;
-  //     }
-      
-  //   } else {
-  //     this.payableAmount = this.total;
-  //   }
-  // }
 
   get addItemAttributeForm() { return this.addItemAttribute.controls; }
   get bookingForm() { return this.booking.controls; }
-  
-  //Add to table
-  // addItemAttributeToList() {
-  //   console.log(this.isConditionChargeApply);
-  //   this.submitItemAttribute = true;
-  //   if (this.addItemAttribute.invalid) {
-  //     console.log("error");
-  //     return;
-  // }
-  //   var itemid = this.addItemAttribute.controls['itemid'].value;
-  //   var itemAttributeId = this.addItemAttribute.controls['attributeId'].value;
-  //   this.itemAttributeIDs.push(itemAttributeId);
-  //   this.itemcreationservice.GetItemAttributeDetails(itemAttributeId).subscribe(data => {
-  //     this.tempItemAttribute = data;
-  //     this.itemAttributeTable.push(this.tempItemAttribute);
-  //   });
-  //   console.log(this.itemAttributeIDs);
-  //   console.log(this.itemAttributeTable);
-  // }
 
+  search() {
+    this.isSearch = true;
+    this.bookingService.SearchBooking(this.searchBookingId).subscribe(data => {
+      this.searchResult = data;
+      console.log(this.searchResult);
+    }, error => {
+    });
+    setTimeout(() => {
+    if (this.searchResult != null) {
+      console.log(this.searchResult.bookingItem.id);
+      this.booking.controls['itemid'].setValue(this.searchResult.item.itemId);
+      this.GetItemAttributes(this.searchResult.item.itemId);
+      this.GetItemAttributesOnChange(this.searchResult.bookingItem.itemAttributeId);
+      setTimeout(()=> {this.onItemPriceChange(this.searchResult.itemPrice);
+        this.isConditionChargeApply = this.searchResult.bookingItem.isConditionChargeApply;
+        this.conditionChargeChangeForSearch(this.isConditionChargeApply);
+      },300)
+     
+      this.booking.controls['attributeId'].setValue(this.searchResult.bookingItem.itemAttributeId);
+      this.itemPrice = this.searchResult.itemPrice;
+      console.log('Item Price'+this.itemPrice);
+      this.isInCity = this.searchResult.bookingItem.isInCity;
+      
+    console.log('i am'+this.itemAttributeDetails);
+     
+    } else {
+      this.modalService.openErrorModal("No Booking found");
+    }
+},300);
+  }
   addBooking() {
     this.submitBooking = true;
     if (this.booking.invalid) {
       console.log("error");
       return;
     }
-    
     this.placeBooking.merchantId = this.merchantInfo.id;
     this.placeBooking.receiverName = this.booking.controls['receiverName'].value;
     this.placeBooking.receiverPhone = this.booking.controls['receiverPhone'].value;
@@ -384,7 +268,129 @@ export class BookingComponent implements OnInit {
     });
 
   }
-  
+  GetItemAttributes(itemId) {
+    if (itemId === 0) {
+      this.listItemAttributes == null;
+    } else {
+      this.itemcreationservice.GetItemAttributesOfAnItemMerchant(itemId, this.merchantId).subscribe(data => {
+
+        this.listItemAttributes = data;
+      });
+    }
+  }
+  onSelectItemAttribute(event) {
+    let value = event.target.value;
+    let itemAttributeId = value;
+    console.log(itemAttributeId)
+    this.GetItemAttributesOnChange(itemAttributeId);
+  }
+  GetItemAttributesOnChange(itemAttributeId) {
+    if (itemAttributeId === 0) {
+      this.itemAttributeDetails == null;
+    } else {
+      this.itemcreationservice.GetItemAttributeDetails(itemAttributeId).subscribe(data => {
+       
+        this.itemAttributeDetails = data;
+        this.conditionChargeTemp = this.itemAttributeDetails['conditionCharge'];
+        console.log(this.isConditionChargeApply);
+        //this.isConditionChargeApply = false;
+        //this.itemPrice = 0;
+        
+      },error => {
+        console.log('error');
+      });
+    }
+  }
+  onSearchChange(searchValue: string): void {
+    console.log(searchValue);
+    // this.total = this.tempTotal;
+    console.log(this.total);
+    this.total = this.total - (+searchValue);
+    console.log(this.total);
+  }
+  onItemPriceChange(itemPrice: any): void {
+    console.log(itemPrice);
+    this.conditionCharge = 0;
+    this.total = 0;
+    this.payableAmount = 0;
+    this.courierBill = 0;
+    this.merchantBill = 0;
+    this.itemPrice = parseFloat(itemPrice);
+    if (this.isInCity) {
+      this.bookingAndDelivCharge = (this.itemAttributeDetails.inCityRate+ this.itemAttributeDetails.bookingCharge);
+      this.total = this.total + (this.itemAttributeDetails.inCityRate + this.itemAttributeDetails.bookingCharge);
+      this.payableAmount = this.total;
+      this.courierBill = this.bookingAndDelivCharge;
+      this.merchantBill = this.itemPrice;
+      console.log(this.merchantBill);
+    } else {
+      this.bookingAndDelivCharge = this.itemAttributeDetails.outCityRate+ this.itemAttributeDetails.bookingCharge;
+      this.total = this.total + this.itemAttributeDetails.outCityRate + this.itemAttributeDetails.bookingCharge;
+      this.payableAmount = this.total;
+      this.courierBill = this.bookingAndDelivCharge;
+      this.merchantBill = this.itemPrice;
+      console.log(this.merchantBill);
+    }
+
+    console.log(this.total);
+    this.total = this.total + this.itemPrice;
+    this.payableAmount = this.total;
+    this.tempTotal = this.total;
+    this.conditionCharge = (this.itemPrice * this.conditionChargeTemp) / 100;
+    if (this.isConditionChargeApply == true) {
+      this.total = 0;
+      if (this.isInCity) {
+        this.bookingAndDelivCharge = (this.itemAttributeDetails['inCityRate'] + this.itemAttributeDetails['bookingCharge']);
+        this.total = this.total + this.itemAttributeDetails['inCityRate'] + this.itemAttributeDetails['bookingCharge'];
+        this.payableAmount = this.total;
+        this.courierBill = this.bookingAndDelivCharge;
+
+      } else {
+        this.bookingAndDelivCharge = this.itemAttributeDetails['outCityRate'] + this.itemAttributeDetails['bookingCharge'];
+        this.total = this.total + this.itemAttributeDetails['outCityRate'] + this.itemAttributeDetails['bookingCharge'];
+        this.payableAmount = this.total;
+        this.courierBill = this.bookingAndDelivCharge;
+      }
+      this.tempTotal = this.total;
+      console.log(this.total);
+      this.bookingAndDelivCharge = this.bookingAndDelivCharge + this.conditionCharge;
+      this.total = this.tempTotal + this.conditionCharge;
+      this.payableAmount = this.total;
+      this.courierBill = this.bookingAndDelivCharge;
+    }
+  }
+  conditionChargeChangeForSearch(isChanged: any) {
+    if (isChanged && this.conditionCharge !== 0 && this.itemPrice !== 0) {
+      this.total = 0;
+      this.payableAmount = 0;
+      this.courierBill = 0;
+      this.total = this.tempTotal + this.conditionCharge;
+      this.courierBill = this.bookingAndDelivCharge + this.conditionCharge;
+      this.payableAmount = this.total;
+    } else {
+      this.total = this.tempTotal;
+      this.payableAmount = this.total;
+      this.courierBill = this.bookingAndDelivCharge;
+      console.log(this.total);
+    }
+    console.log(isChanged.checked);
+  }
+  conditionChargeChange(isChanged: any) {
+    if (isChanged.checked && this.conditionCharge !== 0 && this.itemPrice !== 0) {
+      this.total = 0;
+      this.payableAmount = 0;
+      this.courierBill = 0;
+      this.total = this.tempTotal + this.conditionCharge;
+      this.courierBill = this.bookingAndDelivCharge + this.conditionCharge;
+      this.payableAmount = this.total;
+    } else {
+      this.total = this.tempTotal;
+      this.payableAmount = this.total;
+      this.courierBill = this.bookingAndDelivCharge;
+      console.log(this.total);
+    }
+    console.log(isChanged.checked);
+  }
   generatePdf() {
     console.log(this.merchantName);
     this.invoice.merchantName = this.merchantInfo.name;
@@ -400,11 +406,11 @@ export class BookingComponent implements OnInit {
 
     var documentDefinition = this.getDocumentDefinition();
     pdfMake.createPdf(documentDefinition).open();
-   }
+  }
 
-   // set data for pdf
-   getDocumentDefinition() {
-     
+  // set data for pdf
+  getDocumentDefinition() {
+
     sessionStorage.setItem('resume', JSON.stringify(this.invoice));
     return {
       pageSize: 'A4',
@@ -428,9 +434,6 @@ export class BookingComponent implements OnInit {
             {
               text: 'Email : ' + this.invoice.merchantEmail + '\n\n',
             }
-            ], 
-            [
-              this.getProfilePicObject()
             ]
           ]
         },
@@ -441,15 +444,15 @@ export class BookingComponent implements OnInit {
                 text: 'Receiver Info'
               },
               {
-              text: this.invoice.receiverName,
-              style: 'name'
-            },
-            {
-              text: this.invoice.receiverPhone
-            },
-            {
-              text: 'Address : ' + this.invoice.reciverAddress + '\n\n',
-            }
+                text: this.invoice.receiverName,
+                style: 'name'
+              },
+              {
+                text: this.invoice.receiverPhone
+              },
+              {
+                text: 'Address : ' + this.invoice.reciverAddress + '\n\n',
+              }
             ]
           ]
         },
@@ -459,52 +462,52 @@ export class BookingComponent implements OnInit {
             // headers are automatically repeated if the table spans over multiple pages
             // you can declare how many rows should be treated as headers
             headerRows: 1,
-            widths: [ '*', 'auto', 100, '*' ],
+            widths: ['*', 'auto', 100, '*'],
             body: [
-              [ 'Description', 'Date', 'Discount', 'Total' ],
-              [ 'Test', this.datePipe.transform( new Date(),'yyyy-MM-dd') , this.invoice.discount, this.invoice.total ]
+              ['Description', 'Date', 'Discount', 'Total'],
+              ['Test', this.datePipe.transform(new Date(), 'yyyy-MM-dd'), this.invoice.discount, this.invoice.total]
             ]
           }
         }
       ],
-        styles: {
-          name: {
-            fontSize: 10,
-            bold: true
-          }
+      styles: {
+        name: {
+          fontSize: 10,
+          bold: true
         }
+      }
     };
-   }
-   getProfilePicObject() {
-    if (this.logoUrl) {
-      return {
-        image:  '',
-        width: 75,
-        alignment : 'right'
-      };
-    }
-    return null;
   }
-  getBase64ImageFromURL(url) {
-    return new Promise((resolve, reject) => {
-      var img = new Image();
-      img.setAttribute("crossOrigin", "anonymous");
-      img.onload = () => {
-        var canvas = document.createElement("canvas");
-        canvas.width = img.width;
-        canvas.height = img.height;
-        var ctx = canvas.getContext("2d");
-        ctx.drawImage(img, 0, 0);
-        var dataURL = canvas.toDataURL("image/png");
-        resolve(dataURL);
-      };
-      img.onerror = error => {
-        reject(error);
-      };
-      img.src = url;
-    });
-  }
-   openInfoModal() {
+  // getProfilePicObject() {
+  //   if (this.logoUrl) {
+  //     return {
+  //       image: '',
+  //       width: 75,
+  //       alignment: 'right'
+  //     };
+  //   }
+  //   return null;
+  // }
+  // getBase64ImageFromURL(url) {
+  //   return new Promise((resolve, reject) => {
+  //     var img = new Image();
+  //     img.setAttribute("crossOrigin", "anonymous");
+  //     img.onload = () => {
+  //       var canvas = document.createElement("canvas");
+  //       canvas.width = img.width;
+  //       canvas.height = img.height;
+  //       var ctx = canvas.getContext("2d");
+  //       ctx.drawImage(img, 0, 0);
+  //       var dataURL = canvas.toDataURL("image/png");
+  //       resolve(dataURL);
+  //     };
+  //     img.onerror = error => {
+  //       reject(error);
+  //     };
+  //     img.src = url;
+  //   });
+  // }
+  openInfoModal() {
     this.modalService.openInfoModal('Booking added');
   }
 }

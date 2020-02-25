@@ -32,4 +32,8 @@ Create(booking: Booking) {
     console.log(model);
     return this.http.post(this.baseURL + 'setbookingstatus' , model);
   }
+  SearchBooking(SerialNo: any) {
+    let query = encodeURIComponent('SerialNo') + '=' + encodeURIComponent(SerialNo);
+    return this.http.get(this.baseURL + 'search' + '?' + query);
+  }
 }

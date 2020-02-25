@@ -164,19 +164,19 @@ namespace CourierAPI.Controllers
             return Ok();
         }
          [HttpGet("search")]
-        public async Task<ActionResult> SearchBooking(string SerialNo)
+        public async Task<ActionResult> SearchBooking([FromQuery]string SerialNo)
         {
             var booking = await _bookingService.SearchBookingBySerialNo(SerialNo);
             if(booking == null)
             {
-                return NotFound();
+                return BadRequest();
             }
-            // var convertToJson = new Seri
-           
-            // booking.Merchant.PasswordHash = null;
-            // var merchant = await _merchantService.GetMerchant(booking.MerchantId);
-            // var receiver = await _receiverService.GetReceiver(booking.ReceiverId);
-            return Ok(new {booking});
+            var bookingItem = await _context.BookingItems.FirstOrDefaultAsync(x=>x.BookingId == booking.Id);
+            var itemAttribute = await _context.ItemAttributes.Include(i=>i.Item).FirstOrDefaultAsync(x=>x.ItemAttributeId == bookingItem.ItemAttributeId);
+            
+            booking.BookingItem = bookingItem;
+            booking.Item = itemAttribute.Item;
+            return Ok(booking);
         }
         //show from to date report
         [HttpGet("datewisereport")]

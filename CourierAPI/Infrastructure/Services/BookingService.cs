@@ -34,6 +34,11 @@ namespace CourierAPI.Infrastructure.Services
         public async Task<Booking> SearchBookingBySerialNo(string SerialNo)
         {
             var result = await _unitOfWork.Bookings.FindBookingBySerialNo(SerialNo);
+            if(result!=null)
+            {
+                result.Merchant.PasswordHash = null;
+                result.Merchant.PasswordSalt = null;
+            }
             return result;
         }
     }
