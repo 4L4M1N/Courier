@@ -26,5 +26,9 @@ namespace CourierAPI.Core.Models
         public DateTime DeliveredDate { get; set; }
         public string Status { get; set; }
         public string SerialNo { get; set; }
+        [NotMapped]
+        public BookingItem BookingItem { get; set; }
+        [NotMapped]
+        public Item Item { get; set; }
     }
 }

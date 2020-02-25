@@ -2,6 +2,17 @@
   <h5 class="card-title text-center">booking Form</h5>
   <!-- Merchant info start -->
   <div class="row">
+    <div class="col-12">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" [(ngModel)]="searchBookingId"  id="search" placeholder="Search By Booking Serial no" aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button mat-raised-button color="primary" (click)="search()" id="searchButton" class="btn btn-primary">Search</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
       <div class="col-12">
         <div class="card">
           <div class="card-header">
@@ -168,7 +179,7 @@
                   </div>
                   <div class="form-group">
                     <label>Item Price</label>
-                    <input type="number" class="form-control" [(ngModel)]="itemPrice" 
+                    <input type="number" class="form-control" [(ngModel)] = "itemPrice" 
                     [ngModelOptions]="{standalone: true}"
                     (input)="onItemPriceChange($event.target.value)">
                   </div>
@@ -181,6 +192,7 @@
                       readonly>
                   </div>
                   <mat-checkbox [(ngModel)]="isConditionChargeApply" class="example-margin"
+                  [checked]="isConditionChargeApply"
                   [ngModelOptions]="{standalone: true}"
                   (change)="conditionChargeChange($event)">
                     <label>Apply Condition Charge </label>
@@ -214,9 +226,25 @@
                 </div>
               </div>
           </div>
-          <button mat-raised-button color="primary" (click)="addBooking()" type="submit">
-            Add Booking
-          </button>
+          <div class="row">
+           <div class="col-sm-5 col-md-5 col-lg-5 mx-auto">
+
+            <button mat-raised-button  class="btn btn-danger mr-2 ml-2">Delete</button>
+            <button mat-raised-button  class="btn btn-success mr-2">Update</button>
+            <button mat-raised-button color="primary"  class="btn btn-primary mr-2" (click)="addBooking()" type="submit">
+              Add Booking
+            </button>
+            <button mat-raised-button class="btn btn-info" (click)="generatePdf()">Print</button>
+           </div>
+            <!--  <div class="col-sm-4 col-md-4 col-lg-4 mx-auto">
+                <button mat-raised-button  class="btn btn-danger mr-2">Delete</button>
+                <button mat-raised-button  class="btn btn-success mr-2">Update</button>
+                <button mat-raised-button color="primary"  class="btn btn-primary mr-3" (click)="addBooking()" type="submit">
+                  Add Booking
+                </button>
+            </div> -->
+            
+          </div>
         </div>
       </div>
     </div>
@@ -225,6 +253,7 @@
   <!-- <form #loginForm="ngForm" (ngSubmit)="a()">  -->
     
 <!-- paste here -->
+
   <button mat-raised-button color="primary" (click)="generatePdf()">Print</button>
   <br>
 
