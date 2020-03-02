@@ -17,5 +17,21 @@ namespace CourierAPI.Infrastructure.Services
             var result = await _unitOfWork.Receivers.GetReciverById(ReceiverId);
             return result;
         }
+
+        public async Task<bool> Update(Receiver receiver)
+        {
+            var isReceiverExists = await _unitOfWork.Receivers.GetReciverById(receiver.Id);
+            if(isReceiverExists == null)
+            {
+                return false;
+            }
+            isReceiverExists.Name = receiver.Name;
+            isReceiverExists.Phone = receiver.Phone;
+            isReceiverExists.Email = receiver.Email;
+            isReceiverExists.Address = receiver.Address;
+            isReceiverExists.ZoneId = receiver.ZoneId;
+             await _unitOfWork.CompleteAsync();
+            return true;
+        }
     }
 }

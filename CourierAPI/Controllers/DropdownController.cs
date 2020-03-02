@@ -203,6 +203,14 @@ namespace CourierAPI.Controllers
             if (result == null) return BadRequest();
             return Ok(result);
         }
+        [HttpGet("zones/{zoneId?}")]
+        public async Task<IActionResult> DivisionOfAZone(string zoneId)
+        {
+            int id = int.Parse(zoneId);
+            var result = await _unitOfWork.DeliveryAddress.GetDivisionOfAZone(id);
+            if (result == null) return BadRequest();
+            return Ok(result);
+        }
         // Create Division
         [HttpPost("division/create")]
         [Authorize(Roles = "CourierOwner")]

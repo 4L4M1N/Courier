@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CourierAPI.Core.DTOs;
 using CourierAPI.Core.IRepositories;
 using CourierAPI.Core.IServices;
 using CourierAPI.Core.Models;
@@ -40,6 +41,36 @@ namespace CourierAPI.Infrastructure.Services
                 result.Merchant.PasswordSalt = null;
             }
             return result;
+        }
+
+        public async Task<bool> Update(BookingDTO booking)
+        {
+            var isBookingExists = await _unitOfWork.Bookings.FindBookingById(booking.BookingId);
+            if(isBookingExists == null)
+            {
+                return false;
+            }
+            isBookingExists.ItemPrice = booking.ItemPrice;
+            isBookingExists.MerchantBill = booking.MerchantBill;
+            isBookingExists.CourierBill = booking.CourierBill;
+            isBookingExists.TotalAmmount = booking.TotalAmount;
+            isBookingExists.ItemPrice = booking.ItemPrice;
+            isBookingExists.ItemPrice = booking.ItemPrice;
+            isBookingExists.ConditionCharge = booking.ConditionCharge;
+            isBookingExists.TotalAmmount = booking.TotalAmount;
+            await _unitOfWork.CompleteAsync();
+            // var receiver = await _unitOfWork.Receivers.GetReciverById(booking.ReceiverId);
+            // receiver.ZoneId = booking.ZoneId;
+            
+            // receiver.Name = booking.ReceiverName;
+            var bookingItem = await _unitOfWork.BookingItems.FindBookingItemById(booking.BookingId);
+
+            bookingItem.IsConditionChargeApply = booking.IsConditionCharge;
+            bookingItem.IsInCity = booking.IsInCity;
+            bookingItem.IsOutCity = booking.IsOutCity;
+            bookingItem.ItemAttributeId = booking.ItemAttributeId;
+            await _unitOfWork.CompleteAsync();
+            return true;
         }
     }
 }

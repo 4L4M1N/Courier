@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CourierAPI.Core.Models
@@ -8,5 +9,6 @@ namespace CourierAPI.Core.Models
         
         [Required]
         public string Name { get; set; }
+        public List<Zone> Zones { get; set; }
     }
 }

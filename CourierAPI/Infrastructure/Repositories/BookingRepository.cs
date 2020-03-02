@@ -28,13 +28,13 @@ namespace CourierAPI.Infrastructure.Repositories
 
         public async Task Delete(string bookingId)
         {
-            var result = await _context.Bookings.FindAsync(bookingId);
+            var result = await _context.Bookings.Where(b=>b.Id == bookingId).FirstOrDefaultAsync();
             _context.Bookings.Remove(result);
         }
 
         public async Task<Booking> FindBookingBySerialNo(string bookingSerialNo)
         {
-             var result = await _context.Bookings.Where(b =>b.SerialNo== bookingSerialNo).Include(x=>x.Merchant).Include(x=>x.Receiver).AsNoTracking().FirstOrDefaultAsync();
+             var result = await _context.Bookings.Where(b =>b.SerialNo== bookingSerialNo).Include(x=>x.Merchant).Include(x=>x.Receiver).Include(x=>x.Receiver.Zone).FirstOrDefaultAsync();
             return result;
         }
     }

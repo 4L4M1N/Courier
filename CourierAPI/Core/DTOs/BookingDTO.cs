@@ -9,6 +9,8 @@ namespace CourierAPI.Core.DTOs
         public double Discount { get; set; }
         public int ItemAttributeId { get; set; }
         public string ReceiverName { get; set; }
+        public string ReceiverId{ get; set; }
+        public string BookingId { get; set; }
         public string ReceiverAddress { get; set; }
         public string ReceiverPhone { get; set; }
         public string ReceiverEmail { get; set; }

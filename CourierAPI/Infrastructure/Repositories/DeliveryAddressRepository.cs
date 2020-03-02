@@ -39,6 +39,13 @@ namespace CourierAPI.Infrastructure.Repositories
             return result;
         }
 
+        public async Task<Division> GetDivisionOfAZone(int zoneId)
+        {
+            var zone = await _context.Zones.FirstOrDefaultAsync(x=>x.ZoneId == zoneId);
+            var division = await _context.Divisions.FirstOrDefaultAsync(x=>x.DivisionId == zone.DivisionId);
+            return division;
+        }
+
         public async Task<IEnumerable<Division>> GetDivisions()
         {
             var divisions = await _context.Divisions.ToListAsync();
