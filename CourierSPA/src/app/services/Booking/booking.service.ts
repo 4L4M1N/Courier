@@ -3,6 +3,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Booking } from 'src/app/models/booking';
 import { Observable } from 'rxjs';
 import { BookingView } from 'src/app/models/viewModels/bookingView';
+import { Receiver } from 'src/app/models/receiver';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,23 @@ constructor(private http: HttpClient) { }
 Create(booking: Booking) {
     console.log(booking);
     return this.http.post(this.baseURL + 'add', booking);
+  }
+  Update(booking: Booking)
+  {
+    console.log(booking);
+    const receiver: Receiver = {
+      Id: booking.receiverId,
+      Email: booking.receiverEmail,
+      ZoneId: booking.zoneId,
+      Phone: booking.receiverPhone,
+      Address: booking.receiverAddress,
+      Name: booking.receiverName
+    };
+    var data = {
+      booking: booking,
+      receiver: receiver
+    };
+    return this.http.put(this.baseURL + 'update', data);
   }
   GetAllBooking(): Observable<BookingView[]> {
     return this.http.get<BookingView[]>(this.baseURL + 'all');

@@ -49,6 +49,8 @@ export class BookingComponent implements OnInit {
   merchantBill: number;
   merchantInfo: any;
   merchantId: any;
+  receiverId: any;
+  bookingId: any;
   searchBookingId: any;
   searchResult: any;
   isSearch = false;
@@ -81,7 +83,10 @@ export class BookingComponent implements OnInit {
     merchantBill: 0,
     receiverBill: 0,
     courierBill: 0,
-    merchantIdentity: ''
+    merchantIdentity: '',
+    receiverId: '',
+    bookingId: '',
+    receiverEmail: ''
   };
 
   // tempItemAttribute: ItemAttribute; // store itemAttributes to table
@@ -93,11 +98,11 @@ export class BookingComponent implements OnInit {
   submitItemAttribute = false;
   submitBooking = false;
   constructor(private route: ActivatedRoute, private merchentservice: MerchantService,
-    private itemcreationservice: ItemcreationService,
-    private deliveryAddressservice: DeliveryAddressService,
-    private modalService: ModalService,
-    private datePipe: DatePipe,
-    private bookingService: BookingService) {
+              private itemcreationservice: ItemcreationService,
+              private deliveryAddressservice: DeliveryAddressService,
+              private modalService: ModalService,
+              private datePipe: DatePipe,
+              private bookingService: BookingService) {
     this.itemcreationservice.GetItems().subscribe(data => { this.items = data });
     this.deliveryAddressservice.GetDivisions().subscribe(r => { this.division = r });
   }
@@ -116,6 +121,7 @@ export class BookingComponent implements OnInit {
       receiverName: new FormControl('', Validators.required),
       receiverPhone: new FormControl('', Validators.required),
       receiverAddress: new FormControl('', Validators.required),
+      receiverEmail: new FormControl('', Validators.required),
       divisionid: new FormControl('', Validators.required),
       zoneid: new FormControl('', Validators.required),
       itemid: new FormControl('', Validators.required),
@@ -150,11 +156,19 @@ export class BookingComponent implements OnInit {
       console.log(this.showBookingSerial.showBookingSerial);
     });
   }
+  GetDivision()
+  {
+    this.deliveryAddressservice.GetDivisions().subscribe(r => { this.division = r });
+  }
   // division dropdown populate
   onSelectDivision(event) {
     this.booking.controls['itemid'].setValue('');
     this.booking.controls['attributeId'].setValue('');
     this.itemPrice = 0;
+    if(this.isSearch)
+    {
+      this.onItemPriceChange(this.itemPrice);
+    }
     let divisionName = event.target['options']
     [event.target['options'].selectedIndex].text;
     console.log(divisionName);
@@ -170,6 +184,12 @@ export class BookingComponent implements OnInit {
     let value = event.target.value;
     let divId = value;
     //console.log(divId);
+    this.GetZonesOnChange(divId);
+   
+  }
+  GetZonesOnChange(divId)
+  {
+    console.log(divId);
     if (divId === 0) {
       this.listZones == null;
     } else {
@@ -191,7 +211,6 @@ export class BookingComponent implements OnInit {
   get bookingForm() { return this.booking.controls; }
 
   search() {
-    this.isSearch = true;
     this.bookingService.SearchBooking(this.searchBookingId).subscribe(data => {
       this.searchResult = data;
       console.log(this.searchResult);
@@ -199,32 +218,45 @@ export class BookingComponent implements OnInit {
     });
     setTimeout(() => {
     if (this.searchResult != null) {
+      this.isSearch = true;
       console.log(this.searchResult.bookingItem.id);
       this.booking.controls['itemid'].setValue(this.searchResult.item.itemId);
       this.GetItemAttributes(this.searchResult.item.itemId);
       this.GetItemAttributesOnChange(this.searchResult.bookingItem.itemAttributeId);
+      this.booking.controls['divisionid'].setValue(this.searchResult.receiver.zone.divisionId);
+      this.GetDivision();
+      this.booking.controls['zoneid'].setValue(this.searchResult.receiver.zone.zoneId);
+      this.GetZonesOnChange(this.searchResult.receiver.zone.divisionId);
+      this.receiverId = this.searchResult.receiver.id;
+      this.bookingId = this.searchResult.id;
+      this.booking.controls['receiverName'].setValue(this.searchResult.receiver.name);
+      this.booking.controls['receiverPhone'].setValue(this.searchResult.receiver.phone);
+      this.booking.controls['receiverAddress'].setValue(this.searchResult.receiver.address);
+      this.booking.controls['reference'].setValue(this.searchResult.receiver.address);
+      this.booking.controls['receiverEmail'].setValue(this.searchResult.receiver.email);
       setTimeout(()=> {this.onItemPriceChange(this.searchResult.itemPrice);
-        this.isConditionChargeApply = this.searchResult.bookingItem.isConditionChargeApply;
-        this.conditionChargeChangeForSearch(this.isConditionChargeApply);
-      },300)
-     
+                       this.isConditionChargeApply = this.searchResult.bookingItem.isConditionChargeApply;
+                       this.conditionChargeChangeForSearch(this.isConditionChargeApply);
+      }, 300);
       this.booking.controls['attributeId'].setValue(this.searchResult.bookingItem.itemAttributeId);
       this.itemPrice = this.searchResult.itemPrice;
       console.log('Item Price'+this.itemPrice);
       this.isInCity = this.searchResult.bookingItem.isInCity;
-      
-    console.log('i am'+this.itemAttributeDetails);
-     
     } else {
       this.modalService.openErrorModal("No Booking found");
     }
-},300);
+  }, 300);
   }
   addBooking() {
     this.submitBooking = true;
     if (this.booking.invalid) {
       console.log("error");
       return;
+    }
+    if(this.isSearch)
+    {
+      this.placeBooking.bookingId = this.bookingId;
+      this.placeBooking.receiverId = this.receiverId;
     }
     this.placeBooking.merchantId = this.merchantInfo.id;
     this.placeBooking.receiverName = this.booking.controls['receiverName'].value;
@@ -233,6 +265,7 @@ export class BookingComponent implements OnInit {
     this.placeBooking.divisionId = this.booking.controls['divisionid'].value;
     this.placeBooking.zoneId = this.booking.controls['zoneid'].value;
     this.placeBooking.itemAttributeId = this.booking.controls['attributeId'].value;
+    this.placeBooking.receiverEmail = this.booking.controls['receiverEmail'].value;
     this.placeBooking.discount = this.discountAmmount;
     this.placeBooking.totalAmount = this.total;
     this.placeBooking.itemPrice = this.itemPrice;
@@ -267,6 +300,53 @@ export class BookingComponent implements OnInit {
       console.log('error');
     });
 
+  }
+  UpdateBooking()
+  {
+    
+    this.placeBooking.bookingId = this.bookingId;
+    this.placeBooking.receiverId = this.receiverId;
+    this.placeBooking.merchantId = this.merchantInfo.id;
+    this.placeBooking.receiverName = this.booking.controls['receiverName'].value;
+    this.placeBooking.receiverPhone = this.booking.controls['receiverPhone'].value;
+    this.placeBooking.receiverAddress = this.booking.controls['receiverAddress'].value;
+    this.placeBooking.divisionId = this.booking.controls['divisionid'].value;
+    this.placeBooking.receiverEmail = this.booking.controls['receiverEmail'].value;
+    this.placeBooking.zoneId = this.booking.controls['zoneid'].value;
+    this.placeBooking.itemAttributeId = this.booking.controls['attributeId'].value;
+    this.placeBooking.discount = this.discountAmmount;
+    this.placeBooking.totalAmount = this.total;
+    this.placeBooking.itemPrice = this.itemPrice;
+    this.placeBooking.merchantIdentity = this.merchantIdentity;
+    this.placeBooking.courierBill = this.courierBill;
+    this.placeBooking.merchantBill = this.merchantBill;
+    this.placeBooking.receiverBill = this.payableAmount;
+    this.placeBooking.conditionCharge = this.conditionCharge;
+    // Condition Charge
+    if (this.isConditionChargeApply) {
+      this.placeBooking.isConditionCharge = true;
+      this.placeBooking.conditionCharge = this.conditionCharge;
+      console.log(this.conditionCharge);
+    } else {
+      this.placeBooking.isConditionCharge = false;
+      this.placeBooking.conditionCharge = 0;
+    }
+    // inCity OutCity
+
+    if (this.isInCity) {
+      this.placeBooking.isInCity = true;
+      this.placeBooking.isOutCity = false;
+    } else {
+      this.placeBooking.isInCity = false;
+      this.placeBooking.isOutCity = true;
+    }
+    console.log(this.placeBooking);
+    this.bookingService.Update(this.placeBooking).subscribe(() => {
+      console.log('created');
+      this.modalService.openInfoModal("Booking Updated");
+    }, error => {
+      console.log('error');
+    });
   }
   GetItemAttributes(itemId) {
     if (itemId === 0) {

@@ -6,6 +6,7 @@ export interface Booking {
     receiverName: string;
     receiverPhone: string;
     receiverAddress: string;
+    receiverEmail: string;
     totalAmount: number;
     discount: number;
     conditionCharge: number;
@@ -17,4 +18,6 @@ export interface Booking {
     merchantBill: number;
     courierBill: number;
     receiverBill: number;
+    receiverId:string;
+    bookingId:string;
 }

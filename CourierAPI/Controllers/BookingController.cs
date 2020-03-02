@@ -9,6 +9,8 @@ using CourierAPI.Core.Models;
 using CourierAPI.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
+using Extensions = CourierAPI.Helpers.Extensions;
 
 namespace CourierAPI.Controllers
 {
@@ -107,6 +109,23 @@ namespace CourierAPI.Controllers
             if (result == 0) return BadRequest("error occured");
             return Ok();
         }
+        [HttpPut("update")]
+        public async Task<IActionResult> Update(JObject data)
+        {
+            dynamic jsondata = data;
+            JObject receiverJson = jsondata.receiver;
+            JObject bookingJson = jsondata.booking;
+            var receiver = receiverJson.ToObject<Receiver>();
+            // Update Receiver
+            var isUpdateReceiver = await _receiverService.Update(receiver);
+            var booking = bookingJson.ToObject<BookingDTO>();
+            var isUpdateBooking = await _bookingService.Update(booking);
+            if(isUpdateBooking && isUpdateReceiver)
+            {
+                return Ok(receiver);
+            }
+            return BadRequest("NotUpdated");
+        }
 
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteBooking(string id)
@@ -119,7 +138,6 @@ namespace CourierAPI.Controllers
             await _unitOfWork.Bookings.Delete(isBookingExists.Id);
 
              var result = await _unitOfWork.CompleteAsync();
-            if (result == 0) return BadRequest("dont save");
             return NoContent();
         }
 
