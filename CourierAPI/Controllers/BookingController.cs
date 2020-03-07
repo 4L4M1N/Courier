@@ -135,10 +135,12 @@ namespace CourierAPI.Controllers
             if(isBookingExists == null)
                 return BadRequest("no booking is exist");
 
-            await _unitOfWork.Bookings.Delete(isBookingExists.Id);
-
-             var result = await _unitOfWork.CompleteAsync();
-            return NoContent();
+            var result = await _bookingService.Delete(isBookingExists.Id);
+            if(result) {
+                string message = "deleted";
+                return Ok(message);
+                }
+            return BadRequest("Booking dont delete");
         }
 
 

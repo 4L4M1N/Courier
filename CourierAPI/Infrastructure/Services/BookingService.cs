@@ -20,6 +20,22 @@ namespace CourierAPI.Infrastructure.Services
             _unitOfWork = unitOfWork;
             _context = context;
         }
+
+        public async Task<bool> Delete(string bookingId)
+        {
+             var isBookingExists = await _unitOfWork.Bookings.FindBookingById(bookingId);
+            if(isBookingExists == null)
+            {
+                return false;
+            }
+            await _unitOfWork.Receivers.Delete(isBookingExists.ReceiverId);
+            await _unitOfWork.BookingItems.Delete(isBookingExists.Id);
+            await _unitOfWork.Bookings.Delete(isBookingExists.Id);
+            var result =  await _unitOfWork.CompleteAsync();
+            if(result > 0) return true;
+            return false;
+        }
+
         public async Task<List<BookingR>> GetAllBookingDetails()
         {
             var result = await _context.ShowBookings.FromSqlRaw("exec Booking").ToListAsync();

@@ -34,6 +34,10 @@ Create(booking: Booking) {
     };
     return this.http.put(this.baseURL + 'update', data);
   }
+  DeleteBooking(bookingId)
+  {
+    return this.http.delete(this.baseURL + 'delete/' + bookingId,{responseType: 'text'});
+  }
   GetAllBooking(): Observable<BookingView[]> {
     return this.http.get<BookingView[]>(this.baseURL + 'all');
   }

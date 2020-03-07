@@ -28,7 +28,7 @@ namespace CourierAPI.Infrastructure.Repositories
 
         public async Task Delete(string bookingId)
         {
-            var result = await _context.Bookings.Where(b=>b.Id == bookingId).FirstOrDefaultAsync();
+            var result = await _context.Bookings.FindAsync(bookingId);
             _context.Bookings.Remove(result);
         }
 
