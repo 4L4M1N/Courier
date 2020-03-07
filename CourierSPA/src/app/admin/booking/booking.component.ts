@@ -345,7 +345,22 @@ export class BookingComponent implements OnInit {
       console.log('created');
       this.modalService.openInfoModal("Booking Updated");
     }, error => {
+      this.modalService.openErrorModal("Not updated");
       console.log('error');
+    });
+  }
+  DeleteBooking() {
+    this.modalService.openConfirmModal("Are you want to sure delete this booking?",(answer: boolean) => {
+      if (answer) {
+        console.log(this.bookingId);
+        this.bookingService.DeleteBooking(this.bookingId).subscribe(() => {
+          this.modalService.openInfoModal("Booking Deleted");
+        }, error => {
+          console.log(error);
+        });
+        return;
+      }
+      console.log('No, I\'m sorry.');
     });
   }
   GetItemAttributes(itemId) {

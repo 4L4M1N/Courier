@@ -22,6 +22,12 @@ namespace CourierAPI.Infrastructure.Repositories
             await _context.Receivers.AddAsync(receiver);
         }
 
+        public async Task Delete(string ReceiverId)
+        {
+            var findReceiver = await _context.Receivers.FindAsync(ReceiverId);
+            _context.Receivers.Remove(findReceiver);
+        }
+
         public async Task<Receiver> GetReciverById(string ReceiverId)
         {
             var result = await _context.Receivers.Include(x=>x.Zone).FirstOrDefaultAsync(x=>x.Id == ReceiverId);
