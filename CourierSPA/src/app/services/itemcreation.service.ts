@@ -8,7 +8,7 @@ import { Iitem } from '../models/Iitem';
   providedIn: 'root'
 })
 export class ItemcreationService {
-  baseURL = 'http://amin601-001-site1.gtempurl.com/api/dropdown/';
+  baseURL = 'http://localhost:5000/api/dropdown/';
 
 constructor(private http: HttpClient) { }
 
@@ -26,6 +26,9 @@ UpdateItemAttribute(sendUpdatedItemAttribute: ItemAttribute) {
   return this.http.put(this.baseURL + 'itemattribute/update' , sendUpdatedItemAttribute);
 }
 
+deleteItemAttribute(itemAttributeId, merchantId) {
+  return this.http.delete(this.baseURL + 'itemattribute/delete/' + itemAttributeId + '/' + merchantId);
+}
 
 GetAllItemAttribute(): Observable<ItemAttribute[]> {
   return this.http.get<ItemAttribute[]>(this.baseURL + 'itemattribute');
@@ -43,6 +46,12 @@ GetItemAttributesOfAnItem(itemId): Observable<ItemAttribute[]>
 GetItemAttributesOfAnItemMerchant(itemId, merchantIdentity): Observable<ItemAttribute[]>
 {
   let query = encodeURIComponent('itemId') + '=' + encodeURIComponent(itemId)
+  + '&' + encodeURIComponent('merchantIdentity') + '=' + encodeURIComponent(merchantIdentity);
+  return this.http.get<ItemAttribute[]>(this.baseURL + 'itemattribute' + '?' + query);
+}
+GetItemAttributeWithItem(merchantIdentity): Observable<ItemAttribute[]>
+{
+  let query = encodeURIComponent('withItem') + '=' + encodeURIComponent('true')
   + '&' + encodeURIComponent('merchantIdentity') + '=' + encodeURIComponent(merchantIdentity);
   return this.http.get<ItemAttribute[]>(this.baseURL + 'itemattribute' + '?' + query);
 }

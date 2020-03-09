@@ -1,11 +1,12 @@
+import { BookingreportComponent } from './admin/bookingreport/bookingreport.component';
 import { DivisionzonecreationComponent } from './admin/divisionzonecreation/divisionzonecreation.component';
 import { ConfirmComponent } from './shared/Dialog/confirm/confirm.component';
 import { AlertComponent } from './shared/Dialog/alert/alert.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy, DatePipe } from '@angular/common';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule,
-         MatIconModule, MatListModule, MatCardModule, MatGridList, MatGridListModule, MatDialogModule, MAT_DIALOG_DATA, MatDialogRef, MatCheckboxModule, MatTableModule, MatFormFieldModule, MatChipsModule } from '@angular/material';
+         MatIconModule, MatListModule, MatCardModule, MatGridList, MatGridListModule, MatDialogModule, MAT_DIALOG_DATA, MatDialogRef, MatCheckboxModule, MatTableModule, MatFormFieldModule, MatChipsModule, MatInputModule, MatPaginator, MatSortModule, MatPaginatorModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
@@ -38,6 +39,9 @@ import { AssignDelivManComponent } from './admin/assignDelivMan/assignDelivMan.c
 import { MerchantItemComponent } from './admin/merchant-item/merchant-item.component';
 import { RequestBookingComponent } from './request-booking/request-booking.component';
 import { ManageRequestedBookingComponent } from './admin/manage-requested-booking/manage-requested-booking.component';
+import { StatusService } from './services/status.service';
+import { SetStatusComponent } from './admin/setStatus/setStatus.component';
+import { BookingReportService } from './services/Report/booking/bookingReport.service';
 
 
 
@@ -64,9 +68,11 @@ import { ManageRequestedBookingComponent } from './admin/manage-requested-bookin
       AlertComponent,
       ConfirmComponent,
       AssignDelivManComponent,
+      SetStatusComponent,
       DivisionzonecreationComponent,
       RequestBookingComponent,
-      ManageRequestedBookingComponent
+      ManageRequestedBookingComponent,
+      BookingreportComponent
    ],
    imports: [
       BrowserModule,
@@ -81,13 +87,19 @@ import { ManageRequestedBookingComponent } from './admin/manage-requested-bookin
       MatSidenavModule,
       MatIconModule,
       MatListModule,
+      MatDatepickerModule,
+      MatNativeDateModule,
       MatCardModule,
       MatGridListModule,
       MatDialogModule,
       MatCheckboxModule,
       MatTableModule,
       MatFormFieldModule,
-      MatChipsModule
+      MatChipsModule,
+      MatInputModule,
+      MatPaginatorModule,
+      MatSortModule,
+      MatSelectModule
    ],
    providers: [
       { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
@@ -96,13 +108,17 @@ import { ManageRequestedBookingComponent } from './admin/manage-requested-bookin
       MerchantService,
       DeliveryManAddComponent,
       DeliveryAddressService,
-      ItemcreationService
+      ItemcreationService,
+      StatusService,
+      BookingReportService,
+      DatePipe,
+      { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
    ],
    bootstrap: [
       AppComponent
    ],
    entryComponents: [
-      AlertComponent, ConfirmComponent, AssignDelivManComponent
+      AlertComponent, ConfirmComponent, AssignDelivManComponent, SetStatusComponent
     ],
 })
 export class AppModule { }

@@ -9,6 +9,7 @@ namespace CourierAPI.Helpers
         public AutoMapperProfile()
         {
             CreateMap<Merchant, MerchantDTO>();
+            CreateMap<ItemAttribute, ItemAttributeDTO>();
         }
     }
 }

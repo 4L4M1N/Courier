@@ -12,5 +12,6 @@ namespace CourierAPI.Core.DTOs
         public int ItemId { get; set; }
         public string MerchantId { get; set; }
         public int ItemAttributeId {get; set;}
+        public string ItemName { get; set; }
     }
 }

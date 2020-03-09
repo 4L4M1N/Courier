@@ -5,4 +5,7 @@ export interface BookingView {
     delivManName: string;
     delivManId: string;
     zone: string;
+    bookingSerialNo: string;
+    merchantName: string;
+    status: string;
 }

@@ -18,8 +18,17 @@ namespace CourierAPI.Core.Models
         public double TotalAmmount { get; set; }
         public double Discount { get; set; }
         public double ItemPrice { get; set;}
+        public double ConditionCharge { get; set; }
+        public double MerchantBill { get; set; }
+        public double CourierBill { get; set; }
+        public double ReceiverBill { get; set; }
         public DateTime BookingDate { get; set; }
         public DateTime DeliveredDate { get; set; }
         public string Status { get; set; }
+        public string SerialNo { get; set; }
+        [NotMapped]
+        public BookingItem BookingItem { get; set; }
+        [NotMapped]
+        public Item Item { get; set; }
     }
 }

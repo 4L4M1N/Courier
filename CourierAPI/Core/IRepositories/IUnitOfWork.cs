@@ -16,6 +16,7 @@ namespace CourierAPI.Core.IRepositories
          IAssignedDelivManRepository AssignedDelivMan {get;}
          ICommonInfoRepository CommonInfo{get;}
          IRequestBookingRepository RequestBooking {get;}
+         IStatusRepository Status {get;}
          Task<int> CompleteAsync();
     }
 }

@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-header">
+          Info
+        </div>
+        <div class="card-body">
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="Fromdate" placeholder="From Date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput [matDatepicker]="ToPicker" [(ngModel)]="ToDate" placeholder="ToDate">
+            <mat-datepicker-toggle matSuffix [for]="ToPicker"></mat-datepicker-toggle>
+            <mat-datepicker #ToPicker></mat-datepicker>
+          </mat-form-field>
+          <br>
+          <!-- <button mat-button (click)="check()" mat-raised-button color="primary">Check Date</button> -->
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-header">
+          Reports
+        </div>
+        <div class="card-body">
+          <button mat-button (click)="generatePdf()" mat-raised-button color="primary">{{reportNumber+1}}. Booking Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

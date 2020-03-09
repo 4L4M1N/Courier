@@ -114,14 +114,16 @@ namespace CourierAPI.Controllers
             return Unauthorized();
         }
 
+         
+        [Authorize(Roles = "CourierOwner, SuperAdmin")]
         [HttpPost("update")]
-        public async Task<IActionResult> Update(MerchantToAddDTO updateMerchant)
+        public async Task<IActionResult> Update(MerchantDTO updateMerchant)
         {
-            var isMerchantExist = await _unitOfWork.Merchants.FindByMerchantNameAsync(updateMerchant.Name);
+            var isMerchantExist = await _unitOfWork.Merchants.FindByMerchantIdAsync(updateMerchant.Id.ToString());
             if (isMerchantExist == null) return BadRequest("User Not Found");
 
             isMerchantExist.Email = updateMerchant.Email;
-            isMerchantExist.BankAccountNo = updateMerchant.BankAccountNo;
+            isMerchantExist.Name = updateMerchant.Name;
             isMerchantExist.Address = updateMerchant.Address;
             isMerchantExist.Phone = updateMerchant.Phone;
             isMerchantExist.TradeLicenseNo = updateMerchant.TradeLicenseNo;

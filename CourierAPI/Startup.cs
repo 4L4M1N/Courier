@@ -18,11 +18,12 @@ using Microsoft.IdentityModel.Tokens;
 using AutoMapper;
 using CourierAPI.Core;
 using CourierAPI.Core.IRepositories;
+using CourierAPI.Core.IServices;
 using CourierAPI.Core.Models;
 using CourierAPI.Helpers;
 using CourierAPI.Infrastructure.Data;
 using CourierAPI.Infrastructure.Repositories;
-
+using CourierAPI.Infrastructure.Services;
 
 namespace CourierAPI
 {
@@ -57,7 +58,7 @@ namespace CourierAPI
                  options => options.SerializerSettings.ReferenceLoopHandling =            
                 Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
-            services.BuildServiceProvider().GetService<DataContext>().Database.Migrate();
+            //services.BuildServiceProvider().GetService<DataContext>().Database.Migrate();
             services.AddCors();
             
             // Automapper Configuration
@@ -79,6 +80,10 @@ namespace CourierAPI
             // services.AddScoped<IDeliveryAddressRepository, DeliveryAddressRepository>();
             // services.AddScoped<IDeliveryManRepository, DeliveryManRepository>();
             // services.AddScoped<IAssignedDelivManRepository, AssignedDelivManRepository>();
+            services.AddTransient<IBookingService, BookingService>();
+            services.AddTransient<IStatusService, StatusService>();
+            services.AddTransient<IMerchantService, MerchantService>();
+            services.AddTransient<IReceiverService, ReceiverService>();
 
             services.AddAuthentication(x =>
             {
@@ -108,8 +113,8 @@ namespace CourierAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(x => x.WithOrigins("http://binary-geek.com").AllowAnyMethod().AllowAnyHeader());
-            //app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            //app.UseCors(x => x.WithOrigins("http://binary-geek.com").AllowAnyMethod().AllowAnyHeader());
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseHttpsRedirection();
 
             app.UseRouting();

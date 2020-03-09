@@ -1,5 +1,6 @@
 using CourierAPI.Core.Models;
 using CourierAPI.Core.Query;
+using CourierAPI.Core.ReportFormat;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -27,14 +28,16 @@ namespace CourierAPI.Infrastructure.Data
         public DbSet<CommonInfo> CommonInfos { get; set; }
         public DbSet<Branch> Branches { get; set; }
         public DbSet<RequestBooking> RequestBookings { get; set; }
-
+        public DbSet<Status> Statuses { get; set; }
 
         //Query
-        public DbQuery<BookingDetailsR> ShowBookings { get; set; }
+        public DbQuery<BookingR> ShowBookings { get; set; }
+        public DbQuery<BookingDetailsReport> ShowBookingDetailsReport { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
 
             // Override default AspNet Identity table names
             builder.Entity<IdentityUser>(entity => { entity.ToTable(name: "Users"); });

@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { AssignDelivMan } from 'src/app/models/View/assignDelivMan';
+import { AssignDelivMan } from 'src/app/models/viewModels/assignDelivMan';
 
 @Component({
   selector: 'app-assignDelivMan',
@@ -28,7 +28,7 @@ export class AssignDelivManComponent implements OnInit {
     this.selectedItem = i
 }
   down(selectedDelivManId ) {
-    this.delivManId = selectedDelivManId. delivManIdentity;
+    this.delivManId = selectedDelivManId.delivManIdentity;
     this.data.selectedDelivManId = this.delivManId;
     this.delivManName = selectedDelivManId.name;
   }

@@ -10,6 +10,7 @@ namespace CourierAPI.Core.IRepositories
          Task<Merchant> GetMerchantDetailsAsync(string merchantId);
          Task<Merchant> FindByMerchantNameAsync(string merchantName);
          Task<Merchant> FindByMerchantEmailAsync(string merchantEmail);
+         Task<Merchant> FindByMerchantIdAsync(string id);
          Task<Merchant> FindByMerchantPhoneAsync(string merchantPhone);
          Task<Merchant> FindByMerchantIdentityAsync(string merchantIdentity);
          Task<IEnumerable<Merchant>> GetMerchantsAsync();

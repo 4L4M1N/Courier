@@ -8,7 +8,7 @@ import { Zone } from '../models/zone';
   providedIn: 'root'
 })
 export class DeliveryAddressService {
-  baseURL = 'http://amin601-001-site1.gtempurl.com/api/dropdown/';
+  baseURL = 'http://localhost:5000/api/dropdown/';
 
   constructor(private http: HttpClient) { }
 
@@ -17,6 +17,9 @@ export class DeliveryAddressService {
   }
   GetZonesOfADivison(divisionId): Observable<Zone[]> {
     return this.http.get<Zone[]>(this.baseURL + 'divisions/' + divisionId);
+  }
+  GetDivisionOfAZone(divisionId): Observable<Division> {
+    return this.http.get<Division>(this.baseURL + 'divisions/' + divisionId);
   }
   CreateDivision(DivisionName) {
     console.log(DivisionName);

@@ -12,7 +12,6 @@ namespace CourierAPI.Core.Models
         
         [Required]
         public int DivisionId { get; set; }
-        [ForeignKey("DivisionId")]
         public Division Division { get; set; }
     }
 }
