@@ -30,6 +30,11 @@ namespace CourierAPI.Infrastructure.Services
             }
             await _unitOfWork.Receivers.Delete(isBookingExists.ReceiverId);
             await _unitOfWork.BookingItems.Delete(isBookingExists.Id);
+            var isAssigned = await _unitOfWork.AssignedDelivMan.FindAssignedBookingById(isBookingExists.Id);
+            if(isAssigned != null)
+            {
+                await _unitOfWork.AssignedDelivMan.Delete(isBookingExists.Id);
+            }
             await _unitOfWork.Bookings.Delete(isBookingExists.Id);
             var result =  await _unitOfWork.CompleteAsync();
             if(result > 0) return true;
