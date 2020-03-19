@@ -106,7 +106,7 @@
                 </div>
                 <div class="form-group">
                   <label>Select Zone </label>
-                  <select class="custom-select form-group" formControlName="zoneid"
+                  <select class="custom-select form-group" formControlName="zoneid" (change)="onSelectZone($event)"
                     [ngClass]="{ 'is-invalid': submitBooking && bookingForm.zoneid.errors }">
                     <option value="" disabled>Choose your Zone</option>
                     <option *ngFor="let i of listZones" [value]="i.zoneId">{{i.name}}</option>

@@ -3,6 +3,7 @@ import { IDeliveryMan } from 'src/app/models/IDeliveryMan';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DeliveryManService } from 'src/app/services/DeliveryMan.service';
 import { ModalService } from 'src/app/services/Dialog/modal.service';
+import { phoneValidator } from 'src/app/validators/custom.validators';
 
 @Component({
   selector: 'app-deliveryManAdd',

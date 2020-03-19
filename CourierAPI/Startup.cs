@@ -24,6 +24,7 @@ using CourierAPI.Helpers;
 using CourierAPI.Infrastructure.Data;
 using CourierAPI.Infrastructure.Repositories;
 using CourierAPI.Infrastructure.Services;
+using System.Net.Mime;
 
 namespace CourierAPI
 {
@@ -48,16 +49,41 @@ namespace CourierAPI
             );
 
             //Configure Identity and Identity Store
-            services.AddIdentity<AppUser, IdentityRole>()
+            services.AddIdentity<AppUser, IdentityRole>(options => {
+                
+            })
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<DataContext>();
-
+            // //Configure Identity Options
+            // services.Configure<IdentityOptions>(options =>
+            // {
+            //     //Configure Password
+            //     options.Password.RequireDigit = true;
+            //     options.Password.RequireLowercase = true;
+            //     options.Password.RequireUppercase = true;
+            //     options.Password.RequireNonAlphanumeric = false;
+            //     options.Password.RequiredLength = 8;
+            //     options.Password.RequiredUniqueChars = 0;
+            // });
             services.AddMvc();
 
             services.AddControllers().AddNewtonsoftJson(
                  options => options.SerializerSettings.ReferenceLoopHandling =            
                 Newtonsoft.Json.ReferenceLoopHandling.Ignore
-            );
+            ).ConfigureApiBehaviorOptions(options =>{
+                options.SuppressConsumesConstraintForFormFileParameters = true;
+                options.SuppressMapClientErrors = true;
+                // options.SuppressModelStateInvalidFilter = false;
+                //options.SuppressUseValidationProblemDetailsForInvalidModelStateResponses = true;
+                
+                // For Model Error!
+                options.InvalidModelStateResponseFactory = context =>
+                {
+                    var result = new BadRequestObjectResult(context.ModelState);
+                    result.ContentTypes.Add(MediaTypeNames.Application.Json);
+                    return result;
+                };
+            });
             //services.BuildServiceProvider().GetService<DataContext>().Database.Migrate();
             services.AddCors();
             

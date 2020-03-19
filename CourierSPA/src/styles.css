@@ -20,7 +20,25 @@
   color: #fff;
  
 }
-
+.custom-modalbox > .mat-dialog-container {
+    
+   box-shadow: none;
+  background: transparent;
+  color:black; 
+  /* opacity: 0.3; */
+}
+.cdk-overlay-backdrop {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
+  opacity: 0;
+}
 /* .mat-toolbar.mat-primary {
   background-color:#1d6ac8;background-image:-moz-linear-gradient(#45b3f3, #1d6ac8);background-image:-webkit-linear-gradient(#45b3f3, #1d6ac8);border-color:#1d6ac8 #1d6ac8 #1a5eb2;
 color:

@@ -189,7 +189,7 @@ namespace CourierAPI.Controllers
             var booking = await _bookingService.SearchBookingBySerialNo(SerialNo);
             if(booking == null)
             {
-                return BadRequest();
+                return BadRequest("No booking found");
             }
             var bookingItem = await _context.BookingItems.FirstOrDefaultAsync(x=>x.BookingId == booking.Id);
             var itemAttribute = await _context.ItemAttributes.Include(i=>i.Item).FirstOrDefaultAsync(x=>x.ItemAttributeId == bookingItem.ItemAttributeId);

@@ -1,13 +1,30 @@
-<h2 mat-dialog-title>{{ data.title }}</h2>
+<div class="main">
+<div class="dialog" *ngIf="data.title=='ERROR'" style="padding-top: 20px;" align="center">
+  <img src="assets/images/error.png" width="50px;">
+</div>
+<div class="dialog" *ngIf="data.title=='INFO'" style="padding-top: 20px;" align="center">
+  <img src="assets/images/check.png" width="50px;">
+</div>
+
+
+
+<div class="content" style="background-color: white;">
 <mat-dialog-content>
-  <div>
-    <mat-icon>{{ getAlertIcon() }}</mat-icon>
+  <div class="message pt-5 text-center">
+    <!-- <mat-icon>{{ getAlertIcon() }}</mat-icon>
+    <mat-icon>{{ getAlertIcon() }}</mat-icon> -->
+   
     {{ data.content }}
   </div>
 </mat-dialog-content>
 <mat-divider></mat-divider>
 <mat-dialog-actions align="center">
-  <button mat-raised-button color="primary" [mat-dialog-close]="data.title">
+  <button mat-raised-button color="primary" *ngIf="data.title=='INFO'" class="btn btn-success" [mat-dialog-close]="data.title">
+    {{ data.closeButtonLabel }}
+  </button>
+  <button mat-raised-button color="primary" *ngIf="data.title=='ERROR'" class="btn btn-danger" [mat-dialog-close]="data.title">
     {{ data.closeButtonLabel }}
   </button>
 </mat-dialog-actions>
+</div>
+</div>
