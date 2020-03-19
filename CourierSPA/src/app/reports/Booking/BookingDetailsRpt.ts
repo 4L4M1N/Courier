@@ -78,21 +78,7 @@ export class BookingDetailsRpt {
 //           };
 //     }
 
-
-
-
-
-public static table(data, columns) {
-  return {
-      table: {
-          headerRows: 1,
-          body: this.buildTableBody(data, columns)
-      }, style: {
-        fontSize: 9
-      }
-  };
-}
-public static buildTableBody(data: BookingDetailsReport[], columns) {
+public static buildTableBody(data?: BookingDetailsReport[], columns?) {
   var body = [];
   body.push(columns);
 
@@ -108,8 +94,16 @@ public static buildTableBody(data: BookingDetailsReport[], columns) {
 
   return body;
 }
-
-
+public static table(data?, columns?) {
   
-   
+  return {
+      table: {
+          headerRows: 1,
+          body: this.buildTableBody(data, columns)
+      }, style: {
+        fontSize: 9
+      }
+  };
+}
+
 }

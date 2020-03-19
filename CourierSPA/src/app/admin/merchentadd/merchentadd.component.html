@@ -9,48 +9,74 @@
                   <div class="form-label-group">
                         <label for="inputUsername">Name</label>
                         <input type="text" 
-                        class="form-control"  formControlName="name" placeholder="">
-                        
+                        class="form-control"  formControlName="name" placeholder=""
+                        [ngClass]="{ 'is-invalid': submitted && merchantForm.name.errors }">
+                        <div *ngIf="submitted && merchantForm.name.errors" class="invalid-feedback">
+                          <div *ngIf="merchantForm.name.errors.required">Merchant Name is required</div>
+                        </div>
                   </div>
+
   
                   <div class="form-label-group">
                       <label for="inputUsername">Phone</label>
                       <input type="text" 
-                      class="form-control" formControlName="phone" placeholder="">
-                      
+                      class="form-control" formControlName="phone"
+                      [ngClass]="{ 'is-invalid': submitted && merchantForm.phone.errors}">
+                      <div *ngIf="submitted && merchantForm.phone.errors" class="invalid-feedback">
+                        <div class="error-message" *ngIf="merchantForm.phone.errors.required">Merchant Phone is required</div>
+                        <div class="error-message"  *ngIf="merchantForm.phone.errors.isPhoneValid">Phone no must be number</div>
+                      </div>
                   </div>
                   <div class="form-label-group">
                       <label for="inputUsername">Email</label>
                       <input type="text" 
-                      class="form-control"  formControlName="email" placeholder="">
-                      
+                      class="form-control"  formControlName="email" placeholder=""
+                      [ngClass]="{ 'is-invalid': submitted && merchantForm.email.errors }">
+                      <div *ngIf="submitted && merchantForm.email.errors" class="invalid-feedback">
+                        <div *ngIf="merchantForm.email.errors.required">Merchant Email is required</div>
+                        <div *ngIf="merchantForm.email.errors.email">Email must be a valid email address</div>
+                      </div>
                   </div>
 
                   <div class="form-label-group">
                     <label for="inputUsername">Password</label>
                     <input type="text" 
-                    class="form-control"  formControlName="password" placeholder="">
-                    
+                    class="form-control"  formControlName="password" placeholder=""
+                    [ngClass]="{ 'is-invalid': submitted && merchantForm.password.errors }">
+                    <div *ngIf="submitted && merchantForm.password.errors" class="invalid-feedback">
+                      <div *ngIf="merchantForm.password.errors.required">Password is required</div>
+                      <div *ngIf="merchantForm.password.errors.minlength">Password must be at least 8 characters</div>
+                      
+                    </div>
                 </div>
 
 
               <div class="form-label-group">
                   <label for="inputUsername">Address</label>
                   <input type="text" 
-                  class="form-control"  formControlName="address" placeholder="">
-                  
+                  class="form-control"  formControlName="address" placeholder=""
+                  [ngClass]="{ 'is-invalid': submitted && merchantForm.address.errors }">
+                  <div *ngIf="submitted && merchantForm.address.errors" class="invalid-feedback">
+                    <div *ngIf="merchantForm.address.errors.required">Address is required</div>
+                  </div>
               </div>
             <div class="form-label-group">
                 <label for="inputUsername">Bank Account No</label>
                 <input type="text" 
-                class="form-control"  formControlName="bankAccountNo" placeholder="">
-                
+                class="form-control"  formControlName="bankAccountNo" placeholder=""
+                [ngClass]="{ 'is-invalid': submitted && merchantForm.bankAccountNo.errors }">
+                <div *ngIf="submitted && merchantForm.bankAccountNo.errors" class="invalid-feedback">
+                  <div *ngIf="merchantForm.bankAccountNo.errors.required">Bank Account No is required</div>
+                </div>
           </div>
           <div class="form-label-group">
               <label for="inputUsername">Trade License No</label>
               <input type="text" 
-              class="form-control"  formControlName="tradeLicenseNo" placeholder="">
-              
+              class="form-control"  formControlName="tradeLicenseNo" placeholder=""
+              [ngClass]="{ 'is-invalid': submitted && merchantForm.tradeLicenseNo.errors }">
+              <div *ngIf="submitted && merchantForm.tradeLicenseNo.errors" class="invalid-feedback">
+                <div *ngIf="merchantForm.tradeLicenseNo.errors.required">Trade License No is required</div>
+              </div>
         </div>
                 <br>
                   <button  class="btn  btn-primary btn-block text-uppercase" type="submit">Create</button>
