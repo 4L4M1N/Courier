@@ -12,11 +12,12 @@ export class BookingReportService {
   constructor(private http: HttpClient) { }
   
  
-    GetAllBookingDetails(FromDate, ToDate): Observable<BookingDetailsReport[]> {
+    async GetAllBookingDetails(FromDate, ToDate) {
       console.log(FromDate);
       let query = encodeURIComponent('FromDate') + '=' + encodeURIComponent(FromDate)
   + '&' + encodeURIComponent('ToDate') + '=' + encodeURIComponent(ToDate);
-      return this.http.get<BookingDetailsReport[]>(this.baseURL + 'datewisereport'+ '?' + query);
+      const result = await this.http.get(this.baseURL + 'datewisereport'+ '?' + query).toPromise();
+      return result;
     }
 
 }

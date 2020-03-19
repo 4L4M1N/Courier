@@ -1,0 +1,7 @@
+.invalid-feedback .error-message {
+   
+    display: none;
+  }
+  .invalid-feedback .error-message:first-child {
+    display: block;
+  }

@@ -8,6 +8,8 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import {BookingDetailsReport } from 'src/app/models/reportsFormat/BookingDetailsReport';
 import { delay } from 'rxjs/operators';
+import 'rxjs/add/observable/forkJoin';
+import { Observable } from 'rxjs';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
   selector: 'app-bookingreport',
@@ -35,21 +37,11 @@ export class BookingreportComponent implements OnInit {
   //   console.log(this.apiFormdate);
   //   console.log(this.apiToDate);
   // }
-   getBookingDetails()
-  {
-    this.apiFormdate = this.datePipe.transform(this.Fromdate, 'MM-dd-yyyy');
-    // console.log(this.apiFormdate);
-    this.apiToDate = this.datePipe.transform(this.ToDate, 'MM-dd-yyyy');
-    this.bookingReportService.GetAllBookingDetails(this.apiFormdate, this.apiToDate)
-    .subscribe((bookingList: BookingDetailsReport[]) => {
-      console.log(bookingList);
-      this.bookingDetails = bookingList;
-    });
-  }
+  
 generatePdf()
   {
-    this.getBookingDetails();
-    setTimeout(() => {
+    const a = this.getBookingDetails();
+    a.then((data=> {
       var ab = {
         pageSize: 'A4',
         pageOrientation: 'landscape',
@@ -63,7 +55,7 @@ generatePdf()
           },
           { text: 'Booking Details Report', style: 'header' },
           { text: 'From: '+this.apiFormdate+' '+'To: '+this.apiToDate, style: 'header' },
-          BookingDetailsRpt.table(this.bookingDetails, ['bookingDate', 'courierBill',
+          BookingDetailsRpt.table(data, ['bookingDate', 'courierBill',
           'deliveredDate','deliveryMan','id','merchantBill','merchantName','receiverBill','receiverName',
         'status','zone'
         ])
@@ -75,7 +67,21 @@ generatePdf()
           }
         }
       }
-      pdfMake.createPdf(ab).open();
-    }, 300);
+      
+        pdfMake.createPdf(ab).open();
+    }))
+   
+      
+  }
+  async getBookingDetails()
+  {
+    this.apiFormdate = this.datePipe.transform(this.Fromdate, 'MM-dd-yyyy');
+    // console.log(this.apiFormdate);
+    this.apiToDate = this.datePipe.transform(this.ToDate, 'MM-dd-yyyy');
+    return await this.bookingReportService.GetAllBookingDetails(this.apiFormdate, this.apiToDate);
+    // .subscribe((bookingList: BookingDetailsReport[]) => {
+
+    //   this.bookingDetails = bookingList;
+    // });
   }
 }

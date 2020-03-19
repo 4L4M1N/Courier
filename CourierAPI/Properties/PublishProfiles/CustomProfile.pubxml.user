@@ -6,16 +6,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAe2b3w57WI06+1vGe2o7BHAAAAAACAAAAAAAQZgAAAAEAACAAAACvtyJsVRS1WOIbd5+Qnvaguc7SlpM0B0rULIZMRVe2jwAAAAAOgAAAAAIAACAAAAA/ZA92NXJFjeKuiqO0Wzop4Z48E+CqFvuFtJzWFpv1JSAAAACZvJHMsdRSAEO65UBbVVtYKx39Gan0uD+xsuyLRo6DDEAAAABuI+pwWchVhQZuHtlXrAIeMWZwlyeImBRmtDOccyWqTrPX5dQJHEhfNTLVjS+vjBpIm2QHzn8LD97bVPb0b7Ub</EncryptedPassword>
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQqrVSR+3LUyz8gf6InLsmQAAAAACAAAAAAAQZgAAAAEAACAAAAB6OJcMXOKtaYS/KrA1lZPs0GP5P7srH6FegKpL+xGRwQAAAAAOgAAAAAIAACAAAABMBeggRxtP+CY8S2FA6vfF6Ql+yYkETx/r9Dl5LpwYNyAAAAB39vr+WzWGOxfeT0MLN1GnHtShzCMYg2bToX+QSu5Om0AAAADCfBea+nTUPsg44ftzAhVkZgt3FX51ySG5H+s1mLJcOyPtrs6xI3//t3xbnc555mmPmIEMIY4giYSjvbi2Xghw</EncryptedPassword>
   </PropertyGroup>
   <ItemGroup>
     <DestinationConnectionStrings Include="CourierDB">
-      <Value>Data Source=SQL5043.site4now.net%3bInitial Catalog=DB_A50EE3_courier%3bUser Id=DB_A50EE3_courier_admin%3bPassword=Prog4%40AmiN%3b</Value>
+      <Value>Data Source=SQL5052.site4now.net%3bInitial Catalog=DB_A5617B_courier%3bUser Id=DB_A5617B_courier_admin%3bPassword=Prog4%40AmiN%3b</Value>
     </DestinationConnectionStrings>
   </ItemGroup>
   <ItemGroup>
     <EFMigrations Include="CourierAPI.Infrastructure.Data.DataContext">
-      <Value>Data Source=SQL5043.site4now.net%3bInitial Catalog=DB_A50EE3_courier%3bUser Id=DB_A50EE3_courier_admin%3bPassword=Prog4%40AmiN%3b</Value>
+      <Value>Data Source=SQL5052.site4now.net%3bInitial Catalog=DB_A5617B_courier%3bUser Id=DB_A5617B_courier_admin%3bPassword=Prog4%40AmiN%3b</Value>
     </EFMigrations>
   </ItemGroup>
 </Project>

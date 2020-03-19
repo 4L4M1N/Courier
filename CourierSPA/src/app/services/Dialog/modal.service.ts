@@ -25,7 +25,10 @@ export class ModalService {
 
   openAlertModal(message: string, alertType: AlertType) {
     const dialogRef = this.dialog.open(AlertComponent, {
+      
       width: '300px',
+      position: {top: '30px'},
+      panelClass: 'custom-modalbox',
       data: new ModalAlertData({
         title: this.getAlertTitle(alertType),
         content: message,

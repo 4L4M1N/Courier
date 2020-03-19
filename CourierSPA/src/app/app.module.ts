@@ -42,6 +42,7 @@ import { ManageRequestedBookingComponent } from './admin/manage-requested-bookin
 import { StatusService } from './services/status.service';
 import { SetStatusComponent } from './admin/setStatus/setStatus.component';
 import { BookingReportService } from './services/Report/booking/bookingReport.service';
+import { ErrorInterceptorProvider } from './interceptors/ErrorInterceptor';
 
 
 
@@ -112,6 +113,7 @@ import { BookingReportService } from './services/Report/booking/bookingReport.se
       StatusService,
       BookingReportService,
       DatePipe,
+      ErrorInterceptorProvider,
       { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
    ],
    bootstrap: [
