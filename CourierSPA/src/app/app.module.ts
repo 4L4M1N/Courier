@@ -43,6 +43,8 @@ import { StatusService } from './services/status.service';
 import { SetStatusComponent } from './admin/setStatus/setStatus.component';
 import { BookingReportService } from './services/Report/booking/bookingReport.service';
 import { ErrorInterceptorProvider } from './interceptors/ErrorInterceptor';
+import { LoaderInterceptor } from './interceptors/LoaderInterceptor';
+import { LoaderComponent } from './shared/loader/loader/loader.component';
 
 
 
@@ -59,6 +61,7 @@ import { ErrorInterceptorProvider } from './interceptors/ErrorInterceptor';
       MerchantEditComponent,
       MerchantItemComponent,
       LoginComponent,
+      LoaderComponent,
       RegistrationComponent,
       MerchentaddComponent,
       BookingComponent,
@@ -105,6 +108,11 @@ import { ErrorInterceptorProvider } from './interceptors/ErrorInterceptor';
    providers: [
       { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
       {provide: LocationStrategy, useClass: HashLocationStrategy},
+      {
+         provide: HTTP_INTERCEPTORS,
+         useClass: LoaderInterceptor,
+         multi: true
+       },
       AuthService,
       MerchantService,
       DeliveryManAddComponent,

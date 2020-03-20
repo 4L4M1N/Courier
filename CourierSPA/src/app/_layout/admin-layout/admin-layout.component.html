@@ -58,8 +58,9 @@
 				<mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu2}" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
 			</mat-list-item>
 			<div class="submenu" [ngClass]="{'expanded' : showSubmenu2}" *ngIf="isShowing || isExpanded">
-        <a mat-list-item [routerLink]="'/admin/managebooking'"><i class="fas fa-tasks pr-2"></i>  Manage Booking</a>
+        <a mat-list-item [routerLink]="'/admin/managebooking'"><i class="far fa-edit pr-2"></i> Manage Booking</a>
         <a mat-list-item [routerLink]="'/admin/manage-requested-booking'"><i class="fas fa-tasks pr-2"></i>  Requested Booking</a>
+        <a mat-list-item [routerLink]="'/admin/bookingreport'"><i class="far fa-file-alt pr-2"></i>  Reports</a>
 				<a mat-list-item [routerLink]="'/admin/divzonecreate'"><i class="fas fa-map-marked-alt pr-2"></i>Create Zone</a>
 			
 			</div>
