@@ -190,7 +190,6 @@ export class BookingComponent implements OnInit {
     let divId = value;
     //console.log(divId);
     this.GetZonesOnChange(divId);
-   
   }
   onSelectZone(event){
     console.log("Selct Zone id"+this.booking.controls['zoneid'].value);

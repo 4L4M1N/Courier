@@ -12,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
+using CourierAPI.Core.IServices;
 
 namespace CourierAPI.Controllers
 {
@@ -20,15 +21,17 @@ namespace CourierAPI.Controllers
     public class DeliveryManController: ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IDeliveryManService _deliveryManService;
         
         private readonly IMapper _mapper;
         private readonly IConfiguration _config;
 
-        public DeliveryManController(IUnitOfWork unitOfWork, IConfiguration config, IMapper mapper)
+        public DeliveryManController(IUnitOfWork unitOfWork, IConfiguration config, IMapper mapper,IDeliveryManService deliveryManService)
         {
             _unitOfWork = unitOfWork;
              _config = config;
             _mapper = mapper;
+            _deliveryManService = deliveryManService;
         }
 
         [HttpPost("create")]
@@ -36,8 +39,8 @@ namespace CourierAPI.Controllers
         {
             //check already exists or not
 
-            byte[] passwordHash, passwordSalt;
-            Extensions.CreatePasswordHash(addDeliveryMan.Password, out passwordHash, out passwordSalt);
+            // byte[] passwordHash, passwordSalt;
+            // Extensions.CreatePasswordHash(addDeliveryMan.Password, out passwordHash, out passwordSalt);
             int total = _unitOfWork.DeliveryMan.LastDeliverManId();
             var DeliveryManId = Extensions.GenerateIdForDeliveryMan(total + 1);
             var DeliveryManToAdd = new DeliveryMan
@@ -45,14 +48,20 @@ namespace CourierAPI.Controllers
                 DelivManIdentity  = DeliveryManId,
                 Name = addDeliveryMan.Name,
                 Phone = addDeliveryMan.Phone,
-                PasswordHash = passwordHash,
-                PasswordSalt = passwordSalt
+                NID = addDeliveryMan.NID,
+                Address = addDeliveryMan.Address,
+                ECName = addDeliveryMan.ECName,
+                ECAddress = addDeliveryMan.ECAddress,
+                ECPhone = addDeliveryMan.ECPhone,
+                // PasswordHash = passwordHash,
+                // PasswordSalt = passwordSalt,
+                ZoneId = addDeliveryMan.ZoneId
             };
             await _unitOfWork.DeliveryMan.AddDeliveryManAsync(DeliveryManToAdd);
             var result = await _unitOfWork.CompleteAsync();
-            if(result == 0) return BadRequest();
+            if(result == 0) return BadRequest("Something went wrong!");
 
-            return Ok();
+            return Ok("Delivery Man Added");
         }
 
 
@@ -104,7 +113,7 @@ namespace CourierAPI.Controllers
         [HttpGet("all")]
         public async Task<IActionResult> GetAllDeliveryMan()
         {
-            var deliveryMan = await _unitOfWork.DeliveryMan.GetAllDeliveryMan();
+            var deliveryMan = await _deliveryManService.GetDeliveryMen();
             return Ok(deliveryMan);
         }
         
