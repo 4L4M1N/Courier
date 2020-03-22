@@ -110,6 +110,7 @@ namespace CourierAPI
             services.AddTransient<IStatusService, StatusService>();
             services.AddTransient<IMerchantService, MerchantService>();
             services.AddTransient<IReceiverService, ReceiverService>();
+            services.AddTransient<IDeliveryManService, DeliveryManService>();
 
             services.AddAuthentication(x =>
             {

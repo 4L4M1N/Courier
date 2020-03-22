@@ -1,37 +1,163 @@
 
     <div class="row">
-      <div class="col-md-4">
-      
+      <div class="col-sm-8 col-md-8 col-lg-8 mx-auto">
+        <div class="card">
+          <div class="card-header">
+            Delivery Man Info
+          </div>
           <div class="card-body">
-            <h5 class="card-title text-center">Create Delivery Man</h5>
-            <form  [formGroup]="deliveymanaddForm" (ngSubmit) = (Create()) method="POST" >
-              
-                  <div class="form-label-group">
-                        <label for="inputUsername">Name</label>
-                        <input type="text" 
-                        class="form-control"  formControlName="name" placeholder="Ex: Mr. Fast">
-                        
-                  </div>
-  
-                  <div class="form-label-group">
-                      <label for="inputUsername">Phone</label>
-                      <input type="text" 
-                      class="form-control" formControlName="phone" placeholder="Ex: 017XXXXXXXXXX">
-                      
-                  </div>
-                  
+              <div class="row" [formGroup]="deliveymanaddForm">
+                      <div class="col-sm-6 col-md-6 col-lg-6 border-right mx-auto">
+                          <div class="form-label-group">
+                                <label for="inputUsername">Name</label>
+                                <input type="text" 
+                                class="form-control"  formControlName="name" placeholder="Ex: Mr. Fast"
+                                [ngClass]="{ 'is-invalid': submitted && deliveryManForm.name.errors }">
+                                <div *ngIf="submitted && deliveryManForm.name.errors" class="invalid-feedback">
+                                  <div *ngIf="deliveryManForm.name.errors.required">Delivery-Man Name is required</div>
+                                </div>
+                          </div>
+        
+                          <div class="form-label-group">
+                              <label for="phone">Phone</label>
+                              <input type="text" 
+                              class="form-control" formControlName="phone" placeholder="Ex: 017XXXXXXXXXX"
+                              [ngClass]="{ 'is-invalid': submitted && deliveryManForm.phone.errors}">
+                              <div *ngIf="submitted && deliveryManForm.phone.errors" class="invalid-feedback">
+                                <div class="error-message" *ngIf="deliveryManForm.phone.errors.required">Delivery-Man Phone is required</div>
+                                <div class="error-message"  *ngIf="deliveryManForm.phone.errors.isPhoneValid">Phone no must be number</div>
+                              </div>
+                          </div>
 
-                  <div class="form-label-group">
-                    <label for="inputUsername">Password</label>
-                    <input type="text" 
-                    class="form-control"  formControlName="password" placeholder="Ex: as1234">
-                    
+                          <!-- <div class="form-label-group">
+                            <label for="password">Password</label>
+                            <input type="password" 
+                            class="form-control"  formControlName="password" placeholder="Ex: as1234">
+                          </div> -->
+
+                          <div class="form-label-group">
+                            <label for="nid">NID</label>
+                            <input type="text" 
+                            class="form-control"  formControlName="nid" placeholder="Ex: as1234"
+                            [ngClass]="{ 'is-invalid': submitted && deliveryManForm.nid.errors }">
+                            <div *ngIf="submitted && deliveryManForm.nid.errors" class="invalid-feedback">
+                              <div *ngIf="deliveryManForm.nid.errors.required">Delivery-Man NID is required</div>
+                            </div>
+                          </div>
+
+                          <div class="form-label-group">
+                            <label for="address">Address</label>
+                            <input type="text" 
+                            class="form-control"  formControlName="address" placeholder=""
+                            [ngClass]="{ 'is-invalid': submitted && deliveryManForm.address.errors }">
+                            <div *ngIf="submitted && deliveryManForm.address.errors" class="invalid-feedback">
+                              <div *ngIf="deliveryManForm.address.errors.required">Address is required</div>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label>Select Area </label>
+                            <select class="custom-select form-control" formControlName="divisionid" (change)="onSelectDivision($event)"
+                              [ngClass]="{ 'is-invalid': submitted && deliveryManForm.divisionid.errors }">
+                              <option value="" disabled>Choose your Area</option>
+                              <option *ngFor="let i of division" [value]="i.divisionId">{{i.name}}</option>
+                            </select>
+                            <div *ngIf="submitted && deliveryManForm.divisionid.errors" class="invalid-feedback">
+                              <div *ngIf="deliveryManForm.divisionid.errors.required">Area is required</div>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label>Select Zone </label>
+                            <select class="custom-select form-group" formControlName="zoneid"
+                              [ngClass]="{ 'is-invalid': submitted && deliveryManForm.zoneid.errors }">
+                              <option value="" disabled>Choose your Zone</option>
+                              <option *ngFor="let i of listZones" [value]="i.zoneId">{{i.name}}</option>
+                            </select>
+                            <div *ngIf="submitted && deliveryManForm.zoneid.errors" class="invalid-feedback">
+                              <div *ngIf="deliveryManForm.zoneid.errors.required">Zone is required</div>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="col-sm-6 col-md-6 col-lg-6 border-right mx-auto">
+                          <div class="form-label-group">
+                            <label for="ecName">Emergency Contact Person Name</label>
+                            <input type="text" 
+                            class="form-control"  formControlName="ecName" placeholder="Ex: Md.Kuddus "
+                            [ngClass]="{ 'is-invalid': submitted && deliveryManForm.ecName.errors }">
+                            <div *ngIf="submitted && deliveryManForm.ecName.errors" class="invalid-feedback">
+                              <div *ngIf="deliveryManForm.ecName.errors.required">Emergency Contact Person Name is required</div>
+                            </div>
+                          </div>
+                          
+                          <div class="form-label-group">
+                            <label for="ecPhone">Emergency Contact Person Phone</label>
+                            <input type="text" 
+                            class="form-control"  formControlName="ecPhone" placeholder="Ex: 017XXXXXXXXXX"
+                            [ngClass]="{ 'is-invalid': submitted && deliveryManForm.ecPhone.errors}">
+                            <div *ngIf="submitted && deliveryManForm.ecPhone.errors" class="invalid-feedback">
+                              <div class="error-message" *ngIf="deliveryManForm.ecPhone.errors.required">Emergency Contact Person Phone no is required</div>
+                              <div class="error-message"  *ngIf="deliveryManForm.ecPhone.errors.isPhoneValid">Phone no must be number</div>
+                            </div>
+                          </div>
+
+                          <div class="form-label-group">
+                            <label for="ecAddress">Emergency Contact Person Address</label>
+                            <input type="text" 
+                            class="form-control"  formControlName="ecAddress" placeholder="Ex: ABC">
+                          </div>
+                      </div>
+              </div>
+              <div class="row pt-3">
+                <div class="col-sm-5 col-md-5 col-lg-5 mx-auto">
+                  <button mat-raised-button *ngIf="isSearch" class="btn btn-danger mr-2 ml-2">Delete</button>
+                  <button mat-raised-button *ngIf="isSearch" class="btn btn-success mr-2" type="submit">Update</button>
+                  <button mat-raised-button color="primary" *ngIf="!isSearch" class="btn btn-primary mr-2" (click)="Create()" type="submit">
+                    Add
+                  </button>
                 </div>
-                <br>
-                  <button  class="btn  btn-primary btn-block text-uppercase" type="submit">Create</button>
-            </form>
+              </div>
+          </div>
+         
+        </div>
+      </div>
+      <div class="col-sm-4 col-md-4 col-lg-4 mx-auto">
+        <div class="card">
+          <div class="card-header">
+            Delivery Man List
+          </div>
+          <!-- <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+          </mat-form-field> -->
+          <mat-toolbar>
+            <mat-form-field style="width: 100%" floatLabel='never'>
+            <input  
+                   matInput 
+                   [(ngModel)]="listFilter" 
+                   placeholder="Search" 
+                   autocomplete="off" >
+          </mat-form-field>
+          </mat-toolbar> 
+          <div class="card-body">
+              <div class="profile-badge pb-2" *ngFor="let i of filteredDeliveryMan | paginate: { itemsPerPage: 4, currentPage: p }">
+                <div class="media border p-3 shadow-sm p-3 bg-white rounded">
+                      <img src="assets/images/avatar.png" width="50px;">
+                      <div class="media-body">
+                        <p>{{i.name}}</p>
+                        <p>{{i.phone}}</p>
+                        <p>{{i.zone.name}}, {{i.zone.division.name}}</p>
+                        <p class="font-italic"></p>
+                      </div>
+                </div>
+            </div>
+            <!-- <mat-paginator [length]="filteredDeliveryMan?.length"
+            [pageSize]="size"
+            [pageIndex]="page"
+            [pageSizeOptions]="[4, 8, 12]"
+            (page)="getData($event)">
+            </mat-paginator> -->
+             <pagination-controls (pageChange)="p = $event"></pagination-controls>
           </div>
         </div>
       </div>
+    </div>
 
   
