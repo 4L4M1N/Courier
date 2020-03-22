@@ -44,6 +44,12 @@ namespace CourierAPI.Infrastructure.Repositories
             return result;
         }
 
+        public async Task<List<DeliveryMan>> GetDeliveryMen()
+        {
+            var result = await _context.DeliveryMen.Include(x=>x.Zone).Include(x=>x.Zone.Division).ToListAsync();
+            return result;
+        }
+
         public int LastDeliverManId()
         {
             var id = _context.DeliveryMen.Count();
