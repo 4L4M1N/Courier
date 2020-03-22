@@ -27,23 +27,29 @@
                           <option *ngFor="let i of item" [value]="i.itemId">{{i.name}}</option>
                         </select>
                         <div class="form-group">
-                            <input type="text" class="form-control" formControlName="ItemSize" placeholder="Item Type Name"> 
+                            <input type="text" required  class="form-control" formControlName="ItemSize" placeholder="Item Type Name" [ngClass]="{'is-invalid': ItemAttributeForm.get('ItemSize').errors && ItemAttributeForm.get('ItemSize').touched}">                  
+                            <div class="invalid-feedback" *ngIf="ItemAttributeForm.get('ItemSize').touched && ItemAttributeForm.get('ItemSize').hasError('required')">ItemSize is required</div>
                         </div>
                         
                         <div class="form-group">
-                          <input type="text"  class="form-control" formControlName="InCityRate"  placeholder="In City Rate" >
+                          <input type="text"  class="form-control" formControlName="InCityRate"  placeholder="In City Rate"  [ngClass]="{'is-invalid': ItemAttributeForm.get('InCityRate').errors && ItemAttributeForm.get('InCityRate').touched}" >
+                          <div class="invalid-feedback" *ngIf="ItemAttributeForm.get('InCityRate').touched && ItemAttributeForm.get('InCityRate').hasError('required')">InCityRate is required</div>
                         </div>
                         <div class="form-group">
-                            <input type="text"  class="form-control" formControlName="OutCityRate"  placeholder="Out City Rate" value="editOutCity?" >
+                            <input type="text"  class="form-control" formControlName="OutCityRate"  placeholder="Out City Rate" value="editOutCity?"  [ngClass]="{'is-invalid': ItemAttributeForm.get('OutCityRate').errors && ItemAttributeForm.get('OutCityRate').touched}">
+                            <div class="invalid-feedback" *ngIf="ItemAttributeForm.get('OutCityRate').touched && ItemAttributeForm.get('OutCityRate').hasError('required')">OutCityRate is required</div>
                         </div>
                         <div class="form-group">
-                          <input type="text"  class="form-control" formControlName="RegularRate" placeholder="Regular Rate" >
+                          <input type="text"  class="form-control" formControlName="RegularRate" placeholder="Regular Rate"  [ngClass]="{'is-invalid': ItemAttributeForm.get('RegularRate').errors && ItemAttributeForm.get('RegularRate').touched}" >
+                          <div class="invalid-feedback" *ngIf="ItemAttributeForm.get('RegularRate').touched && ItemAttributeForm.get('RegularRate').hasError('required')">RegularRate is required</div>
                         </div>
                         <div class="form-group">
-                            <input type="text"  class="form-control" formControlName="ConditionCharge" placeholder="Condition Charge in Percantage (%)" >
+                            <input type="text"  class="form-control" formControlName="ConditionCharge" placeholder="Condition Charge in Percantage (%)"  [ngClass]="{'is-invalid': ItemAttributeForm.get('ConditionCharge').errors && ItemAttributeForm.get('ConditionCharge').touched}" >
+                            <div class="invalid-feedback" *ngIf="ItemAttributeForm.get('ConditionCharge').touched && ItemAttributeForm.get('ConditionCharge').hasError('required')">ConditionCharge is required</div>
                         </div>
                         <div class="form-group">
-                          <input type="text"  class="form-control" formControlName="BookingCharge" placeholder="Booking Charge" >
+                          <input type="text"  class="form-control" formControlName="BookingCharge" placeholder="Booking Charge"  [ngClass]="{'is-invalid': ItemAttributeForm.get('BookingCharge').errors && ItemAttributeForm.get('BookingCharge').touched}" >
+                          <div class="invalid-feedback" *ngIf="ItemAttributeForm.get('BookingCharge').touched && ItemAttributeForm.get('BookingCharge').hasError('required')">BookingCharge is required</div>
                         </div>
                         <div class="btn-toolbar">
                           <button *ngIf="!isModify" class="btn  btn-primary btn float-right text-uppercase" type="submit" (click)="CreateItemAttribute()">Submit</button>
