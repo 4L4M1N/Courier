@@ -9,4 +9,5 @@ export interface IDeliveryMan {
     ecAddress: string;
     divisionId: number;
     zoneId: number;
+    delivManIdentity:string; 
 }
