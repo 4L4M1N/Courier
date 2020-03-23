@@ -21,5 +21,6 @@ namespace CourierAPI.Core.DTOs
         public string ECName{ get; set; }
         public string ECAddress{ get; set; }
         public string Password {get;set;}
+        public string DelivManIdentity  { get; set; }
     }
 }

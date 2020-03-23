@@ -19,10 +19,12 @@ export class DeliveryManAddComponent implements OnInit {
   deliveryMan: IDeliveryMan;
   deliveymanaddForm: FormGroup;
   allDeliveryMan: any;
+  deliveryManIdentity: string;
   submitted = false;
   datasource:any;
   isSearch = false;
   searchText: any;
+  isModify = false;
   _listFilter = '';
   p: number = 1;
   page = 0;
@@ -76,24 +78,6 @@ export class DeliveryManAddComponent implements OnInit {
         this.filteredDeliveryMan = this.allDeliveryMan;
       })
     }
-  // getData(obj) {
-  //   console.log(this._listFilter);
-    
-  //     this.deliveryManService.GetAllDelivaryMan().subscribe(r => 
-  //       { this.allDeliveryMan = r;
-  //         let index=0,
-  //         startingIndex=obj.pageIndex * obj.pageSize,
-  //         endingIndex=startingIndex + obj.pageSize;
-      
-  //         this.filteredDeliveryMan = this.allDeliveryMan.filter(() => {
-  //           index++;
-  //           return (index > startingIndex && index <= endingIndex) ? true : false;
-  //         });
-  //       }
-  //       );
-    
-    
-  // }
   get deliveryManForm() {return this.deliveymanaddForm.controls; }
   GetDivision()
   {
@@ -102,6 +86,7 @@ export class DeliveryManAddComponent implements OnInit {
   onSelectDivision(event) {
     let value = event.target.value;
     let divId = value;
+    this.deliveymanaddForm.controls['zoneid'].setValue('');
     //console.log(divId);
     this.GetZonesOnChange(divId);
   }
@@ -125,8 +110,43 @@ export class DeliveryManAddComponent implements OnInit {
 
     this.deliveryManService.Create(this.deliveryMan).subscribe((response) => {
         this.modalService.openInfoModal(response);
+        this.getData();
       }, error => {
         this.modalService.openErrorModal(error);
       });
   }
+  onDeliveryManClick(deliveryMan)
+  {
+    this.isSearch = true;
+    this.deliveryManIdentity = deliveryMan.delivManIdentity;
+    console.log(this.deliveryManIdentity);
+    this.deliveymanaddForm.controls['name'].setValue(deliveryMan.name);
+    this.deliveymanaddForm.controls['phone'].setValue(deliveryMan.phone);
+    this.deliveymanaddForm.controls['nid'].setValue(deliveryMan.nid);
+    this.deliveymanaddForm.controls['address'].setValue(deliveryMan.address);
+    this.deliveymanaddForm.controls['ecPhone'].setValue(deliveryMan.ecPhone);
+    this.deliveymanaddForm.controls['ecName'].setValue(deliveryMan.ecName);
+    this.deliveymanaddForm.controls['ecAddress'].setValue(deliveryMan.ecAddress);
+    this.deliveymanaddForm.controls['divisionid'].setValue(deliveryMan.zone.divisionId);
+    this.GetDivision();
+    this.GetZonesOnChange(deliveryMan.zone.divisionId);
+    this.deliveymanaddForm.controls['zoneid'].setValue(deliveryMan.zone.zoneId);
+  }
+  UpdateDeliveryMan()
+  {
+    this.submitted = true;
+    if (this.deliveymanaddForm.invalid) {
+      return ;
+    }
+    this.deliveryMan = Object.assign({}, this.deliveymanaddForm.value);
+    this.deliveryMan.delivManIdentity = this.deliveryManIdentity;
+    this.deliveryManService.Update(this.deliveryMan).subscribe((response) => {
+      this.modalService.openInfoModal(response);
+      this.getData();
+    }, error => {
+      this.modalService.openErrorModal(error);
+    });
+    console.log(this.deliveryMan);
+  }
 }
+
