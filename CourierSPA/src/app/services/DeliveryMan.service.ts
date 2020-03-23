@@ -17,6 +17,8 @@ Create(deliveryMan: IDeliveryMan) {
 GetAllDelivaryMan(): Observable<IDeliveryMan[]>  {
   return this.http.get<IDeliveryMan[]>(this.baseURL + 'all');
 }
-
+Update(deliveryMan: IDeliveryMan) {
+  return this.http.put(this.baseURL + 'update', deliveryMan,{responseType: 'text'});
+}
 
 }

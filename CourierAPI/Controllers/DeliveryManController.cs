@@ -116,6 +116,15 @@ namespace CourierAPI.Controllers
             var deliveryMan = await _deliveryManService.GetDeliveryMen();
             return Ok(deliveryMan);
         }
-        
+         [HttpPut("update")]
+        public async Task<IActionResult> UpdateDeliveryMan(DeliveryManToAddDTO UpdateDeliveryMan)
+        {
+            var result = await _deliveryManService.Update(UpdateDeliveryMan);
+            if(result)
+            {
+                return Ok("Delivery Man information updated");
+            }
+            return BadRequest("Update Failed");
+        }
     }
 }

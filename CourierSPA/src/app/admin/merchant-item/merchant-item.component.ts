@@ -1,6 +1,6 @@
 import { ItemAttribute } from './../../models/ItemAttribute';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ItemcreationService } from 'src/app/services/itemcreation.service';
 import { ModalService } from 'src/app/services/Dialog/modal.service';
 import { ActivatedRoute } from '@angular/router';
@@ -12,8 +12,6 @@ import { Iitem } from 'src/app/models/Iitem';
   styleUrls: ['./merchant-item.component.css']
 })
 export class MerchantItemComponent implements OnInit {
-  
- 
   item: Iitem[];
   merchantId: any;
   itemAttribute: ItemAttribute;
@@ -37,13 +35,13 @@ export class MerchantItemComponent implements OnInit {
     this.getitems();
     // Item Attribute or Type
     this.ItemAttributeForm = new FormGroup({
-      itemid: new FormControl(''),
-      ItemSize: new FormControl(''),
-      InCityRate: new FormControl(''),
-      OutCityRate: new FormControl(''),
-      RegularRate: new FormControl(''),
-      ConditionCharge: new FormControl(''),
-      BookingCharge: new FormControl('')
+      itemid: new FormControl('', [Validators.required]),
+      ItemSize: new FormControl('', [Validators.required]),
+      InCityRate: new FormControl('' , [Validators.required]),
+      OutCityRate: new FormControl('', [Validators.required]),
+      RegularRate: new FormControl('', [Validators.required]),
+      ConditionCharge: new FormControl('', [Validators.required]),
+      BookingCharge: new FormControl('', [Validators.required])
     });
   }
   // Create Item attribute or type
@@ -121,6 +119,7 @@ export class MerchantItemComponent implements OnInit {
   openErrorModal() {
     this.modalService.openErrorModal('Error');
   }
+
 
 }
 
