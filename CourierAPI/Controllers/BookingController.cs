@@ -148,7 +148,7 @@ namespace CourierAPI.Controllers
         public async Task<ActionResult> AssignDelivMan(AssignDelivManToBooking assign)
         {
             var isBookingExists = await _unitOfWork.Bookings.FindBookingById(assign.BookingId);
-            var isDelivManExists = await _unitOfWork.DeliveryMan.FindByDeliveryManByIdAsync(assign.DelivManId);
+            var isDelivManExists = await _unitOfWork.DeliveryMan.FindByDeliveryManByIdAsync(assign.DelivManId); //Delivery-Man Identity
             if(isBookingExists == null || isDelivManExists == null)
             {
                 return BadRequest("Don't exists!");
