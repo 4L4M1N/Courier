@@ -10,6 +10,7 @@ namespace CourierAPI.Core.IRepositories
         Task<DeliveryMan> GetDeliveryManDetailsAsync(string id);
 
         Task<DeliveryMan> FindByDeliveryManNameAsync(string DMname);
+        //Delivery-Man Identity
         Task<DeliveryMan> FindByDeliveryManByIdAsync(string delivManId);
         Task<IEnumerable<DeliveryMan>> GetAllDeliveryMan();
         Task<List<DeliveryMan>> GetDeliveryMen();

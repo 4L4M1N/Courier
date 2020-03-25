@@ -26,7 +26,7 @@ namespace CourierAPI.Infrastructure.Services
 
         public async Task<bool> Update(DeliveryManToAddDTO updateDeliveryMan)
         {
-            var isDeliveryManExists = await _unitOfWork.DeliveryMan.FindByDeliveryManByIdAsync(updateDeliveryMan.DelivManIdentity);
+            var isDeliveryManExists = await _unitOfWork.DeliveryMan.FindByDeliveryManByIdAsync(updateDeliveryMan.DelivManIdentity);//Delivery-Man Identity
             if(isDeliveryManExists == null)
             {
                 return false;
