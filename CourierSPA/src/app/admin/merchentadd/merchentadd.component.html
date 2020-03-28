@@ -33,7 +33,7 @@
                       class="form-control"  formControlName="email" placeholder=""
                       [ngClass]="{ 'is-invalid': submitted && merchantForm.email.errors }">
                       <div *ngIf="submitted && merchantForm.email.errors" class="invalid-feedback">
-                        <div *ngIf="merchantForm.email.errors.required">Merchant Email is required</div>
+                        <!-- <div *ngIf="merchantForm.email.errors.required">Merchant Email is required</div> -->
                         <div *ngIf="merchantForm.email.errors.email">Email must be a valid email address</div>
                       </div>
                   </div>
@@ -44,7 +44,7 @@
                     class="form-control"  formControlName="password" placeholder=""
                     [ngClass]="{ 'is-invalid': submitted && merchantForm.password.errors }">
                     <div *ngIf="submitted && merchantForm.password.errors" class="invalid-feedback">
-                      <div *ngIf="merchantForm.password.errors.required">Password is required</div>
+                      <!-- <div *ngIf="merchantForm.password.errors.required">Password is required</div> -->
                       <div *ngIf="merchantForm.password.errors.minlength">Password must be at least 8 characters</div>
                       
                     </div>

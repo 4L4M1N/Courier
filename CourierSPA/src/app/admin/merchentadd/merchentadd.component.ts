@@ -21,11 +21,15 @@ export class MerchentaddComponent implements OnInit {
     this.merchantaddForm = new FormGroup({
       name: new FormControl('', Validators.required),
       phone: new FormControl('',[Validators.required,phoneValidator]),
-      email: new FormControl('',[Validators.required, Validators.email]),
-      address: new FormControl('',Validators.required),
+      // email: new FormControl('',[Validators.required, Validators.email]),
+      email: new FormControl('',[Validators.email]),
+      // address: new FormControl('',Validators.required),
+      address: new FormControl('',),
       bankAccountNo: new FormControl('',Validators.required),
-      password: new FormControl('',[Validators.required,Validators.minLength(8)]),
-      tradeLicenseNo: new FormControl('',[Validators.required]),
+      // password: new FormControl('',[Validators.required,Validators.minLength(8)]),
+      password: new FormControl('',[Validators.minLength(8)]),
+      // tradeLicenseNo: new FormControl('',[Validators.required]),
+      tradeLicenseNo: new FormControl('',),
       });
   }
   get merchantForm() {return this.merchantaddForm.controls;}

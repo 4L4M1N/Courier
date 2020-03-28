@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, ViewChild, ComponentFactoryResolver, ElementRef } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { from } from 'rxjs';
@@ -11,10 +11,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  @ViewChild("errorlogin", {read: ElementRef, static:false}) errorlogin: ElementRef;
   loginForm: FormGroup;
   submitted = false;
+  errormessage:string;
+  hide:any;
   model: any = {};
+  _ref:any; 
   constructor(private authService: AuthService,  private router: Router, private modalService: ModalService) { }
 
   ngOnInit() {
@@ -26,6 +29,8 @@ export class LoginComponent implements OnInit {
   get f() { return this.loginForm.controls; }
 
   login() {
+    this.hide = false;
+    this.errormessage = '';
     this.submitted = true;
     if(this.loginForm.invalid)
     {
@@ -42,7 +47,8 @@ export class LoginComponent implements OnInit {
       console.log('success');
       this.router.navigate(['/admin/admin-dashboard']);
     }, error => {
-      console.log('failed');
+      this.errormessage = error;
+      // this.modalService.openErrorModal(error);
     });
   }
 
@@ -53,6 +59,12 @@ export class LoginComponent implements OnInit {
   logout() {
     localStorage.removeItem('token');
     console.log('log out');
+  }
+  CloseError() {
+    //console.log(this.errorlogin.nativeElement);
+    //this.errorlogin.nativeElement.hidden = true;
+    this.hide = true;
+    this.errormessage = '';
   }
   openInfoModal() {
     this.modalService.openInfoModal('Hello Info');

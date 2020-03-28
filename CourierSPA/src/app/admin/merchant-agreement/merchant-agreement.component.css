@@ -1,3 +1,10 @@
 li {
     list-style-type: square;
 }
+.invalid-feedback .error-message {
+   
+    display: none;
+  }
+  .invalid-feedback .error-message:first-child {
+    display: block;
+  }
