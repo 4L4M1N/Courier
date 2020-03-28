@@ -24,4 +24,7 @@ GetAllMerchants(): Observable<Merchants[]> {
 GetMerchant(id): Observable<Merchants> {
   return this.http.get<Merchants>(this.baseURL + id);
 }
+Update(merchant: Merchants) {
+  return this.http.put(this.baseURL+ 'update', merchant, {responseType: 'text'});
+}
 }

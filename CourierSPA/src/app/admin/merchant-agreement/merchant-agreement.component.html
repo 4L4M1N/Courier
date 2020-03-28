@@ -7,14 +7,14 @@
             <div class="fab"><p style="font-size: 25px;" (click) = "ClickEditMerchantInfo()">Edit</p></div>
           <h5 class="card-title">Merchant Information</h5> <i class="fas fa-pencil" aria-hidden="true"></i>
 
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label>Merchant Code</label>
-              <input type="text" class="form-control" [readOnly]="isReadOnly" value="{{merchantInfo?.merchantIdentity}}">
+              <input type="text" class="form-control" readonly value="{{merchantInfo?.merchantIdentity}}">
               </div>
 
               <div class="form-group">
                 <label>Merchant Name</label>
-                <input type="text" class="form-control" [readOnly]="isReadOnly" value="{{merchantInfo?.name}}">
+                <input type="text" class="form-control" readonly value="{{merchantInfo?.name}}">
               </div>
 
               <div class="form-group">
@@ -30,8 +30,88 @@
               <div class="form-group">
                 <label>Trade License</label>
                 <input type="text" class="form-control" [readOnly]="isReadOnly" value="{{merchantInfo?.tradeLicenseNo}}">
+              </div> -->
+              <form  [formGroup]="merchantForm">
+              
+                <div class="form-group">
+                  <label>Merchant Code</label>
+                <input type="text" class="form-control" readonly value="{{merchantInfo?.merchantIdentity}}">
+                </div>
+                <div class="form-label-group">
+                      <label for="inputUsername">Name</label>
+                      <input type="text" readonly
+                      class="form-control"  formControlName="name" placeholder=""
+                      [ngClass]="{ 'is-invalid': submitted && merchantInformationForm.name.errors }">
+                      <div *ngIf="submitted && merchantInformationForm.name.errors" class="invalid-feedback">
+                        <div *ngIf="merchantInformationForm.name.errors.required">Merchant Name is required</div>
+                      </div>
+                </div>
+
+
+                <div class="form-label-group">
+                    <label for="inputUsername">Phone</label>
+                    <input type="text" [readOnly]="isReadOnly"
+                    class="form-control" formControlName="phone"
+                    [ngClass]="{ 'is-invalid': submitted && merchantInformationForm.phone.errors}">
+                    <div *ngIf="submitted && merchantInformationForm.phone.errors" class="invalid-feedback">
+                      <div class="error-message" *ngIf="merchantInformationForm.phone.errors.required">Merchant Phone is required</div>
+                      <div class="error-message"  *ngIf="merchantInformationForm.phone.errors.isPhoneValid">Phone no must be number</div>
+                    </div>
+                </div>
+                <div class="form-label-group">
+                    <label for="inputUsername">Email</label>
+                    <input type="text" [readOnly]="isReadOnly"
+                    class="form-control"  formControlName="email" placeholder=""
+                    [ngClass]="{ 'is-invalid': submitted && merchantInformationForm.email.errors }">
+                    <div *ngIf="submitted && merchantInformationForm.email.errors" class="invalid-feedback">
+                      <!-- <div *ngIf="merchantForm.email.errors.required">Merchant Email is required</div> -->
+                      <div *ngIf="merchantInformationForm.email.errors.email">Email must be a valid email address</div>
+                    </div>
+                </div>
+
+                <!-- <div class="form-label-group">
+                  <label for="inputUsername">Password</label>
+                  <input type="text" [readOnly]="isReadOnly"
+                  class="form-control"  formControlName="password" placeholder=""
+                  [ngClass]="{ 'is-invalid': submitted && merchantInformationForm.password.errors }">
+                  <div *ngIf="submitted && merchantInformationForm.password.errors" class="invalid-feedback">
+                    <div *ngIf="merchantInformationForm.password.errors.required">Password is required</div>
+                    <div *ngIf="merchantInformationForm.password.errors.minlength">Password must be at least 8 characters</div>
+                  </div>
+                </div> -->
+
+
+              <div class="form-label-group">
+                  <label for="inputUsername">Address</label>
+                  <input type="text" [readOnly]="isReadOnly"
+                  class="form-control"  formControlName="address" placeholder=""
+                  [ngClass]="{ 'is-invalid': submitted && merchantInformationForm.address.errors }">
+                  <div *ngIf="submitted && merchantInformationForm.address.errors" class="invalid-feedback">
+                    <div *ngIf="merchantInformationForm.address.errors.required">Address is required</div>
+                  </div>
               </div>
-              <button *ngIf="!isReadOnly" class="btn  btn-success btn float-right text-uppercase button-space" type="submit" >Update</button>
+              <div class="form-label-group">
+                  <label for="inputUsername">Bank Account No</label>
+                  <input type="text" [readOnly]="isReadOnly"
+                  class="form-control"  formControlName="bankAccountNo" placeholder=""
+                  [ngClass]="{ 'is-invalid': submitted && merchantInformationForm.bankAccountNo.errors }">
+                  <div *ngIf="submitted && merchantInformationForm.bankAccountNo.errors" class="invalid-feedback">
+                    <div *ngIf="merchantInformationForm.bankAccountNo.errors.required">Bank Account No is required</div>
+                  </div>
+              </div>
+              <div class="form-label-group">
+                  <label for="inputUsername">Trade License No</label>
+                  <input type="text" [readOnly]="isReadOnly"
+                  class="form-control"  formControlName="tradeLicenseNo" placeholder=""
+                  [ngClass]="{ 'is-invalid': submitted && merchantInformationForm.tradeLicenseNo.errors }">
+                  <div *ngIf="submitted && merchantInformationForm.tradeLicenseNo.errors" class="invalid-feedback">
+                    <div *ngIf="merchantInformationForm.tradeLicenseNo.errors.required">Trade License No is required</div>
+                  </div>
+              </div>
+              <br>
+                <!-- <button  class="btn  btn-primary btn-block text-uppercase" type="submit">Create</button> -->
+          </form>
+              <button *ngIf="!isReadOnly" class="btn  btn-success btn float-right text-uppercase button-space" (click)="Update()" type="submit" >Update</button>
         </div>
         
       </div>

@@ -117,7 +117,7 @@ namespace CourierAPI.Controllers
             // throw new Exception("noooooo");
             var user = await _userManager.FindByNameAsync(userForLoginDTO.UserName);
             if (user == null)
-                return Unauthorized();
+                return BadRequest("User name or Password is incorrect");
 
             var result = await _signInManager
                 .CheckPasswordSignInAsync(user, userForLoginDTO.Password, false); //Please use better option
@@ -155,7 +155,7 @@ namespace CourierAPI.Controllers
                     token = tokenHandler.WriteToken(token)
                 });
             }
-            return Unauthorized();
+            return BadRequest("User name or Password is incorrect");
 
         }
 

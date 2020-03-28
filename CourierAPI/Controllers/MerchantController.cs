@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using CourierAPI.Core.DTOs;
 using CourierAPI.Core.IRepositories;
 using CourierAPI.Core.Models;
+using CourierAPI.Core.IServices;
 
 namespace CourierAPI.Controllers
 {
@@ -26,11 +27,13 @@ namespace CourierAPI.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly IConfiguration _config;
         private readonly IMapper _mapper;
-        public MerchantController(IUnitOfWork unitOfWork, IConfiguration config, IMapper mapper)
+        private readonly IMerchantService _merchantService;
+        public MerchantController(IUnitOfWork unitOfWork, IConfiguration config, IMapper mapper, IMerchantService merchantService)
         {
             _unitOfWork = unitOfWork;
             _config = config;
             _mapper = mapper;
+            _merchantService = merchantService;
         }
 
         [HttpGet("test")]
@@ -47,8 +50,8 @@ namespace CourierAPI.Controllers
             if (isMerchantExist != null)
                 return BadRequest("This name already exists!");
 
-            byte[] passwordHash, passwordSalt;
-            Extensions.CreatePasswordHash(addMerchant.Password, out passwordHash, out passwordSalt);
+            // byte[] passwordHash, passwordSalt;
+            // Extensions.CreatePasswordHash(addMerchant.Password, out passwordHash, out passwordSalt);
             int total = _unitOfWork.Merchants.LastMerchantId();
             var merchantId = Extensions.GenerateIdForMerchant(total + 1);
             var merchantToAdd = new Merchant
@@ -60,9 +63,9 @@ namespace CourierAPI.Controllers
                 Email = addMerchant.Email,
                 Address = addMerchant.Address,
                 TradeLicenseNo = addMerchant.TradeLicenseNo,
-                MerchantIdentity = merchantId,
-                PasswordHash = passwordHash,
-                PasswordSalt = passwordSalt
+                MerchantIdentity = merchantId
+                // PasswordHash = passwordHash,
+                // PasswordSalt = passwordSalt
             };
             await _unitOfWork.Merchants.AddMerchantAsync(merchantToAdd);
             var result = await _unitOfWork.CompleteAsync();
@@ -116,20 +119,15 @@ namespace CourierAPI.Controllers
 
          
         [Authorize(Roles = "CourierOwner, SuperAdmin")]
-        [HttpPost("update")]
+        [HttpPut("update")]
         public async Task<IActionResult> Update(MerchantDTO updateMerchant)
         {
-            var isMerchantExist = await _unitOfWork.Merchants.FindByMerchantIdAsync(updateMerchant.Id.ToString());
-            if (isMerchantExist == null) return BadRequest("User Not Found");
-
-            isMerchantExist.Email = updateMerchant.Email;
-            isMerchantExist.Name = updateMerchant.Name;
-            isMerchantExist.Address = updateMerchant.Address;
-            isMerchantExist.Phone = updateMerchant.Phone;
-            isMerchantExist.TradeLicenseNo = updateMerchant.TradeLicenseNo;
-            var result = await _unitOfWork.CompleteAsync();
-            if (result == 0) return BadRequest();
-            return Ok("Merchant Updated");
+            var result = await _merchantService.Update(updateMerchant);
+            if(result)
+            {
+                return Ok("Merchant information updated");
+            }
+            return BadRequest("Update Failed");
         }
 
         [Authorize(Roles = "CourierOwner, SuperAdmin")]

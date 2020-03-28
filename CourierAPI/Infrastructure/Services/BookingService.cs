@@ -74,8 +74,7 @@ namespace CourierAPI.Infrastructure.Services
             isBookingExists.ItemPrice = booking.ItemPrice;
             isBookingExists.MerchantBill = booking.MerchantBill;
             isBookingExists.CourierBill = booking.CourierBill;
-            isBookingExists.TotalAmmount = booking.TotalAmount;
-            isBookingExists.ItemPrice = booking.ItemPrice;
+            isBookingExists.ReceiverBill = booking.ReceiverBill;
             isBookingExists.ItemPrice = booking.ItemPrice;
             isBookingExists.ConditionCharge = booking.ConditionCharge;
             isBookingExists.TotalAmmount = booking.TotalAmount;
