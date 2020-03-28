@@ -25,7 +25,12 @@
                                 <div *ngIf="f.password.errors.required">Password is required</div>
                               </div>
                         </div> <br>
-                        
+                        <div #errorlogin class="alert alert-danger alert-dismissible fade show" *ngIf="errormessage && !hide" role="alert">
+                          {{errormessage}}
+                          <button type="button" class="close" data-dismiss="alert" (click)="CloseError()" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
                         <!-- Implement Remember me -->
                         <div class="custom-control custom-checkbox mb-3">
                               <input type="checkbox" class="custom-control-input" id="customCheck1">

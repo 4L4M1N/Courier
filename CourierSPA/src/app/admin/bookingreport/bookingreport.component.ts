@@ -19,8 +19,8 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class BookingreportComponent implements OnInit {
   // date = new FormControl(new Date());
-  Fromdate:any;
-  ToDate:any;
+  Fromdate = new Date;
+  ToDate = new Date;
   apiFormdate: any;
   apiToDate:any;
   reportNumber = 0;
@@ -55,9 +55,9 @@ generatePdf()
           },
           { text: 'Booking Details Report', style: 'header' },
           { text: 'From: '+this.apiFormdate+' '+'To: '+this.apiToDate, style: 'header' },
-          BookingDetailsRpt.table(data, ['bookingDate', 'courierBill',
-          'deliveredDate','deliveryMan','id','merchantBill','merchantName','receiverBill','receiverName',
-        'status','zone'
+          BookingDetailsRpt.table(data, ['Booking Date', 'Courier Bill',
+          'Delivered Date','Delivery Man','ID','Merchant Bill','Merchant Name','Receiver Bill','Receiver Name',
+        'Status','Zone'
         ])
         ],
         styles: {
