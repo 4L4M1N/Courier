@@ -250,6 +250,7 @@ export class BookingComponent implements OnInit {
         this.isSearch = true;
         console.log(this.searchResult.bookingItem.id);
         this.booking.controls['itemid'].setValue(this.searchResult.item.itemId);
+        this.isInCity = this.searchResult.bookingItem.isInCity;
         //this.GetItemAttributes(this.searchResult.item.itemId);
         //this.GetItemAttributesOnChange(this.searchResult.bookingItem.itemAttributeId);
         this.itemcreationservice.GetItemAttributesOfAnItemMerchant(this.searchResult.item.itemId, this.merchantId).subscribe(data => {
@@ -470,6 +471,7 @@ export class BookingComponent implements OnInit {
     if (this.isInCity) {
       this.bookingAndDelivCharge = (this.itemAttributeDetails.inCityRate+ this.itemAttributeDetails.bookingCharge);
       this.total = this.total + (this.itemAttributeDetails.inCityRate + this.itemAttributeDetails.bookingCharge);
+      console.log(this.total);
       this.payableAmount = this.total;
       this.courierBill = this.bookingAndDelivCharge;
       this.merchantBill = this.itemPrice;

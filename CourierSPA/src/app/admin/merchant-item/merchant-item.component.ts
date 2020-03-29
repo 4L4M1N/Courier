@@ -20,6 +20,7 @@ export class MerchantItemComponent implements OnInit {
   createItemFrom: FormGroup;
   ItemAttributeForm: FormGroup;
   p: number = 1;
+  submitted = false;
   editOutCity: any;
   ItemAttributeid: any;
   isModify = false;
@@ -44,8 +45,14 @@ export class MerchantItemComponent implements OnInit {
       BookingCharge: new FormControl('', [Validators.required])
     });
   }
+  get itemAttributeADDForm() {return this.ItemAttributeForm.controls;}
   // Create Item attribute or type
   CreateItemAttribute() {
+    this.submitted = true;
+    if (this.ItemAttributeForm.invalid)
+    {
+      return ;
+    }
     if (this.ItemAttributeForm.valid) {
       console.log(this.ItemAttributeForm.value);
       this.itemAttribute = Object.assign({}, this.ItemAttributeForm.value);

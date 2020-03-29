@@ -21,35 +21,63 @@
               <form [formGroup]="ItemAttributeForm">
                   <div class="card-body">
                     <h5 class="card-title text-center">Item Type</h5>
-                                                        
-                      <select class="custom-select form-group" formControlName="itemid" (change)="onSelect($event)">
-                          <option value="" disabled>Choose your Item</option>
-                          <option *ngFor="let i of item" [value]="i.itemId">{{i.name}}</option>
-                        </select>
+                      <!-- TODO: Fix Space -->
                         <div class="form-group">
-                            <input type="text" required  class="form-control" formControlName="ItemSize" placeholder="Item Type Name" [ngClass]="{'is-invalid': ItemAttributeForm.get('ItemSize').errors && ItemAttributeForm.get('ItemSize').touched}">                  
-                            <div class="invalid-feedback" *ngIf="ItemAttributeForm.get('ItemSize').touched && ItemAttributeForm.get('ItemSize').hasError('required')">ItemSize is required</div>
-                        </div>
+                          <select class="custom-select form-group" formControlName="itemid" (change)="onSelect($event)"
+                          [ngClass]="{ 'is-invalid': submitted && itemAttributeADDForm.itemid.errors }">
+                            <option value="" disabled>Choose your Item</option>
+                            <option *ngFor="let i of item" [value]="i.itemId">{{i.name}}</option>
+                          </select>
+                          <div *ngIf="submitted && itemAttributeADDForm.itemid.errors" class="invalid-feedback">
+                            <div *ngIf="itemAttributeADDForm.itemid.errors.required">Item id is required</div>
+                          </div>
+                        </div> 
+                        <div class="form-group">
+                            <input type="text" required  class="form-control" formControlName="ItemSize" placeholder="Item Type Name"
+                            [ngClass]="{ 'is-invalid': submitted && itemAttributeADDForm.ItemSize.errors }">
+                            <div *ngIf="submitted && itemAttributeADDForm.ItemSize.errors" class="invalid-feedback">
+                              <div *ngIf="itemAttributeADDForm.ItemSize.errors.required">Item size Name is required</div>
+                            </div>
+                          </div>
                         
                         <div class="form-group">
-                          <input type="text"  class="form-control" formControlName="InCityRate"  placeholder="In City Rate"  [ngClass]="{'is-invalid': ItemAttributeForm.get('InCityRate').errors && ItemAttributeForm.get('InCityRate').touched}" >
-                          <div class="invalid-feedback" *ngIf="ItemAttributeForm.get('InCityRate').touched && ItemAttributeForm.get('InCityRate').hasError('required')">InCityRate is required</div>
+                          <input type="text"  class="form-control" formControlName="InCityRate"  placeholder="In City Rate"  
+                          [ngClass]="{ 'is-invalid': submitted && itemAttributeADDForm.InCityRate.errors }">
+                          <div *ngIf="submitted && itemAttributeADDForm.InCityRate.errors" class="invalid-feedback">
+                            <div *ngIf="itemAttributeADDForm.InCityRate.errors.required">In City Rate is required</div>
+                          </div>
                         </div>
+
                         <div class="form-group">
-                            <input type="text"  class="form-control" formControlName="OutCityRate"  placeholder="Out City Rate" value="editOutCity?"  [ngClass]="{'is-invalid': ItemAttributeForm.get('OutCityRate').errors && ItemAttributeForm.get('OutCityRate').touched}">
-                            <div class="invalid-feedback" *ngIf="ItemAttributeForm.get('OutCityRate').touched && ItemAttributeForm.get('OutCityRate').hasError('required')">OutCityRate is required</div>
+                            <input type="text"  class="form-control" formControlName="OutCityRate"  placeholder="Out City Rate" value="editOutCity?" 
+                            [ngClass]="{ 'is-invalid': submitted && itemAttributeADDForm.OutCityRate.errors }">
+                            <div *ngIf="submitted && itemAttributeADDForm.OutCityRate.errors" class="invalid-feedback">
+                              <div *ngIf="itemAttributeADDForm.OutCityRate.errors.required">Out city rate is required</div>
+                            </div>
                         </div>
+
                         <div class="form-group">
-                          <input type="text"  class="form-control" formControlName="RegularRate" placeholder="Regular Rate"  [ngClass]="{'is-invalid': ItemAttributeForm.get('RegularRate').errors && ItemAttributeForm.get('RegularRate').touched}" >
-                          <div class="invalid-feedback" *ngIf="ItemAttributeForm.get('RegularRate').touched && ItemAttributeForm.get('RegularRate').hasError('required')">RegularRate is required</div>
+                          <input type="text"  class="form-control" formControlName="RegularRate" placeholder="Regular Rate" 
+                          [ngClass]="{ 'is-invalid': submitted && itemAttributeADDForm.RegularRate.errors }">
+                          <div *ngIf="submitted && itemAttributeADDForm.RegularRate.errors" class="invalid-feedback">
+                            <div *ngIf="itemAttributeADDForm.RegularRate.errors.required">Regular rate is required</div>
+                          </div>
                         </div>
+
                         <div class="form-group">
-                            <input type="text"  class="form-control" formControlName="ConditionCharge" placeholder="Condition Charge in Percantage (%)"  [ngClass]="{'is-invalid': ItemAttributeForm.get('ConditionCharge').errors && ItemAttributeForm.get('ConditionCharge').touched}" >
-                            <div class="invalid-feedback" *ngIf="ItemAttributeForm.get('ConditionCharge').touched && ItemAttributeForm.get('ConditionCharge').hasError('required')">ConditionCharge is required</div>
+                            <input type="text"  class="form-control" formControlName="ConditionCharge" placeholder="Condition Charge in Percantage (%)"  
+                            [ngClass]="{ 'is-invalid': submitted && itemAttributeADDForm.ConditionCharge.errors }">
+                            <div *ngIf="submitted && itemAttributeADDForm.ConditionCharge.errors" class="invalid-feedback">
+                              <div *ngIf="itemAttributeADDForm.ConditionCharge.errors.required">Condition Charge is required</div>
+                            </div>
                         </div>
+
                         <div class="form-group">
-                          <input type="text"  class="form-control" formControlName="BookingCharge" placeholder="Booking Charge"  [ngClass]="{'is-invalid': ItemAttributeForm.get('BookingCharge').errors && ItemAttributeForm.get('BookingCharge').touched}" >
-                          <div class="invalid-feedback" *ngIf="ItemAttributeForm.get('BookingCharge').touched && ItemAttributeForm.get('BookingCharge').hasError('required')">BookingCharge is required</div>
+                          <input type="text"  class="form-control" formControlName="BookingCharge" placeholder="Booking Charge" 
+                          [ngClass]="{ 'is-invalid': submitted && itemAttributeADDForm.BookingCharge.errors }">
+                          <div *ngIf="submitted && itemAttributeADDForm.BookingCharge.errors" class="invalid-feedback">
+                            <div *ngIf="itemAttributeADDForm.BookingCharge.errors.required">Booking Charge is required</div>
+                          </div>
                         </div>
                         <div class="btn-toolbar">
                           <button *ngIf="!isModify" class="btn  btn-primary btn float-right text-uppercase" type="submit" (click)="CreateItemAttribute()">Submit</button>
