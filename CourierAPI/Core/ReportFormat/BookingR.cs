@@ -13,5 +13,6 @@ namespace CourierAPI.Core.ReportFormat
         public string BookingSerialNo { get; set; }
         public string MerchantName { get; set; }
         public string Status { get; set; }
+        public string MerchantId { get; set; }
     }
 }

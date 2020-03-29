@@ -47,13 +47,13 @@
     <mat-header-cell *matHeaderCellDef class="pl-3"> Actions </mat-header-cell>>
     <mat-cell *matCellDef="let element"> 
       
-      <a class="btn btn-default border-0" href="https://www.facebook.com" >
+      <!-- <a class="btn btn-default border-0" href="https://www.facebook.com" >
         <i style="color: blue;" class="fas fa-info"></i>
-      </a>
-      <a class="btn btn-default border-0" href="https://www.google.com" >
+      </a> -->
+      <a class="btn btn-default border-0" [routerLink]="['/admin/booking/', element.merchantId]" [queryParams]="{ BookingID: element.bookingSerialNo}">
         <i style="color: green;" class="far fa-edit"></i>
       </a>
-      <a class="btn btn-default border-0" href="https://www.facebook.com" >
+      <a class="btn btn-default border-0" [routerLink]="['/admin/booking/', element.merchantId]" [queryParams]="{ BookingID: element.bookingSerialNo}">
         <i style="color: red;" class="fas fa-trash-alt"></i>
       </a>
     </mat-cell>

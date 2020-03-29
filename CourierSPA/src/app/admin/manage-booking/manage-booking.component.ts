@@ -7,6 +7,7 @@ import { DeliveryManService } from 'src/app/services/DeliveryMan.service';
 import { ModalService } from 'src/app/services/Dialog/modal.service';
 import { SetStatusComponent } from '../setStatus/setStatus.component';
 import { StatusService } from 'src/app/services/status.service';
+import { PreviousRouteService } from 'src/app/services/Others/PreviousRoute.service';
 
 @Component({
   selector: 'app-manage-booking',
@@ -29,6 +30,7 @@ export class ManageBookingComponent implements OnInit {
   bookingId:string;
   datasource: any;
   statusvalue:string;
+  previousUrl:any;
   status = [
     {value: 'onway', viewValue: 'On Way'},
     {value: 'delevered', viewValue: 'Delevered'},
@@ -39,12 +41,14 @@ export class ManageBookingComponent implements OnInit {
   constructor(private bookingService: BookingService, private dialog: MatDialog,
               private deliveryManService: DeliveryManService,
               private modalService: ModalService,
-              private statusService: StatusService) { }
+              private statusService: StatusService,
+              private previousRouteService: PreviousRouteService) { }
 
   ngOnInit() {
     this.GetAllBooking();
     this.GetDelivManList();
     this.GetStatusList();
+    this.previousUrl = this.previousRouteService.getPreviousUrl();
     // this.selected =  'option2';
   }
   applyFilter(filterValue: string) {

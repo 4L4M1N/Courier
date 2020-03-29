@@ -10,12 +10,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <DestinationConnectionStrings Include="CourierDB">
-      <Value>Data Source=SQL5052.site4now.net%3bInitial Catalog=DB_A5617B_courier%3bUser Id=DB_A5617B_courier_admin%3bPassword=Prog4%40AmiN%3b</Value>
+      <Value>Data Source=SQL5052.site4now.net%3bInitial Catalog=DB_A5617B_courierdemo%3bUser Id=DB_A5617B_courierdemo_admin%3bPassword=Prog4%40AmiN%3b</Value>
     </DestinationConnectionStrings>
   </ItemGroup>
   <ItemGroup>
     <EFMigrations Include="CourierAPI.Infrastructure.Data.DataContext">
-      <Value>Data Source=SQL5052.site4now.net%3bInitial Catalog=DB_A5617B_courier%3bUser Id=DB_A5617B_courier_admin%3bPassword=Prog4%40AmiN%3b</Value>
+      <Value>Data Source=SQL5052.site4now.net%3bInitial Catalog=DB_A5617B_courierdemo%3bUser Id=DB_A5617B_courierdemo_admin%3bPassword=Prog4%40AmiN%3b</Value>
     </EFMigrations>
   </ItemGroup>
 </Project>
