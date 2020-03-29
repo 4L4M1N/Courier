@@ -45,6 +45,8 @@ import { BookingReportService } from './services/Report/booking/bookingReport.se
 import { ErrorInterceptorProvider } from './interceptors/ErrorInterceptor';
 import { LoaderInterceptor } from './interceptors/LoaderInterceptor';
 import { LoaderComponent } from './shared/loader/loader/loader.component';
+import { PreviousRouteService } from './services/Others/PreviousRoute.service';
+
 
 
 
@@ -120,6 +122,7 @@ import { LoaderComponent } from './shared/loader/loader/loader.component';
       ItemcreationService,
       StatusService,
       BookingReportService,
+      PreviousRouteService,
       DatePipe,
       ErrorInterceptorProvider,
       { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }

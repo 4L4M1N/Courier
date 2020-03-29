@@ -19,6 +19,7 @@ import { ModalService } from 'src/app/services/Dialog/modal.service';
 import { DatePipe } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/forkJoin';
+import { PreviousRouteService } from 'src/app/services/Others/PreviousRoute.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -56,6 +57,9 @@ export class BookingComponent implements OnInit {
   searchBookingId: any;
   searchResult: any;
   isSearch = false;
+  requestedBookingId:any;
+  requested = false;
+  previousUrl:any;
   showBookingSerial: any;
   isAddWithMainBill = false; // Add with main Bill
   isConditionChargeApply = false;    // Condition Charge
@@ -104,17 +108,37 @@ export class BookingComponent implements OnInit {
               private deliveryAddressservice: DeliveryAddressService,
               private modalService: ModalService,
               private datePipe: DatePipe,
-              private bookingService: BookingService) {
+              private bookingService: BookingService,
+              private previousRouteService: PreviousRouteService) {
     this.itemcreationservice.GetItems().subscribe(data => { this.items = data });
     this.deliveryAddressservice.GetDivisions().subscribe(r => { this.division = r });
   }
 
   ngOnInit() {
+
+    // get route param
     this.route.paramMap
       .subscribe(params => {
         this.merchantId = params.get('merchantId');
+        console.log(this.requestedBookingId);
         console.log(this.merchantId);
       });
+    // get optional query param
+    this.route.queryParamMap
+      .subscribe(queryParams => {
+        this.requestedBookingId = queryParams.get('BookingID')||0; 
+        this.previousUrl = this.previousRouteService.getPreviousUrl();
+        console.log(this.previousUrl);
+        // this.requestedBookingId = this.ActivatedRoute.snapshot.queryParamMap.get('BookingID')||0;;
+        console.log(this.requestedBookingId);
+        if (this.previousUrl == '/admin/managebooking' && this.requestedBookingId != null) {
+          console.log("true");
+          this.requested = true;
+          this.searchBookingId = this.requestedBookingId;
+          this.search();
+        }
+      });
+
     this.GetMerchantInfo();
     // this.GetBookingSerial();
 
