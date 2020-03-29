@@ -8,4 +8,5 @@ export interface BookingView {
     bookingSerialNo: string;
     merchantName: string;
     status: string;
+    merchantId: string;
 }
