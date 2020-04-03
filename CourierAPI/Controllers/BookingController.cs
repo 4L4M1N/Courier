@@ -11,6 +11,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using Extensions = CourierAPI.Helpers.Extensions;
+using Microsoft.Extensions.Logging;
+using System.Data;
+using Dapper;
+using CourierAPI.Core.ReportFormat;
 
 namespace CourierAPI.Controllers
 {
@@ -25,10 +29,12 @@ namespace CourierAPI.Controllers
         private readonly IStatusService _statusService;
         public readonly IMerchantService _merchantService;
         public readonly IReceiverService _receiverService;
+        public readonly ILogger _logger;
         
         public BookingController(IUnitOfWork unitOfWork, DataContext context, 
                                 IBookingService bookingService, IStatusService statusService,
-                                IMerchantService merchantService, IReceiverService receiverService)
+                                IMerchantService merchantService, IReceiverService receiverService,
+                                ILogger<BookingController> logger)
         {
             _context = context;
             _unitOfWork = unitOfWork;
@@ -36,12 +42,12 @@ namespace CourierAPI.Controllers
             _statusService = statusService;
             _merchantService = merchantService;
             _receiverService = receiverService;
-            
+            _logger = logger;
         }
         [HttpGet("test")]
         public async Task<IActionResult> GetBooking()
         {
-            
+            _logger.LogInformation("Hello logger successed");
             return Ok();
         }
 

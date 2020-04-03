@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using System.Threading.Tasks;
 using CourierAPI.Core.DTOs;
 using CourierAPI.Core.IRepositories;
@@ -7,6 +9,7 @@ using CourierAPI.Core.IServices;
 using CourierAPI.Core.Models;
 using CourierAPI.Core.ReportFormat;
 using CourierAPI.Infrastructure.Data;
+using Dapper;
 using Microsoft.EntityFrameworkCore;
 
 namespace CourierAPI.Infrastructure.Services
@@ -15,10 +18,12 @@ namespace CourierAPI.Infrastructure.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly DataContext _context;
-        public BookingService(IUnitOfWork unitOfWork, DataContext context)
+        private readonly IDbConnection _dbConnection;
+        public BookingService(IUnitOfWork unitOfWork, DataContext context,IDbConnection dbConnection)
         {
             _unitOfWork = unitOfWork;
             _context = context;
+            _dbConnection = dbConnection;
         }
 
         public async Task<bool> Delete(string bookingId)
@@ -43,14 +48,21 @@ namespace CourierAPI.Infrastructure.Services
 
         public async Task<List<BookingR>> GetAllBookingDetails()
         {
-            var result = await _context.ShowBookings.FromSqlRaw("exec Booking").ToListAsync();
-            return result;
+            //var result = await _context.Query<BookingR>().FromSqlRaw("exec Booking").ToListAsync(); --Method 2
+            //var result = await _context.ShowBookings.FromSqlRaw("exec Booking").ToListAsync(); --Method 1
+            // return result;
+            var result =  await _dbConnection.QueryAsync<BookingR>("Booking",commandType: CommandType.StoredProcedure);
+            return result.ToList();
         }
 
         public async Task<List<BookingDetailsReport>> GetBookingDetailsForReport(DateTime From, DateTime To)
         {
-            var result = await _context.ShowBookingDetailsReport.FromSqlRaw("exec BookingDetails {0}, {1}",From, To).ToListAsync();
-            return result;
+            // var result = await _context.Query<BookingDetailsReport>().FromSqlRaw("exec BookingDetails {0}, {1}",From, To).ToListAsync(); --Method 2
+            // var result = await _context.ShowBookingDetailsReport.FromSqlRaw("exec BookingDetails {0}, {1}",From, To).ToListAsync(); --Method 1
+            // return result;
+            var values = new { fromDate = From, toDate = To }; 
+            var result =  await _dbConnection.QueryAsync<BookingDetailsReport>("BookingDetails", values, commandType: CommandType.StoredProcedure);
+            return result.ToList();
         }
 
         public async Task<Booking> SearchBookingBySerialNo(string SerialNo)

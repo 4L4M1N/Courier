@@ -1,8 +1,10 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;
 
 namespace CourierAPI.Core.ReportFormat
 {
+   
     public class BookingDetailsReport
     {
         [JsonProperty("ID")]

@@ -25,6 +25,8 @@ using CourierAPI.Infrastructure.Data;
 using CourierAPI.Infrastructure.Repositories;
 using CourierAPI.Infrastructure.Services;
 using System.Net.Mime;
+using System.Data;
+using Microsoft.Data.SqlClient;
 
 namespace CourierAPI
 {
@@ -47,6 +49,9 @@ namespace CourierAPI
                     Configuration.GetConnectionString("CourierDB")
                 )
             );
+            //For Dapper
+            services.AddScoped<IDbConnection, SqlConnection>(p =>
+                new SqlConnection(Configuration.GetConnectionString("CourierDB")));
 
             //Configure Identity and Identity Store
             services.AddIdentity<AppUser, IdentityRole>(options => {
