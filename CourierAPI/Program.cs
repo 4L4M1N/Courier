@@ -21,6 +21,12 @@ namespace CourierAPI
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                })
+                // For Logging
+                .ConfigureLogging(logging=>
+                {
+                    logging.ClearProviders();
+                    logging.AddConsole();
                 });
     }
 }

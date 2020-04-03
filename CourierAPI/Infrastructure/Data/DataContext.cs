@@ -30,15 +30,19 @@ namespace CourierAPI.Infrastructure.Data
         public DbSet<RequestBooking> RequestBookings { get; set; }
         public DbSet<Status> Statuses { get; set; }
 
-        //Query
-        public DbQuery<BookingR> ShowBookings { get; set; }
-        public DbQuery<BookingDetailsReport> ShowBookingDetailsReport { get; set; }
+        //Query -- Method 1
+        // public DbQuery<BookingR> ShowBookings { get; set; }
+        // public DbQuery<BookingDetailsReport> ShowBookingDetailsReport { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-
+            // #region Query --Method 2
+            // builder.Query<BookingR>();
+            // builder.Query<BookingDetailsReport>(); 
+            // #endregion Query 
+            
             // Override default AspNet Identity table names
             builder.Entity<IdentityUser>(entity => { entity.ToTable(name: "Users"); });
             builder.Entity<IdentityRole>(entity => { entity.ToTable(name: "Roles"); });
