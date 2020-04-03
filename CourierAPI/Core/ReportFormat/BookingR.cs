@@ -1,7 +1,9 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CourierAPI.Core.ReportFormat
 {
+    
     public class BookingR
     {
         public string Id { get; set; }
