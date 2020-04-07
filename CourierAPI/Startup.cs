@@ -26,6 +26,7 @@ using CourierAPI.Infrastructure.Repositories;
 using CourierAPI.Infrastructure.Services;
 using System.Net.Mime;
 using System.Data;
+using CourierAPI.Infrastructure.ActionFilters;
 using Microsoft.Data.SqlClient;
 
 namespace CourierAPI
@@ -72,16 +73,21 @@ namespace CourierAPI
             // });
             services.AddMvc();
 
-            services.AddControllers().AddNewtonsoftJson(
-                 options => options.SerializerSettings.ReferenceLoopHandling =            
-                Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            services.AddControllers(optinos => {
+                optinos.Filters.Add(new HttpResponseExceptionFilter());
+            }).AddNewtonsoftJson(
+                 options => {options.SerializerSettings.ReferenceLoopHandling =            
+                Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                options.AllowInputFormatterExceptionMessages = false;
+                 }
+                
             ).ConfigureApiBehaviorOptions(options =>{
                 options.SuppressConsumesConstraintForFormFileParameters = true;
                 options.SuppressMapClientErrors = true;
                 // options.SuppressModelStateInvalidFilter = false;
                 //options.SuppressUseValidationProblemDetailsForInvalidModelStateResponses = true;
                 
-                // For Model Error!
+                //For Model Error!
                 options.InvalidModelStateResponseFactory = context =>
                 {
                     var result = new BadRequestObjectResult(context.ModelState);
@@ -142,7 +148,11 @@ namespace CourierAPI
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseExceptionHandler("/api/error-local-development");
+            }
+            else
+            {
+                app.UseExceptionHandler("/api/error");
             }
 
             //app.UseCors(x => x.WithOrigins("http://binary-geek.com").AllowAnyMethod().AllowAnyHeader());
