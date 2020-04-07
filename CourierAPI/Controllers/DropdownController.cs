@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
 using System.Linq;
 using AutoMapper;
@@ -50,11 +49,11 @@ namespace CourierAPI.Controllers
         //Item Attribute
         [HttpPost("itemattribute/create")]
         [Authorize(Roles = "CourierOwner")]
-        public async Task<IActionResult> CreateItemAttribute(ItemAttributeDTO itemAttribute)
+        public async Task<IActionResult> CreateItemAttribute([FromBody]ItemAttributeDTO itemAttribute)
         {
             //Using System.Text.Json
             //var result = JsonSerializer.Deserialize<ItemAttribute>(itemAttribute);
-
+            if(!ModelState.IsValid) return BadRequest(ModelState);
             if (itemAttribute == null) return BadRequest("No value please check");
             var isitemAttributeExists = _unitOfWork.ItemAttributes.CheckItemAttribute(itemAttribute);
             if (isitemAttributeExists > 0)

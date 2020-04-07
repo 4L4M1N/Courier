@@ -16,9 +16,9 @@ CreateItem(itemName) {
   return this.http.post(this.baseURL + 'item/create', itemName);
 }
 
-CreateItemAttribute(sendItemAttribute: ItemAttribute) {
-  console.log(sendItemAttribute);
-  return this.http.post(this.baseURL + 'itemattribute/create', sendItemAttribute);
+CreateItemAttribute(itemAttribute: ItemAttribute) {
+  console.log(itemAttribute);
+  return this.http.post(this.baseURL + 'itemattribute/create', itemAttribute);
 }
 
 UpdateItemAttribute(sendUpdatedItemAttribute: ItemAttribute) {
