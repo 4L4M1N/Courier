@@ -28,6 +28,8 @@ using System.Net.Mime;
 using System.Data;
 using CourierAPI.Infrastructure.ActionFilters;
 using Microsoft.Data.SqlClient;
+using CourierAPI.Infrastructure.Middlewares;
+using Microsoft.AspNetCore.Http;
 
 namespace CourierAPI
 {
@@ -154,8 +156,12 @@ namespace CourierAPI
             {
                 app.UseExceptionHandler("/api/error");
             }
-
+            // app.UseStatusCodePages(async context => {
+            //     context.HttpContext.Response.ContentType = "application/json";
+            //     await context.HttpContext.Response.WriteAsync("vvsfff");
+            // });
             //app.UseCors(x => x.WithOrigins("http://binary-geek.com").AllowAnyMethod().AllowAnyHeader());
+            //app.UseMiddleware<ErrorHandlingMiddleware>();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseHttpsRedirection();
 

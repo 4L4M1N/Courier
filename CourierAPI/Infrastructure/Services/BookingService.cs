@@ -83,6 +83,7 @@ namespace CourierAPI.Infrastructure.Services
             {
                 return false;
             }
+            isBookingExists = null;
             isBookingExists.ItemPrice = booking.ItemPrice;
             isBookingExists.MerchantBill = booking.MerchantBill;
             isBookingExists.CourierBill = booking.CourierBill;

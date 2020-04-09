@@ -46,6 +46,8 @@ import { ErrorInterceptorProvider } from './interceptors/ErrorInterceptor';
 import { LoaderInterceptor } from './interceptors/LoaderInterceptor';
 import { LoaderComponent } from './shared/loader/loader/loader.component';
 import { PreviousRouteService } from './services/Others/PreviousRoute.service';
+import { InternalServerErrorComponent } from './shared/errors/InternalServerError/InternalServerError.component';
+import { ErrorHandleService } from './services/Others/ErrorHandle.service';
 
 
 
@@ -78,7 +80,8 @@ import { PreviousRouteService } from './services/Others/PreviousRoute.service';
       DivisionzonecreationComponent,
       RequestBookingComponent,
       ManageRequestedBookingComponent,
-      BookingreportComponent
+      BookingreportComponent,
+      InternalServerErrorComponent
    ],
    imports: [
       BrowserModule,
@@ -124,7 +127,8 @@ import { PreviousRouteService } from './services/Others/PreviousRoute.service';
       BookingReportService,
       PreviousRouteService,
       DatePipe,
-      ErrorInterceptorProvider,
+      ErrorHandleService,
+      // ErrorInterceptorProvider,
       { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
    ],
    bootstrap: [
