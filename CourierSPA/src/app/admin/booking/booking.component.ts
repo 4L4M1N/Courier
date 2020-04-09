@@ -16,10 +16,13 @@ import { InvoiceR } from 'src/app/models/reportsFormat/invoiceR';
 import { Booking } from 'src/app/models/booking';
 import { BookingService } from 'src/app/services/Booking/booking.service';
 import { ModalService } from 'src/app/services/Dialog/modal.service';
-import { DatePipe } from '@angular/common';
+import { DatePipe, JsonPipe } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/forkJoin';
 import { PreviousRouteService } from 'src/app/services/Others/PreviousRoute.service';
+import { ErrorHandleService } from 'src/app/services/Others/ErrorHandle.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { IError } from 'src/app/models/others/IError';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -109,7 +112,8 @@ export class BookingComponent implements OnInit {
               private modalService: ModalService,
               private datePipe: DatePipe,
               private bookingService: BookingService,
-              private previousRouteService: PreviousRouteService) {
+              private previousRouteService: PreviousRouteService,
+              private errorHandle: ErrorHandleService) {
     this.itemcreationservice.GetItems().subscribe(data => { this.items = data });
     this.deliveryAddressservice.GetDivisions().subscribe(r => { this.division = r });
   }
@@ -401,9 +405,9 @@ export class BookingComponent implements OnInit {
     this.bookingService.Update(this.placeBooking).subscribe(() => {
       console.log('created');
       this.modalService.openInfoModal("Booking Updated");
-    }, error => {
-      this.modalService.openErrorModal("Not updated");
-      console.log('error');
+    }, (error) => {
+      this.errorHandle.handleError(error.error);
+
     });
   }
   DeleteBooking() {
