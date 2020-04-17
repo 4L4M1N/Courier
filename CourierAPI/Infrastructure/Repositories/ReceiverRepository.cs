@@ -17,9 +17,10 @@ namespace CourierAPI.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task Add(Receiver receiver)
+        public async Task<Receiver> Add(Receiver receiver)
         {
             await _context.Receivers.AddAsync(receiver);
+            return receiver;
         }
 
         public async Task Delete(string ReceiverId)

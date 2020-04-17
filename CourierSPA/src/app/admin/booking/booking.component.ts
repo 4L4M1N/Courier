@@ -284,7 +284,7 @@ export class BookingComponent implements OnInit {
             this.booking.controls['receiverName'].setValue(this.searchResult.receiver.name);
             this.booking.controls['receiverPhone'].setValue(this.searchResult.receiver.phone);
             this.booking.controls['receiverAddress'].setValue(this.searchResult.receiver.address);
-            this.booking.controls['reference'].setValue(this.searchResult.receiver.address);
+            this.booking.controls['reference'].setValue(this.searchResult.receiver.reference);
             this.booking.controls['receiverEmail'].setValue(this.searchResult.receiver.email);
             this.onItemPriceChange(this.searchResult.itemPrice);
             this.isConditionChargeApply = this.searchResult.bookingItem.isConditionChargeApply;
@@ -406,7 +406,7 @@ export class BookingComponent implements OnInit {
       console.log('created');
       this.modalService.openInfoModal("Booking Updated");
     }, (error) => {
-      this.errorHandle.handleError(error.error);
+      this.errorHandle.handleError(error);
 
     });
   }

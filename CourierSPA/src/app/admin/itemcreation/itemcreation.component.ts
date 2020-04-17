@@ -4,6 +4,7 @@ import { ItemcreationService } from 'src/app/services/itemcreation.service';
 import { ItemAttribute } from 'src/app/models/ItemAttribute';
 import { Iitem } from 'src/app/models/Iitem';
 import { ModalService } from 'src/app/services/Dialog/modal.service';
+import { ErrorHandleService } from 'src/app/services/Others/ErrorHandle.service';
 
 @Component({
   selector: 'app-itemcreation',
@@ -19,7 +20,7 @@ export class ItemcreationComponent implements OnInit {
   createItemFrom: FormGroup;
   ItemAttributeForm: FormGroup;
   p: number = 1;
-  constructor(private itemcreationservice: ItemcreationService, private modalService: ModalService) { }
+  constructor(private itemcreationservice: ItemcreationService, private modalService: ModalService,private errorHandle: ErrorHandleService) { }
 
   ngOnInit() {
     this.getitems();
@@ -48,8 +49,7 @@ export class ItemcreationComponent implements OnInit {
         console.log('created');
         this.openInfoModal();
       }, error => {
-        console.log('error');
-        this.openErrorModal();
+        this.errorHandle.handleError(error);
       });
   }}
 
@@ -62,8 +62,9 @@ export class ItemcreationComponent implements OnInit {
         console.log('ok');
         this.openInfoModal();
       }, error => {
-        console.log('error');
-        this.openErrorModal();
+        //console.log('error');
+        //this.modalService.openErrorModal(error);
+        this.errorHandle.handleError(error);
       });
   }}
   getitems() {
