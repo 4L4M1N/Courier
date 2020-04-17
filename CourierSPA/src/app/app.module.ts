@@ -6,7 +6,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HashLocationStrategy, LocationStrategy, DatePipe } from '@angular/common';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule,
-         MatIconModule, MatListModule, MatCardModule, MatGridList, MatGridListModule, MatDialogModule, MAT_DIALOG_DATA, MatDialogRef, MatCheckboxModule, MatTableModule, MatFormFieldModule, MatChipsModule, MatInputModule, MatPaginator, MatSortModule, MatPaginatorModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material';
+         MatIconModule, MatListModule, MatCardModule, MatGridList,
+         MatGridListModule, MatDialogModule, MAT_DIALOG_DATA, MatDialogRef,
+         MatCheckboxModule, MatTableModule, MatFormFieldModule, MatChipsModule,
+         MatInputModule, MatPaginator, MatSortModule, MatPaginatorModule, MatSelectModule,
+         MatDatepickerModule, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 import { AppComponent } from './app.component';

@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using CourierAPI.Core.DTOs;
 using CourierAPI.Core.Models;
 
 namespace CourierAPI.Core.IServices
@@ -7,5 +8,6 @@ namespace CourierAPI.Core.IServices
     {
          Task<Receiver> GetReceiver(string ReceiverId);
          Task<bool> Update(Receiver receiver);
+         Task<Receiver> Add(BookingDTO booking);
     }
 }

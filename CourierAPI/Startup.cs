@@ -1,22 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using AutoMapper;
-using CourierAPI.Core;
 using CourierAPI.Core.IRepositories;
 using CourierAPI.Core.IServices;
 using CourierAPI.Core.Models;
@@ -24,23 +16,25 @@ using CourierAPI.Helpers;
 using CourierAPI.Infrastructure.Data;
 using CourierAPI.Infrastructure.Repositories;
 using CourierAPI.Infrastructure.Services;
-using System.Net.Mime;
 using System.Data;
 using CourierAPI.Infrastructure.ActionFilters;
 using Microsoft.Data.SqlClient;
-using CourierAPI.Infrastructure.Middlewares;
-using Microsoft.AspNetCore.Http;
+using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
+using System.Net.Mime;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CourierAPI
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment environment)
         {
             Configuration = configuration;
+            HostingEnvironment = environment;
         }
 
         public IConfiguration Configuration { get; }
+        public IHostingEnvironment HostingEnvironment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -88,14 +82,32 @@ namespace CourierAPI
                 options.SuppressMapClientErrors = true;
                 // options.SuppressModelStateInvalidFilter = false;
                 //options.SuppressUseValidationProblemDetailsForInvalidModelStateResponses = true;
-                
+
                 //For Model Error!
-                options.InvalidModelStateResponseFactory = context =>
-                {
-                    var result = new BadRequestObjectResult(context.ModelState);
-                    result.ContentTypes.Add(MediaTypeNames.Application.Json);
-                    return result;
-                };
+                // if (HostingEnvironment.IsDevelopment())
+                // {
+                //     options.InvalidModelStateResponseFactory = context =>
+                // {
+                //      var result = new BadRequestObjectResult(context.ModelState);
+
+                //     // TODO: add `using System.Net.Mime;` to resolve MediaTypeNames
+                //     result.ContentTypes.Add(MediaTypeNames.Application.Json);
+                //     result.ContentTypes.Add(MediaTypeNames.Application.Xml);
+
+                //     return result;
+                // };
+
+                // }
+                // options.InvalidModelStateResponseFactory = context =>
+                // {
+                //      var result = new BadRequestObjectResult(context.ModelState);
+
+                //     // TODO: add `using System.Net.Mime;` to resolve MediaTypeNames
+                //     result.ContentTypes.Add(MediaTypeNames.Application.Json);
+                //     result.ContentTypes.Add(MediaTypeNames.Application.Xml);
+
+                //     return result;
+                // };
             });
             //services.BuildServiceProvider().GetService<DataContext>().Database.Migrate();
             services.AddCors();

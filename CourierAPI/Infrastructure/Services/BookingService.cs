@@ -26,6 +26,11 @@ namespace CourierAPI.Infrastructure.Services
             _dbConnection = dbConnection;
         }
 
+        public Task<bool> Add(BookingDTO booking)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> Delete(string bookingId)
         {
              var isBookingExists = await _unitOfWork.Bookings.FindBookingById(bookingId);
@@ -83,7 +88,6 @@ namespace CourierAPI.Infrastructure.Services
             {
                 return false;
             }
-            isBookingExists = null;
             isBookingExists.ItemPrice = booking.ItemPrice;
             isBookingExists.MerchantBill = booking.MerchantBill;
             isBookingExists.CourierBill = booking.CourierBill;

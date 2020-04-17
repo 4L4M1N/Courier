@@ -1,4 +1,6 @@
+using System;
 using System.Threading.Tasks;
+using CourierAPI.Core.DTOs;
 using CourierAPI.Core.IRepositories;
 using CourierAPI.Core.IServices;
 using CourierAPI.Core.Models;
@@ -12,6 +14,22 @@ namespace CourierAPI.Infrastructure.Services
          {
              _unitOfWork = unitOfWork;
          }
+
+        public async Task<Receiver> Add(BookingDTO booking)
+        {
+            var receiver = new Receiver
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = booking.ReceiverName,
+                Address = booking.ReceiverAddress,
+                Phone = booking.ReceiverPhone,
+                Email = booking.ReceiverEmail,
+                ZoneId = booking.ZoneId
+            };
+            receiver = await _unitOfWork.Receivers.Add(receiver);
+            return receiver;
+        }
+
         public async Task<Receiver> GetReceiver(string ReceiverId)
         {
             var result = await _unitOfWork.Receivers.GetReciverById(ReceiverId);

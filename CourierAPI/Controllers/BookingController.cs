@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using CourierAPI.Core.DTOs;
-using CourierAPI.Helpers;
 using CourierAPI.Core.IRepositories;
 using CourierAPI.Core.IServices;
 using CourierAPI.Core.Models;
@@ -12,9 +11,6 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using Extensions = CourierAPI.Helpers.Extensions;
 using Microsoft.Extensions.Logging;
-using System.Data;
-using Dapper;
-using CourierAPI.Core.ReportFormat;
 
 namespace CourierAPI.Controllers
 {
@@ -65,16 +61,17 @@ namespace CourierAPI.Controllers
         public async Task<IActionResult> Add(BookingDTO booking)
         {
             //Save Receiver
-            var receiver = new Receiver
-            {
-                Id = Guid.NewGuid().ToString(),
-                Name = booking.ReceiverName,
-                Address = booking.ReceiverAddress,
-                Phone = booking.ReceiverPhone,
-                Email = booking.ReceiverEmail,
-                ZoneId = booking.ZoneId
-            };
-            await _unitOfWork.Receivers.Add(receiver);
+            // var receiver = new Receiver
+            // {
+            //     Id = Guid.NewGuid().ToString(),
+            //     Name = booking.ReceiverName,
+            //     Address = booking.ReceiverAddress,
+            //     Phone = booking.ReceiverPhone,
+            //     Email = booking.ReceiverEmail,
+            //     ZoneId = booking.ZoneId
+            // };
+            // receiver = await _unitOfWork.Receivers.Add(receiver);
+            var receiver = await _receiverService.Add(booking);
             //get receiverId
             var receiverId = receiver.Id;
             var totalBooking = _context.Bookings.Count();

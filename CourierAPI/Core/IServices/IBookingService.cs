@@ -14,6 +14,7 @@ namespace CourierAPI.Core.IServices
          Task<List<BookingDetailsReport>> GetBookingDetailsForReport(DateTime From, DateTime To);
          Task<Booking> SearchBookingBySerialNo(string SerialNo);
          Task<bool> Update(BookingDTO booking);
+         Task<bool> Add(BookingDTO booking);
          Task<bool> Delete(string bookingId);
     }
 }
