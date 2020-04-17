@@ -26,6 +26,11 @@ namespace CourierAPI.Infrastructure.Services
             _dbConnection = dbConnection;
         }
 
+        public Task<bool> Add(BookingDTO booking)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> Delete(string bookingId)
         {
              var isBookingExists = await _unitOfWork.Bookings.FindBookingById(bookingId);

@@ -6,7 +6,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HashLocationStrategy, LocationStrategy, DatePipe } from '@angular/common';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule,
-         MatIconModule, MatListModule, MatCardModule, MatGridList, MatGridListModule, MatDialogModule, MAT_DIALOG_DATA, MatDialogRef, MatCheckboxModule, MatTableModule, MatFormFieldModule, MatChipsModule, MatInputModule, MatPaginator, MatSortModule, MatPaginatorModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material';
+         MatIconModule, MatListModule, MatCardModule, MatGridList,
+         MatGridListModule, MatDialogModule, MAT_DIALOG_DATA, MatDialogRef,
+         MatCheckboxModule, MatTableModule, MatFormFieldModule, MatChipsModule,
+         MatInputModule, MatPaginator, MatSortModule, MatPaginatorModule, MatSelectModule,
+         MatDatepickerModule, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
@@ -46,6 +50,8 @@ import { ErrorInterceptorProvider } from './interceptors/ErrorInterceptor';
 import { LoaderInterceptor } from './interceptors/LoaderInterceptor';
 import { LoaderComponent } from './shared/loader/loader/loader.component';
 import { PreviousRouteService } from './services/Others/PreviousRoute.service';
+import { InternalServerErrorComponent } from './shared/errors/InternalServerError/InternalServerError.component';
+import { ErrorHandleService } from './services/Others/ErrorHandle.service';
 
 
 
@@ -78,7 +84,8 @@ import { PreviousRouteService } from './services/Others/PreviousRoute.service';
       DivisionzonecreationComponent,
       RequestBookingComponent,
       ManageRequestedBookingComponent,
-      BookingreportComponent
+      BookingreportComponent,
+      InternalServerErrorComponent
    ],
    imports: [
       BrowserModule,
@@ -124,7 +131,8 @@ import { PreviousRouteService } from './services/Others/PreviousRoute.service';
       BookingReportService,
       PreviousRouteService,
       DatePipe,
-      ErrorInterceptorProvider,
+      ErrorHandleService,
+      // ErrorInterceptorProvider,
       { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
    ],
    bootstrap: [

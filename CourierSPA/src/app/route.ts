@@ -16,6 +16,7 @@ import { ManageBookingComponent } from './admin/manage-booking/manage-booking.co
 import { MerchantItemComponent } from './admin/merchant-item/merchant-item.component';
 import { RequestBookingComponent } from './request-booking/request-booking.component';
 import { ManageRequestedBookingComponent } from './admin/manage-requested-booking/manage-requested-booking.component';
+import { InternalServerErrorComponent } from './shared/errors/InternalServerError/InternalServerError.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -45,4 +46,5 @@ export const appRoutes: Routes = [
     { path: 'requestbooking', component: RequestBookingComponent },
     { path: '**', redirectTo: 'notes', pathMatch: 'full'},
     { path: 'admin', redirectTo: 'admin-dashboard', pathMatch: 'full'},
+    { path: 'error', component: InternalServerErrorComponent },
 ];

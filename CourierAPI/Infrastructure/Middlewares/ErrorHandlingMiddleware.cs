@@ -34,11 +34,11 @@ namespace CourierAPI.Infrastructure.Middlewares
         var code = HttpStatusCode.InternalServerError; // 500 if unexpected
         var exceptionPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
         
-        if      (ex is InternalServerErrorException  )     code = HttpStatusCode.NotFound;
+        // if (ex is NotFoundErrorException) code = HttpStatusCode.Unauthorized;
         // else if (ex is ValidationException) code = HttpStatusCode.Unauthorized;
         // else if (ex is MyException)             code = HttpStatusCode.BadRequest;
 
-        var result = JsonConvert.SerializeObject(new { error = "HOise reee", traceID = ex.StackTrace, targetSite = ex.TargetSite });
+        var result = JsonConvert.SerializeObject(new { error = ex.Message });
         context.Response.ContentType = "application/json";
         context.Response.StatusCode = (int)code;
         return context.Response.WriteAsync(result);
