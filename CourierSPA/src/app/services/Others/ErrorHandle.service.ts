@@ -3,15 +3,21 @@ import { Router, NavigationExtras } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { IError } from 'src/app/models/others/IError';
 import { ModalService } from '../Dialog/modal.service';
+import * as global from 'src/app/shared/Global/global';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ErrorHandleService {
+isErrorOccured:boolean;
 navigationExtras: NavigationExtras;
-constructor(private router: Router,private modalService: ModalService) { }
+constructor(private router: Router,private modalService: ModalService) { 
+  this.isErrorOccured = false;
+}
 public handleError(error: any){
   if (error.status == 500) {
+    this.isErrorOccured = true;
+    global.changeToTrue();
     this.handle500Error(error.error);
   }
   if (error.status == 401) {
