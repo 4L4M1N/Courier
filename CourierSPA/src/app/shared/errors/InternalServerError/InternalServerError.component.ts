@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd, NavigationStart } from '@angular/router';
 
 @Component({
   selector: 'app-InternalServerError',
@@ -8,7 +8,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class InternalServerErrorComponent implements OnInit {
   message:any;
-  constructor(private route: ActivatedRoute) { 
+  previousRoute:any;
+  constructor(private route: ActivatedRoute, private router: Router) { 
     this.route.queryParams.subscribe(params=> {
       this.message = params;
     })
